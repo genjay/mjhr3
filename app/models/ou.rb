@@ -2,6 +2,9 @@ class Ou < ActiveRecord::Base
 	after_initialize :defaults
 	has_many :worktypes
 
+  validates :uid,:name,presence:true 
+ 	validates :uid,:name, uniqueness: { message: "已經被使用" } 
+
 	def defaults
 		# 請不要在此用會sql自己的語法，可能會無限回圈
 		self.overwork_hours_for_freetax ||= 46

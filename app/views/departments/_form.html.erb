@@ -2,13 +2,12 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :uid, autofocus: true %>
-    <%= f.input :name %>
-    <%= f.association :worktype %>
-    <%= f.input :upper_id %>
+    <%= f.input :uid,placeholder:'部門代號', autofocus: true %>
+    <%= f.input :name,placeholder:'部門名稱' %>
+    <%= f.association :worktype, :label_method => lambda { |f| "#{f.uid}  #{f.name}" } %>
+    <%= f.association :upper, :label_method => lambda { |f| "#{f.uid} #{f.name}"},:prompt => ''%>
     <%= f.input :is_stoped %>
-    <%= f.input :memo %>
-    <%= f.input :ou_id %>
+    <%= f.input :memo,placeholder:'備註' %> 
   </div>
 
   <div class="form-actions">

@@ -67,6 +67,8 @@ class WorktypesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_worktype
       @worktype = Worktype.find(params[:id])
+      @worktype.on_duty_at=@worktype.on_duty_at.strftime('%H:%M')
+      @worktype.off_duty_at=@worktype.off_duty_at.strftime('%H:%M')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

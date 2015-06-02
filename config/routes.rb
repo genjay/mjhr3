@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root 'pages#home'
   resources :overtypes
   resources :offtypes
-  resources :departments
+
+  post '/departments/new' => 'departments#new', :as => 'new_department'
+  resources :departments, except: [:new]
   resources :worktypes do
     resources :workrests
   end

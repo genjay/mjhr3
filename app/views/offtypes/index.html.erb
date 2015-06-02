@@ -2,6 +2,8 @@
 
 <h1>Listing Offtypes</h1>
 
+<%= link_to 'New Offtype', new_offtype_path %>
+
 <table class='table table-hover'>
   <thead>
     <tr>
@@ -13,9 +15,7 @@
       <th>Include holiday</th>
       <th>Can duplicate</th>
       <th>Is quota ctrl</th>
-      <th>Is stoped</th>
-      <th>Memo</th>
-      <th>Ou</th>
+      <th>Is stoped</th> 
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,19 +23,15 @@
   <tbody>
     <% @offtypes.each do |offtype| %>
       <tr>
-        <td><%= offtype.uid %></td>
+        <td><%= link_to offtype.uid,edit_offtype_path(offtype) %></td>
         <td><%= offtype.name %></td>
         <td><%= offtype.mins_of_minimum %></td>
         <td><%= offtype.mins_per_unit %></td>
         <td><%= offtype.deduct_percent %></td>
-        <td><%= offtype.include_holiday %></td>
-        <td><%= offtype.can_duplicate %></td>
-        <td><%= offtype.is_quota_ctrl %></td>
-        <td><%= offtype.is_stoped %></td>
-        <td><%= offtype.memo %></td>
-        <td><%= offtype.ou_id %></td>
-        <td><%= link_to 'Show', offtype %></td>
-        <td><%= link_to 'Edit', edit_offtype_path(offtype) %></td>
+        <td><%= '含假日' if offtype.include_holiday %></td>
+        <td><%= '可重疊' if offtype.can_duplicate %></td>
+        <td><%= '管控假' if offtype.is_quota_ctrl %></td>
+        <td><%= '已停用' if offtype.is_stoped %></td> 
         <td><%= link_to 'Destroy', offtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

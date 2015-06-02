@@ -1,6 +1,11 @@
 class Worktype < ActiveRecord::Base
 	has_many :workrests
   accepts_nested_attributes_for :workrests, :allow_destroy => true
+
+  validates :uid,:name,presence:true 
+  validates :uid, uniqueness: { scope: :ou_id ,
+    message: "已經被使用" } 
+
   after_initialize :defaults
 
   def defaults

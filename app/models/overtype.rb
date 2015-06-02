@@ -1,6 +1,10 @@
 class Overtype < ActiveRecord::Base
-		after_initialize :defaults 
 
+  validates :uid,:name,presence:true 
+ 	validates :uid,:name, uniqueness: { scope: :ou_id	,
+    message: "已經被使用" } 
+    
+	after_initialize :defaults 
 	def defaults
 		# 請不要在此用會sql自己的語法，可能會無限回圈
 		self.mins_of_A ||= 120

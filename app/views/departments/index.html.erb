@@ -2,6 +2,8 @@
 
 <h1>Listing Departments</h1>
 
+<%= button_to 'New Department', new_department_path , :class => 'button' %>
+
 <table class='table table-hover'>
   <thead>
     <tr>
@@ -17,13 +19,11 @@
   <tbody>
     <% @departments.each do |department| %>
       <tr>
-        <td><%= link_to department.uid, department %></td>
-        <td><%= link_to department.name, department %></td>
-        <td><%= department.worktype %></td>
-        <td><%= department.upper_id %></td>
-        <td><%= department.is_stoped %></td> 
-        <td><%= link_to 'Show', department %></td>
-        <td><%= link_to 'Edit', edit_department_path(department) %></td>
+        <td><%= link_to department.uid, edit_department_path(department) %></td>
+        <td><%= link_to department.name, edit_department_path(department) %></td>
+        <td><%= department.worktype.try(:name) %></td>
+        <td><%= department.upper.try(:name) %></td>
+        <td><%= '停用中' if department.is_stoped %></td>  
         <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
