@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+  resources :pay_types
+  resources :annual_leave_lists
   get 'home' => 'pages#home'
   get 'pages/home'
   root 'pages#home'
   resources :overtypes
   resources :offtypes
   resources :departments
-  resources :worktypes
+  resources :worktypes do
+    resources :workrests
+  end
   resources :ous
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,7 @@
+rails g scaffold pay_type \
+ uid name \
+ cycle_unit:string \
+ rule_for_break:string \
+ is_stoped:boolean \
+ ou_it:integer \
+ memo:text --force 

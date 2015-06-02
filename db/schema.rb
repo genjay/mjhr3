@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601093646) do
+ActiveRecord::Schema.define(version: 20150602092427) do
+
+  create_table "annual_leave_lists", force: :cascade do |t|
+    t.integer  "months_of_job", limit: 4
+    t.integer  "days",          limit: 4
+    t.text     "memo",          limit: 65535
+    t.integer  "ou_id",         limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string   "uid",         limit: 255
@@ -77,6 +86,18 @@ ActiveRecord::Schema.define(version: 20150601093646) do
     t.integer  "ou_id",         limit: 4
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+  end
+
+  create_table "pay_types", force: :cascade do |t|
+    t.string   "uid",            limit: 255
+    t.string   "name",           limit: 255
+    t.string   "cycle_unit",     limit: 255
+    t.string   "rule_for_break", limit: 255
+    t.boolean  "is_stoped",      limit: 1
+    t.integer  "ou_it",          limit: 4
+    t.text     "memo",           limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "workrests", force: :cascade do |t|

@@ -1,0 +1,17 @@
+<%= simple_form_for(@pay_type) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :uid %>
+    <%= f.input :name %>
+    <%= f.input :cycle_unit %>
+    <%= f.input :rule_for_break %>
+    <%= f.input :is_stoped %>
+    <%= f.input :ou_it %>
+    <%= f.input :memo %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
