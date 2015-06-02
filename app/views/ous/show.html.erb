@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @ou.uid %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ou.name %>
+</p>
+
+<p>
+  <strong>Overwork hours for freetax:</strong>
+  <%= @ou.overwork_hours_for_freetax %>
+</p>
+
+<p>
+  <strong>Days per month:</strong>
+  <%= @ou.days_per_month %>
+</p>
+
+<p>
+  <strong>Hours per day:</strong>
+  <%= @ou.hours_per_day %>
+</p>
+
+<p>
+  <strong>Lp rate:</strong>
+  <%= @ou.LP_rate %>
+</p>
+
+<p>
+  <strong>Welfare rate:</strong>
+  <%= @ou.welfare_rate %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @ou.memo %>
+</p>
+
+<%= link_to 'Edit', edit_ou_path(@ou) %> |
+<%= link_to 'Back', ous_path %>

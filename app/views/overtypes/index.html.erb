@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Overtypes</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Mins of a</th>
+      <th>Mins of b</th>
+      <th>Rate of a</th>
+      <th>Amt of a</th>
+      <th>Rate of b</th>
+      <th>Amt of b</th>
+      <th>Rate of c</th>
+      <th>Amt of c</th>
+      <th>Rate of h</th>
+      <th>Amt of h</th>
+      <th>Mins per unit</th>
+      <th>Valid unit</th>
+      <th>Is stoped</th>
+      <th>Pay type</th>
+      <th>Memo</th>
+      <th>Ou</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @overtypes.each do |overtype| %>
+      <tr>
+        <td><%= overtype.uid %></td>
+        <td><%= overtype.name %></td>
+        <td><%= overtype.mins_of_A %></td>
+        <td><%= overtype.mins_of_B %></td>
+        <td><%= overtype.rate_of_A %></td>
+        <td><%= overtype.amt_of_A %></td>
+        <td><%= overtype.rate_of_B %></td>
+        <td><%= overtype.amt_of_B %></td>
+        <td><%= overtype.rate_of_C %></td>
+        <td><%= overtype.amt_of_C %></td>
+        <td><%= overtype.rate_of_H %></td>
+        <td><%= overtype.amt_of_H %></td>
+        <td><%= overtype.mins_per_unit %></td>
+        <td><%= overtype.valid_unit %></td>
+        <td><%= overtype.is_stoped %></td>
+        <td><%= overtype.pay_type %></td>
+        <td><%= overtype.memo %></td>
+        <td><%= overtype.ou_id %></td>
+        <td><%= link_to 'Show', overtype %></td>
+        <td><%= link_to 'Edit', edit_overtype_path(overtype) %></td>
+        <td><%= link_to 'Destroy', overtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Overtype', new_overtype_path %>

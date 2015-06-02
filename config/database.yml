@@ -1,0 +1,22 @@
+
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+development:
+  <<: *default
+  database: mjhr3_development
+
+test:
+  <<: *default
+  database: mjhr3_test
+
+production:
+  <<: *default
+  database: mjhr3_production
+  username: mjhr3
+  password: <%= ENV['MJHR2_DATABASE_PASSWORD'] %>

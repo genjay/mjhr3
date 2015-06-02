@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ous</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Overwork hours for freetax</th>
+      <th>Days per month</th>
+      <th>Hours per day</th>
+      <th>Lp rate</th>
+      <th>Welfare rate</th>
+      <th>Memo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ous.each do |ou| %>
+      <tr>
+        <td><%= ou.uid %></td>
+        <td><%= ou.name %></td>
+        <td><%= ou.overwork_hours_for_freetax %></td>
+        <td><%= ou.days_per_month %></td>
+        <td><%= ou.hours_per_day %></td>
+        <td><%= ou.LP_rate %></td>
+        <td><%= ou.welfare_rate %></td>
+        <td><%= ou.memo %></td>
+        <td><%= link_to 'Show', ou %></td>
+        <td><%= link_to 'Edit', edit_ou_path(ou) %></td>
+        <td><%= link_to 'Destroy', ou, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ou', new_ou_path %>
