@@ -19,6 +19,13 @@
     <%= f.input :ou_id %>
   </div>
 
+    <%# f.simple_fields_for :workrests, @worktype.workrests do |q| %>
+    <%# q.input :rest_begin_at, label: "rest_begin_at" %>
+    <%# q.input :mins_of_rest, label: "rest Miniutes" %>
+    <%# q.check_box :_destroy %>
+    <%# q.label :_destroy, "Remove" %>
+    <%# end %>
+
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

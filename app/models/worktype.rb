@@ -1,6 +1,6 @@
 class Worktype < ActiveRecord::Base
 	has_many :workrests
-  accepts_nested_attributes_for :workrests
+  accepts_nested_attributes_for :workrests, :allow_destroy => true
   after_initialize :defaults
 
   def defaults

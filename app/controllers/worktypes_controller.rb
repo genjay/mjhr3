@@ -15,10 +15,12 @@ class WorktypesController < ApplicationController
   # GET /worktypes/new
   def new
     @worktype = Worktype.new
+    # 3.times { @worktype.workrests.build }
   end
 
   # GET /worktypes/1/edit
   def edit
+    # 3.times { @worktype.workrests.build }
   end
 
   # POST /worktypes
@@ -69,6 +71,6 @@ class WorktypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def worktype_params
-      params.require(:worktype).permit(:uid, :name, :on_duty_at, :off_duty_at, :buffer_before_duty, :buffer_after_duty, :minimum_before_overwork, :minimum_after_overwork, :minimum_holiday_overwork, :range_on, :range_off, :is_stoped, :mins_of_duty, :memo, :ou_id)
+      params.require(:worktype).permit(:uid, :name, :on_duty_at, :off_duty_at, :buffer_before_duty, :buffer_after_duty, :minimum_before_overwork, :minimum_after_overwork, :minimum_holiday_overwork, :range_on, :range_off, :is_stoped, :mins_of_duty, :memo, :ou_id,workrests_attributes: [:id,:worktype_id,:is_holiday,:rest_begin_at,:mins_of_rest,:is_deduct_for_duty,:memo,:_destroy])
     end
 end

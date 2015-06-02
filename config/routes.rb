@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'home' => 'pages#home'
   get 'pages/home'
-
+  root 'pages#home'
   resources :overtypes
   resources :offtypes
   resources :departments
