@@ -4,7 +4,7 @@ class OvertypesController < ApplicationController
   # GET /overtypes
   # GET /overtypes.json
   def index
-    @overtypes = Overtype.all
+    @overtypes = Overtype.all.order(uid: :asc)
   end
 
   # GET /overtypes/1

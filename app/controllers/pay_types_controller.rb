@@ -4,7 +4,7 @@ class PayTypesController < ApplicationController
   # GET /pay_types
   # GET /pay_types.json
   def index
-    @pay_types = PayType.all
+    @pay_types = PayType.all.order(uid: :asc)
   end
 
   # GET /pay_types/1

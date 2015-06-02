@@ -4,7 +4,7 @@ class WorktypesController < ApplicationController
   # GET /worktypes
   # GET /worktypes.json
   def index
-    @worktypes = Worktype.all
+    @worktypes = Worktype.all.order(uid: :asc)
   end
 
   # GET /worktypes/1

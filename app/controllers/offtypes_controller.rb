@@ -4,7 +4,7 @@ class OfftypesController < ApplicationController
   # GET /offtypes
   # GET /offtypes.json
   def index
-    @offtypes = Offtype.all
+    @offtypes = Offtype.all.order(uid: :asc)
   end
 
   # GET /offtypes/1

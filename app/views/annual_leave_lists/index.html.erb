@@ -7,8 +7,7 @@
     <tr>
       <th>Months of job</th>
       <th>Days</th>
-      <th>Memo</th>
-      <th>Ou</th>
+      <th>Memo</th> 
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +15,9 @@
   <tbody>
     <% @annual_leave_lists.each do |annual_leave_list| %>
       <tr>
-        <td><%= annual_leave_list.months_of_job %></td>
+        <td><%= link_to annual_leave_list.months_of_job, edit_annual_leave_list_path(annual_leave_list) %></td>
         <td><%= annual_leave_list.days %></td>
-        <td><%= annual_leave_list.memo %></td>
-        <td><%= annual_leave_list.ou_id %></td>
+        <td><%= annual_leave_list.memo %></td> 
         <td><%= link_to 'Show', annual_leave_list %></td>
         <td><%= link_to 'Edit', edit_annual_leave_list_path(annual_leave_list) %></td>
         <td><%= link_to 'Destroy', annual_leave_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>

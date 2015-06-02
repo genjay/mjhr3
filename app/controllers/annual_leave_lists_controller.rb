@@ -4,7 +4,7 @@ class AnnualLeaveListsController < ApplicationController
   # GET /annual_leave_lists
   # GET /annual_leave_lists.json
   def index
-    @annual_leave_lists = AnnualLeaveList.all
+    @annual_leave_lists = AnnualLeaveList.all.order(months_of_job: :asc)
   end
 
   # GET /annual_leave_lists/1
