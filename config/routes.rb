@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :subsidies
+  resources :insurance_settings
+  resources :insurance_settings
+  resources :catcodes
   resources :pay_types
   resources :annual_leave_lists
   get 'home' => 'pages#home'

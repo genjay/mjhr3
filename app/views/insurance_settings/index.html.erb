@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Insurance Settings</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Is stoped</th> 
+      <th>A rate</th>
+      <th>A employee</th>
+      <th>A compayny</th>
+      <th>B rate</th>
+      <th>B employee</th>
+      <th>B compayny</th>
+      <th>C rate</th>
+      <th>C employee</th>
+      <th>C compayny</th>
+      <th>D rate</th>
+      <th>D employee</th>
+      <th>D compayny</th>
+      <th>E rate</th>
+      <th>E employee</th>
+      <th>E compayny</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @insurance_settings.each do |insurance_setting| %>
+      <tr>
+        <td><%= insurance_setting.uid %></td>
+        <td><%= link_to insurance_setting.name, edit_insurance_setting_path(insurance_setting) %></td>
+        <td><%= insurance_setting.is_stoped %></td> 
+        <td><%= insurance_setting.a_rate %></td>
+        <td><%= insurance_setting.a_employee %></td>
+        <td><%= insurance_setting.a_compayny %></td>
+        <td><%= insurance_setting.b_rate %></td>
+        <td><%= insurance_setting.b_employee %></td>
+        <td><%= insurance_setting.b_compayny %></td>
+        <td><%= insurance_setting.c_rate %></td>
+        <td><%= insurance_setting.c_employee %></td>
+        <td><%= insurance_setting.c_compayny %></td>
+        <td><%= insurance_setting.d_rate %></td>
+        <td><%= insurance_setting.d_employee %></td>
+        <td><%= insurance_setting.d_compayny %></td>
+        <td><%= insurance_setting.e_rate %></td>
+        <td><%= insurance_setting.e_employee %></td>
+        <td><%= insurance_setting.e_compayny %></td> 
+        <td><%= link_to 'Destroy', insurance_setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Insurance setting', new_insurance_setting_path %>

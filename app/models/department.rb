@@ -1,4 +1,5 @@
 class Department < ActiveRecord::Base
+	default_scope { where("ou_id is null")}
   belongs_to :worktype
   belongs_to :upper, class_name: "Department"
   validates :uid,:name,presence:true 

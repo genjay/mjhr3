@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: MyString
+  name: MyString
+  is_stoped: false
+  memo: MyText
+  ou_id: 1
+  a_rate: 9.99
+  a_employee: 9.99
+  a_compayny: 9.99
+  b_rate: 9.99
+  b_employee: 9.99
+  b_compayny: 9.99
+  c_rate: 9.99
+  c_employee: 9.99
+  c_compayny: 9.99
+  d_rate: 9.99
+  d_employee: 9.99
+  d_compayny: 9.99
+  e_rate: 9.99
+  e_employee: 9.99
+  e_compayny: 9.99
+
+two:
+  uid: MyString
+  name: MyString
+  is_stoped: false
+  memo: MyText
+  ou_id: 1
+  a_rate: 9.99
+  a_employee: 9.99
+  a_compayny: 9.99
+  b_rate: 9.99
+  b_employee: 9.99
+  b_compayny: 9.99
+  c_rate: 9.99
+  c_employee: 9.99
+  c_compayny: 9.99
+  d_rate: 9.99
+  d_employee: 9.99
+  d_compayny: 9.99
+  e_rate: 9.99
+  e_employee: 9.99
+  e_compayny: 9.99

@@ -1,4 +1,5 @@
 class Offtype < ActiveRecord::Base
+	default_scope { where("ou_id is null")}
 	after_initialize :defaults
 
   validates :uid,:name,presence:true 

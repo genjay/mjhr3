@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>M name:</strong>
+  <%= @catcode.m_name %>
+</p>
+
+<p>
+  <strong>Col name:</strong>
+  <%= @catcode.col_name %>
+</p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @catcode.uid %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @catcode.name %>
+</p>
+
+<p>
+  <strong>Is stoped:</strong>
+  <%= @catcode.is_stoped %>
+</p>
+
+<p>
+  <strong>Ou:</strong>
+  <%= @catcode.ou_id %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @catcode.memo %>
+</p>
+
+<%= link_to 'Edit', edit_catcode_path(@catcode) %> |
+<%= link_to 'Back', catcodes_path %>

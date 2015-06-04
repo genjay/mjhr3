@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Catcodes</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>M name</th>
+      <th>Col name</th>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Is stoped</th> 
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @catcodes.each do |catcode| %>
+      <tr>
+        <td><%= catcode.m_name %></td>
+        <td><%= catcode.col_name %></td>
+        <td><%= catcode.uid %></td>
+        <td><%= catcode.name %></td>
+        <td><%= catcode.is_stoped %></td> 
+        <td><%= link_to 'Show', catcode %></td>
+        <td><%= link_to 'Edit', edit_catcode_path(catcode) %></td>
+        <td><%= link_to 'Destroy', catcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Catcode', new_catcode_path %>

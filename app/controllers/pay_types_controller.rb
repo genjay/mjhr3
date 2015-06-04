@@ -15,10 +15,19 @@ class PayTypesController < ApplicationController
   # GET /pay_types/new
   def new
     @pay_type = PayType.new
+    @pay_type.cycle_unit = 'A'
+    @cycle_unit_lists = Catcode.lists('pay_type','cycle_unit')
+    # @cycle_unit_lists = Catcode.where("m_name='pay_type' and col_name='cycle_unit'").pluck("concat(uid,' ',name),uid")
+    @rule_for_break_lists = Catcode.where("m_name='pay_type' and col_name='rule_for_break'").pluck("concat(uid,' ',name),uid")
+    
+    # render :text => @cycle_unit_lists
   end
 
   # GET /pay_types/1/edit
   def edit
+    @cycle_unit_lists = Catcode.where("m_name='pay_type' and col_name='cycle_unit'").pluck("concat(uid,' ',name),uid") 
+    @rule_for_break_lists = Catcode.where("m_name='pay_type' and col_name='rule_for_break'").pluck("concat(uid,' ',name),uid")
+    
   end
 
   # POST /pay_types
@@ -69,6 +78,6 @@ class PayTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pay_type_params
-      params.require(:pay_type).permit(:uid, :name, :cycle_unit, :rule_for_break, :is_stoped, :ou_it, :memo)
+      params.require(:pay_type).permit(:uid, :name, :cycle_unit, :rule_for_break, :is_stoped, :ou_id, :memo)
     end
 end

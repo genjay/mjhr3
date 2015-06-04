@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  m_name: MyString
+  col_name: MyString
+  uid: MyString
+  name: MyString
+  is_stoped: false
+  ou_id: 1
+  memo: MyText
+
+two:
+  m_name: MyString
+  col_name: MyString
+  uid: MyString
+  name: MyString
+  is_stoped: false
+  ou_id: 1
+  memo: MyText
