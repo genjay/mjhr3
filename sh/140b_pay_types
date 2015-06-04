@@ -3,5 +3,5 @@ rails g scaffold pay_type \
  cycle_unit:string \
  rule_for_break:string \
  is_stoped:boolean \
- ou_it:integer \
+ ou_id:integer \
  memo:text --force 
