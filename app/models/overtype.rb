@@ -1,5 +1,4 @@
 class Overtype < ActiveRecord::Base
-	default_scope { where("ou_id is null")}
 
   validates :uid,:name,presence:true 
  	validates :uid,:name, uniqueness: { scope: :ou_id	,

@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <%= link_to 'Home', pages_home_path %>
+      <%= link_to 'home', pages_home_path %>
       
     </div>
 
@@ -41,7 +41,7 @@
           </ul>
         </li>
 
-                <li class="dropdown">
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">設定<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><%= link_to '部門設定',departments_path %></li>
@@ -55,6 +55,14 @@
             <li><%= link_to 'catcodes',catcodes_path %></li>
             <li><%= link_to '保險身分',insurance_settings_path %></li>
             <li><%= link_to '補助比率',subsidies_path %></li>
+            <li><%= link_to '勞保級距表',lvlists_path %></li>
+          </ul>
+        </li>
+
+                <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">設定<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to '人員資料',employees_path %></li> 
           </ul>
         </li>
         

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :employees do
+    resources :employee_insurance_setting
+  end
+  resources :lvlists
   resources :subsidies
   resources :insurance_settings
   resources :insurance_settings

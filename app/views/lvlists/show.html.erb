@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @lvlist.uid %>
+</p>
+
+<p>
+  <strong>Amt:</strong>
+  <%= @lvlist.amt %>
+</p>
+
+<p>
+  <strong>Ou:</strong>
+  <%= @lvlist.ou_id %>
+</p>
+
+<%= link_to 'Edit', edit_lvlist_path(@lvlist) %> |
+<%= link_to 'Back', lvlists_path %>

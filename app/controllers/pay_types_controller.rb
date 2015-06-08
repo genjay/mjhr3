@@ -14,19 +14,20 @@ class PayTypesController < ApplicationController
 
   # GET /pay_types/new
   def new
+    set_lists
     @pay_type = PayType.new
-    @pay_type.cycle_unit = 'A'
-    @cycle_unit_lists = Catcode.lists('pay_type','cycle_unit')
-    # @cycle_unit_lists = Catcode.where("m_name='pay_type' and col_name='cycle_unit'").pluck("concat(uid,' ',name),uid")
-    @rule_for_break_lists = Catcode.where("m_name='pay_type' and col_name='rule_for_break'").pluck("concat(uid,' ',name),uid")
-    
+    # @pay_type.cycle_unit = 'A'
+
     # render :text => @cycle_unit_lists
   end
 
   # GET /pay_types/1/edit
   def edit
-    @cycle_unit_lists = Catcode.where("m_name='pay_type' and col_name='cycle_unit'").pluck("concat(uid,' ',name),uid") 
-    @rule_for_break_lists = Catcode.where("m_name='pay_type' and col_name='rule_for_break'").pluck("concat(uid,' ',name),uid")
+    set_lists
+    # @cycle_unit_lists = Catcode.lists('pay_type','cycle_unit')
+    # @rule_for_break_lists = Catcode.lists('pay_type','rule_for_break')
+    # @cycle_unit_lists = Catcode.where("m_name='pay_type' and col_name='cycle_unit'").pluck("concat(uid,' ',name),uid") 
+    # @rule_for_break_lists = Catcode.where("m_name='pay_type' and col_name='rule_for_break'").pluck("concat(uid,' ',name),uid")
     
   end
 
@@ -79,5 +80,11 @@ class PayTypesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pay_type_params
       params.require(:pay_type).permit(:uid, :name, :cycle_unit, :rule_for_break, :is_stoped, :ou_id, :memo)
+    end
+
+    def set_lists # 下單選單用 
+      @cycle_unit_lists = [["A 月薪", "A"], ["B 時薪", "B"], ["C 日薪", "C"]]
+      @rule_for_break_lists = [["A 依比率", "A"], ["B 不給付", "B"], ["C 全給付", "C"]]
+      
     end
 end

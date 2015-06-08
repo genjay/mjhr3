@@ -1,5 +1,5 @@
 class Ou < ActiveRecord::Base
-	default_scope { where("ou_id is null")}
+	# default_scope { where(id: nil)}
 	after_initialize :defaults
 	has_many :worktypes
 

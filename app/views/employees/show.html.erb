@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @employee.uid %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @employee.name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @employee.department_id %>
+</p>
+
+<p>
+  <strong>Id number:</strong>
+  <%= @employee.id_number %>
+</p>
+
+<p>
+  <strong>Arrive date:</strong>
+  <%= @employee.arrive_date %>
+</p>
+
+<p>
+  <strong>Levae date:</strong>
+  <%= @employee.levae_date %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @employee.birthday %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @employee.sex %>
+</p>
+
+<p>
+  <strong>Marriage:</strong>
+  <%= @employee.marriage %>
+</p>
+
+<p>
+  <strong>Education:</strong>
+  <%= @employee.education %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @employee.school %>
+</p>
+
+<p>
+  <strong>Tel1:</strong>
+  <%= @employee.tel1 %>
+</p>
+
+<p>
+  <strong>Tel2:</strong>
+  <%= @employee.tel2 %>
+</p>
+
+<p>
+  <strong>Address1:</strong>
+  <%= @employee.address1 %>
+</p>
+
+<p>
+  <strong>Address2:</strong>
+  <%= @employee.address2 %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @employee.email %>
+</p>
+
+<p>
+  <strong>Cardno of duty:</strong>
+  <%= @employee.cardno_of_duty %>
+</p>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

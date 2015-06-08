@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: MyString
+  name: MyString
+  department_id: 1
+  id_number: MyString
+  arrive_date: 2015-06-04
+  levae_date: 2015-06-04
+  birthday: 2015-06-04
+  sex: MyString
+  marriage: MyString
+  education: MyString
+  school: MyString
+  tel1: MyString
+  tel2: MyString
+  address1: MyString
+  address2: MyString
+  email: MyString
+  cardno_of_duty: MyString
+
+two:
+  uid: MyString
+  name: MyString
+  department_id: 1
+  id_number: MyString
+  arrive_date: 2015-06-04
+  levae_date: 2015-06-04
+  birthday: 2015-06-04
+  sex: MyString
+  marriage: MyString
+  education: MyString
+  school: MyString
+  tel1: MyString
+  tel2: MyString
+  address1: MyString
+  address2: MyString
+  email: MyString
+  cardno_of_duty: MyString

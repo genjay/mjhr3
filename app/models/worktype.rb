@@ -1,5 +1,4 @@
 class Worktype < ActiveRecord::Base
-  default_scope { where("ou_id is null")}
 	has_many :workrests
   accepts_nested_attributes_for :workrests, :allow_destroy => true
 

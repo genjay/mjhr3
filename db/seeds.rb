@@ -1,4 +1,8 @@
 
+if true # ou
+	Ou.create(uid:'16130535',name:'研能')
+end
+
 if true # 部門
 	sql=ActiveRecord::Base.connection
 	sql.execute("truncate table departments;")
@@ -239,10 +243,11 @@ if true # workrests 需要 worktypes 完成後
 	sql.execute('Insert into workrests (worktype_id,created_at,updated_at,rest_begin_at,mins_of_rest,is_deduct_for_duty,is_holiday)  values ((select id from worktypes where uid="AZ"),"2015/01/01 12:01:00","2015/01/01 12:01:00","1030","10","1","1");')
 	sql.execute('Insert into workrests (worktype_id,created_at,updated_at,rest_begin_at,mins_of_rest,is_deduct_for_duty,is_holiday)  values ((select id from worktypes where uid="AZ"),"2015/01/01 12:01:00","2015/01/01 12:01:00","1230","40","1","1");')
 	sql.execute('Insert into workrests (worktype_id,created_at,updated_at,rest_begin_at,mins_of_rest,is_deduct_for_duty,is_holiday)  values ((select id from worktypes where uid="AZ"),"2015/01/01 12:01:00","2015/01/01 12:01:00","1500","10","1","1");')
-
 end
 
 if true # overtypes
+	Overtype.create(uid:'A',name:'一般加班')
+	Overtype.create(uid:'B',name:'補休加班')
 end
 
 if true # annual_leave_lists 特休對應表 

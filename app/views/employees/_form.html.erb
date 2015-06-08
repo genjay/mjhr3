@@ -1,0 +1,27 @@
+<%= simple_form_for(@employee) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :uid,autofocus:true %>
+    <%= f.input :name %>
+    <%= f.association :department, :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.input :id_number %>
+    <%= f.input :arrive_date %>
+    <%= f.input :levae_date %>
+    <%= f.input :birthday %>
+    <%= f.input :sex %>
+    <%= f.input :marriage %>
+    <%= f.input :education %>
+    <%= f.input :school %>
+    <%= f.input :tel1 %>
+    <%= f.input :tel2 %>
+    <%= f.input :address1 %>
+    <%= f.input :address2 %>
+    <%= f.input :email %>
+    <%= f.input :cardno_of_duty %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

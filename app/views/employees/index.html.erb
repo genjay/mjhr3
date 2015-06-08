@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Employees</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Id number</th>
+      <th>Arrive date</th>
+      <th>Levae date</th>
+      <th>Birthday</th>
+      <th>Sex</th>
+      <th>Marriage</th>
+      <th>Education</th>
+      <th>School</th>
+      <th>Tel1</th>
+      <th>Tel2</th>
+      <th>Address1</th>
+      <th>Address2</th>
+      <th>Email</th>
+      <th>Cardno of duty</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.uid %></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.department_id %></td>
+        <td><%= employee.id_number %></td>
+        <td><%= employee.arrive_date %></td>
+        <td><%= employee.levae_date %></td>
+        <td><%= employee.birthday %></td>
+        <td><%= employee.sex %></td>
+        <td><%= employee.marriage %></td>
+        <td><%= employee.education %></td>
+        <td><%= employee.school %></td>
+        <td><%= employee.tel1 %></td>
+        <td><%= employee.tel2 %></td>
+        <td><%= employee.address1 %></td>
+        <td><%= employee.address2 %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.cardno_of_duty %></td>
+        <td><%= link_to 'Show', employee %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employee', new_employee_path %>

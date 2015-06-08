@@ -5,7 +5,7 @@ class CreateOfftypes < ActiveRecord::Migration
       t.string :name
       t.integer :mins_of_minimum
       t.integer :mins_per_unit
-      t.integer :deduct_percent
+      t.decimal :deduct_percent, precision: 7, scale: 4
       t.boolean :include_holiday
       t.boolean :can_duplicate
       t.boolean :is_quota_ctrl
