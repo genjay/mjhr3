@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608084850) do
+ActiveRecord::Schema.define(version: 20150608133224) do
 
   create_table "annual_leave_lists", force: :cascade do |t|
     t.integer  "months_of_job", limit: 4
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20150608084850) do
 
   add_index "departments", ["worktype_id"], name: "index_departments_on_worktype_id", using: :btree
 
+  create_table "employee_inoutlogs", force: :cascade do |t|
+    t.integer  "employee_id",    limit: 4
+    t.string   "action",         limit: 255
+    t.date     "begin_at"
+    t.integer  "department_id",  limit: 4
+    t.integer  "days_of_jobage", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "employee_insurance_settings", force: :cascade do |t|
     t.integer  "employee_id",       limit: 4
     t.integer  "NHI_LV",            limit: 4
@@ -79,27 +89,27 @@ ActiveRecord::Schema.define(version: 20150608084850) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "uid",            limit: 255
-    t.string   "name",           limit: 255
-    t.integer  "department_id",  limit: 4
-    t.string   "id_number",      limit: 255
+    t.string   "uid",           limit: 255
+    t.string   "name",          limit: 255
+    t.integer  "department_id", limit: 4
+    t.string   "id_number",     limit: 255
     t.date     "arrive_date"
-    t.date     "levae_date"
+    t.date     "leave_date"
     t.date     "birthday"
-    t.string   "sex",            limit: 255
-    t.string   "marriage",       limit: 255
-    t.string   "education",      limit: 255
-    t.string   "school",         limit: 255
-    t.string   "tel1",           limit: 255
-    t.string   "tel2",           limit: 255
-    t.string   "address1",       limit: 255
-    t.string   "address2",       limit: 255
-    t.string   "email",          limit: 255
-    t.string   "cardno_of_duty", limit: 255
-    t.integer  "ou_id",          limit: 4
-    t.text     "memo",           limit: 65535
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "sex",           limit: 255
+    t.string   "marriage",      limit: 255
+    t.string   "education",     limit: 255
+    t.string   "school",        limit: 255
+    t.string   "tel1",          limit: 255
+    t.string   "tel2",          limit: 255
+    t.string   "address1",      limit: 255
+    t.string   "address2",      limit: 255
+    t.string   "email",         limit: 255
+    t.string   "cardno",        limit: 255
+    t.integer  "ou_id",         limit: 4
+    t.text     "memo",          limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "insurance_settings", force: :cascade do |t|
@@ -110,19 +120,19 @@ ActiveRecord::Schema.define(version: 20150608084850) do
     t.integer  "ou_id",      limit: 4
     t.decimal  "a_rate",                   precision: 7,  scale: 4
     t.decimal  "a_employee",               precision: 10
-    t.decimal  "a_compayny",               precision: 10
+    t.decimal  "a_company",                precision: 10
     t.decimal  "b_rate",                   precision: 7,  scale: 4
     t.decimal  "b_employee",               precision: 10
-    t.decimal  "b_compayny",               precision: 10
+    t.decimal  "b_company",                precision: 10
     t.decimal  "c_rate",                   precision: 7,  scale: 4
     t.decimal  "c_employee",               precision: 10
-    t.decimal  "c_compayny",               precision: 10
+    t.decimal  "c_company",                precision: 10
     t.decimal  "d_rate",                   precision: 7,  scale: 4
     t.decimal  "d_employee",               precision: 10
-    t.decimal  "d_compayny",               precision: 10
+    t.decimal  "d_company",                precision: 10
     t.decimal  "e_rate",                   precision: 7,  scale: 4
     t.decimal  "e_employee",               precision: 10
-    t.decimal  "e_compayny",               precision: 10
+    t.decimal  "e_company",                precision: 10
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
   end
@@ -244,6 +254,4 @@ ActiveRecord::Schema.define(version: 20150608084850) do
     t.datetime "updated_at",                             null: false
   end
 
-  add_foreign_key "departments", "worktypes"
-  add_foreign_key "workrests", "worktypes"
 end

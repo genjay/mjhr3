@@ -11,4 +11,9 @@ class Department < ActiveRecord::Base
   before_destroy :check_for_destory
   def check_for_destory
   end
+  after_initialize :defaults 
+
+  def defaults
+  	self.worktype = Worktype.where(ou_id:self.ou_id).first
+  end
 end

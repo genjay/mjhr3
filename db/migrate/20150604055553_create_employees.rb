@@ -6,7 +6,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.integer :department_id
       t.string :id_number
       t.date :arrive_date
-      t.date :levae_date
+      t.date :leave_date
       t.date :birthday
       t.string :sex
       t.string :marriage
@@ -17,7 +17,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :address1
       t.string :address2
       t.string :email
-      t.string :cardno_of_duty
+      t.string :cardno 
       t.integer :ou_id
       t.text :memo
 

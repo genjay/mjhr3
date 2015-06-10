@@ -1,7 +1,7 @@
 class CreateWorkrests < ActiveRecord::Migration
   def change
     create_table :workrests do |t|
-      t.references :worktype, index: true, foreign_key: true
+      t.references :worktype, index: true 
       t.boolean :is_holiday
       t.time :rest_begin_at
       t.integer :mins_of_rest
