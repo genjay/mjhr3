@@ -7,7 +7,7 @@
     <%= f.association :department, :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
     <%= f.input :id_number %>
     <%= f.input :arrive_date %>
-    <%= f.input :levae_date %>
+    <%= f.input :leave_date %>
     <%= f.input :birthday %>
     <%= f.input :sex %>
     <%= f.input :marriage %>
@@ -18,7 +18,7 @@
     <%= f.input :address1 %>
     <%= f.input :address2 %>
     <%= f.input :email %>
-    <%= f.input :cardno_of_duty %>
+    <%= f.input :cardno %>
   </div>
 
   <div class="form-actions">

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :employees do
     resources :employee_insurance_setting
   end

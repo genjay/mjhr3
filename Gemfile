@@ -44,6 +44,8 @@ group :development, :test do
   gem 'spring'
   gem 'hirb-unicode'
   gem 'better_errors'
+  gem "brakeman", require: false
+  gem "rails_best_practices", require: false
 end
 
 group :test do
