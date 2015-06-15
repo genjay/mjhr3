@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612030029) do
+ActiveRecord::Schema.define(version: 20150615032222) do
 
   create_table "annual_leave_lists", force: :cascade do |t|
     t.integer  "months_of_job", limit: 4
@@ -207,6 +207,26 @@ ActiveRecord::Schema.define(version: 20150612030029) do
     t.text     "memo",           limit: 65535
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+  end
+
+  create_table "sch_deps", force: :cascade do |t|
+    t.integer  "ou_id",         limit: 4
+    t.date     "duty_date"
+    t.boolean  "is_holiday",    limit: 1
+    t.integer  "worktype_id",   limit: 4
+    t.integer  "department_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "sch_emps", force: :cascade do |t|
+    t.integer  "ou_id",       limit: 4
+    t.date     "duty_date"
+    t.boolean  "is_holiday",  limit: 1
+    t.integer  "worktype_id", limit: 4
+    t.integer  "employee_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "subsidies", force: :cascade do |t|
