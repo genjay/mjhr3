@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :uid,placeholder:'部門代號', autofocus: true %>
     <%= f.input :name,placeholder:'部門名稱' %>
-    <%= f.association :worktype, :label_method => lambda { |f| "#{f.uid}  #{f.name}" } %>
+    <%= f.association :worktype, value_method: :id, :label_method => lambda { |f| "#{f.uid}  #{f.name} #{f.id}" } %>
     <%= f.association :upper, :label_method => lambda { |f| "#{f.uid} #{f.name}"},:prompt => ''%>
     <%= f.input :is_stoped %>
     <%= f.input :memo,placeholder:'備註' %> 

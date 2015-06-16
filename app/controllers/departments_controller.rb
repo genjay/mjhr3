@@ -4,7 +4,7 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all.order(:uid)
+    @departments = Department.includes(:worktype).page(params[:pages]) #.order(:uid)
   end
 
   # GET /departments/1
@@ -40,6 +40,8 @@ class DepartmentsController < ApplicationController
   # PATCH/PUT /departments/1
   # PATCH/PUT /departments/1.json
   def update
+    # render :text => department_params
+    # return
     respond_to do |format|
       if @department.update(department_params)
         format.html { redirect_to @department, notice: 'Department was successfully updated.' }

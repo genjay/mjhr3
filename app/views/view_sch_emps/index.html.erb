@@ -1,0 +1,25 @@
+<h1>出勤曆</h1>
+
+<%= form_tag view_sch_emps_path, :method => 'get' do %>
+  <p>
+  	<%= text_field_tag :yyyymm, params[:yyyymm] %>
+  	<%= text_field_tag :emp_id, params[:emp_id] %>
+  	<%= submit_tag "尋找", :name => nil %>
+  </p>
+<% end %>
+
+<table class='table table-hover'>
+	<tbody>
+		<thead>
+			<th> 日期</th>
+			<th> 假日</th>
+		</thead>
+		<% @viewschemps.each do |f| %>
+		  <tr>
+		  	<td><%= f.name %></td>
+				<td><%= f.duty_date %></td>
+				<td><%= f.is_holiday %></td>
+			</tr>
+		<% end %>
+  </tbody>
+</table>

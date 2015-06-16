@@ -21,7 +21,7 @@
       <tr>
         <td><%= link_to department.uid, edit_department_path(department) %></td>
         <td><%= link_to department.name, edit_department_path(department) %></td>
-        <td><%= department.worktype.try(:name) %></td>
+        <td><%= department.worktype.uid %></td>
         <td><%= department.upper.try(:name) %></td>
         <td><%= '停用中' if department.is_stoped %></td>  
         <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
