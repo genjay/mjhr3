@@ -1,30 +1,22 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
-  # GET /employees
-  # GET /employees.json
   def index
-    @employees = Employee.all
+    @employees = @current_ou.employees.page(params[:page])
   end
-
-  # GET /employees/1
-  # GET /employees/1.json
+ 
   def show
   end
 
-  # GET /employees/new
   def new
-    @employee = Employee.new
+    @employee = @current_ou.employees.new
   end
 
-  # GET /employees/1/edit
   def edit
   end
 
-  # POST /employees
-  # POST /employees.json
   def create
-    @employee = Employee.new(employee_params)
+    @employee = @current_ou.employees.new(employee_params)
 
     respond_to do |format|
       if @employee.save
@@ -64,7 +56,7 @@ class EmployeesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
-      @employee = Employee.find(params[:id])
+      @employee = @current_ou.employees.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

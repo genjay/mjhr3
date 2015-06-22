@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Departments</h1>
 
 <%= button_to 'New Department', new_department_path , :class => 'button' %>
+<%= paginate @departments, :theme => 'twitter-bootstrap-3'%>
 
 <table class='table table-hover'>
   <thead>
@@ -21,7 +20,7 @@
       <tr>
         <td><%= link_to department.uid, edit_department_path(department) %></td>
         <td><%= link_to department.name, edit_department_path(department) %></td>
-        <td><%= department.worktype.uid %></td>
+        <td><%= department.worktype.try(:uid) %></td>
         <td><%= department.upper.try(:name) %></td>
         <td><%= '停用中' if department.is_stoped %></td>  
         <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,6 +28,7 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @departments, :theme => 'twitter-bootstrap-3'%>
 
 <br>
 

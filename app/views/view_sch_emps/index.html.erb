@@ -2,8 +2,8 @@
 
 <%= form_tag view_sch_emps_path, :method => 'get' do %>
   <p>
-  	<%= text_field_tag :yyyymm, params[:yyyymm] %>
-  	<%= text_field_tag :emp_id, params[:emp_id] %>
+  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月' %>
+  	<%= text_field_tag :emp_id, params[:emp_id],placeholder:'工號' %>
   	<%= submit_tag "尋找", :name => nil %>
   </p>
 <% end %>
@@ -16,6 +16,8 @@
 		</thead>
 		<% @viewschemps.each do |f| %>
 		  <tr>
+		  	<td><%= f.id %></td>
+		  	<td><%= link_to f.duty_date,edit_view_sch_emp_path(f,:uid => f.uid,:duty_date => f.duty_date, :worktype_id => f.worktype_id, :is_holiday => f.is_holiday, :employee_id => f.employee_id)%></td>
 		  	<td><%= f.name %></td>
 				<td><%= f.duty_date %></td>
 				<td><%= f.is_holiday %></td>

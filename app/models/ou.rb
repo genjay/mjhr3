@@ -2,6 +2,10 @@ class Ou < ActiveRecord::Base
 	# default_scope { where(id: nil)}
 	after_initialize :defaults
 	has_many :worktypes
+	has_many :employees
+	has_many :departments
+	has_many :view_sch_emps
+	has_many :view_sch_deps
 
   validates :uid,:name,presence:true 
  	validates :uid,:name, uniqueness: { message: "已經被使用" } 

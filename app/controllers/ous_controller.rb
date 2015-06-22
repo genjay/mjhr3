@@ -4,6 +4,7 @@ class OusController < ApplicationController
   # GET /ous
   # GET /ous.json
   def index
+ 
     @ous = Ou.all
   end
 
