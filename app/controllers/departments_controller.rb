@@ -7,7 +7,7 @@ class DepartmentsController < ApplicationController
     # session[:xid] = '11123'
     # render :text => session[:xid] 
     # return
-    @departments = @current_ou.departments.includes(:worktype).page(params[:page]) #.order(:uid)
+    @departments = @current_ou.departments.includes(:worktype) 
   end
 
   # GET /departments/1
@@ -63,6 +63,13 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def multi_destroy
+    Department.destroy(params[:ids])
+    respond_to do |format|
+      format.html { redirect_to departments_path }
     end
   end
 

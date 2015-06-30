@@ -5,3 +5,5 @@
 #= require cocoon
 #= require turbolinks
 #= require_tree .
+jQuery ->
+   $('#table_id').DataTable();

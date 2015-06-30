@@ -18,8 +18,12 @@ Rails.application.routes.draw do
   resources :overtypes
   resources :offtypes
 
-  post '/departments/new' => 'departments#new', :as => 'new_department'
-  resources :departments, except: [:new]
+  # post '/departments/new' => 'departments#new', :as => 'new_department'
+  resources :departments do #, except: [:new] do
+    collection do
+      delete 'multi_destroy'
+    end
+  end
   resources :worktypes do
     resources :workrests
   end
