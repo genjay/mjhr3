@@ -7,10 +7,24 @@ class Department < ActiveRecord::Base
  	validates :uid,:name, uniqueness: { scope: :ou_id	,
     message: "已經被使用" }
 
-  
-  before_destroy :check_for_destory
-  def check_for_destory
+
+  def destroy
+    case 
+    when Department.exists?(upper_id: self.id)
+      then 
+        self.errors.add :base, "Department using #{self.uid} can't delete"
+        false
+    when Employee.exists?(department_id: self.id)
+      then 
+        self.errors.add :base, "Employee using can't delete"
+        # errors.add "Employee using can't delete"
+        false
+    else
+      super
+    end 
   end
+ 
+
   # after_initialize :defaults 
 
   # def defaults

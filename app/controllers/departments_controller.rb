@@ -7,7 +7,7 @@ class DepartmentsController < ApplicationController
     # session[:xid] = '11123'
     # render :text => session[:xid] 
     # return
-    @departments = @current_ou.departments.includes(:worktype) 
+    @departments = @current_ou.departments.includes(:worktype).order(:uid) 
   end
 
   # GET /departments/1
@@ -31,7 +31,7 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
-        format.html { redirect_to @department, notice: 'Department was successfully created.' }
+        format.html { redirect_to departments_path, notice: 'Department was successfully created.' }
         format.json { render :show, status: :created, location: @department }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class DepartmentsController < ApplicationController
     # return
     respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to @department, notice: 'Department was successfully updated.' }
+        format.html { redirect_to departments_path, notice: 'Department was successfully updated.' }
         format.json { render :show, status: :ok, location: @department }
       else
         format.html { render :edit }
@@ -59,17 +59,28 @@ class DepartmentsController < ApplicationController
   # DELETE /departments/1
   # DELETE /departments/1.json
   def destroy
-    @department.destroy
     respond_to do |format|
-      format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
-      format.json { head :no_content }
+      if @department.destroy
+          format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
+          format.json { head :no_content }
+      else
+        # render :text => @department.errors[:base].to_s 
+        # return
+         format.html { redirect_to departments_url,alert: @department.errors[:base] }
+      end
     end
   end
 
   def multi_destroy
-    Department.destroy(params[:ids])
-    respond_to do |format|
-      format.html { redirect_to departments_path }
+    # render :text => params
+    # return
+    if params[:ids] != nil
+      Department.destroy(params[:ids])
+      respond_to do |format|
+        format.html { redirect_to departments_path, notice: 'Department was successfully destroyed.'}
+      end
+    else
+      redirect_to departments_path
     end
   end
 

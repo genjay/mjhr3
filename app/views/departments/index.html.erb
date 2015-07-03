@@ -1,30 +1,33 @@
-<h1>Listing Departments</h1>
+<h2>部門維護</h2>
+<hr>  
+    <%= link_to 'New ', new_department_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
 
-<%= form_tag multi_destroy_departments_path, method: :delete do %>
-  <%= submit_tag "Delete Selected" %>
+   <%= form_tag multi_destroy_departments_path, method: :delete do %>  
+    <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
   <table id='table_id'class='table table-hover'>
     <thead>
       <tr>
         <th></th>
-        <th>Uid</th>
-        <th>Name</th>
-        <th>Worktype</th>
-        <th>Upper</th>
-        <th>Is stoped</th> 
-        <th>x</th>
+        <th>項次</th>
+        <th>代號</th>
+        <th>名稱</th>
+        <th>班別</th>
+        <th>上層主管</th>
+        <th>是否停用</th>  
       </tr>
     </thead>
 
     <tbody>
-      <% @departments.each do |department| %>
+      <% @departments.each_with_index do |department,i| %>
         <tr>
           <td><%= check_box_tag "ids[]", department.id %></td>
+          <td><%= i+1 %></td>
           <td><%= link_to department.uid, edit_department_path(department) %></td>
           <td><%= link_to department.name, edit_department_path(department) %></td>
           <td><%= department.worktype.try(:uid) %></td>
           <td><%= department.upper.try(:name) %></td>
           <td><%= '停用中' if department.is_stoped %></td>  
-          <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -33,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Department', new_department_path %>
+<%= link_to 'New Department', new_department_path,autofocus: true %>
