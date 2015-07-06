@@ -66,22 +66,40 @@ class DepartmentsController < ApplicationController
       else
         # render :text => @department.errors[:base].to_s 
         # return
-         format.html { redirect_to departments_url,alert: @department.errors[:base] }
+         format.html { render :edit, notice: 'error',alert: @department.errors[:base] }
       end
     end
   end
 
-  def multi_destroy
-    # render :text => params
-    # return
-    if params[:ids] != nil
-      Department.destroy(params[:ids])
-      respond_to do |format|
-        format.html { redirect_to departments_path, notice: 'Department was successfully destroyed.'}
+  def multi_destroy 
+    errors ||=''
+    ok_msg ||=''
+    all_msg ||=''
+    params[:ids].each do |f|
+      x = Department.find(f)
+      x.destroy
+      if x.errors.empty?
+        ok_msg = ok_msg + " [#{x.uid} #{x.name}]"  
+      else
+        errors = errors + "[#{x.uid} #{x.name}] 失敗" + x.errors[:base].join + '\n'
       end
-    else
-      redirect_to departments_path
+         
+      if ok_msg.size>0 
+        all_msg = "#{ok_msg} 刪除完成\\n #{errors}" 
+      else
+        all_msg = "#{errors}" 
+      end
     end
+
+    respond_to do |format|
+      if errors.size>0 
+       format.html { redirect_to departments_path, alert: all_msg } 
+      else
+       format.html { redirect_to departments_path, notice: all_msg }
+      end 
+
+    end
+ 
   end
 
   private

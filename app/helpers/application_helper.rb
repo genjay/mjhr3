@@ -1,5 +1,6 @@
 module ApplicationHelper
   def notice_message
+  # Xdite rails 101 內的用法 
     alert_types = { notice: :success, alert: :danger }
 
     close_button_options = { class: "close", "data-dismiss" => "alert", "aria-hidden" => true }
@@ -8,18 +9,19 @@ module ApplicationHelper
     alerts = flash.map do |type, message|
       alert_content = close_button + message
 
-    alert_type = alert_types[type.to_sym] || type
-    alert_class = "alert alert-#{alert_type} alert-dismissable"
+      alert_type = alert_types[type.to_sym] || type
+      alert_class = "alert alert-#{alert_type} alert-dismissable"
 
       content_tag(:div, alert_content, class: alert_class)
     end
 
-    alerts.join("\n").html_safe
+    # alerts.join("\n").html_safe
+    alerts.join('\n').gsub('\n','</br>').html_safe
   end
 
-  def yyyymm
-    (params[:yyyymm] || Time.now.strftime('%Y%m'))
-  end
+  # def yyyymm
+  #   (params[:yyyymm] || Time.now.strftime('%Y%m'))
+  # end
 
 
 end

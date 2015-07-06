@@ -12,7 +12,7 @@ class Department < ActiveRecord::Base
     case 
     when Department.exists?(upper_id: self.id)
       then 
-        self.errors.add :base, "Department using #{self.uid} can't delete"
+        self.errors.add :base, "Department using [#{self.uid+self.name}]s can't delete"
         false
     when Employee.exists?(department_id: self.id)
       then 
