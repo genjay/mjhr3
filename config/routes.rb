@@ -15,15 +15,21 @@ Rails.application.routes.draw do
   get 'home' => 'pages#home'
   get 'pages/home'
   root 'pages#home'
-  resources :overtypes
-  resources :offtypes
 
-  # post '/departments/new' => 'departments#new', :as => 'new_department'
-  resources :departments do #, except: [:new] do
+  resources :departments ,:overtypes,except: [:show, :destroy] do
     collection do
       delete 'multi_destroy'
     end
   end
+  
+  resources :offtypes
+
+  # resources :departments do #, except: [:new] do
+  #   collection do
+  #     delete 'multi_destroy'
+  #   end
+  # end
+
   resources :worktypes do
     resources :workrests
   end

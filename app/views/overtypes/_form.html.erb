@@ -18,11 +18,11 @@
     <%= f.input :valid_unit , :collection => ['1m', '2m']%> 
     <%= f.input :is_stoped %>
     <%= f.input :pay_type %>
-    <%= f.input :memo %>
-    <%= f.input :ou_id %>
+    <%= f.input :memo %> 
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+    <%= link_to 'Back', overtypes_path,class: 'btn btn-primary' %></td>
   </div>
 <% end %>

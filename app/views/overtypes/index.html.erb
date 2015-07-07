@@ -1,35 +1,40 @@
-<p id="notice"><%= notice %></p>
+<h2>加班類別</h2>
 
-<h1>Listing Overtypes</h1>
+<%= form_tag multi_destroy_overtypes_path, method: :delete do %>
 
-<%= link_to 'New Overtype', new_overtype_path %>
+  <%= link_to 'New', new_overtype_path ,class: 'btn btn-primary'%>
 
-<table class='table table-hover'>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料'} %>
+
+<table id='table_id' class='table table-hover'>
   <thead>
     <tr>
-      <th>Uid</th>
-      <th>Name</th>
-      <th>Mins of a</th>
-      <th>Mins of b</th>
-      <th>Rate of a</th>
-      <th>Amt of a</th>
-      <th>Rate of b</th>
-      <th>Amt of b</th>
-      <th>Rate of c</th>
-      <th>Amt of c</th>
+      <th></th>
+      <th>項次</th>
+      <th>代號</th>
+      <th>名稱</th>
+      <th>A 時段</th>
+      <th>B 時段</th>
+      <th>A 比率</th>
+      <th>A 金額</th>
+      <th>B 比率</th>
+      <th>B 金額</th>
+      <th>C 比率</th>
+      <th>C 金額</th>
       <th>Rate of h</th>
       <th>Amt of h</th>
       <th>Mins per unit</th>
       <th>Valid unit</th>
       <th>Is stoped</th>
-      <th>Pay type</th> 
-      <th colspan="3"></th>
+      <th>Pay type</th>   
     </tr>
   </thead>
 
   <tbody>
-    <% @overtypes.each do |overtype| %>
+    <% @overtypes.each_with_index do |overtype,i| %>
       <tr>
+        <td><%= check_box_tag "ids[]", overtype.id %></td>
+        <td><%= i+1 %>
         <td><%= link_to overtype.uid, edit_overtype_path(overtype)%></td>
         <td><%= link_to overtype.name, edit_overtype_path(overtype) %></td>
         <td><%= overtype.mins_of_A %></td>
@@ -45,13 +50,17 @@
         <td><%= overtype.mins_per_unit %></td>
         <td><%= overtype.valid_unit %></td>
         <td><%= overtype.is_stoped %></td>
-        <td><%= overtype.pay_type %></td> 
-        <td><%= link_to 'Destroy', overtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= overtype.pay_type %></td>  
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= link_to 'New', new_overtype_path ,class: 'btn btn-primary'%>
 
-<%= link_to 'New Overtype', new_overtype_path %>
+<%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料'} %>
+
+<% end %>
+
+<br>
+ 

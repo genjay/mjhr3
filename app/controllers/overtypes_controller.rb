@@ -1,34 +1,23 @@
 class OvertypesController < ApplicationController
   before_action :set_overtype, only: [:show, :edit, :update, :destroy]
 
-  # GET /overtypes
-  # GET /overtypes.json
   def index
-    @overtypes = Overtype.all.order(uid: :asc)
+    @overtypes = @current_ou.overtypes.order(uid: :asc)
   end
 
-  # GET /overtypes/1
-  # GET /overtypes/1.json
-  def show
-  end
-
-  # GET /overtypes/new
   def new
-    @overtype = Overtype.new
+    @overtype = @current_ou.overtypes.new
   end
 
-  # GET /overtypes/1/edit
   def edit
   end
 
-  # POST /overtypes
-  # POST /overtypes.json
   def create
-    @overtype = Overtype.new(overtype_params)
+    @overtype = @current_ou.overtypes.new(overtype_params)
 
     respond_to do |format|
       if @overtype.save
-        format.html { redirect_to @overtype, notice: 'Overtype was successfully created.' }
+        format.html { redirect_to overtypes_path, notice: 'Overtype was successfully created.' }
         format.json { render :show, status: :created, location: @overtype }
       else
         format.html { render :new }
@@ -37,12 +26,10 @@ class OvertypesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /overtypes/1
-  # PATCH/PUT /overtypes/1.json
   def update
     respond_to do |format|
       if @overtype.update(overtype_params)
-        format.html { redirect_to @overtype, notice: 'Overtype was successfully updated.' }
+        format.html { redirect_to overtypes_path, notice: 'Overtype was successfully updated.' }
         format.json { render :show, status: :ok, location: @overtype }
       else
         format.html { render :edit }
@@ -51,24 +38,41 @@ class OvertypesController < ApplicationController
     end
   end
 
-  # DELETE /overtypes/1
-  # DELETE /overtypes/1.json
-  def destroy
-    @overtype.destroy
-    respond_to do |format|
-      format.html { redirect_to overtypes_url, notice: 'Overtype was successfully destroyed.' }
-      format.json { head :no_content }
+  def multi_destroy 
+    # render :text => params
+    err_msg,ok_msg,all_msg = '','',''
+    # ok_msg = 'yyy'
+    # render :text => ok_msg
+    # return
+    params[:ids].each do |f|
+      x = @current_ou.overtypes.find(f)
+      if x.destroy
+        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+      else
+        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+      end
     end
-  end
+
+      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+      # render :text => all_msg
+      respond_to do |format|
+        if err_msg.size>0
+          format.html { redirect_to overtypes_path, alert: all_msg }
+        else
+          format.html { redirect_to overtypes_path, notice: all_msg }
+        end
+      end
+    
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_overtype
-      @overtype = Overtype.find(params[:id])
+      @overtype = @current_ou.overtypes.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def overtype_params
-      params.require(:overtype).permit(:uid, :name, :mins_of_A, :mins_of_B, :rate_of_A, :amt_of_A, :rate_of_B, :amt_of_B, :rate_of_C, :amt_of_C, :rate_of_H, :amt_of_H, :mins_per_unit, :valid_unit, :is_stoped, :pay_type, :memo, :ou_id)
+      params.require(:overtype).permit(:uid, :name, :mins_of_A, :mins_of_B, :rate_of_A, :amt_of_A, :rate_of_B, :amt_of_B, :rate_of_C, :amt_of_C, :rate_of_H, :amt_of_H, :mins_per_unit, :valid_unit, :is_stoped, :pay_type, :memo)
     end
 end
