@@ -16,13 +16,11 @@ Rails.application.routes.draw do
   get 'pages/home'
   root 'pages#home'
 
-  resources :departments ,:overtypes,except: [:show, :destroy] do
+  resources :overtypes, :departments, :offtypes, except: [:show, :destroy] do
     collection do
       delete 'multi_destroy'
     end
   end
-  
-  resources :offtypes
 
   # resources :departments do #, except: [:new] do
   #   collection do

@@ -61,6 +61,35 @@ class OfftypesController < ApplicationController
     end
   end
 
+    def multi_destroy 
+    errors ||=''
+    ok_msg ||=''
+    all_msg ||=''
+    params[:ids].each do |f|
+      x = Offtype.find(f)
+      x.destroy
+      if x.errors.empty?
+        ok_msg = ok_msg + " [#{x.uid} #{x.name}]"  
+      else
+        errors = errors + "[#{x.uid} #{x.name}] 失敗" + x.errors[:base].join + '\n'
+      end
+         
+      if ok_msg.size>0 
+        all_msg = "#{ok_msg} 刪除完成\\n #{errors}" 
+      else
+        all_msg = "#{errors}" 
+      end
+    end
+
+    respond_to do |format|
+      if errors.size>0 
+       format.html { redirect_to offtypes_path, alert: all_msg } 
+      else
+       format.html { redirect_to offtypes_path, notice: all_msg }
+      end 
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offtype
