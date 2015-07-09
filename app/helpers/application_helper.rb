@@ -22,6 +22,7 @@ module ApplicationHelper
   # def yyyymm
   #   (params[:yyyymm] || Time.now.strftime('%Y%m'))
   # end
+  
 
 
 end
