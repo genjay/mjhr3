@@ -1,37 +1,41 @@
-<p id="notice"><%= notice %></p>
+<h2>Listing Subsidies</h2>
 
-<h1>Listing Subsidies</h1>
+<%= form_tag multi_destroy_subsidies_path, method: :delete do %>
 
-<table class='table table-hover'>
+  <%= link_to 'New ', new_subsidy_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+
+<table id='table_id'class='table table-hover'>
   <thead>
     <tr>
+      <th></th>
+      <th>項次</th>
       <th>Uid</th>
       <th>Name</th>
       <th>Rate</th>
       <th>Memo</th>
       <th>Is stoped</th>
       <th>Ou</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @subsidies.each do |subsidy| %>
+    <% @subsidies.each_with_index do |subsidy,i| %>
       <tr>
-        <td><%= subsidy.uid %></td>
-        <td><%= subsidy.name %></td>
+        <td><%= check_box_tag "ids[]", subsidy.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to subsidy.uid, edit_subsidy_path(subsidy) %></td>
+        <td><%= link_to subsidy.name, edit_subsidy_path(subsidy) %></td>
         <td><%= subsidy.rate %></td>
         <td><%= subsidy.memo %></td>
         <td><%= subsidy.is_stoped %></td>
         <td><%= subsidy.ou_id %></td>
-        <td><%= link_to 'Show', subsidy %></td>
-        <td><%= link_to 'Edit', edit_subsidy_path(subsidy) %></td>
-        <td><%= link_to 'Destroy', subsidy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= link_to 'New ', new_subsidy_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
-<%= link_to 'New Subsidy', new_subsidy_path %>
+<% end %>

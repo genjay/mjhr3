@@ -1,5 +1,5 @@
 <%= simple_form_for(@lvlist) do |f| %>
-  <%= f.error_notification %>
+  <% f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :uid %>
@@ -8,6 +8,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', lvlists_path,class: 'btn btn-primary', method: :get %>
   </div>
+
 <% end %>

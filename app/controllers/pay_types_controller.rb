@@ -38,7 +38,7 @@ class PayTypesController < ApplicationController
 
     respond_to do |format|
       if @pay_type.save
-        format.html { redirect_to @pay_type, notice: 'Pay type was successfully created.' }
+        format.html { redirect_to pay_types_path, notice: 'Pay type was successfully created.' }
         format.json { render :show, status: :created, location: @pay_type }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class PayTypesController < ApplicationController
   def update
     respond_to do |format|
       if @pay_type.update(pay_type_params)
-        format.html { redirect_to @pay_type, notice: 'Pay type was successfully updated.' }
+        format.html { redirect_to pay_types_path, notice: 'Pay type was successfully updated.' }
         format.json { render :show, status: :ok, location: @pay_type }
       else
         format.html { render :edit }
@@ -63,12 +63,38 @@ class PayTypesController < ApplicationController
 
   # DELETE /pay_types/1
   # DELETE /pay_types/1.json
-  def destroy
-    @pay_type.destroy
-    respond_to do |format|
-      format.html { redirect_to pay_types_url, notice: 'Pay type was successfully destroyed.' }
-      format.json { head :no_content }
+  # def destroy
+  #   @pay_type.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to pay_types_url, notice: 'Pay type was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
+  def multi_destroy 
+    # render :text => params
+    err_msg,ok_msg,all_msg = '','',''
+    # ok_msg = 'yyy'
+    # render :text => ok_msg
+    # return
+    params[:ids].each do |f|
+      x = PayType.find(f)
+      if x.destroy
+        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+      else
+        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+      end
     end
+
+      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+      # render :text => all_msg
+      respond_to do |format|
+        if err_msg.size>0
+          format.html { redirect_to pay_types_path, alert: all_msg }
+        else
+          format.html { redirect_to pay_types_path, notice: all_msg }
+        end
+      end
   end
 
   private
@@ -79,7 +105,7 @@ class PayTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pay_type_params
-      params.require(:pay_type).permit(:uid, :name, :cycle_unit, :rule_for_break, :is_stoped, :ou_id, :memo)
+      params.require(:pay_type).permit(:uid, :name, :cycle_unit, :rule_for_break, :is_stoped, :memo)
     end
 
     def set_lists # 下單選單用 

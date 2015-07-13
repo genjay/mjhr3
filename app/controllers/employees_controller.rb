@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   def index
-    @employees = @current_ou.employees.page(params[:page])
+    @employees = @current_ou.employees.order(uid: :asc)#page(params[:page])
   end
  
   def show
@@ -20,7 +20,7 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
+        format.html { redirect_to employees_path, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
         format.html { render :new }
@@ -34,7 +34,7 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
+        format.html { redirect_to employees_path, notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
         format.html { render :edit }
@@ -45,12 +45,38 @@ class EmployeesController < ApplicationController
 
   # DELETE /employees/1
   # DELETE /employees/1.json
-  def destroy
-    @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-      format.json { head :no_content }
+  # def destroy
+  #   @employee.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
+  def multi_destroy 
+    # render :text => params
+    err_msg,ok_msg,all_msg = '','',''
+    # ok_msg = 'yyy'
+    # render :text => ok_msg
+    # return
+    params[:ids].each do |f|
+      x = Employee.find(f)
+      if x.destroy
+        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+      else
+        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+      end
     end
+
+      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+      # render :text => all_msg
+      respond_to do |format|
+        if err_msg.size>0
+          format.html { redirect_to employees_path, alert: all_msg }
+        else
+          format.html { redirect_to employees_path, notice: all_msg }
+        end
+      end
   end
 
   private

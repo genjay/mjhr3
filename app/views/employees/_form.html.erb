@@ -1,4 +1,5 @@
-<%= simple_form_for(@employee) do |f| %> 
+<%= simple_form_for(@employee) do |f| %>
+  <% f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :uid,autofocus:true %>
@@ -21,6 +22,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', employees_path,class: 'btn btn-primary', method: :get %>
   </div>
-<% end %>
+
+<% end %> 

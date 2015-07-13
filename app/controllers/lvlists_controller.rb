@@ -28,7 +28,7 @@ class LvlistsController < ApplicationController
 
     respond_to do |format|
       if @lvlist.save
-        format.html { redirect_to @lvlist, notice: 'Lvlist was successfully created.' }
+        format.html { redirect_to lvlists_path, notice: 'Lvlist was successfully created.' }
         format.json { render :show, status: :created, location: @lvlist }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class LvlistsController < ApplicationController
   def update
     respond_to do |format|
       if @lvlist.update(lvlist_params)
-        format.html { redirect_to @lvlist, notice: 'Lvlist was successfully updated.' }
+        format.html { redirect_to lvlists_path, notice: 'Lvlist was successfully updated.' }
         format.json { render :show, status: :ok, location: @lvlist }
       else
         format.html { render :edit }
@@ -53,12 +53,38 @@ class LvlistsController < ApplicationController
 
   # DELETE /lvlists/1
   # DELETE /lvlists/1.json
-  def destroy
-    @lvlist.destroy
-    respond_to do |format|
-      format.html { redirect_to lvlists_url, notice: 'Lvlist was successfully destroyed.' }
-      format.json { head :no_content }
+  # def destroy
+  #   @lvlist.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to lvlists_url, notice: 'Lvlist was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
+  def multi_destroy 
+    # render :text => params
+    err_msg,ok_msg,all_msg = '','',''
+    # ok_msg = 'yyy'
+    # render :text => ok_msg
+    # return
+    params[:ids].each do |f|
+      x = Lvlist.find(f)
+      if x.destroy
+        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+      else
+        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+      end
     end
+
+      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+      # render :text => all_msg
+      respond_to do |format|
+        if err_msg.size>0
+          format.html { redirect_to lvlists_path, alert: all_msg }
+        else
+          format.html { redirect_to lvlists_path, notice: all_msg }
+        end
+      end
   end
 
   private
@@ -69,6 +95,6 @@ class LvlistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lvlist_params
-      params.require(:lvlist).permit(:uid, :amt, :ou_id)
+      params.require(:lvlist).permit(:uid, :amt)
     end
 end

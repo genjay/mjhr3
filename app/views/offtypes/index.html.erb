@@ -28,7 +28,7 @@
         <td><%= check_box_tag "ids[]", offtype.id %></td>
         <td><%= i+1 %></td>
         <td><%= link_to offtype.uid,edit_offtype_path(offtype) %></td>
-        <td><%= offtype.name %></td>
+        <td><%= link_to offtype.name,edit_offtype_path(offtype) %></td>
         <td><%= offtype.mins_of_minimum %></td>
         <td><%= offtype.mins_per_unit %></td>
         <td><%= offtype.deduct_percent %></td>
