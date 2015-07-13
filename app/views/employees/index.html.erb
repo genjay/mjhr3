@@ -1,10 +1,15 @@
-<h1>Listing Employees</h1>
+<h2>Listing Employees</h2>
 
+<%= form_tag multi_destroy_employees_path, method: :delete do %>
 
-<%= paginate @employees, :theme => 'twitter-bootstrap-3'%>
-<table id='table_id' class='table table-hover'>
+  <%= link_to 'New ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+<table id='table_id'class='table table-hover'>
   <thead>
     <tr>
+      <th></th>
+      <th>項次</th>
       <th>Uid</th>
       <th>Name</th>
       <th>Department</th>
@@ -18,16 +23,16 @@
       <th>School</th> 
       <th>Email</th>
       <th>Cardno of duty</th>
-      <th>x</th>
-      <th>y</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @employees.each do |employee| %>
+    <% @employees.each_with_index do |employee,i| %>
       <tr>
-        <td><%= employee.uid %></td>
-        <td><%= employee.name %></td>
+        <td><%= check_box_tag "ids[]", employee.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to employee.uid,edit_employee_path(employee) %></td>
+        <td><%= link_to employee.name,edit_employee_path(employee) %></td>
         <td><%= employee.department_id %></td>
         <td><%= employee.id_number %></td>
         <td><%= employee.arrive_date %></td>
@@ -36,18 +41,15 @@
         <td><%= employee.sex %></td>
         <td><%= employee.marriage %></td>
         <td><%= employee.education %></td>
-        <td><%= employee.school %></td> 
+        <td><%= employee.school %></td>
+        <td><%= employee.email %></td>
         <td><%= employee.cardno %></td>
-        <td><%= link_to 'Show', employee %></td>
-        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= paginate @employees, :theme => 'twitter-bootstrap-3'%>
-
-<br>
-
-<%= link_to 'New Employee', new_employee_path %>
+  <%= link_to 'New ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  
+<% end %>

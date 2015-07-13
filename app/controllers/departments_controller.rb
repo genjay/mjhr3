@@ -97,9 +97,7 @@ class DepartmentsController < ApplicationController
       else
        format.html { redirect_to departments_path, notice: all_msg }
       end 
-
     end
- 
   end
 
   private

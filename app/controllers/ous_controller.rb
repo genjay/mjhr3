@@ -29,7 +29,7 @@ class OusController < ApplicationController
 
     respond_to do |format|
       if @ou.save
-        format.html { redirect_to @ou, notice: 'Ou was successfully created.' }
+        format.html { redirect_to ous_path, notice: 'Ou was successfully created.' }
         format.json { render :show, status: :created, location: @ou }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class OusController < ApplicationController
   def update
     respond_to do |format|
       if @ou.update(ou_params)
-        format.html { redirect_to @ou, notice: 'Ou was successfully updated.' }
+        format.html { redirect_to ous_path, notice: 'Ou was successfully updated.' }
         format.json { render :show, status: :ok, location: @ou }
       else
         format.html { render :edit }
@@ -54,13 +54,13 @@ class OusController < ApplicationController
 
   # DELETE /ous/1
   # DELETE /ous/1.json
-  def destroy
-    @ou.destroy
-    respond_to do |format|
-      format.html { redirect_to ous_url, notice: 'Ou was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @ou.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to ous_url, notice: 'Ou was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

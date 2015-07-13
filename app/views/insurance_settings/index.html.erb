@@ -1,10 +1,15 @@
-<p id="notice"><%= notice %></p>
+<h2>Listing Insurance Settings</h2>
 
-<h1>Listing Insurance Settings</h1>
+<%= form_tag multi_destroy_insurance_settings_path, method: :delete do %>
 
-<table class='table table-hover'>
+  <%= link_to 'New ', new_insurance_setting_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+<table id='table_id'class='table table-hover'>
   <thead>
     <tr>
+      <th></th>
+      <th>項次</th>
       <th>Uid</th>
       <th>Name</th>
       <th>Is stoped</th> 
@@ -23,14 +28,15 @@
       <th>E rate</th>
       <th>E employee</th>
       <th>E company</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @insurance_settings.each do |insurance_setting| %>
+    <% @insurance_settings.each_with_index do |insurance_setting,i| %>
       <tr>
-        <td><%= insurance_setting.uid %></td>
+        <td><%= check_box_tag "ids[]", insurance_setting.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to insurance_setting.uid, edit_insurance_setting_path(insurance_setting) %></td>
         <td><%= link_to insurance_setting.name, edit_insurance_setting_path(insurance_setting) %></td>
         <td><%= insurance_setting.is_stoped %></td> 
         <td><%= insurance_setting.a_rate %></td>
@@ -47,13 +53,14 @@
         <td><%= insurance_setting.d_company %></td>
         <td><%= insurance_setting.e_rate %></td>
         <td><%= insurance_setting.e_employee %></td>
-        <td><%= insurance_setting.e_company %></td> 
-        <td><%= link_to 'Destroy', insurance_setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= insurance_setting.e_company %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+  <%= link_to 'New ', new_insurance_setting_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  
+<% end %>
 
-<%= link_to 'New Insurance setting', new_insurance_setting_path %>

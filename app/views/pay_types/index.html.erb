@@ -1,10 +1,15 @@
-<p id="notice"><%= notice %></p>
+<h2>Listing Pay Types</h2>
 
-<h1>Listing Pay Types</h1>
+<%= form_tag multi_destroy_pay_types_path, method: :delete do %>
 
-<table class='table table-hover'>
+  <%= link_to 'New ', new_pay_type_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+<table id='table_id'class='table table-hover'>
   <thead>
     <tr>
+      <th></th>
+      <th>項次</th>
       <th>Uid</th>
       <th>Name</th>
       <th>Cycle unit</th>
@@ -12,28 +17,27 @@
       <th>Is stoped</th>
       <th>Ou it</th>
       <th>Memo</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @pay_types.each do |pay_type| %>
+    <% @pay_types.each_with_index do |pay_type,i| %>
       <tr>
-        <td><%= pay_type.uid %></td>
-        <td><%= pay_type.name %></td>
+        <td><%= check_box_tag "ids[]", pay_type.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to pay_type.uid,edit_pay_type_path(pay_type) %></td>
+        <td><%= link_to pay_type.name,edit_pay_type_path(pay_type) %></td>
         <td><%= pay_type.cycle_unit %></td>
         <td><%= pay_type.rule_for_break %></td>
         <td><%= pay_type.is_stoped %></td>
         <td><%= pay_type.ou_id %></td>
         <td><%= pay_type.memo %></td>
-        <td><%= link_to 'Show', pay_type %></td>
-        <td><%= link_to 'Edit', edit_pay_type_path(pay_type) %></td>
-        <td><%= link_to 'Destroy', pay_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Pay type', new_pay_type_path %>
+  <%= link_to 'New ', new_pay_type_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  
+<% end %>

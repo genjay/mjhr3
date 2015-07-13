@@ -28,7 +28,7 @@ class InsuranceSettingsController < ApplicationController
 
     respond_to do |format|
       if @insurance_setting.save
-        format.html { redirect_to @insurance_setting, notice: 'Insurance setting was successfully created.' }
+        format.html { redirect_to insurance_settings_path, notice: 'Insurance setting was successfully created.' }
         format.json { render :show, status: :created, location: @insurance_setting }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class InsuranceSettingsController < ApplicationController
   def update
     respond_to do |format|
       if @insurance_setting.update(insurance_setting_params)
-        format.html { redirect_to @insurance_setting, notice: 'Insurance setting was successfully updated.' }
+        format.html { redirect_to insurance_settings_path, notice: 'Insurance setting was successfully updated.' }
         format.json { render :show, status: :ok, location: @insurance_setting }
       else
         format.html { render :edit }
@@ -53,12 +53,38 @@ class InsuranceSettingsController < ApplicationController
 
   # DELETE /insurance_settings/1
   # DELETE /insurance_settings/1.json
-  def destroy
-    @insurance_setting.destroy
-    respond_to do |format|
-      format.html { redirect_to insurance_settings_url, notice: 'Insurance setting was successfully destroyed.' }
-      format.json { head :no_content }
+  # def destroy
+  #   @insurance_setting.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to insurance_settings_url, notice: 'Insurance setting was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
+  def multi_destroy 
+    # render :text => params
+    err_msg,ok_msg,all_msg = '','',''
+    # ok_msg = 'yyy'
+    # render :text => ok_msg
+    # return
+    params[:ids].each do |f|
+      x = InsuranceSetting.find(f)
+      if x.destroy
+        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+      else
+        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+      end
     end
+
+      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+      # render :text => all_msg
+      respond_to do |format|
+        if err_msg.size>0
+          format.html { redirect_to insurance_settings_path, alert: all_msg }
+        else
+          format.html { redirect_to insurance_settings_path, notice: all_msg }
+        end
+      end
   end
 
   private

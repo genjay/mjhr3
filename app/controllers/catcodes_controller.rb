@@ -28,7 +28,7 @@ class CatcodesController < ApplicationController
 
     respond_to do |format|
       if @catcode.save
-        format.html { redirect_to @catcode, notice: 'Catcode was successfully created.' }
+        format.html { redirect_to catcodes_path, notice: 'Catcode was successfully created.' }
         format.json { render :show, status: :created, location: @catcode }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CatcodesController < ApplicationController
   def update
     respond_to do |format|
       if @catcode.update(catcode_params)
-        format.html { redirect_to @catcode, notice: 'Catcode was successfully updated.' }
+        format.html { redirect_to catcodes_path, notice: 'Catcode was successfully updated.' }
         format.json { render :show, status: :ok, location: @catcode }
       else
         format.html { render :edit }
@@ -53,12 +53,38 @@ class CatcodesController < ApplicationController
 
   # DELETE /catcodes/1
   # DELETE /catcodes/1.json
-  def destroy
-    @catcode.destroy
-    respond_to do |format|
-      format.html { redirect_to catcodes_url, notice: 'Catcode was successfully destroyed.' }
-      format.json { head :no_content }
+  # def destroy
+  #   @catcode.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to catcodes_url, notice: 'Catcode was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
+  def multi_destroy 
+    # render :text => params
+    err_msg,ok_msg,all_msg = '','',''
+    # ok_msg = 'yyy'
+    # render :text => ok_msg
+    # return
+    params[:ids].each do |f|
+      x = Catcode.find(f)
+      if x.destroy
+        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+      else
+        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+      end
     end
+
+      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+      # render :text => all_msg
+      respond_to do |format|
+        if err_msg.size>0
+          format.html { redirect_to catcodes_path, alert: all_msg }
+        else
+          format.html { redirect_to catcodes_path, notice: all_msg }
+        end
+      end
   end
 
   private
@@ -69,6 +95,6 @@ class CatcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def catcode_params
-      params.require(:catcode).permit(:m_name, :col_name, :uid, :name, :is_stoped, :ou_id, :memo)
+      params.require(:catcode).permit(:m_name, :col_name, :uid, :name, :is_stoped, :memo)
     end
 end

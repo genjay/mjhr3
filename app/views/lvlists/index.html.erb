@@ -1,31 +1,35 @@
-<p id="notice"><%= notice %></p>
+<h2>Listing Lvlists</h2>
 
-<h1>Listing Lvlists</h1>
+<%= form_tag multi_destroy_lvlists_path, method: :delete do %>
 
-<table>
+  <%= link_to 'New ', new_lvlist_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+<table id='table_id'class='table table-hover'>
   <thead>
     <tr>
+      <th></th>
+      <th>項次</th>
       <th>Uid</th>
       <th>Amt</th>
       <th>Ou</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @lvlists.each do |lvlist| %>
+    <% @lvlists.each_with_index do |lvlist,i| %>
       <tr>
-        <td><%= lvlist.uid %></td>
+        <td><%= check_box_tag "ids[]", lvlist.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to lvlist.uid,edit_lvlist_path(lvlist) %></td>
         <td><%= lvlist.amt %></td>
         <td><%= lvlist.ou_id %></td>
-        <td><%= link_to 'Show', lvlist %></td>
-        <td><%= link_to 'Edit', edit_lvlist_path(lvlist) %></td>
-        <td><%= link_to 'Destroy', lvlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Lvlist', new_lvlist_path %>
+  <%= link_to 'New ', new_lvlist_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  
+<% end %>
