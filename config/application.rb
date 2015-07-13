@@ -25,5 +25,12 @@ module Happy
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    # 無效config.generator do |g|
+    #     g.controller_test false
+    #     g.view_test false
+    #     g.helper_test false
+    #     g.routing_test false
+    #     g.request_test false
+    # end
   end
 end

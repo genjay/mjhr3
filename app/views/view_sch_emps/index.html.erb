@@ -8,16 +8,20 @@
   </p>
 <% end %>
 
-<table class='table table-hover'>
+<table id='table_id' class='table table-hover'>
 	<tbody>
 		<thead>
-			<th> 日期</th>
-			<th> 假日</th>
+			<th>項次</th>
+			<th>姓名</th>
+			<th>日期</th>
+			<th>假日</th>
+			<th></th>
 		</thead>
-		<% @viewschemps.each do |f| %>
+		<% @viewschemps.each_with_index do |f,i| %>
 		  <tr>
-		  	<td><%= f.id %></td>
-		  	<td><%= link_to f.duty_date,edit_view_sch_emp_path(f,:uid => f.uid,:duty_date => f.duty_date, :worktype_id => f.worktype_id, :is_holiday => f.is_holiday, :employee_id => f.employee_id)%></td>
+		  	<td><%= i + 1 %></td>
+		  	<td><%= f.name %></td>
+		  	<td><%= link_to f.duty_date,edit_view_sch_emp_path(f,:duty_date => f.duty_date,:uid => f.uid)%></td>
 		  	<td><%= f.name %></td>
 				<td><%= f.duty_date %></td>
 				<td><%= f.is_holiday %></td>

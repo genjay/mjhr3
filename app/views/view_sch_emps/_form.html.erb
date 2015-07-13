@@ -1,10 +1,10 @@
 <%= simple_form_for(@schemp) do |f| %>
   <div class="form-inputs">
-    <%= f.input :duty_date %>
-    <%= f.input :is_holiday %>
+    <%= f.input :uid, :disabled => true %> 
+    <%= f.input :name, :disabled => true %>
+    <%= f.input :duty_date, as: :string, :disabled => true %>
+    <%= f.input :is_holiday,as: :select %>
     <%= f.input :worktype_id %>
-    <%= f.input :uid %>
-    <%= f.input :employee_id %>
   </div>
 
   <div class="form-actions" >

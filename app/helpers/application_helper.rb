@@ -19,9 +19,9 @@ module ApplicationHelper
     alerts.join('\n').gsub('\n','</br>').html_safe
   end
 
-  # def yyyymm
-  #   (params[:yyyymm] || Time.now.strftime('%Y%m'))
-  # end
+  def yyyymm
+    (params[:yyyymm] || Time.now.strftime('%Y%m'))
+  end
   
 
 

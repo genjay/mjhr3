@@ -1,5 +1,6 @@
 create or replace view view_sch_emps as
 Select ifnull(c.id,0) id
+,a.id employee_id
 ,a.ou_id,a.uid,a.name,b.duty_date
 ,case 
  when c.worktype_id is not null then c.worktype_id

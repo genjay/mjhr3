@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+
+  resources :view_sch_deps
+  resources :view_sch_deps, only: [:index, :edit]
+
   resources :view_sch_emps
   devise_for :users
   resources :employees do

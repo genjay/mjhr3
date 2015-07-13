@@ -6,6 +6,7 @@ class Employee < ActiveRecord::Base
   # belongs_to :ou
   has_one :employee_insurance_setting
   has_many :employee_inoutlog, dependent: :destroy
+  has_many :view_sch_emps
 
   # def self.create
   # 	super

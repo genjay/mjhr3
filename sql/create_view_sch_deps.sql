@@ -1,5 +1,8 @@
-create view view_sch_deps as
-Select a.ou_id,a.uid,a.name
+create or replace view view_sch_deps as
+Select 
+ ifnull(c.id,0) id,
+ a.id department_id,
+ a.ou_id,a.uid,a.name
 ,b.duty_date
 ,case
  when c.worktype_id is not null then c.worktype_id
