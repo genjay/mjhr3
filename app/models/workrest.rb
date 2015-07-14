@@ -1,3 +1,3 @@
 class Workrest < ActiveRecord::Base
-  belongs_to :worktype, :dependent => :destroy
+  belongs_to :worktype 
 end
