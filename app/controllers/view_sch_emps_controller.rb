@@ -10,11 +10,10 @@ class ViewSchEmpsController < ApplicationController
  
    	@viewschemps = @current_ou.view_sch_emps.search(yyyymm, emp_id)
 
-    @@viewschemps = @viewschemps 
   end
 
   def edit 
-  	@schemp = @@viewschemps.find_by(uid:params[:uid], duty_date: params[:duty_date])
+  	@schemp = @current_ou.view_sch_emps.find_by(uid:params[:uid], duty_date: params[:duty_date])
   	# render :text => "#{@schemp.uid}#{@schemp.duty_date}"
   end 
 
@@ -23,7 +22,7 @@ class ViewSchEmpsController < ApplicationController
   	
   	@y = SchEmp.new(x)
   	if @y.save 
-  		# format.html { redirect_to view_sch_emps_path, notice: 'Worktype was successfully created.' }
+  		format.html { redirect_to view_sch_emps_path, notice: 'Worktype was successfully created.' }
   	else
     end   
 

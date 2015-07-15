@@ -12,6 +12,12 @@ Select ifnull(c.id,0) id
  when d.is_holiday is not null then d.is_holiday
  else b.is_holiday
  end is_holiday
+ ,case 
+ when c.worktype_id is not null then 'sch_emps'
+ when d.worktype_id is not null then 'sch_deps'
+ else 'departments'
+ end notes
+,e.id department_id
 from employees a
 left join calendars b on a.ou_id=b.ou_id 
   and b.duty_date >= a.arrive_date

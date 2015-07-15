@@ -24,4 +24,8 @@ class Worktype < ActiveRecord::Base
     self.range_off                ||= 480
     self.mins_of_duty             ||= 480
   end
+  
+  def to_s
+    "#{uid} #{name}"
+  end
 end

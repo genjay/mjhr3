@@ -1,6 +1,6 @@
 if true # ou
 	@ou ||= Ou.find_by(uid:'16130535')
-	@ou ||= Ou.create(uid:'16130535',name:'研能') #if @ou == nil
+	@ou ||= Ou.create(uid:'16130535',name:'研能')  
 end
 
 if true # 100 班別
@@ -142,11 +142,12 @@ if true # 100-2 workrests 需要 worktypes 完成後
 end
 
 if true # 110 部門
+	w = Worktype.first
   Department.where(ou_id:@ou.id).destroy_all
-  Department.create(ou_id:@ou.id, uid:"0", name:"管理部門")
-  Department.create(ou_id:@ou.id, uid:"001", name:"總經理室")
-  Department.create(ou_id:@ou.id, uid:"001-A", name:"總經理室-A班")
-  Department.create(ou_id:@ou.id, uid:"001-B", name:"總經理室-B班")
+  Department.create(ou_id:@ou.id, uid:"0", name:"管理部門", worktype: w)
+  Department.create(ou_id:@ou.id, uid:"001", name:"總經理室", worktype: w)
+  Department.create(ou_id:@ou.id, uid:"001-A", name:"總經理室-A班", worktype: w)
+  Department.create(ou_id:@ou.id, uid:"001-B", name:"總經理室-B班", worktype: w)
   Department.create(ou_id:@ou.id, uid:"002", name:"財務處")
   Department.create(ou_id:@ou.id, uid:"002-A", name:"財務處-A班")
   Department.create(ou_id:@ou.id, uid:"003", name:"勞工安全衛生管理課")

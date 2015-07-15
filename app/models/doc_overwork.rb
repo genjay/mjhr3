@@ -1,4 +1,4 @@
-class DocForget < ActiveRecord::Base
+class DocOverwork < ActiveRecord::Base
 	validates :employee_id, :duty_date, uniqueness: {scope: [:employee_id, :duty_date]}
 
 	belongs_to :employee 
@@ -10,4 +10,5 @@ class DocForget < ActiveRecord::Base
 	  	false
 	  end
 	end
+
 end

@@ -23,7 +23,7 @@
 		  	<td><%= f.name %></td>
 		  	<td><%= link_to f.duty_date,edit_view_sch_emp_path(f,:duty_date => f.duty_date,:uid => f.uid)%></td>
 		  	<td><%= f.name %></td>
-				<td><%= f.duty_date %></td>
+				<td><%= f.worktype.to_s %></td>
 				<td><%= f.is_holiday %></td>
 			</tr>
 		<% end %>
