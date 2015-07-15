@@ -100,6 +100,30 @@ CREATE TABLE `departments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `doc_forgets`
+--
+
+DROP TABLE IF EXISTS `doc_forgets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doc_forgets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `doc_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `duty_date` date DEFAULT NULL,
+  `on_duty_at` datetime DEFAULT NULL,
+  `off_duty_at` datetime DEFAULT NULL,
+  `is_closed` tinyint(1) DEFAULT NULL,
+  `ou_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_doc_forgets_on_ou_id_and_doc_no` (`ou_id`,`doc_no`),
+  UNIQUE KEY `index_doc_forgets_on_employee_id_and_duty_date` (`employee_id`,`duty_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `employee_inoutlogs`
 --
 
@@ -447,7 +471,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -587,7 +611,7 @@ CREATE TABLE `worktypes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-15 11:30:57
+-- Dump completed on 2015-07-15 13:26:12
 INSERT INTO schema_migrations (version) VALUES ('20150601093620');
 
 INSERT INTO schema_migrations (version) VALUES ('20150601093625');
@@ -629,4 +653,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150615032222');
 INSERT INTO schema_migrations (version) VALUES ('20150714064212');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715025739');
+
+INSERT INTO schema_migrations (version) VALUES ('20150715034654');
 

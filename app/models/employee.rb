@@ -7,6 +7,7 @@ class Employee < ActiveRecord::Base
   has_one :employee_insurance_setting
   has_many :employee_inoutlog, dependent: :destroy
   has_many :view_sch_emps
+  has_many :doc_forgets
 
   # def self.create
   # 	super
