@@ -6,7 +6,7 @@
     <%= f.input :name %>
     <%= f.association :department, :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
     <%= f.input :id_number %>
-    <%= f.input :arrive_date %>
+    <%= f.input :arrive_date  %>
     <%= f.input :leave_date %>
     <%= f.input :birthday %>
     <%= f.input :sex %>

@@ -30,7 +30,7 @@ class WorktypesController < ApplicationController
 
     respond_to do |format|
       if @worktype.save
-        format.html { redirect_to worktypes_paht, notice: 'Worktype was successfully created.' }
+        format.html { redirect_to worktypes_path, notice: 'Worktype was successfully created.' }
         format.json { render :show, status: :created, location: @worktype }
       else
         format.html { render :new }

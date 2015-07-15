@@ -18,11 +18,11 @@ class ViewSchEmp < ActiveRecord::Base
 	  else
 	  	x = SchEmp.find(self.id)
 	  end
-		x.ou_id = self.id
+		x.ou_id       = self.id
 		x.employee_id = self.employee_id
-		x.duty_date = self.duty_date
+		x.duty_date   = self.duty_date
 		x.worktype_id = self.worktype_id
-		x.is_holiday = self.is_holiday
+		x.is_holiday  = self.is_holiday
 
     x.save
 	end
