@@ -1,11 +1,13 @@
-<%= simple_form_for(@schemp) do |f| %>
+<%= simple_form_for(@viewschemp) do |f| %>
   <div class="form-inputs">
-    <%= f.input :uid, :disabled => true %> 
-    <%= f.input :name, :disabled => true %>
-    <%= f.input :duty_date, as: :string, :disabled => true %>
-    <%= f.input :is_holiday,as: :select %>
-    <%= f.input :worktype  %>
-  </div>
+    <%= f.input :id, as: :hidden %>
+    <%= f.input :employee_id, as: :hidden %>
+    <%= f.input :uid, :readonly => true %> 
+    <%= f.input :name, :readonly => true %>
+    <%= f.input :duty_date, as: :string, :readonly => true %>
+    <%= f.input :is_holiday %>
+    <%= f.association :worktype, value_method: :id, label_method: lambda {|f| "#{f.uid} #{f.name}"}  %> 
+  </div> 
 
   <div class="form-actions" >
     <%= f.button :submit %>

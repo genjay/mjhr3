@@ -3,7 +3,7 @@
 <%= form_tag view_sch_emps_path, :method => 'get' do %>
   <p>
   	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月' %>
-  	<%= text_field_tag :emp_id, params[:emp_id],placeholder:'工號' %>
+  	<%= text_field_tag :emp_id, 'a00514',placeholder:'工號' %>
   	<%= submit_tag "尋找", :name => nil %>
   </p>
 <% end %>

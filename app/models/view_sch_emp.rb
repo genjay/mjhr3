@@ -1,7 +1,6 @@
 class ViewSchEmp < ActiveRecord::Base
-  validates :employee_id, :duty_date, uniqueness: {scope: [:employee_id, :duty_date]}
+	validates :is_holiday, :worktype_id ,presence: true
   default_scope { limit 31  }  
-
   belongs_to :worktype
   self.primary_key = 'id' # 這行一定要加，因為這是db view，沒有primary index,給rails 抓預設值
 
@@ -19,19 +18,7 @@ class ViewSchEmp < ActiveRecord::Base
 		end
 	end
 
-	def save 
-	  sch = SchEmp.column_names
-	  if self.id == 0 
-	    x = SchEmp.new()
-	  else
-	  	x = SchEmp.find(self.id)
-	  end
-	  x.update_attributes(self.attributes.slice(*sch))
-	  v = ViewSchEmp.find_by(employee_id: employee_id,duty_date: duty_date).attributes
-	  self.assign_attributes(v)
+	def readonly?
+		true
 	end
-
-	# def readonly?
-	# 	true
-	# end
 end
