@@ -6,12 +6,12 @@
     <%= f.input :name %>
     <%= f.association :department, :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
     <%= f.input :id_number %>
-    <%= f.input :arrive_date  %>
-    <%= f.input :leave_date %>
+    <%= f.date_field :arrive_date %>
+    <%= f.date_field :leave_date %>
     <%= f.input :birthday %>
-    <%= f.input :sex %>
-    <%= f.input :marriage %>
-    <%= f.input :education %>
+    <%= f.input :sex, :collection => Option.sex %>
+    <%= f.input :marriage, :collection => Option.marriage  %>
+    <%= f.input :education, :collection => Option.education %>
     <%= f.input :school %>
     <%= f.input :tel1 %>
     <%= f.input :tel2 %>
