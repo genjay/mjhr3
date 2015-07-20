@@ -19,6 +19,6 @@ class WorkrestsController < ApplicationController
   private
 
   def find_worktype
-    @worktype = Worktype.find(params[:worktype_id])
+    @worktype = current_ou.worktypes.find(params[:worktype_id])
   end
 end

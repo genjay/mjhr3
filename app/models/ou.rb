@@ -8,6 +8,12 @@ class Ou < ActiveRecord::Base
 	has_many :employees, :dependent => :restrict_with_error 
 	has_many :overtypes, :dependent => :restrict_with_error
 	has_many :departments, :dependent => :restrict_with_error 
+	has_many :subsidies, :dependent => :restrict_with_error
+	has_many :annual_leave_lists, :dependent => :restrict_with_error
+	has_many :insurance_settings, :dependent => :restrict_with_error
+	has_many :lvlists, :dependent => :restrict_with_error
+	has_many :offtypes, :dependent => :restrict_with_error
+	has_many :pay_types, :dependent => :restrict_with_error
 
   # prefix with view_ is a db view can't update delete new
 	has_many :view_sch_emps # can not use :dependent

@@ -10,4 +10,8 @@ class DocForget < ActiveRecord::Base
 	  	false
 	  end
 	end
+
+	def duty_info
+		ViewSchEmp.find_by(ou_id: ou_id,employee_id: employee_id,duty_date: duty_date)
+	end
 end

@@ -4,7 +4,7 @@ class SubsidiesController < ApplicationController
   # GET /subsidies
   # GET /subsidies.json
   def index
-    @subsidies = Subsidy.all
+    @subsidies = current_ou.subsidies.all
   end
 
   # GET /subsidies/1
@@ -14,7 +14,7 @@ class SubsidiesController < ApplicationController
 
   # GET /subsidies/new
   def new
-    @subsidy = Subsidy.new
+    @subsidy = current_ou.subsidies.new
   end
 
   # GET /subsidies/1/edit
@@ -24,7 +24,7 @@ class SubsidiesController < ApplicationController
   # POST /subsidies
   # POST /subsidies.json
   def create
-    @subsidy = Subsidy.new(subsidy_params)
+    @subsidy = current_ou.subsidies.new(subsidy_params)
 
     respond_to do |format|
       if @subsidy.save
@@ -68,7 +68,7 @@ class SubsidiesController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = Subsidy.find(f)
+      x = current_ou.subsidies.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -90,7 +90,7 @@ class SubsidiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subsidy
-      @subsidy = Subsidy.find(params[:id])
+      @subsidy = current_ou.subsidies.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

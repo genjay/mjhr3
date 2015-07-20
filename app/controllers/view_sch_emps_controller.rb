@@ -5,7 +5,7 @@ class ViewSchEmpsController < ApplicationController
     yyyymm = params[:yyyymm]
   	emp_id = params[:emp_id] 
  
-   	@viewschemps = @current_ou.view_sch_emps.search(yyyymm, emp_id)
+   	@viewschemps = current_ou.view_sch_emps.search(yyyymm, emp_id)
 
   end
 
@@ -13,12 +13,12 @@ class ViewSchEmpsController < ApplicationController
   end 
 
   def update 
-    @viewschemp = @current_ou.view_sch_emps.new(viewschemp_params)
+    @viewschemp = current_ou.view_sch_emps.new(viewschemp_params)
 
     if @viewschemp.id == 0 
-      x = @current_ou.sch_emps.new(viewschemp_params)
+      x = current_ou.sch_emps.new(viewschemp_params)
     else
-      x = @current_ou.sch_emps.find(@viewschemp.id)
+      x = current_ou.sch_emps.find(@viewschemp.id)
       x.assign_attributes(viewschemp_params)
     end
 
@@ -35,7 +35,7 @@ class ViewSchEmpsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_viewschemp 
-      @viewschemp = @current_ou.view_sch_emps.find_by(uid: params[:uid],duty_date: params[:duty_date]) 
+      @viewschemp = current_ou.view_sch_emps.find_by(uid: params[:uid],duty_date: params[:duty_date]) 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

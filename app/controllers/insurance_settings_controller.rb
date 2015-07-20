@@ -4,7 +4,7 @@ class InsuranceSettingsController < ApplicationController
   # GET /insurance_settings
   # GET /insurance_settings.json
   def index
-    @insurance_settings = InsuranceSetting.all
+    @insurance_settings = current_ou.insurance_settings.all
   end
 
   # GET /insurance_settings/1
@@ -14,7 +14,7 @@ class InsuranceSettingsController < ApplicationController
 
   # GET /insurance_settings/new
   def new
-    @insurance_setting = InsuranceSetting.new
+    @insurance_setting = current_ou.insurance_settings.new
   end
 
   # GET /insurance_settings/1/edit
@@ -24,7 +24,7 @@ class InsuranceSettingsController < ApplicationController
   # POST /insurance_settings
   # POST /insurance_settings.json
   def create
-    @insurance_setting = InsuranceSetting.new(insurance_setting_params)
+    @insurance_setting = current_ou.insurance_settings.new(insurance_setting_params)
 
     respond_to do |format|
       if @insurance_setting.save
@@ -68,7 +68,7 @@ class InsuranceSettingsController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = InsuranceSetting.find(f)
+      x = current_ou.insurance_settings.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -90,7 +90,7 @@ class InsuranceSettingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_insurance_setting
-      @insurance_setting = InsuranceSetting.find(params[:id])
+      @insurance_setting = current_ou.insurance_settings.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

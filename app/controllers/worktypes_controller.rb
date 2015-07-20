@@ -4,7 +4,7 @@ class WorktypesController < ApplicationController
   # GET /worktypes
   # GET /worktypes.json
   def index
-    @worktypes = Worktype.all.order(uid: :asc)
+    @worktypes = current_ou.worktypes.all.order(uid: :asc)
   end
 
   # GET /worktypes/1
@@ -14,7 +14,7 @@ class WorktypesController < ApplicationController
 
   # GET /worktypes/new
   def new
-    @worktype = Worktype.new
+    @worktype = current_ou.worktypes.new
     # 3.times { @worktype.workrests.build }
   end
 
@@ -26,7 +26,7 @@ class WorktypesController < ApplicationController
   # POST /worktypes
   # POST /worktypes.json
   def create
-    @worktype = Worktype.new(worktype_params)
+    @worktype = current_ou.worktypes.new(worktype_params)
 
     respond_to do |format|
       if @worktype.save
@@ -70,7 +70,7 @@ class WorktypesController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = Worktype.find(f)
+      x = current_ou.worktypes.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -92,7 +92,7 @@ class WorktypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_worktype
-      @worktype = Worktype.find(params[:id])
+      @worktype = current_ou.worktypes.find(params[:id])
       @worktype.on_duty_at=@worktype.on_duty_at.strftime('%H:%M')
       @worktype.off_duty_at=@worktype.off_duty_at.strftime('%H:%M')
     end

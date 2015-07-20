@@ -5,7 +5,7 @@
     <%= f.input :uid, :readonly => true %> 
     <%= f.input :name, :readonly => true %>
     <%= f.input :duty_date, as: :string, :readonly => true %>
-    <%= f.input :is_holiday %>
+    <%= f.input :is_holiday, collection: [['Y',1],['N',0]] , selected: 0 %>
     <%= f.association :worktype, value_method: :id, label_method: lambda {|f| "#{f.uid} #{f.name}"}  %> 
   </div> 
 

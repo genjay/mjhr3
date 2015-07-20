@@ -2,18 +2,18 @@ class OvertypesController < ApplicationController
   before_action :set_overtype, only: [:show, :edit, :update, :destroy]
 
   def index
-    @overtypes = @current_ou.overtypes.order(uid: :asc)
+    @overtypes = current_ou.overtypes.order(uid: :asc)
   end
 
   def new
-    @overtype = @current_ou.overtypes.new
+    @overtype = current_ou.overtypes.new
   end
 
   def edit
   end
 
   def create
-    @overtype = @current_ou.overtypes.new(overtype_params)
+    @overtype = current_ou.overtypes.new(overtype_params)
 
     respond_to do |format|
       if @overtype.save
@@ -45,7 +45,7 @@ class OvertypesController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = @current_ou.overtypes.find(f)
+      x = current_ou.overtypes.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -68,7 +68,7 @@ class OvertypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_overtype
-      @overtype = @current_ou.overtypes.find(params[:id])
+      @overtype = current_ou.overtypes.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

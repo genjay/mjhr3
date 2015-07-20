@@ -4,7 +4,7 @@ class PayTypesController < ApplicationController
   # GET /pay_types
   # GET /pay_types.json
   def index
-    @pay_types = PayType.all.order(uid: :asc)
+    @pay_types = current_ou.pay_types.all.order(uid: :asc)
   end
 
   # GET /pay_types/1
@@ -15,7 +15,7 @@ class PayTypesController < ApplicationController
   # GET /pay_types/new
   def new
     set_lists
-    @pay_type = PayType.new
+    @pay_type = current_ou.pay_types.new
     # @pay_type.cycle_unit = 'A'
 
     # render :text => @cycle_unit_lists
@@ -34,7 +34,7 @@ class PayTypesController < ApplicationController
   # POST /pay_types
   # POST /pay_types.json
   def create
-    @pay_type = PayType.new(pay_type_params)
+    @pay_type = current_ou.pay_types.new(pay_type_params)
 
     respond_to do |format|
       if @pay_type.save
@@ -78,7 +78,7 @@ class PayTypesController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = PayType.find(f)
+      x = current_ou.pay_types.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -100,7 +100,7 @@ class PayTypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pay_type
-      @pay_type = PayType.find(params[:id])
+      @pay_type = current_ou.pay_types.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,7 +1,7 @@
 class Employee < ActiveRecord::Base
   validates :uid,:name,presence:true 
  	validates :uid,:cardno, uniqueness: {scope: [:ou_id], message: "已經被使用" }, :allow_blank => true
-  belongs_to :department
+  belongs_to :department,counter_cache: true
   belongs_to :ou
   has_one :employee_insurance_setting
   has_many :employee_inoutlog, dependent: :destroy

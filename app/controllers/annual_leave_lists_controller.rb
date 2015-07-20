@@ -4,7 +4,7 @@ class AnnualLeaveListsController < ApplicationController
   # GET /annual_leave_lists
   # GET /annual_leave_lists.json
   def index
-    @annual_leave_lists = AnnualLeaveList.all.order(months_of_job: :asc)
+    @annual_leave_lists = current_ou.annual_leave_lists.all.order(months_of_job: :asc)
   end
 
   # GET /annual_leave_lists/1
@@ -14,7 +14,7 @@ class AnnualLeaveListsController < ApplicationController
 
   # GET /annual_leave_lists/new
   def new
-    @annual_leave_list = AnnualLeaveList.new
+    @annual_leave_list = current_ou.annual_leave_lists.new
   end
 
   # GET /annual_leave_lists/1/edit
@@ -24,7 +24,7 @@ class AnnualLeaveListsController < ApplicationController
   # POST /annual_leave_lists
   # POST /annual_leave_lists.json
   def create
-    @annual_leave_list = AnnualLeaveList.new(annual_leave_list_params)
+    @annual_leave_list = current_ou.annual_leave_lists.new(annual_leave_list_params)
 
     respond_to do |format|
       if @annual_leave_list.save
@@ -68,7 +68,7 @@ class AnnualLeaveListsController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = AnnualLeaveList.find(f)
+      x = current_ou.annual_leave_lists.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -90,7 +90,7 @@ class AnnualLeaveListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_annual_leave_list
-      @annual_leave_list = AnnualLeaveList.find(params[:id])
+      @annual_leave_list = current_ou.annual_leave_lists.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

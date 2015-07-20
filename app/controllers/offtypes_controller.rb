@@ -4,7 +4,7 @@ class OfftypesController < ApplicationController
   # GET /offtypes
   # GET /offtypes.json
   def index
-    @offtypes = Offtype.order(uid: :asc)
+    @offtypes = current_ou.offtypes.order(uid: :asc)
   end
 
   # GET /offtypes/1
@@ -14,7 +14,7 @@ class OfftypesController < ApplicationController
 
   # GET /offtypes/new
   def new
-    @offtype = Offtype.new
+    @offtype = current_ou.offtypes.new
   end
 
   # GET /offtypes/1/edit
@@ -24,7 +24,7 @@ class OfftypesController < ApplicationController
   # POST /offtypes
   # POST /offtypes.json
   def create
-    @offtype = Offtype.new(offtype_params)
+    @offtype = current_ou.offtypes.new(offtype_params)
 
     respond_to do |format|
       if @offtype.save
@@ -68,7 +68,7 @@ class OfftypesController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = Offtype.find(f)
+      x = current_ou.offtypes.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -90,7 +90,7 @@ class OfftypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offtype
-      @offtype = Offtype.find(params[:id])
+      @offtype = current_ou.offtypes.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

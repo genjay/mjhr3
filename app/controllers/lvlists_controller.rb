@@ -4,7 +4,7 @@ class LvlistsController < ApplicationController
   # GET /lvlists
   # GET /lvlists.json
   def index
-    @lvlists = Lvlist.all
+    @lvlists = current_ou.lvlists.all
   end
 
   # GET /lvlists/1
@@ -14,7 +14,7 @@ class LvlistsController < ApplicationController
 
   # GET /lvlists/new
   def new
-    @lvlist = Lvlist.new
+    @lvlist = current_ou.lvlists.new
   end
 
   # GET /lvlists/1/edit
@@ -24,7 +24,7 @@ class LvlistsController < ApplicationController
   # POST /lvlists
   # POST /lvlists.json
   def create
-    @lvlist = Lvlist.new(lvlist_params)
+    @lvlist = current_ou.lvlists.new(lvlist_params)
 
     respond_to do |format|
       if @lvlist.save
@@ -68,7 +68,7 @@ class LvlistsController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = Lvlist.find(f)
+      x = current_ou.lvlists.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -90,7 +90,7 @@ class LvlistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lvlist
-      @lvlist = Lvlist.find(params[:id])
+      @lvlist = current_ou.lvlists.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
