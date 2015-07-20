@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'pages/home'
   root 'pages#home'
 
-  resources  :employees, :subsidies, :overtypes, :departments, :offtypes, :worktypes, :ous, :lvlists, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, except: [:show, :destroy] do
+  resources  :employees, :subsidies, :overtypes, :departments, :offtypes, :worktypes, :ous, :lvlists, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_forgets, except: [:show, :destroy] do
     collection do
       delete 'multi_destroy'
     end

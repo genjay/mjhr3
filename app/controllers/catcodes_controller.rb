@@ -4,7 +4,7 @@ class CatcodesController < ApplicationController
   # GET /catcodes
   # GET /catcodes.json
   def index
-    @catcodes = Catcode.all
+    @catcodes = current_ou.catcodes.all
   end
 
   # GET /catcodes/1
@@ -14,7 +14,7 @@ class CatcodesController < ApplicationController
 
   # GET /catcodes/new
   def new
-    @catcode = Catcode.new
+    @catcode = current_ou.catcodes.new
   end
 
   # GET /catcodes/1/edit
@@ -24,7 +24,7 @@ class CatcodesController < ApplicationController
   # POST /catcodes
   # POST /catcodes.json
   def create
-    @catcode = Catcode.new(catcode_params)
+    @catcode = current_ou.catcodes.new(catcode_params)
 
     respond_to do |format|
       if @catcode.save
@@ -68,7 +68,7 @@ class CatcodesController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = Catcode.find(f)
+      x = current_ou.catcodes.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
       else
@@ -90,7 +90,7 @@ class CatcodesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_catcode
-      @catcode = Catcode.find(params[:id])
+      @catcode = current_ou.catcodes.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

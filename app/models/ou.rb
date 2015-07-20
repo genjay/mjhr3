@@ -14,6 +14,9 @@ class Ou < ActiveRecord::Base
 	has_many :lvlists, :dependent => :restrict_with_error
 	has_many :offtypes, :dependent => :restrict_with_error
 	has_many :pay_types, :dependent => :restrict_with_error
+	has_many :doc_forgets, :dependent => :restrict_with_error
+	has_many :doc_offworks, :dependent => :restrict_with_error
+	has_many :doc_overworks, :dependent => :restrict_with_error
 
   # prefix with view_ is a db view can't update delete new
 	has_many :view_sch_emps # can not use :dependent
