@@ -1,0 +1,39 @@
+<h2>忘刷清單</h2> 
+
+<%= form_tag multi_destroy_doc_forgets_path, method: :delete do %>  
+  <%= link_to 'New ', new_doc_forget_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
+
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+  <table id='table_id' class='table table-hover'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>項次</th>
+        <th>代號</th>
+        <th>出勤日期</th>
+        <th>出勤起</th>
+        <th>出勤迄</th>
+        <th>是否關帳</th>  
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @forgets.each_with_index do |forget,i| %>
+        <tr>
+          <td><%= check_box_tag "ids[]", forget.id %></td>
+          <td><%= i+1 %></td>
+          <td><%= link_to forget.employee_id, edit_doc_forget_path(forget) %></td>
+          <td><%= forget.duty_date %></td>
+          <td><%= forget.on_duty_at.strftime("%H:%M") %></td>
+          <td><%= forget.off_duty_at.strftime("%H:%M") %></td>
+          <td><%= '已關帳' if forget.is_closed %></td>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 
+   <%= link_to 'New ', new_doc_forget_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
+
+    <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+<% end %>
+ 

@@ -1,0 +1,17 @@
+<%= simple_form_for(@forget) do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs"> 
+    <%= f.input(:employee_id,label: '代號',placeholder:'員工代號', autofocus: true) %>
+    <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
+    <%= f.input :on_duty_at,as: 'string',placeholder:'開始時間',label:'出勤起' %>
+    <%= f.input :off_duty_at,as: 'string',placeholder:'結束時間',label:'出勤迄' %>
+    <%= f.input :is_closed,label:'是否關帳' %>
+    <%= f.input :notes,placeholder:'備註',label:'備註' %> 
+  </div>
+
+  <div class="form-actions"> 
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', doc_forgets_path,class: 'btn btn-primary', method: :get %>
+  </div>
+<% end %>
