@@ -2,30 +2,35 @@
 
 <%= form_tag view_sch_emps_path, :method => 'get' do %>
   <p>
-  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月' %>
+  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true %>
   	<%= text_field_tag :emp_id, 'a00514',placeholder:'工號' %>
   	<%= submit_tag "尋找", :name => nil %>
   </p>
+
+
 <% end %>
 
 <table id='table_id' class='table table-hover'>
-	<tbody>
-		<thead>
+	<thead>
+		<tr>
 			<th>項次</th>
 			<th>姓名</th>
 			<th>日期</th>
+			<th>班別</th>
 			<th>假日</th>
-			<th></th>
-		</thead>
+	  </tr>
+	</thead>
+		
+	<tbody>
 		<% @viewschemps.each_with_index do |f,i| %>
 		  <tr>
 		  	<td><%= i + 1 %></td>
 		  	<td><%= f.name %></td>
 		  	<td><%= link_to f.duty_date,edit_view_sch_emp_path(f,:duty_date => f.duty_date,:uid => f.uid)%></td>
-		  	<td><%= f.name %></td>
 				<td><%= f.worktype.to_s %></td>
 				<td><%= f.is_holiday %></td>
 			</tr>
 		<% end %>
   </tbody>
 </table>
+
