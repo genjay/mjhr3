@@ -4,7 +4,7 @@ class DocForgetsController < ApplicationController
   # GET /worktypes
   # GET /worktypes.json
   def index
-    @forgets = current_ou.doc_forgets.all.order(employee_id: :asc)
+    @forgets = current_ou.doc_forgets.includes(:employee).order(employee_id: :asc)
   end
 
   # GET /worktypes/1
@@ -31,10 +31,10 @@ class DocForgetsController < ApplicationController
     respond_to do |format|
       if @forget.save
         format.html { redirect_to doc_forgets_path, notice: 'Forget was successfully created.' }
-        format.json { render :show, status: :created, location: @forget }
+        # format.json { render :show, status: :created, location: @forget }
       else
         format.html { render :new }
-        format.json { render json: @forget.errors, status: :unprocessable_entity }
+        # format.json { render json: @forget.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,10 +45,10 @@ class DocForgetsController < ApplicationController
     respond_to do |format|
       if @forget.update(forget_params)
         format.html { redirect_to doc_forgets_path, notice: 'Worktype was successfully updated.' }
-        format.json { render :show, status: :ok, location: @forget }
+        # format.json { render :show, status: :ok, location: @forget }
       else
         format.html { render :edit }
-        format.json { render json: @forget.errors, status: :unprocessable_entity }
+        # format.json { render json: @forget.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,9 +72,9 @@ class DocForgetsController < ApplicationController
     params[:ids].each do |f|
       x = current_ou.doc_forgets.find(f)
       if x.destroy
-        ok_msg = ok_msg << "[#{x.employee_id}]"
+        ok_msg = ok_msg << "[#{x.employee_id} #{x.employee.name}]"
       else
-        err_msg = err_msg << "[#{x.employee_id}] 刪除失敗 " << x.errors[:base].join << '\n'
+        err_msg = err_msg << "[#{x.employee_id} #{x.employee.name}] 刪除失敗 " << x.errors[:base].join << '\n'
       end
     end
 
@@ -93,8 +93,8 @@ class DocForgetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_doc_forget
       @forget = current_ou.doc_forgets.find(params[:id])
-      @forget.on_duty_at=@forget.on_duty_at.strftime('%H:%M')
-      @forget.off_duty_at=@forget.off_duty_at.strftime('%H:%M')
+      # @forget.on_duty_at=@forget.on_duty_at.strftime('%H:%M')
+      # @forget.off_duty_at=@forget.off_duty_at.strftime('%H:%M')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
