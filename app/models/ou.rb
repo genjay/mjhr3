@@ -1,5 +1,4 @@
 class Ou < ActiveRecord::Base
-  store :settings, :accessors => [:sex, :url]
   validates :uid,:name, presence:true , uniqueness: {message: "已經被使用"} 
 
 	after_initialize :assign_default_values

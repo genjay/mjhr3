@@ -7,9 +7,5 @@ class Catcode < ActiveRecord::Base
   	# self.where("m_name='#{m_name}' and col_name='#{col_name}'").pluck("concat(uid,' ',name),uid")
   	self.where(m_name: m_name, col_name: col_name).pluck("concat(uid,' ',name),uid")
   end
-  
-  def self.sex
-  	# x = ['Man','Woman']
-  	x = {:Man =>:Man,:Woman =>:Woman}
-  end
+
 end

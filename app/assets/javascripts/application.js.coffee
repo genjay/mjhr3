@@ -6,7 +6,4 @@
 #= require turbolinks
 #= require_tree .
 jQuery ->
-   $('#table_id').DataTable({
-    paging: true
-    pageLength: 50
-} );
+   $('#table_id').DataTable();
