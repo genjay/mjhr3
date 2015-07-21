@@ -146,7 +146,11 @@ CREATE TABLE `doc_forgets` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_doc_forgets_on_employee_id_and_duty_date` (`employee_id`,`duty_date`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+>>>>>>> 177c5b1a07ae28d9b0f3b32bd331dbab0ba3c984
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -700,7 +704,11 @@ CREATE TABLE `worktypes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2015-07-20 17:12:41
+=======
+-- Dump completed on 2015-07-20 14:25:20
+>>>>>>> 177c5b1a07ae28d9b0f3b32bd331dbab0ba3c984
 INSERT INTO schema_migrations (version) VALUES ('20150601093620');
 
 INSERT INTO schema_migrations (version) VALUES ('20150601093625');
@@ -754,4 +762,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150716085938');
 INSERT INTO schema_migrations (version) VALUES ('20150717081415');
 
 INSERT INTO schema_migrations (version) VALUES ('20150720071610');
+
+INSERT INTO schema_migrations (version) VALUES ('20150717081415');
 

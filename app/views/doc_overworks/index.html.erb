@@ -1,0 +1,39 @@
+<h2>加班清單</h2> 
+
+<%= form_tag multi_destroy_doc_overworks_path, method: :delete do %>  
+  <%= link_to 'New ', new_doc_overwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
+
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+  <table id='table_id' class='table table-hover'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>項次</th>
+        <th>姓名</th>
+        <th>出勤日</th>
+        <th>加班起</th>
+        <th>加班迄</th>
+        <th>是否關帳</th>  
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @overworks.each_with_index do |overwork,i| %>
+        <tr>
+          <td><%= check_box_tag "ids[]", overwork.id %></td>
+          <td><%= i+1 %></td>
+          <td><%= link_to overwork.employee.name, edit_doc_overwork_path(overwork) %></td>
+          <td><%= overwork.duty_date %></td>
+          <td><%= overwork.overwork_begin_at.strftime('%H:%M') if overwork.overwork_begin_at? %></td>
+          <td><%= overwork.overwork_end_at.strftime('%H:%M') if overwork.overwork_end_at? %></td>
+          <td><%= '已關帳' if overwork.is_closed %></td>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 
+   <%= link_to 'New ', new_doc_overwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
+
+    <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+<% end %>
+ 
