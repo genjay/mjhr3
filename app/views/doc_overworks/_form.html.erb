@@ -1,0 +1,18 @@
+<%= simple_form_for(@overwork) do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
+    <%= f.input :overwork_begin_at,placeholder:'開始時間',label:'加班起' %>
+    <%= f.input :overwork_end_at,placeholder:'結束時間',label:'加班迄' %>
+    <%= f.input :mins_of_overwork,placeholder:'分鐘',label:'加班時數' %>
+    <%= f.input :is_closed,label:'是否關帳' %>
+    <%= f.input :notes,placeholder:'備註',label:'備註' %> 
+  </div>
+
+  <div class="form-actions"> 
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', doc_overworks_path,class: 'btn btn-primary', method: :get %>
+  </div>
+<% end %>
