@@ -2,7 +2,7 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true  %>
     <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
     <%= f.input :overwork_begin_at,placeholder:'開始時間',label:'加班起' %>
     <%= f.input :overwork_end_at,placeholder:'結束時間',label:'加班迄' %>

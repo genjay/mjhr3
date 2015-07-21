@@ -2,7 +2,7 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true  %>
     <%= f.input :offduty_begin_at,placeholder:'開始時間',label:'請假起' %>
     <%= f.input :offduty_end_at,placeholder:'結束時間',label:'請假迄' %>
     <%= f.input :mins_offduty,placeholder:'時數',label:'請假時數' %>

@@ -23,7 +23,7 @@
         <tr>
           <td><%= check_box_tag "ids[]", forget.id %></td>
           <td><%= i+1 %></td>
-          <td><%= link_to forget.employee.name, edit_doc_forget_path(forget) %></td>
+          <td><%= link_to forget.employee.try(:name), edit_doc_forget_path(forget) %></td>
           <td><%= forget.duty_date %></td>
           <td><%= forget.on_duty_at.strftime('%H:%M') if forget.on_duty_at? %></td>
           <td><%= forget.off_duty_at.strftime('%H:%M') if forget.off_duty_at? %></td>

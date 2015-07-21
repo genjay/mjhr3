@@ -1,5 +1,5 @@
 class DocForget < ActiveRecord::Base
-	validates :employee_id, :duty_date, uniqueness: {scope: [:employee_id, :duty_date]}
+	validates :employee_id, :duty_date,presence: true, uniqueness: {scope: [:employee_id, :duty_date]}
 
 	belongs_to :employee 
 	before_destroy :check_is_closed
