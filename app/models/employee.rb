@@ -8,6 +8,7 @@ class Employee < ActiveRecord::Base
   has_many :view_sch_emps
   has_many :doc_forgets
   has_many :doc_overworks
+  has_many :daily_duties
 
   # def self.create
   # 	super

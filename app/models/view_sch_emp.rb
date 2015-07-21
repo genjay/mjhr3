@@ -1,6 +1,6 @@
 class ViewSchEmp < ActiveRecord::Base
 	validates :is_holiday, :worktype_id ,presence: true
-  default_scope { limit 31  }  
+  # default_scope { limit 31  }  
   belongs_to :worktype
   self.primary_key = 'id' # 這行一定要加，因為這是db view，沒有primary index,給rails 抓預設值
 
