@@ -1,5 +1,5 @@
 class DocOffwork < ActiveRecord::Base
-	validates :employee_id, :duty_date, uniqueness: {scope: [:employee_id, :duty_date]}
+	validates :employee_id, uniqueness: {scope: [:employee_id]}
 
 	belongs_to :employee 
 	before_destroy :check_is_closed

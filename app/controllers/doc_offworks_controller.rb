@@ -1,10 +1,10 @@
-class DocForgetsController < ApplicationController
-  before_action :set_doc_forget, only: [:show, :edit, :update, :destroy]
+class DocOffworksController < ApplicationController
+  before_action :set_doc_offwork, only: [:show, :edit, :update, :destroy]
 
   # GET /worktypes
   # GET /worktypes.json
   def index
-    @forgets = current_ou.doc_forgets.includes(:employee).order(employee_id: :asc)
+    @offworks = current_ou.doc_offworks.includes(:employee).order(employee_id: :asc)
   end
 
   # GET /worktypes/1
@@ -14,7 +14,7 @@ class DocForgetsController < ApplicationController
 
   # GET /worktypes/new
   def new
-    @forget = current_ou.doc_forgets.new
+    @offwork = current_ou.doc_offworks.new
     # 3.times { @worktype.workrests.build }
   end
 
@@ -26,11 +26,11 @@ class DocForgetsController < ApplicationController
   # POST /worktypes
   # POST /worktypes.json
   def create
-    @forget = current_ou.doc_forgets.new(forget_params)
+    @offwork = current_ou.doc_offworks.new(offwork_params)
 
     respond_to do |format|
-      if @forget.save
-        format.html { redirect_to doc_forgets_path, notice: 'Forget was successfully created.' }
+      if @offwork.save
+        format.html { redirect_to doc_offworks_path, notice: 'Offwork was successfully created.' }
         # format.json { render :show, status: :created, location: @forget }
       else
         format.html { render :new }
@@ -43,8 +43,8 @@ class DocForgetsController < ApplicationController
   # PATCH/PUT /worktypes/1.json
   def update
     respond_to do |format|
-      if @forget.update(forget_params)
-        format.html { redirect_to doc_forgets_path, notice: 'Forget was successfully updated.' }
+      if @offwork.update(offwork_params)
+        format.html { redirect_to doc_offworks_path, notice: 'Offwork was successfully updated.' }
         # format.json { render :show, status: :ok, location: @forget }
       else
         format.html { render :edit }
@@ -70,7 +70,7 @@ class DocForgetsController < ApplicationController
     # render :text => ok_msg
     # return
     params[:ids].each do |f|
-      x = current_ou.doc_forgets.find(f)
+      x = current_ou.doc_offworks.find(f)
       if x.destroy
         ok_msg = ok_msg << "[#{x.employee_id} #{x.employee.name}]"
       else
@@ -82,23 +82,23 @@ class DocForgetsController < ApplicationController
       # render :text => all_msg
       respond_to do |format|
         if err_msg.size>0
-          format.html { redirect_to doc_forgets_path, alert: all_msg }
+          format.html { redirect_to doc_offworks_path, alert: all_msg }
         else
-          format.html { redirect_to doc_forgets_path, notice: all_msg }
+          format.html { redirect_to doc_offworks_path, notice: all_msg }
         end
       end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_doc_forget
-      @forget = current_ou.doc_forgets.find(params[:id])
+    def set_doc_offwork
+      @offwork = current_ou.doc_offworks.find(params[:id])
       # @forget.on_duty_at=@forget.on_duty_at.strftime('%H:%M')
       # @forget.off_duty_at=@forget.off_duty_at.strftime('%H:%M')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def forget_params
-      params.require(:doc_forget).permit(:employee_id, :duty_date, :on_duty_at, :off_duty_at, :is_closed, :notes)
+    def offwork_params
+      params.require(:doc_offwork).permit(:employee_id, :offtype_id, :offduty_begin_at, :offduty_end_at, :mins_offduty, :is_closed, :notes)
     end
 end

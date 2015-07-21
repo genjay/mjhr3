@@ -1,0 +1,17 @@
+<%= simple_form_for(@offwork) do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.input :offduty_begin_at,placeholder:'開始時間',label:'請假起' %>
+    <%= f.input :offduty_end_at,placeholder:'結束時間',label:'請假迄' %>
+    <%= f.input :mins_offduty,placeholder:'請假時數',label:'時數' %>
+    <%= f.input :is_closed,label:'是否關帳' %>
+    <%= f.input :notes,placeholder:'備註',label:'備註' %> 
+  </div>
+
+  <div class="form-actions"> 
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', doc_offworks_path,class: 'btn btn-primary', method: :get %>
+  </div>
+<% end %>
