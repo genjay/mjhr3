@@ -24,7 +24,7 @@
           <td><%= check_box_tag "ids[]", offwork.id %></td>
           <td><%= i+1 %></td>
           <td><%= link_to offwork.employee.name, edit_doc_offwork_path(offwork) %></td>
-          <td></td>
+          <td><%= offwork.offtype.name %></td>
           <td><%= offwork.offduty_begin_at.strftime('%H:%M') if offwork.offduty_begin_at? %></td>
           <td><%= offwork.offduty_end_at.strftime('%H:%M') if offwork.offduty_end_at? %></td>
           <td><%= '已關帳' if offwork.is_closed %></td>  
