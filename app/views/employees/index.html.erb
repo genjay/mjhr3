@@ -33,7 +33,7 @@
         <td><%= i+1 %></td>
         <td><%= link_to employee.uid,edit_employee_path(employee) %></td>
         <td><%= link_to employee.name,edit_employee_path(employee) %></td>
-        <td><%= employee.department_id %></td>
+        <td><%= employee.department.try(:name) %></td>
         <td><%= employee.id_number %></td>
         <td><%= employee.arrive_date %></td>
         <td><%= employee.leave_date %></td>
