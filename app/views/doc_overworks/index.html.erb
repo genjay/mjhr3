@@ -11,6 +11,7 @@
         <th></th>
         <th>項次</th>
         <th>姓名</th>
+        <th>加班別</th>
         <th>出勤日</th>
         <th>加班起</th>
         <th>加班迄</th>
@@ -24,6 +25,7 @@
           <td><%= check_box_tag "ids[]", overwork.id %></td>
           <td><%= i+1 %></td>
           <td><%= link_to overwork.employee.name, edit_doc_overwork_path(overwork) %></td>
+          <td><%= overwork.overtype.try(:name) %></td>
           <td><%= overwork.duty_date %></td>
           <td><%= overwork.overwork_begin_at.strftime('%H:%M') if overwork.overwork_begin_at? %></td>
           <td><%= overwork.overwork_end_at.strftime('%H:%M') if overwork.overwork_end_at? %></td>

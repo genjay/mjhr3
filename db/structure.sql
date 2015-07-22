@@ -31,7 +31,7 @@ CREATE TABLE `annual_leave_lists` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `calendars` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `catcodes` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_catcodes_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `departments` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_departments_on_ou_id_and_uid` (`ou_id`,`uid`),
   KEY `index_departments_on_worktype_id` (`worktype_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `doc_forgets` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_doc_forgets_on_employee_id_and_duty_date` (`employee_id`,`duty_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `doc_offworks` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,9 +191,10 @@ CREATE TABLE `doc_overworks` (
   `notes` text COLLATE utf8_unicode_ci,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `overtype_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_doc_overworks_on_employee_id_and_duty_date` (`employee_id`,`duty_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,7 +281,7 @@ CREATE TABLE `employees` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_employees_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=685 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,7 +317,7 @@ CREATE TABLE `insurance_settings` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_insurance_settings_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +336,7 @@ CREATE TABLE `lvlists` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_lvlists_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -362,7 +363,7 @@ CREATE TABLE `offtypes` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_offtypes_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +386,7 @@ CREATE TABLE `ous` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -419,7 +420,7 @@ CREATE TABLE `overtypes` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_overtypes_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,7 +443,7 @@ CREATE TABLE `pay_types` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_pay_types_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -519,7 +520,7 @@ CREATE TABLE `subsidies` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_subsidies_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -546,7 +547,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -565,7 +566,8 @@ SET character_set_client = utf8;
  1 AS `name`,
  1 AS `duty_date`,
  1 AS `worktype_id`,
- 1 AS `is_holiday`*/;
+ 1 AS `is_holiday`,
+ 1 AS `notes`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -584,7 +586,9 @@ SET character_set_client = utf8;
  1 AS `name`,
  1 AS `duty_date`,
  1 AS `worktype_id`,
- 1 AS `is_holiday`*/;
+ 1 AS `is_holiday`,
+ 1 AS `notes`,
+ 1 AS `department_id`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -607,7 +611,7 @@ CREATE TABLE `workrests` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_workrests_on_worktype_id` (`worktype_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -638,7 +642,7 @@ CREATE TABLE `worktypes` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_worktypes_on_ou_id_and_uid` (`ou_id`,`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -654,7 +658,7 @@ CREATE TABLE `worktypes` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_sch_deps` AS select ifnull(`c`.`id`,0) AS `id`,`a`.`id` AS `department_id`,`a`.`ou_id` AS `ou_id`,`a`.`uid` AS `uid`,`a`.`name` AS `name`,`b`.`duty_date` AS `duty_date`,(case when (`c`.`worktype_id` is not null) then `c`.`worktype_id` else `a`.`worktype_id` end) AS `worktype_id`,(case when (`c`.`is_holiday` is not null) then `c`.`is_holiday` else `b`.`is_holiday` end) AS `is_holiday` from ((`departments` `a` left join `calendars` `b` on((`a`.`ou_id` = `b`.`ou_id`))) left join `sch_deps` `c` on(((`c`.`department_id` = `a`.`id`) and (`c`.`duty_date` = `b`.`duty_date`)))) */;
+/*!50001 VIEW `view_sch_deps` AS select ifnull(`c`.`id`,0) AS `id`,`a`.`id` AS `department_id`,`a`.`ou_id` AS `ou_id`,`a`.`uid` AS `uid`,`a`.`name` AS `name`,`b`.`duty_date` AS `duty_date`,(case when (`c`.`worktype_id` is not null) then `c`.`worktype_id` else `a`.`worktype_id` end) AS `worktype_id`,(case when (`c`.`is_holiday` is not null) then `c`.`is_holiday` else `b`.`is_holiday` end) AS `is_holiday`,(case when (`c`.`worktype_id` is not null) then 'sch_deps' else 'departments' end) AS `notes` from ((`departments` `a` left join `calendars` `b` on((`a`.`ou_id` = `b`.`ou_id`))) left join `sch_deps` `c` on(((`c`.`department_id` = `a`.`id`) and (`c`.`duty_date` = `b`.`duty_date`)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -672,7 +676,7 @@ CREATE TABLE `worktypes` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_sch_emps` AS select ifnull(`c`.`id`,0) AS `id`,`a`.`id` AS `employee_id`,`a`.`ou_id` AS `ou_id`,`a`.`uid` AS `uid`,`a`.`name` AS `name`,`b`.`duty_date` AS `duty_date`,(case when (`c`.`worktype_id` is not null) then `c`.`worktype_id` when (`d`.`worktype_id` is not null) then `d`.`worktype_id` else `e`.`worktype_id` end) AS `worktype_id`,(case when (`c`.`is_holiday` is not null) then `c`.`is_holiday` when (`d`.`is_holiday` is not null) then `d`.`is_holiday` else `b`.`is_holiday` end) AS `is_holiday` from ((((`employees` `a` left join `calendars` `b` on(((`a`.`ou_id` = `b`.`ou_id`) and (`b`.`duty_date` >= `a`.`arrive_date`) and (`b`.`duty_date` <= ifnull(`a`.`leave_date`,'99991231'))))) left join `sch_emps` `c` on(((`a`.`id` = `c`.`employee_id`) and (`c`.`duty_date` = `b`.`duty_date`)))) left join `sch_deps` `d` on(((`d`.`department_id` = `a`.`department_id`) and (`d`.`duty_date` = `b`.`duty_date`)))) left join `departments` `e` on((`e`.`id` = `a`.`department_id`))) */;
+/*!50001 VIEW `view_sch_emps` AS select ifnull(`c`.`id`,0) AS `id`,`a`.`id` AS `employee_id`,`a`.`ou_id` AS `ou_id`,`a`.`uid` AS `uid`,`a`.`name` AS `name`,`b`.`duty_date` AS `duty_date`,(case when (`c`.`worktype_id` is not null) then `c`.`worktype_id` when (`d`.`worktype_id` is not null) then `d`.`worktype_id` else `e`.`worktype_id` end) AS `worktype_id`,(case when (`c`.`is_holiday` is not null) then `c`.`is_holiday` when (`d`.`is_holiday` is not null) then `d`.`is_holiday` else `b`.`is_holiday` end) AS `is_holiday`,(case when (`c`.`worktype_id` is not null) then 'sch_emps' when (`d`.`worktype_id` is not null) then 'sch_deps' else 'departments' end) AS `notes`,`e`.`id` AS `department_id` from ((((`employees` `a` left join `calendars` `b` on(((`a`.`ou_id` = `b`.`ou_id`) and (`b`.`duty_date` >= `a`.`arrive_date`) and (`b`.`duty_date` <= ifnull(`a`.`leave_date`,'99991231'))))) left join `sch_emps` `c` on(((`a`.`id` = `c`.`employee_id`) and (`c`.`duty_date` = `b`.`duty_date`)))) left join `sch_deps` `d` on(((`d`.`department_id` = `a`.`department_id`) and (`d`.`duty_date` = `b`.`duty_date`)))) left join `departments` `e` on((`e`.`id` = `a`.`department_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -686,7 +690,7 @@ CREATE TABLE `worktypes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-21 17:36:27
+-- Dump completed on 2015-07-22 15:04:17
 INSERT INTO schema_migrations (version) VALUES ('20150601093620');
 
 INSERT INTO schema_migrations (version) VALUES ('20150601093625');
@@ -737,13 +741,9 @@ INSERT INTO schema_migrations (version) VALUES ('20150715065835');
 
 INSERT INTO schema_migrations (version) VALUES ('20150716085938');
 
-INSERT INTO schema_migrations (version) VALUES ('20150717024436');
-
-INSERT INTO schema_migrations (version) VALUES ('20150717055323');
-
-INSERT INTO schema_migrations (version) VALUES ('20150717060401');
-
 INSERT INTO schema_migrations (version) VALUES ('20150717081415');
 
 INSERT INTO schema_migrations (version) VALUES ('20150720071610');
+
+INSERT INTO schema_migrations (version) VALUES ('20150722070306');
 

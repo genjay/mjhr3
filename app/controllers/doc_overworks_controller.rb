@@ -4,7 +4,7 @@ class DocOverworksController < ApplicationController
   # GET /worktypes
   # GET /worktypes.json
   def index
-    @overworks = current_ou.doc_overworks.includes(:employee).order(employee_id: :asc)
+    @overworks = current_ou.doc_overworks.includes([:employee, :overtype]).order(employee_id: :asc)
   end
 
   # GET /worktypes/1
@@ -99,6 +99,6 @@ class DocOverworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def overwork_params
-      params.require(:doc_overwork).permit(:employee_id, :duty_date, :overwork_begin_at, :overwork_end_at, :mins_of_overwork, :is_closed, :notes)
+      params.require(:doc_overwork).permit(:employee_id, :overtype_id, :duty_date, :overwork_begin_at, :overwork_end_at, :mins_of_overwork, :is_closed, :notes)
     end
 end
