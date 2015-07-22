@@ -1,3 +1,7 @@
+if true # 增加 user
+	User.create(email:'genjay@gmail.com',password:'1234',password_confirmation:'1234')
+end
+
 if true # ou
 	@ou ||= Ou.find_by(uid:'16130535')
 	@ou ||= Ou.create(uid:'16130535',name:'研能')  

@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
-  get  'daily_duties/calculate' => 'daily_duties#get_calculate' 
-  post 'daily_duties/calculate' => 'daily_duties#post_calculate' 
+  # get  'daily_duties/calculate' => 'daily_duties#get_calculate' 
+  # post 'daily_duties/calculate' => 'daily_duties#post_calculate' 
+
+  resources :daily_duties do
+    collection do 
+      post 'calculate', action: 'post_calculate'
+      get  'calculate', action: 'get_calculate'
+    end
+  end
 
   resources :view_sch_deps, only: [:index, :edit]
 

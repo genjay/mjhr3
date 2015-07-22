@@ -1,6 +1,6 @@
 <h1>出勤日結</h1>
 
-<%= form_tag(daily_duties_calculate_path, method: "post") do %>
+<%= form_tag(calculate_daily_duties_path, method: "post") do %>
   <%= label_tag(:duty_date, "日期:") %>
   <%= text_field_tag(:duty_date, @default_date) %>
   <%= submit_tag("結轉") %>
