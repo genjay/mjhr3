@@ -1,0 +1,11 @@
+<h1>出勤月結</h1>
+
+<%= form_tag(calculate_month_duties_path, method: "post") do %>
+  <%= label_tag(:yyyymm, '年月:') %>
+  <%= text_field_tag(:yyyymm, yyyymm)%>
+  </br>
+  <%= label_tag(:duty_date_begin, "日期(起)~(迄)") %> 
+  <%= text_field_tag(:duty_date_begin ) %>
+  <%= text_field_tag(:duty_date_end )%>
+  <%= submit_tag("結轉") %>
+<% end %>

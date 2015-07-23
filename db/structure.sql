@@ -65,7 +65,7 @@ CREATE TABLE `cardtimes` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24217 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,6 +352,24 @@ CREATE TABLE `lvlists` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_lvlists_on_ou_id_and_uid` (`ou_id`,`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `month_duties`
+--
+
+DROP TABLE IF EXISTS `month_duties`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `month_duties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ou_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `yyyymm` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -706,7 +724,7 @@ CREATE TABLE `worktypes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-23 13:27:22
+-- Dump completed on 2015-07-23 16:32:40
 INSERT INTO schema_migrations (version) VALUES ('20150601093620');
 
 INSERT INTO schema_migrations (version) VALUES ('20150601093625');
@@ -764,4 +782,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150720071610');
 INSERT INTO schema_migrations (version) VALUES ('20150722070306');
 
 INSERT INTO schema_migrations (version) VALUES ('20150723052707');
+
+INSERT INTO schema_migrations (version) VALUES ('20150723082913');
 
