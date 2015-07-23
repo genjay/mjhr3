@@ -1,0 +1,2 @@
+module CardtimesHelper
+end

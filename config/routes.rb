@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'cardtimes/index'
+
   # get  'daily_duties/calculate' => 'daily_duties#get_calculate' 
   # post 'daily_duties/calculate' => 'daily_duties#post_calculate' 
 
+  resources :cardtimes do 
+    collection { post 'import'}
+  end
+  
   resources :daily_duties do
     collection do 
       post 'calculate', action: 'post_calculate'
