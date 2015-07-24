@@ -7,5 +7,5 @@
   <%= label_tag(:duty_date_begin, "日期(起)~(迄)") %> 
   <%= text_field_tag(:duty_date_begin ) %>
   <%= text_field_tag(:duty_date_end )%>
-  <%= submit_tag("結轉") %>
+  <%= submit_tag "結轉", data: { disable_with: "執行中" } %>
 <% end %>

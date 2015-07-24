@@ -2,7 +2,7 @@
  
 <%= form_tag import_cardtimes_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
+  <%= submit_tag "Import", data: { disable_with: "執行中" } %>
 <% end %>
 
 
