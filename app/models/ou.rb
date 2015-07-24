@@ -21,6 +21,7 @@ class Ou < ActiveRecord::Base
   # prefix with view_ is a db view can't update delete new
 	has_many :view_sch_emps # can not use :dependent
 	has_many :sch_emps
+	has_many :sch_deps
 	has_many :view_sch_deps
 
 	def assign_default_values

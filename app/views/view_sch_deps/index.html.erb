@@ -3,7 +3,7 @@
 <%= form_tag view_sch_deps_path, :method => 'get' do %>
   <p>
   	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true %>
-  	<%= collection_select('', :dep_id, Department.all, :uid, :name) %>
+  	<%= select_tag 'dep_id', options_for_select(Department.all.collect{ |u| [u.name, u.uid] }) %>
   	<%= submit_tag "尋找", :name => nil %>
   </p>
 <% end %>

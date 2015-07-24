@@ -40,7 +40,7 @@ class ViewSchDepsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def viewschdep_params
-      params.require(:view_sch_dep).permit(:id, :employee_id, :duty_date, :worktype_id, :is_holiday )
+      params.require(:view_sch_dep).permit(:id, :department_id, :duty_date, :worktype_id, :is_holiday )
     end
 
 end

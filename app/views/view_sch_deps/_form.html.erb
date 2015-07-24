@@ -1,7 +1,7 @@
 <%= simple_form_for(@viewschdep) do |f| %>
   <div class="form-inputs">
     <%= f.input :id, as: :hidden %>
-    <%= f.input :dep_id, as: :hidden %>
+    <%= f.input :department_id, as: :hidden %>
     <%= f.input :uid, :readonly => true %> 
     <%= f.input :name, :readonly => true %>
     <%= f.input :duty_date, as: :string, :readonly => true %>
