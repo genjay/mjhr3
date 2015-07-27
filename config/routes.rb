@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :calendars
   resources :view_sch_deps
 
   resources :view_sch_emps

@@ -5,7 +5,7 @@ class Calendar < ActiveRecord::Base
 
 	def self.search(a)
 		self.where("duty_date between #{a}01 and #{a}31")\
-		.order(:uid, :duty_date) 
+		.order(:duty_date) 
 	end
 
 	def destroy

@@ -1,0 +1,25 @@
+<h1>行事曆維護</h1>
+
+<%= form_tag calendars_path, :method => 'get' do %>
+  <p>
+  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true %>
+  	<%= submit_tag "尋找", :name => nil %>
+  </p>
+<% end %>
+
+<table id='table_id' class='table table-hover'>
+	<thead>
+		<tr>
+			<th>日期</th>
+			<th>是否為假日</th>
+	  	</tr>
+	</thead>
+	<tbody>
+		<% @calendars.each_with_index do |f,i| %>
+		  <tr>
+		  	<td><%= f.duty_date %></td>
+			<td><%= f.is_holiday %></td>
+		</tr>
+		<% end %>
+  	</tbody>
+</table>
