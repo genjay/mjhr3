@@ -17,7 +17,7 @@
 	<tbody>
 		<% @calendars.each_with_index do |f,i| %>
 		  <tr>
-		  	<td><%= f.duty_date %></td>
+		  	<td><%= link_to f.duty_date,edit_calendar_path(f,:duty_date => f.duty_date)%></td>
 			<td><%= f.is_holiday %></td>
 		</tr>
 		<% end %>

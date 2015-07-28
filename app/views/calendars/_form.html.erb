@@ -1,6 +1,6 @@
 <%= simple_form_for(@calendar) do |f| %>
   <div class="form-inputs">
-    <%= f.input :duty_date, as: :string %>
+    <%= f.input :duty_date, as: :string, :readonly => true %>
     <%= f.input :is_holiday, collection: [['Y',1],['N',0]] , selected: 0 %>
   </div> 
 
