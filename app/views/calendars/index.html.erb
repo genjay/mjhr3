@@ -2,7 +2,7 @@
 
 <%= form_tag calendars_path, :method => 'get' do %>
   <p>
-  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true %>
+  	<%= text_field_tag :yyyymm, yyyymm, placeholder:'年月', autofocus: true %>
   	<%= submit_tag "尋找" %>
   </p>
 <% end %>

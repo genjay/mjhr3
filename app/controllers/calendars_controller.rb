@@ -5,7 +5,7 @@ class CalendarsController < ApplicationController
     yyyymm = params[:yyyymm]
     @calendars = current_ou.calendars.search(yyyymm)
 
-    if @calendars.size == 0 && yyyymm != nil
+    if @calendars.size == 0 && (yyyymm != nil && yyyymm.size == 6)
       year = yyyymm[0..3]
       month = yyyymm[4..5]
       check_date = Date.parse("#{year}/#{month}") rescue nil
@@ -22,7 +22,7 @@ class CalendarsController < ApplicationController
           Calendar.create(ou_id: current_ou.id, duty_date: full_date, is_holiday: is_holiday)
         end
       else
-        redirect_to calendars_path, notice: '日期格式不正確'
+        redirect_to calendars_path, alert: '日期格式不正確'
       end
     end
   end
