@@ -18,6 +18,12 @@ Select ifnull(c.id,0) id
  else 'departments'
  end notes
 ,e.id department_id
+,w.mins_of_duty
+,w.range_on,w.range_off,w.on_duty_at,w.off_duty_at
+,str_to_date(concat(b.duty_date,w.on_duty_at),'%Y-%m-%d%H:%i:%s')
+ + interval w.on_duty_offset day std_on
+,str_to_date(concat(b.duty_date,w.off_duty_at),'%Y-%m-%d%H:%i:%s')
+ + interval w.off_duty_offset day std_off 
 from employees a
 left join calendars b on a.ou_id=b.ou_id 
   and b.duty_date >= a.arrive_date
@@ -25,3 +31,7 @@ left join calendars b on a.ou_id=b.ou_id
 left join sch_emps c on a.id=c.employee_id and c.duty_date=b.duty_date
 left join sch_deps d on d.department_id=a.department_id and d.duty_date=b.duty_date
 left join departments e on e.id=a.department_id
+left join worktypes w on w.id = case 
+ when c.worktype_id is not null then c.worktype_id
+ when d.worktype_id is not null then d.worktype_id
+ else e.worktype_id end 

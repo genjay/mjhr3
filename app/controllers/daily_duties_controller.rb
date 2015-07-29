@@ -9,7 +9,7 @@ class DailyDutiesController < ApplicationController
   end
 
   def post_calculate
-  	DailyDuty.d04(current_ou,params[:duty_date]) 
+  	DailyDuty.d04(current_ou.id,params[:duty_date]) 
   	render :text => "#{DailyDuty.count} 筆完成匯入"
   	return
   end

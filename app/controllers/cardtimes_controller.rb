@@ -8,10 +8,10 @@ class CardtimesController < ApplicationController
     # x = params[:file]
     # render :text => x.path
     # return
-    Cardtime.delete_all
-    y = Cardtime.import(params[:file]) 
+    # Cardtime.delete_all
+    cnt = Cardtime.import(params[:file],current_ou.id) 
     run_time = Time.now - st
-    redirect_to cardtimes_path, notice: "#{run_time} 秒，#{Cardtime.count}Products imported."
+    redirect_to cardtimes_path, notice: "#{run_time} 秒，#{cnt} Products imported."
   end
 
 end
