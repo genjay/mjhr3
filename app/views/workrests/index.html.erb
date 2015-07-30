@@ -23,8 +23,8 @@
           <td><%= workrest.worktype.try(:name) %></td>
           <td><%= workrest.rest_begin_at.strftime('%H:%M') %></td>
           <td><%= workrest.mins_of_rest %></td>
-          <td><%= workrest.is_holiday %></td>
-          <td><%= workrest.is_deduct_for_duty %></td>
+          <td><%= (workrest.is_holiday)? '是' : '否' %></td>
+          <td><%= (workrest.is_deduct_for_duty)? '是' : '否' %></td>
         </tr>
       <% end %>
     </tbody>
