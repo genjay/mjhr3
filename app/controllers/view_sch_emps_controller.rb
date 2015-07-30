@@ -24,7 +24,7 @@ class ViewSchEmpsController < ApplicationController
 
     respond_to do |format|
       if x.save
-        format.html { redirect_to view_sch_emps_path, notice: 'Success'}
+        format.html { redirect_to view_sch_emps_path(@viewschemps,yyyymm: params[:yyyymm],emp_id: params[:emp_id]), notice: 'Success'}
       else
         format.html { render :edit}
       end
