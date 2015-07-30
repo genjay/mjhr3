@@ -12,6 +12,7 @@
       <th>項次</th>
       <th>Uid</th>
       <th>Name</th>
+      <th>休息時刻</th>
       <th>On duty at</th>
       <th>Off duty at</th>
       <th>Buffer before duty</th>
@@ -31,8 +32,9 @@
       <tr>
         <td><%= check_box_tag "ids[]", worktype.id %></td>
         <td><%= i+1 %></td>
-        <td><%= link_to worktype.uid, edit_worktype_path(worktype) %></td>
+        <td><%= worktype.uid %></td>
         <td><%= link_to worktype.name, edit_worktype_path(worktype) %></td>
+        <td><%= link_to '設定', worktype_workrests_path(worktype.id), method: :get %></td>
         <td><%= worktype.on_duty_at.strftime("%H:%M") %></td>
         <td><%= worktype.off_duty_at.strftime("%H:%M") %></td>
         <td><%= worktype.buffer_before_duty %></td>
