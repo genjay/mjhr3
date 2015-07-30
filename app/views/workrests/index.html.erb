@@ -1,29 +1,32 @@
-<p id="notice"><%= notice %></p>
+<h2>休息時刻清單</h2> 
 
-<h1>Listing Workrests</h1>
 
-<table class='table table-hover'>
-  <thead>
-    <tr>
-      <th>休息(起)</th> 
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @workrests.each do |workrest| %>
+  <table id='table_id' class='table table-hover'>
+    <thead>
       <tr>
-        <td><%= workrest.id %></td>
-        <td><%= workrest.worktype_id %></td>
-        <td><%= workrest.rest_begin_at %></td>
-        <td><%= link_to 'show', worktype_workrest_path(@worktype,workrest) %></td>
-        <td><%= workrest.mins_of_rest %></td>
-        <td><%= workrest.is_deduct_for_duty %></td>
-        <td><%= workrest.is_holiday %></td>
+        <th></th>
+        <th>項次</th>
+        <th>班別</th>
+        <th>休息(起)</th>
+        <th>休息時間</th>
+        <th>是否為假日</th>
+        <th>是否扣除(工時)</th>  
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @workrests.each_with_index do |workrest,i| %>
+        <tr>
+          <td><%= check_box_tag "ids[]", workrest.id %></td>
+          <td><%= i+1 %></td>
+          <td><%= workrest.worktype.try(:name) %></td>
+          <td><%= workrest.rest_begin_at.strftime('%H:%M') %></td>
+          <td><%= workrest.mins_of_rest %></td>
+          <td><%= workrest.is_holiday %></td>
+          <td><%= workrest.is_deduct_for_duty %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Workrest', new_worktype_workrest_path %>
