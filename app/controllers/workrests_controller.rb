@@ -10,6 +10,8 @@ class WorkrestsController < ApplicationController
   end
 
   def new
+    worktype = current_ou.worktypes.find(params[:worktype_id])
+    @work_name = worktype[:name]
     @workrest = current_ou.workrests.new
   end
 
@@ -43,9 +45,9 @@ class WorkrestsController < ApplicationController
     params[:ids].each do |f|
       x = current_ou.workrests.find(f)
       if x.destroy
-        ok_msg = ok_msg << "[#{x.employee_id} #{x.employee.name}]"
+        ok_msg = ok_msg << "[#{x.mins_of_rest}]"
       else
-        err_msg = err_msg << "[#{x.employee_id} #{x.employee.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+        err_msg = err_msg << "[#{x.mins_of_rest}] 刪除失敗 " << x.errors[:base].join << '\n'
       end
     end
 
@@ -68,26 +70,4 @@ class WorkrestsController < ApplicationController
       params.require(:workrest).permit(:employee_id, :duty_date, :on_duty_at, :off_duty_at, :is_closed, :notes)
     end
 
-  # before_action :find_worktype
-
-  # def index
-  #   # render :text => @worktype.workrests
-  #   @workrests = @worktype.workrests
-  # end
-
-  # def show
-  #   @workrest = @worktype.workrests.find(params[:id])
-  #   # render :text => @workrest
-  # end
-
-  # def edit
-  #   @workrest = @worktype.workrests.find(params[:id])
-  # end
-  
-
-  # private
-
-  # def find_worktype
-  #   @worktype = current_ou.worktypes.find(params[:worktype_id])
-  # end
 end

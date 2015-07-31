@@ -1,12 +1,18 @@
-<%= simple_form_for(@workrest), :url => worktype_workrest_path(@worktype, @workrest),:html => {:method => :patch} do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for(@workrest) do |f| %>
+  <% f.error_notification %>
 
   <div class="form-inputs">
-  	<%= f.input :rest_begin_at %>
-  	<%= f.input :mins_of_rest %>
+    <%= @worktype_name %>
+    <%= f.input :rest_begin_at, placeholder:'休息(起)', autofocus:true %>
+    <%= f.input :rest_begin_at, placeholder:'休息時間' %>
+    <%= f.input :is_deduct_for_duby, placeholder:'是否扣除(工時)' %>
+    <%= f.input :is_holiday, placeholder:'是否為假日' %>
+    <%= f.input :memo %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', worktype_workrests_path(worktype.id), class: 'btn btn-primary', method: :get %>
   </div>
+
 <% end %>
