@@ -1,5 +1,22 @@
 <h2>Editing Worktype</h2>
 
 <div id='rcorners2'>
-  <%= render 'form' %>
+  <%= simple_form_for @workrest, url: worktype_workrest_path do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs">
+    <%= @worktype_name %>
+    <%= f.input :rest_begin_at, placeholder:'休息(起)', autofocus:true %>
+    <%= f.input :mins_of_rest, placeholder:'休息時間' %>
+    <%= f.input :is_deduct_for_duty, placeholder:'是否扣除(工時)' %>
+    <%= f.input :is_holiday, placeholder:'是否為假日' %>
+    <%= f.input :memo %>
+  </div>
+
+  <div class="form-actions">
+      <%= f.button :submit,'存檔', class: 'btn btn-primary' %>
+      <%= link_to 'Back', worktype_workrests_path, method: :get, class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
 </div>

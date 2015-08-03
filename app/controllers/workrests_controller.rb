@@ -12,7 +12,7 @@ class WorkrestsController < ApplicationController
   def new
     worktype = current_ou.worktypes.find(params[:worktype_id])
     @work_name = worktype[:name]
-    @workrest = current_ou.workrests.new
+    @workrest = current_ou.workrests.new(worktype_id: params[:worktype_id])
   end
 
   def edit
@@ -67,7 +67,7 @@ class WorkrestsController < ApplicationController
     end
 
     def workrest_params
-      params.require(:workrest).permit(:employee_id, :duty_date, :on_duty_at, :off_duty_at, :is_closed, :notes)
+      params.require(:workrest).permit(:worktype_id, :is_holiday, :rest_begin_at, :mins_of_rest, :is_deduct_for_duty, :memo)
     end
 
 end

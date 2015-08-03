@@ -4,7 +4,7 @@
 
   <%= link_to 'New ', new_worktype_workrest_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
   <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
-  <%= link_to 'Exit ', worktypes_path,autofocus: true, method: :get, class: 'btn btn-warning' %>
+  <%= link_to 'Back ', worktypes_path,autofocus: true, method: :get, class: 'btn btn-warning' %>
 
   <table id='table_id' class='table table-hover'>
     <thead>
@@ -24,7 +24,7 @@
         <tr>
           <td><%= check_box_tag "ids[]", workrest.id %></td>
           <td><%= i+1 %></td>
-          <td><%= workrest.worktype.try(:name) %></td>
+          <td><%= link_to workrest.worktype.try(:name), edit_worktype_workrest_path(workrest.worktype_id, workrest) %></td>
           <td><%= workrest.rest_begin_at.strftime('%H:%M') %></td>
           <td><%= workrest.mins_of_rest %></td>
           <td><%= (workrest.is_holiday)? '是' : '否' %></td>

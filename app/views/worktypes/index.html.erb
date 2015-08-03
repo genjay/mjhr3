@@ -2,7 +2,7 @@
 
 <%= form_tag multi_destroy_worktypes_path, method: :delete do %>
 
-  <%= link_to 'New ', new_worktype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= link_to 'New', new_worktype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
   <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <table id='table_id'class='table table-hover'>
