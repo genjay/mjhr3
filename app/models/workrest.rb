@@ -1,3 +1,5 @@
 class Workrest < ActiveRecord::Base
-  belongs_to :worktype   
+  validates :rest_begin_at, :mins_of_rest, presence:true
+
+  belongs_to :worktype 
 end

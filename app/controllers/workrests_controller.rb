@@ -20,7 +20,7 @@ class WorkrestsController < ApplicationController
 
   def create
     @workrest = current_ou.workrests.new(workrest_params)
-
+    @workrest.worktype_id = params[:worktype_id]
     respond_to do |format|
       if @workrest.save
         format.html { redirect_to worktype_workrests_path, notice: 'Workrest was successfully created.' }
