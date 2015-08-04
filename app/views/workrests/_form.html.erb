@@ -1,8 +1,9 @@
+<h4><strong><%= @worktype_name %></strong></h4>
+
 <%= simple_form_for @workrest, url: worktype_workrests_path do |f| %>
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= @worktype_name %>
     <%= f.input :rest_begin_at, placeholder:'休息(起)', autofocus:true %>
     <%= f.input :mins_of_rest, placeholder:'休息時間' %>
     <%= f.input :is_deduct_for_duty, placeholder:'是否扣除(工時)' %>

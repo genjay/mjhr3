@@ -1,5 +1,6 @@
 class WorkrestsController < ApplicationController
     before_action :set_workrest, only: [:show, :edit, :update, :destroy]
+    before_action :set_wortype_name, only: [:edit, :new]
 
   def index
     # @workrests = current_ou.workrests.includes(:worktype).order(id: :asc)
@@ -10,8 +11,6 @@ class WorkrestsController < ApplicationController
   end
 
   def new
-    worktype = current_ou.worktypes.find(params[:worktype_id])
-    @work_name = worktype[:name]
     @workrest = current_ou.workrests.new(worktype_id: params[:worktype_id])
   end
 
@@ -64,6 +63,10 @@ class WorkrestsController < ApplicationController
   private
     def set_workrest
       @workrest = current_ou.workrests.find(params[:id])
+    end
+
+    def set_wortype_name
+      @worktype_name = current_ou.worktypes.find(params[:worktype_id]).name
     end
 
     def workrest_params

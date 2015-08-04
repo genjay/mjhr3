@@ -19,6 +19,7 @@ class Ou < ActiveRecord::Base
 	has_many :doc_offworks, :dependent => :restrict_with_error
 	has_many :doc_overworks, :dependent => :restrict_with_error
 	has_many :calendars, :dependent => :restrict_with_error
+	has_many :employee_insurance_settings, :dependent => :restrict_with_error
 
   # prefix with view_ is a db view can't update delete new
 	has_many :view_sch_emps # can not use :dependent

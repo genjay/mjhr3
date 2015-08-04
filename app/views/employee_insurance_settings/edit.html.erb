@@ -1,0 +1,33 @@
+<h2>新增勞健保維護</h2>
+
+<div id='rcorners2'>
+  <h4><strong><%= @employee_name %></strong></h4>
+
+<%= simple_form_for @employee_insurance, url: employee_employee_insurance_setting_path do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :NHI_LV %>
+    <%= f.input :NHI_begin_at %>
+    <%= f.input :NHI_end_at %>
+    <%= f.input :NHI_subsidy_id %>
+    <%= f.input :labor_lv %>
+    <%= f.input :labor_begin_at %>
+    <%= f.input :labor_end_at %>
+    <%= f.input :labor_subsidy_id %>
+    <%= f.input :LP_Lv %>
+    <%= f.input :LP_begin_at %>
+    <%= f.input :LP_end_at %>
+    <%= f.input :LP_subsidy_id %>
+    <%= f.input :is_free_for_2nd %>
+    <%= f.input :reson_for_free2nd %>
+    <%= f.input :memo %>
+  </div>
+
+  <div class="form-actions">
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', employee_employee_insurance_settings_path, class: 'btn btn-primary', method: :get %>
+  </div>
+
+<% end %> 
+</div>

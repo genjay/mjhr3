@@ -1,0 +1,45 @@
+<h2>人員-勞健保設定</h2>
+
+<%= form_tag multi_destroy_employee_employee_insurance_settings_path, method: :delete do %>
+
+  <%= link_to 'New ', new_employee_employee_insurance_setting_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to 'Back', edit_employee_path(@employee_id), class: 'btn btn-primary', method: :get %>
+
+<table id='table_id'class='table table-hover'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>項次</th>
+      <th>姓名</th>
+      <th>健保級距</th> 
+      <th>補助等級</th>
+      <th>勞保級距</th>
+      <th>補助等級</th>
+      <th>勞退級距</th>
+      <th>補助等級</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employee_insurances.each_with_index do |insurance,i| %>
+      <tr>
+        <td><%= check_box_tag "ids[]", insurance.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to insurance.employee.try(:name), edit_employee_employee_insurance_setting_path(insurance.employee_id, insurance) %></td>
+        <td><%= insurance.NHI_LV %></td>
+        <td><%= insurance.NHI_subsidy_id %></td> 
+        <td><%= insurance.labor_lv %></td>
+        <td><%= insurance.labor_subsidy_id %></td>
+        <td><%= insurance.LP_Lv %></td>
+        <td><%= insurance.LP_subsidy_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <%= link_to 'New ', new_employee_employee_insurance_setting_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to 'Back', edit_employee_path(@employee_id), class: 'btn btn-primary', method: :get %>
+  
+<% end %>
