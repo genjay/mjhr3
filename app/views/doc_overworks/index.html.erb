@@ -15,6 +15,7 @@
         <th>出勤日</th>
         <th>加班起</th>
         <th>加班迄</th>
+        <th>時數</th>
         <th>是否關帳</th>  
       </tr>
     </thead>
@@ -29,6 +30,7 @@
           <td><%= overwork.duty_date %></td>
           <td><%= overwork.overwork_begin_at.strftime('%H:%M') if overwork.overwork_begin_at? %></td>
           <td><%= overwork.overwork_end_at.strftime('%H:%M') if overwork.overwork_end_at? %></td>
+          <td><%= overwork.hr + overwork.hr_h %></td>
           <td><%= '已關帳' if overwork.is_closed %></td>  
         </tr>
       <% end %>

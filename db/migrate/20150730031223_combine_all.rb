@@ -59,8 +59,8 @@ class CombineAll < ActiveRecord::Migration
   	    t.datetime "real_off" 
         t.string   "cardno",      limit: 255
   	    t.integer  "ou_id",       limit: 4
-  	    t.datetime "created_at",                        null: false
-  	    t.datetime "updated_at",                        null: false
+  	    t.datetime "created_at" 
+  	    t.datetime "updated_at" 
   	  end
 
   	  create_table "daily_duty_offtypes", force: :cascade do |t|
@@ -119,7 +119,11 @@ class CombineAll < ActiveRecord::Migration
   	    t.date     "duty_date"
   	    t.datetime "overwork_begin_at"
   	    t.datetime "overwork_end_at"
-  	    t.integer  "mins_of_overwork",  limit: 4
+  	    # t.integer  "mins_of_overwork",  limit: 4, default: 0
+        t.integer  "mins_A",  limit: 4, default: 0
+        t.integer  "mins_B",  limit: 4, default: 0
+        t.integer  "mins_C",  limit: 4, default: 0
+        t.integer  "mins_H",  limit: 4, default: 0
   	    t.boolean  "is_closed",         limit: 1
   	    t.integer  "ou_id",             limit: 4
   	    t.text     "notes",             limit: 65535

@@ -7,7 +7,8 @@
     <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
     <%= f.input :overwork_begin_at,placeholder:'開始時間',label:'加班起' %>
     <%= f.input :overwork_end_at,placeholder:'結束時間',label:'加班迄' %>
-    <%= f.input :mins_of_overwork,placeholder:'分鐘',label:'加班時數' %>
+    <%= f.input :hr,as: :integer,placeholder:'時數',label:'超時時數' %>
+    <%= f.input :hr_h,as: :integer,placeholder:'時數',label:'假日時數' %>
     <%= f.input :is_closed,label:'是否關帳' %>
     <%= f.input :notes,placeholder:'備註',label:'備註' %> 
   </div>

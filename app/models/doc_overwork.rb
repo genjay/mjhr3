@@ -12,4 +12,27 @@ class DocOverwork < ActiveRecord::Base
 	  end
 	end
 
+	def hr # 加班時數，指1750後的加班 
+		(self.mins_A + self.mins_B + self.mins_C)/60
+	end
+
+	def hr=(hrs)
+
+		mins = hrs.to_i * 60
+		self.mins_A = (mins>120)? 120:mins
+		mins = mins - mins_A
+		self.mins_B = (mins>120)? 120:mins
+		mins = mins - mins_B
+		self.mins_C = mins
+	end
+
+	def hr_h # 假日時數，指 0820~1720 部份
+		self.mins_H/60
+	end
+
+	def hr_h=(hrs)
+		mins = hrs.to_i * 60
+		self.mins_H = mins
+	end
+
 end
