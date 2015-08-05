@@ -4,10 +4,12 @@ class Employee < ActiveRecord::Base
   belongs_to :department,counter_cache: true  
   belongs_to :ou
   has_one :employee_insurance_setting
-  has_many :employee_inoutlog, dependent: :destroy
+  has_many :employee_salary_settings
+  has_many :employee_inoutlogs, dependent: :destroy
   has_many :view_sch_emps
   has_many :doc_forgets
   has_many :doc_overworks
+  has_many :doc_offworks
   has_many :daily_duties
 
   # def self.create

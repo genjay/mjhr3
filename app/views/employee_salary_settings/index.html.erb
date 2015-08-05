@@ -1,0 +1,37 @@
+<h2>人員-薪資設定 (<%= @employee_name %>)</h2>
+
+<%= form_tag multi_destroy_employee_employee_salary_settings_path, method: :delete do %>
+
+  <%= link_to 'New ', new_employee_employee_salary_setting_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to 'Back', edit_employee_path(@employee_id), class: 'btn btn-primary', method: :get %>
+
+<table id='table_id'class='table table-hover'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>項次</th>
+      <th>姓名</th>
+      <th>類別</th> 
+      <th>金額</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employee_salaries.each_with_index do |salary,i| %>
+      <tr>
+        <td><%= check_box_tag "ids[]", salary.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= link_to salary.employee.try(:name), edit_employee_employee_salary_setting_path(salary.employee_id, salary) %></td>
+        <td><%= salary.pay_type.try(:name) %></td>
+        <td><%= salary.amt %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <%= link_to 'New ', new_employee_employee_salary_setting_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to 'Back', edit_employee_path(@employee_id), class: 'btn btn-primary', method: :get %>
+  
+<% end %>

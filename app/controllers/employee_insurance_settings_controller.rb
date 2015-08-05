@@ -1,5 +1,6 @@
 class EmployeeInsuranceSettingsController < ApplicationController
   before_action :set_employee_insurance, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee_name, only: [:index, :edit, :new]
 
   def index
     @employee_id = params[:employee_id]
@@ -7,7 +8,6 @@ class EmployeeInsuranceSettingsController < ApplicationController
   end
 
   def new
-    @employee_name = Employee.find_by(id: params[:employee_id]).name
     @employee_insurance = current_ou.employee_insurance_settings.new
   end
 
@@ -60,6 +60,10 @@ class EmployeeInsuranceSettingsController < ApplicationController
   private
     def set_employee_insurance
       @employee_insurance = current_ou.employee_insurance_settings.find(params[:id])
+    end
+
+    def set_employee_name
+      @employee_name = Employee.find_by(id: params[:employee_id]).name
     end
 
     def employee_insurance_params

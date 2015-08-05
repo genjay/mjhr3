@@ -1,5 +1,5 @@
 <%= link_to '勞健保設定', employee_employee_insurance_settings_path(@employee), class: 'btn btn-info', method: :get %>
-<%= link_to '薪資設定', employees_path, class: 'btn btn-info', method: :get %>
+<%= link_to '薪資設定', employee_employee_salary_settings_path(@employee), class: 'btn btn-info', method: :get %>
 
 <%= simple_form_for(@employee) do |f| %>
   <% f.error_notification %>

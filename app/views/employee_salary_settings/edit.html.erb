@@ -1,0 +1,21 @@
+<h2>新增薪資項目維護</h2>
+
+<div id='rcorners2'>
+  <h4><strong><%= @employee_name %></strong></h4>
+
+<%= simple_form_for @employee_salary, url: employee_employee_salary_setting_path do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :pay_type, :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.input :amt %>
+    <%= f.input :memo %>
+  </div>
+
+  <div class="form-actions">
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', employee_employee_salary_settings_path, class: 'btn btn-primary', method: :get %>
+  </div>
+
+<% end %> 
+</div>

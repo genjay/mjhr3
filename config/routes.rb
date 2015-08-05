@@ -53,6 +53,11 @@ Rails.application.routes.draw do
         delete 'multi_destroy'
       end
     end
+    resources :employee_salary_settings, except: [:show, :destroy] do
+      collection do
+        delete 'multi_destroy'
+      end
+    end
     collection do
       delete 'multi_destroy'
     end
