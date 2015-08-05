@@ -8,7 +8,11 @@ class EmployeeInsuranceSettingsController < ApplicationController
   end
 
   def new
-    @employee_insurance = current_ou.employee_insurance_settings.new
+    if current_ou.employee_insurance_settings.where(:employee_id => params[:employee_id]).size == 0
+      @employee_insurance = current_ou.employee_insurance_settings.new
+    else
+      redirect_to employee_employee_insurance_settings_path, alert: '此員工已經有一筆資料'
+    end
   end
 
   def create
@@ -63,7 +67,7 @@ class EmployeeInsuranceSettingsController < ApplicationController
     end
 
     def set_employee_name
-      @employee_name = Employee.find_by(id: params[:employee_id]).name
+      @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
     end
 
     def employee_insurance_params
