@@ -58,6 +58,11 @@ Rails.application.routes.draw do
         delete 'multi_destroy'
       end
     end
+    resources :employee_inoutlogs, except: [:show, :destroy] do
+      collection do
+        delete 'multi_destroy'
+      end
+    end
     collection do
       delete 'multi_destroy'
     end

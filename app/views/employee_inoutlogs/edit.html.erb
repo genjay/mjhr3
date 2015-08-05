@@ -1,0 +1,22 @@
+<h2>新增人員異動維護</h2>
+
+<div id='rcorners2'>
+  <h4><strong><%= @employee_name %></strong></h4>
+
+<%= simple_form_for @inoutlog, url: employee_employee_inoutlog_path do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs">
+    
+    <%= f.input :action %>
+    <%= f.input :begin_at %>
+    <%= f.input :days_of_jobage %>
+  </div>
+
+  <div class="form-actions">
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', employee_employee_inoutlogs_path, class: 'btn btn-primary', method: :get %>
+  </div>
+
+<% end %> 
+</div>
