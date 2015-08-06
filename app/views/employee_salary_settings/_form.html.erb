@@ -4,9 +4,9 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :pay_type, :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
-    <%= f.input :amt %>
-    <%= f.input :memo %>
+    <%= f.association :pay_type, label: '類別', :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.input :amt, label: '金額' %>
+    <%= f.input :memo, label: '備註' %>
   </div>
 
   <div class="form-actions">
