@@ -63,7 +63,7 @@ class EmployeeSalarySettingsController < ApplicationController
     end
 
     def set_employee_name
-      @employee_name = Employee.find_by(id: params[:employee_id]).name
+      @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
     end
 
     def employee_salary_params

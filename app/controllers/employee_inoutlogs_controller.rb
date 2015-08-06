@@ -8,7 +8,9 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   def new
+    employee = current_ou.employees.find_by(id:params[:employee_id])
     @inoutlog = current_ou.employee_inoutlogs.new
+    @inoutlog.department_id = employee.department_id
   end
 
   def create
@@ -24,6 +26,7 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   def edit
+    @inoutlog.department_id = @inoutlog.department.id
   end
 
   def update
@@ -63,7 +66,7 @@ class EmployeeInoutlogsController < ApplicationController
     end
 
     def set_employee_name
-      @employee_name = Employee.find_by(id: params[:employee_id]).name
+      @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
     end
 
     def inoutlog_params
