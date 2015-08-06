@@ -28,6 +28,7 @@ class Ou < ActiveRecord::Base
 	has_many :sch_emps
 	has_many :sch_deps
 	has_many :view_sch_deps
+	alias_method :viewschemps, :view_sch_emps
 
 	def assign_default_values
 		# 請不要在此用會sql自己的語法，可能會無限回圈

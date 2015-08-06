@@ -1,4 +1,5 @@
 if true # 增加 user
+	User.where(email:'genjay@gmail.com').delete_all
 	User.create(email:'genjay@gmail.com',password:'1234',password_confirmation:'1234')
 end
 
@@ -8,7 +9,7 @@ if true # ou
 end
 
 if true # 100 班別
-  Worktype.where(ou_id:@ou.id).destroy_all
+  Worktype.where(ou_id:@ou.id).delete_all
   Worktype.create(ou_id:@ou.id, uid:"A", name:"日班-間接人員", on_duty_at:"08:20", off_duty_at:"17:20", buffer_after_duty:"30" )
   Worktype.create(ou_id:@ou.id, uid:"AZ", name:"尾牙出勤", on_duty_at:"08:20", off_duty_at:"16:20", buffer_after_duty:"30" )
   Worktype.create(ou_id:@ou.id, uid:"B", name:"日班-直接人員", on_duty_at:"08:20", off_duty_at:"17:20", buffer_after_duty:"3 " )
@@ -31,7 +32,7 @@ if true # 100 班別
   Worktype.create(ou_id:@ou.id, uid:"V", name:"夜班-直接人員", on_duty_at:"23:50", off_duty_at:"08:25", buffer_after_duty:"3 " )
 end
 
-if true # 100-2 workrests 需要 worktypes 完成後
+if nil # 100-2 workrests 需要 worktypes 完成後
 	sql=ActiveRecord::Base.connection
 	sql.execute("truncate table workrests;")
 	sql.execute('Insert into workrests (ou_id,worktype_id,created_at,updated_at,rest_begin_at,mins_of_rest,is_deduct_for_duty,is_holiday)  values ((select id from ous where uid="16130535"),(select id from worktypes where ou_id=(select id from ous where uid="16130535") and uid="BZ"),"2015/01/01 12:01:00","2015/01/01 12:01:00","102000","10","1","0");')
@@ -145,9 +146,38 @@ if true # 100-2 workrests 需要 worktypes 完成後
 	sql.execute('Insert into workrests (ou_id,worktype_id,created_at,updated_at,rest_begin_at,mins_of_rest,is_deduct_for_duty,is_holiday)  values ((select id from ous where uid="16130535"),(select id from worktypes where ou_id=(select id from ous where uid="16130535") and uid="AZ"),"2015/01/01 12:01:00","2015/01/01 12:01:00","150000","10","1","1");')
 end
 
+if true # 100-2 workrest 需要 worktypes 完成後
+	w = Worktype.where("name not like ?",'%園區%')
+	Workrest.where(worktype_id: w.ids).delete_all
+	w.each do |i| 
+		if true # 平日
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '00:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '03:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '07:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '10:20:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '12:30:00',mins_of_rest: 40,is_deduct_for_duty: 1,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '15:10:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '17:20:00',mins_of_rest: 20,is_deduct_for_duty: 1,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '19:50:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '21:50:00',mins_of_rest: 15,is_deduct_for_duty: 0,is_holiday: 0)
+		end
+		if true #假日
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '00:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '03:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '07:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '10:20:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '12:30:00',mins_of_rest: 40,is_deduct_for_duty: 1,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '15:10:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '17:20:00',mins_of_rest: 20,is_deduct_for_duty: 1,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '19:50:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '21:50:00',mins_of_rest: 15,is_deduct_for_duty: 0,is_holiday: 1)
+		end
+	end
+end
+
 if true # 110 部門
 	w = Worktype.first
-  Department.where(ou_id:@ou.id).destroy_all
+  Department.where(ou_id:@ou.id).delete_all
   Department.create(ou_id:@ou.id, uid:"0", name:"管理部門", worktype: w)
   Department.create(ou_id:@ou.id, uid:"001", name:"總經理室", worktype: w)
   Department.create(ou_id:@ou.id, uid:"001-A", name:"總經理室-A班",worktype: Worktype.find_by(uid: 'A'))
@@ -217,7 +247,7 @@ if true # 110 部門
 end
 
 if true # 120 假別
-	Offtype.where(ou_id:@ou.id).destroy_all
+	Offtype.where(ou_id:@ou.id).delete_all
 	Offtype.create(ou_id:@ou.id, uid:"OFF01", name:"事假", mins_of_minimum:"60 ", mins_per_unit:"60 ", deduct_percent:"100", include_holiday:"0" )
 	Offtype.create(ou_id:@ou.id, uid:"OFF01-1", name:"事假不扣薪", mins_of_minimum:"60 ", mins_per_unit:"60 ", deduct_percent:"0  ", include_holiday:"0" )
 	Offtype.create(ou_id:@ou.id, uid:"OFF02", name:"一般病假", mins_of_minimum:"60 ", mins_per_unit:"60 ", deduct_percent:"50 ", include_holiday:"0" )
@@ -247,13 +277,13 @@ if true # 120 假別
 end
 
 if true # 130 加班設定
-  Overtype.where(ou_id:@ou.id).destroy_all
+  Overtype.where(ou_id:@ou.id).delete_all
   Overtype.create(ou_id:@ou.id, uid:'A', name:'一般加班')
   Overtype.create(ou_id:@ou.id, uid:'B', name:'補休加班')
 end
 
 if true # 140A 特休對應表 
-	AnnualLeaveList.where(ou_id:@ou.id).destroy_all
+	AnnualLeaveList.where(ou_id:@ou.id).delete_all
 	AnnualLeaveList.create(ou_id:@ou.id, months_of_job:12, days:7, memo:"1 年")
 	AnnualLeaveList.create(ou_id:@ou.id, months_of_job:36, days:10, memo:"3 年")
 	AnnualLeaveList.create(ou_id:@ou.id, months_of_job:60, days:14, memo:"5 年")
@@ -276,17 +306,17 @@ if true # 140A 特休對應表
 end
 
 if true # 140B 薪資項目 
-	PayType.where(ou_id:@ou.id).destroy_all
+	PayType.where(ou_id:@ou.id).delete_all
 	PayType.create(ou_id:@ou.id, uid:'A', name:'底薪(月)',cycle_unit:'month',rule_for_break:'rate')
 end
 
 if true # 140C 保險身分
-	InsuranceSetting.where(ou_id:@ou_id).destroy_all
+	InsuranceSetting.where(ou_id:@ou.id).delete_all
 	InsuranceSetting.create(ou_id:@ou.id,uid:'A',name:'一般')
 end
 
 if true # 140D 補助比率
-	Subsidy.where(ou_id:@ou.id).destroy_all
+	Subsidy.where(ou_id:@ou.id).delete_all
 	Subsidy.create(ou_id:@ou.id,uid:'A',name:'補助 0(一般)',rate:0)
 	Subsidy.create(ou_id:@ou.id,uid:'B',name:'補助 25％(一般)',rate:25)
 	Subsidy.create(ou_id:@ou.id,uid:'C',name:'補助 50％(一般)',rate:50)
@@ -303,6 +333,7 @@ if true # 140F 勞保級距表, wait todo
 end
 
 if true # 141 人員基本資料
+	Employee.where(ou_id:@ou.id).delete_all
 	Employee.create(ou_id:@ou.id, uid:"A00004",name:"name_A00004", department:Department.find_by(uid:"600-L"), arrive_date:"19960725", leave_date:"", cardno:"A00004") 
 	Employee.create(ou_id:@ou.id, uid:"A00005",name:"name_A00005", department:Department.find_by(uid:"001-A"), arrive_date:"19961021", leave_date:"", cardno:"A00005") 
 	Employee.create(ou_id:@ou.id, uid:"A00010",name:"name_A00010", department:Department.find_by(uid:"620-L"), arrive_date:"19970211", leave_date:"", cardno:"A00010") 
@@ -991,7 +1022,7 @@ if true # 141 人員基本資料
 end
 
 if true # 150 行事曆
-	Calendar.where(ou_id:@ou.id).destroy_all
+	Calendar.where(ou_id:@ou.id).delete_all
 	x = Date.new(2014,12,31)
 	366.times.each do |f|
 		Calendar.create(ou_id:@ou.id,duty_date:x+=1,is_holiday:(x.cwday==6 || x.cwday==7)? 1:0)

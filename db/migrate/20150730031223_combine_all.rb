@@ -57,6 +57,12 @@ class CombineAll < ActiveRecord::Migration
         t.datetime "std_off"
   	    t.datetime "real_on"
   	    t.datetime "real_off" 
+        t.integer  "workA",       limit: 4, default: 0
+        t.integer  "workB",       limit: 4, default: 0
+        t.integer  "workC",       limit: 4, default: 0
+        t.integer  "restA",       limit: 4, default: 0
+        t.integer  "restB",       limit: 4, default: 0
+        t.integer  "restC",       limit: 4, default: 0
         t.string   "cardno",      limit: 255
   	    t.integer  "ou_id",       limit: 4
   	    t.datetime "created_at" 

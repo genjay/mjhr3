@@ -7,15 +7,32 @@ class DailyDuty < ActiveRecord::Base
  #    run_sql.execute(sql)
 	# end
 
-	def self.d04(ou_id,duty_date) # 日結
+	def self.d04(ou_id,duty_date,*sid) # 日結
+    run_sql = ActiveRecord::Base.connection  
+    tmpfiles = []
+    tmp01 = "tmp01" #<< sid
+    if true # 產生 tmp01 like daily_duties
+    	run_sql.execute "drop table if exists #{tmp01}"
+    	run_sql.execute "create table #{tmp01} select * from daily_duties limit 0"
+    end
+
+    if true  # 利用 view_sch_emps 產生當日應出勤人員，相關資料
+      columns = DailyDuty.column_names && ViewSchEmp.column_names
+      columns = columns.join(',')
+      sql = "INSERT INTO #{tmp01} (#{columns}) SELECT #{columns} FROM view_sch_emps WHERE ou_id='#{ou_id}' and duty_date='#{duty_date}')"
+    	run_sql.execute sql
+    end
+	end
+
+	def self.d04_old(ou_id,duty_date) # 日結
 		run_sql = ActiveRecord::Base.connection 
-		temp = Rails.env=='product'? 'temporary':'' 
+		temp = Rails.env=='production'? 'temporary':'' 
     tmpfiles = []
 		if true # 01 產生當日應出勤人員資料' 
-			tmp01 = 'tmp_view_sch_emps'
+			tmp01 = 'tmp_view_sch_emps'  
 			tmpfiles = tmpfiles << tmp01
 	  	run_sql.execute("drop table if exists #{tmp01}")
-			sql = %Q(create #{temp} table tmp_view_sch_emps 
+			sql = %Q(create #{temp} table #{tmp01} 
 				Select a.*
 				, a.std_on - interval range_on minute range_a
 				,a.std_off + interval range_off minute range_b
@@ -119,7 +136,7 @@ class DailyDuty < ActiveRecord::Base
     	run_sql.execute("Insert into daily_duties select * from #{tmp07}")
     end
 
-    if true && false # drop tmp table
+    if Rails.env=='production' # drop tmp table
     	tmpfiles.each do |i|
     		run_sql.execute("drop table if exists #{i}")
     	end

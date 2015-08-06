@@ -1,5 +1,6 @@
 class DocOverwork < ActiveRecord::Base
 	validates :employee_id, :duty_date, uniqueness: {scope: [:employee_id, :duty_date]}
+	validates :hr, :hr_h, inclusion: { :in => 0..24,message:"只能輸入0~24" }
 
 	belongs_to :employee
 	belongs_to :overtype
