@@ -1,6 +1,7 @@
 class EmployeeInsuranceSettingsController < ApplicationController
   before_action :set_employee_insurance, only: [:show, :edit, :update, :destroy]
   before_action :set_employee_name, only: [:index, :edit, :new]
+  before_action :set_subsidy_type, only: [:new, :edit]
 
   def index
     @employee_id = params[:employee_id]
@@ -9,6 +10,7 @@ class EmployeeInsuranceSettingsController < ApplicationController
 
   def new
     if current_ou.employee_insurance_settings.where(:employee_id => params[:employee_id]).size == 0
+      set_subsidy_type
       @employee_insurance = current_ou.employee_insurance_settings.new
     else
       redirect_to employee_employee_insurance_settings_path, alert: '此員工已經有一筆資料'
@@ -32,6 +34,7 @@ class EmployeeInsuranceSettingsController < ApplicationController
 
   def update
     respond_to do |format|
+      set_subsidy_type
       if @employee_insurance.update(employee_insurance_params)
         format.html { redirect_to employee_employee_insurance_settings_path, notice: '員工勞健保修改成功' }
       else
@@ -68,6 +71,10 @@ class EmployeeInsuranceSettingsController < ApplicationController
 
     def set_employee_name
       @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
+    end
+
+    def set_subsidy_type
+      @subsidy_type = current_ou.subsidies.all
     end
 
     def employee_insurance_params
