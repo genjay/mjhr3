@@ -10,10 +10,16 @@ class DailyDutiesController < ApplicationController
   end
 
   def post_calculate
-    
-    sid = "_#{session.id}_#{session.__id__}"
-  	DailyDuty.d04(current_ou.id,params[:duty_date],sid) 
-  	render :text => "#{DailyDuty.count} 筆完成匯入"
+    if Rails.env=='production'
+      sid = "_#{session.id}_#{session.__id__}"
+    else
+      # sid = "_#{session.id}_#{session.__id__}"
+      sid = ''
+    end
+    st = Time.now
+  	cnt = DailyDuty.d04(current_ou.id,params[:duty_date],sid) 
+    run_time = Time.now - st
+  	render :text => "#{cnt} 筆完成匯入 #{run_time} 秒"
     # render :text => session.methods
   	return
   end

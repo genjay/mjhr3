@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729071417) do
+ActiveRecord::Schema.define(version: 20150805061020) do
 
   create_table "annual_leave_lists", force: :cascade do |t|
     t.integer  "months_of_job", limit: 4
@@ -58,19 +58,30 @@ ActiveRecord::Schema.define(version: 20150729071417) do
   add_index "catcodes", ["ou_id", "uid"], name: "index_catcodes_on_ou_id_and_uid", unique: true, using: :btree
 
   create_table "daily_duties", force: :cascade do |t|
-    t.integer  "employee_id", limit: 4,             null: false
-    t.date     "duty_date",                         null: false
+    t.integer  "employee_id", limit: 4,               null: false
+    t.date     "duty_date",                           null: false
     t.boolean  "is_holiday",  limit: 1
     t.integer  "worktype_id", limit: 4
-    t.integer  "over_a",      limit: 4, default: 0
-    t.integer  "over_b",      limit: 4, default: 0
-    t.integer  "over_c",      limit: 4, default: 0
-    t.integer  "over_h",      limit: 4, default: 0
+    t.integer  "over_a",      limit: 4,   default: 0
+    t.integer  "over_b",      limit: 4,   default: 0
+    t.integer  "over_c",      limit: 4,   default: 0
+    t.integer  "over_h",      limit: 4,   default: 0
+    t.datetime "std_on"
+    t.datetime "std_off"
     t.datetime "real_on"
     t.datetime "real_off"
+    t.integer  "workA",       limit: 4,   default: 0
+    t.integer  "workB",       limit: 4,   default: 0
+    t.integer  "workC",       limit: 4,   default: 0
+    t.integer  "restA",       limit: 4,   default: 0
+    t.integer  "restB",       limit: 4,   default: 0
+    t.integer  "restC",       limit: 4,   default: 0
+    t.string   "cardno",      limit: 255
     t.integer  "ou_id",       limit: 4
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "range_on"
+    t.datetime "range_off"
   end
 
   create_table "daily_duty_offtypes", force: :cascade do |t|
@@ -79,6 +90,12 @@ ActiveRecord::Schema.define(version: 20150729071417) do
     t.integer  "minutes",       limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "daily_offworks", id: false, force: :cascade do |t|
+    t.integer "off_offwork_id", limit: 4, default: 0, null: false
+    t.date    "duty_date"
+    t.integer "mins_of_duty",   limit: 4
   end
 
   create_table "departments", force: :cascade do |t|
@@ -116,7 +133,7 @@ ActiveRecord::Schema.define(version: 20150729071417) do
     t.integer  "offtype_id",       limit: 4
     t.datetime "offduty_begin_at"
     t.datetime "offduty_end_at"
-    t.string   "mins_offduty",     limit: 255
+    t.integer  "mins_offduty",     limit: 4
     t.boolean  "is_closed",        limit: 1
     t.integer  "ou_id",            limit: 4
     t.text     "notes",            limit: 65535
@@ -129,12 +146,15 @@ ActiveRecord::Schema.define(version: 20150729071417) do
     t.date     "duty_date"
     t.datetime "overwork_begin_at"
     t.datetime "overwork_end_at"
-    t.integer  "mins_of_overwork",  limit: 4
+    t.integer  "mins_A",            limit: 4,     default: 0
+    t.integer  "mins_B",            limit: 4,     default: 0
+    t.integer  "mins_C",            limit: 4,     default: 0
+    t.integer  "mins_H",            limit: 4,     default: 0
     t.boolean  "is_closed",         limit: 1
     t.integer  "ou_id",             limit: 4
     t.text     "notes",             limit: 65535
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "overtype_id",       limit: 4
   end
 
@@ -148,6 +168,7 @@ ActiveRecord::Schema.define(version: 20150729071417) do
     t.integer  "days_of_jobage", limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "ou_id",          limit: 4
   end
 
   create_table "employee_insurance_settings", force: :cascade do |t|
@@ -170,6 +191,16 @@ ActiveRecord::Schema.define(version: 20150729071417) do
     t.integer  "ou_id",             limit: 4
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "employee_salary_settings", force: :cascade do |t|
+    t.integer  "employee_id", limit: 4
+    t.integer  "pay_type_id", limit: 4
+    t.integer  "ou_id",       limit: 4
+    t.integer  "amt",         limit: 4
+    t.text     "memo",        limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "employees", force: :cascade do |t|
@@ -392,12 +423,25 @@ ActiveRecord::Schema.define(version: 20150729071417) do
     t.string   "notes",         limit: 11,  default: "", null: false
     t.integer  "department_id", limit: 4,   default: 0
     t.integer  "mins_of_duty",  limit: 4
-    t.integer  "range_on",      limit: 4
-    t.integer  "range_off",     limit: 4
+    t.datetime "range_on"
+    t.datetime "range_off"
     t.time     "on_duty_at"
     t.time     "off_duty_at"
     t.datetime "std_on"
     t.datetime "std_off"
+    t.string   "cardno",        limit: 255
+  end
+
+  create_table "view_workrests", id: false, force: :cascade do |t|
+    t.integer  "ou_id",              limit: 4
+    t.date     "duty_date"
+    t.integer  "worktype_id",        limit: 4
+    t.boolean  "is_holiday",         limit: 1
+    t.boolean  "is_deduct_for_duty", limit: 1
+    t.datetime "rest_st"
+    t.datetime "rest_end"
+    t.time     "rest_begin_at"
+    t.integer  "mins_of_rest",       limit: 4
   end
 
   create_table "workrests", force: :cascade do |t|

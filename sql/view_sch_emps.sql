@@ -19,7 +19,12 @@ Select ifnull(c.id,0) id
  end notes
 ,e.id department_id
 ,w.mins_of_duty
-,w.range_on,w.range_off,w.on_duty_at,w.off_duty_at
+,str_to_date(concat(b.duty_date,w.on_duty_at),'%Y-%m-%d%H:%i:%s')
+ + interval w.on_duty_offset day - interval w.range_on minute range_on
+,str_to_date(concat(b.duty_date,w.off_duty_at),'%Y-%m-%d%H:%i:%s')
+ + interval w.off_duty_offset day + interval w.range_off minute range_off 
+-- ,w.range_on,w.range_off
+,w.on_duty_at,w.off_duty_at
 ,str_to_date(concat(b.duty_date,w.on_duty_at),'%Y-%m-%d%H:%i:%s')
  + interval w.on_duty_offset day std_on
 ,str_to_date(concat(b.duty_date,w.off_duty_at),'%Y-%m-%d%H:%i:%s')

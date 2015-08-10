@@ -67,6 +67,8 @@ class CombineAll < ActiveRecord::Migration
   	    t.integer  "ou_id",       limit: 4
   	    t.datetime "created_at" 
   	    t.datetime "updated_at" 
+        t.datetime "range_on"
+        t.datetime "range_off"
   	  end
 
   	  create_table "daily_duty_offtypes", force: :cascade do |t|
@@ -112,7 +114,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.integer  "offtype_id",       limit: 4
   	    t.datetime "offduty_begin_at"
   	    t.datetime "offduty_end_at"
-  	    t.string   "mins_offduty",     limit: 255
+  	    t.integer  "mins_offduty",     limit: 4
   	    t.boolean  "is_closed",        limit: 1
   	    t.integer  "ou_id",            limit: 4
   	    t.text     "notes",            limit: 65535
@@ -155,7 +157,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.integer  "NHI_LV",            limit: 4
   	    t.date     "NHI_begin_at"
   	    t.date     "NHI_end_at"
-  	    t.string   "NHI_subsidy_id",    limit: 255
+  	    t.integer  "NHI_subsidy_id",    limit: 4
   	    t.integer  "labor_lv",          limit: 4
   	    t.date     "labor_begin_at"
   	    t.date     "labor_end_at"
@@ -163,7 +165,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.integer  "LP_Lv",             limit: 4
   	    t.date     "LP_begin_at"
   	    t.date     "LP_end_at"
-  	    t.string   "LP_subsidy_id",     limit: 255
+  	    t.integer  "LP_subsidy_id",     limit: 4
   	    t.boolean  "is_free_for_2nd",   limit: 1
   	    t.text     "reson_for_free2nd", limit: 65535
   	    t.text     "memo",              limit: 65535
@@ -407,5 +409,11 @@ class CombineAll < ActiveRecord::Migration
   	  add_index "worktypes", ["ou_id", "uid"], name: "index_worktypes_on_ou_id_and_uid", unique: true, using: :btree
 
   	end
+    
+    create_table "daily_offworks", id: false, force: :cascade do |t|
+      t.integer "off_offwork_id", limit: 4, default: 0, null: false
+      t.date    "duty_date"
+      t.integer "mins_of_duty",   limit: 4
+    end
 
 end

@@ -99,6 +99,6 @@ class DocOffworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offwork_params
-      params.require(:doc_offwork).permit(:employee_id, :offtype_id, :offduty_begin_at, :offduty_end_at, :mins_offduty, :is_closed, :notes)
+      params.require(:doc_offwork).permit(:employee_id, :offtype_id, :begin_date, :begin_time, :end_date, :end_time, :off_hours, :offduty_begin_at, :offduty_end_at, :mins_offduty, :is_closed, :notes)
     end
 end
