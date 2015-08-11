@@ -7,15 +7,15 @@
     <%= f.input :NHI_LV, label: '健保級距' %>
     <%= f.input :NHI_begin_at, label: '健保(起)' %>
     <%= f.input :NHI_end_at, label: '健保(迄)' %>
-    <%= f.input :NHI_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :uid, :label => "健保補助等級", :include_blank => false %>
+    <%= f.input :NHI_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "健保補助等級", :include_blank => false %>
     <%= f.input :labor_lv, label: '勞保級距' %>
     <%= f.input :labor_begin_at, label: '勞保(起)' %>
     <%= f.input :labor_end_at, label: '勞保(迄)' %>
-    <%= f.input :labor_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :uid, :label => "勞保補助等級", :include_blank => false %>
+    <%= f.input :labor_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "勞保補助等級", :include_blank => false %>
     <%= f.input :LP_Lv, label: '勞退級距' %>
     <%= f.input :LP_begin_at, label: '勞退(起)' %>
     <%= f.input :LP_end_at, label: '勞退(迄)' %>
-    <%= f.input :LP_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :uid, :label => "勞退補助等級", :include_blank => false %>
+    <%= f.input :LP_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "勞退補助等級", :include_blank => false %>
     <%= f.input :is_free_for_2nd, label: '二低免繳原因' %>
     <%= f.input :reson_for_free2nd, label: '二低免繳原因' %>
     <%= f.input :memo, label: '備註' %>
