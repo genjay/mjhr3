@@ -4,7 +4,7 @@ class LvlistsController < ApplicationController
   # GET /lvlists
   # GET /lvlists.json
   def index
-    @lvlists = current_ou.lvlists.all
+    @lvlists = current_ou.lvlists.where(:lvtype_id => params[:lvtype_id])
   end
 
   # GET /lvlists/1
@@ -14,7 +14,7 @@ class LvlistsController < ApplicationController
 
   # GET /lvlists/new
   def new
-    @lvlist = current_ou.lvlists.new
+    @lvlist = current_ou.lvlists.new(lvtype_id: params[:lvtype_id])
   end
 
   # GET /lvlists/1/edit
@@ -25,14 +25,12 @@ class LvlistsController < ApplicationController
   # POST /lvlists.json
   def create
     @lvlist = current_ou.lvlists.new(lvlist_params)
-
+    @lvlist.lvtype_id = params[:lvtype_id]
     respond_to do |format|
       if @lvlist.save
-        format.html { redirect_to lvlists_path, notice: 'Lvlist was successfully created.' }
-        format.json { render :show, status: :created, location: @lvlist }
+        format.html { redirect_to lvtype_lvlists_path, notice: 'Lvlist was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @lvlist.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +40,9 @@ class LvlistsController < ApplicationController
   def update
     respond_to do |format|
       if @lvlist.update(lvlist_params)
-        format.html { redirect_to lvlists_path, notice: 'Lvlist was successfully updated.' }
-        format.json { render :show, status: :ok, location: @lvlist }
+        format.html { redirect_to lvtype_lvlists_path, notice: 'Lvlist was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @lvlist.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,9 +76,9 @@ class LvlistsController < ApplicationController
       # render :text => all_msg
       respond_to do |format|
         if err_msg.size>0
-          format.html { redirect_to lvlists_path, alert: all_msg }
+          format.html { redirect_to lvtype_lvlists_path, alert: all_msg }
         else
-          format.html { redirect_to lvlists_path, notice: all_msg }
+          format.html { redirect_to lvtype_lvlists_path, notice: all_msg }
         end
       end
   end

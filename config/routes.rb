@@ -30,7 +30,18 @@ Rails.application.routes.draw do
   get 'pages/home'
   root 'pages#home'
 
-  resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :lvlists, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_forgets, :doc_offworks, :doc_overworks, except: [:show, :destroy] do
+  resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_forgets, :doc_offworks, :doc_overworks, except: [:show, :destroy] do
+    collection do
+      delete 'multi_destroy'
+    end
+  end
+
+  resources  :lvtypes, except: [:show, :destroy] do
+    resources :lvlists, except: [:show, :destroy] do
+      collection do
+        delete 'multi_destroy'
+      end
+    end
     collection do
       delete 'multi_destroy'
     end

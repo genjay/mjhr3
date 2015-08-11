@@ -1,0 +1,35 @@
+<h2>勞健保項目清單</h2>
+
+<%= form_tag multi_destroy_lvtypes_path, method: :delete do %>
+
+  <%= link_to 'New ', new_lvtype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+
+<table id='table_id'class='table table-hover'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>項次</th>
+      <th>Uid</th>
+      <th>名稱</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lvtypes.each_with_index do |lvtype,i| %>
+      <tr>
+        <td><%= check_box_tag "ids[]", lvtype.id %></td>
+        <td><%= i+1 %></td>
+        <td><%= lvtype.uid %></td>
+        <td><%= link_to lvtype.name, edit_lvtype_path(lvtype) %></td>
+        <td><%= link_to '清單維護', lvtype_lvlists_path(lvtype.id), method: :get %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <%= link_to 'New ', new_lvtype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  
+<% end %>
