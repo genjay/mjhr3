@@ -1,18 +1,17 @@
 <h2>Listing Lvlists</h2>
 
-<%= form_tag multi_destroy_lvlists_path, method: :delete do %>
+<%= form_tag multi_destroy_lvtype_lvlists_path, method: :delete do %>
 
-  <%= link_to 'New ', new_lvlist_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to 'New ', new_lvtype_lvlist_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to 'Back ', lvtypes_path, autofocus: true, method: :get, class: 'btn btn-warning' %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Uid</th>
       <th>Amt</th>
-      <th>Ou</th>
     </tr>
   </thead>
 
@@ -21,15 +20,14 @@
       <tr>
         <td><%= check_box_tag "ids[]", lvlist.id %></td>
         <td><%= i+1 %></td>
-        <td><%= link_to lvlist.uid,edit_lvlist_path(lvlist) %></td>
-        <td><%= lvlist.amt %></td>
-        <td><%= lvlist.ou_id %></td>
+        <td><%= link_to lvlist.amt, edit_lvtype_lvlist_path(lvlist.lvtype_id, lvlist) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-  <%= link_to 'New ', new_lvlist_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= link_to 'New ', new_lvtype_lvlist_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
   <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to 'Back ', lvtypes_path, autofocus: true, method: :get, class: 'btn btn-warning' %>
   
 <% end %>

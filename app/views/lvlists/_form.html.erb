@@ -1,15 +1,14 @@
-<%= simple_form_for(@lvlist) do |f| %>
+<%= simple_form_for @lvlist, url: lvtype_lvlists_path do |f| %>
   <% f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="form-inputs"> 
     <%= f.input :uid %>
     <%= f.input :amt %>
-    <%= f.input :ou_id %>
   </div>
 
   <div class="form-actions">
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', lvlists_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to 'Back', lvtype_lvlists_path,class: 'btn btn-primary', method: :get %>
   </div>
 
 <% end %>

@@ -66,9 +66,9 @@ class LvlistsController < ApplicationController
     params[:ids].each do |f|
       x = current_ou.lvlists.find(f)
       if x.destroy
-        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+        ok_msg = ok_msg << "[#{x.amt}]"
       else
-        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+        err_msg = err_msg << "[#{x.amt} 刪除失敗 " << x.errors[:base].join << '\n'
       end
     end
 
@@ -91,6 +91,6 @@ class LvlistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lvlist_params
-      params.require(:lvlist).permit(:uid, :amt)
+      params.require(:lvlist).permit(:uid, :amt, :lvtype_id, :type)
     end
 end

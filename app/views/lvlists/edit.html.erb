@@ -1,5 +1,18 @@
 <h2>Editing Lvlist</h2>
 
 <div id='rcorners2'>
-  <%= render 'form' %>
+  <%= simple_form_for @lvlist, url: lvtype_lvlist_path do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs"> 
+    <%= f.input :uid %>
+    <%= f.input :amt %>
+  </div>
+
+  <div class="form-actions">
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', lvtype_lvlists_path,class: 'btn btn-primary', method: :get %>
+  </div>
+
+<% end %>
 </div>
