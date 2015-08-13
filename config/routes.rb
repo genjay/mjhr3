@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get 'home' => 'pages#home'
   get 'pages/home'
+  get  'get_empid' => 'application#get_empid'
   root 'pages#home'
 
   resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_forgets, :doc_offworks, :doc_overworks, except: [:show, :destroy] do

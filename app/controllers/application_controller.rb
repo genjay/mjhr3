@@ -22,4 +22,14 @@ class ApplicationController < ActionController::Base
   def current_ou
     Ou.find_by(uid: "16130535")
   end
+
+  def get_empid
+    @employee = current_ou.employees.find_by(uid:params[:uid])
+    if @employee == nil
+      render :text => ""
+    else
+      render :text => "#{@employee.name},#{@employee.id}"
+    end
+  end
+
 end

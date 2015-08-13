@@ -2,7 +2,9 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :employee, :label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true %>
+    <!--<%= f.association :employee, :label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true %>-->
+    <input type="text" id="input" onchange="get(this.value)" />&nbsp;&nbsp;<span id="name"></span>
+    <%= f.input :employee_id %>
     <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
     <%= f.input :on_duty_at,as: :time,placeholder:'開始時間',label:'出勤起' %>
     <%= f.input :off_duty_at,as: :time,placeholder:'結束時間',label:'出勤迄' %>
@@ -15,3 +17,25 @@
       <%= link_to 'Back', doc_forgets_path,class: 'btn btn-primary', method: :get %>
   </div>
 <% end %>
+
+<script>
+function get(e){
+  if(e.length > 0){
+    $.ajax({
+      type: "GET",
+      url: '/get_empid/?uid=' + e,
+      dataType: "html",
+      success: function(data) {
+       if(data.length >0){
+            var emp = data.split(",")
+           $("#name").text(emp[0]);
+           $("#doc_forget_employee_id").val(emp[1]);
+       }else{
+           $("#name").text("無此工號");
+           $("#doc_forget_employee_id").val("");
+       }
+      }
+    });
+  }
+}
+</script>

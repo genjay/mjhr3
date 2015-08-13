@@ -26,6 +26,7 @@ class LvlistsController < ApplicationController
   def create
     @lvlist = current_ou.lvlists.new(lvlist_params)
     @lvlist.lvtype_id = params[:lvtype_id]
+    @lvlist.lvtype_uid = @lvlist.lvtype.uid
     respond_to do |format|
       if @lvlist.save
         format.html { redirect_to lvtype_lvlists_path, notice: 'Lvlist was successfully created.' }

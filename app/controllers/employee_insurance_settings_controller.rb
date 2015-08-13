@@ -10,7 +10,6 @@ class EmployeeInsuranceSettingsController < ApplicationController
 
   def new
     if current_ou.employee_insurance_settings.where(:employee_id => params[:employee_id]).size == 0
-      set_subsidy_type
       @employee_insurance = current_ou.employee_insurance_settings.new
     else
       redirect_to employee_employee_insurance_settings_path, alert: '此員工已經有一筆資料'
@@ -34,7 +33,6 @@ class EmployeeInsuranceSettingsController < ApplicationController
 
   def update
     respond_to do |format|
-      set_subsidy_type
       if @employee_insurance.update(employee_insurance_params)
         format.html { redirect_to employee_employee_insurance_settings_path, notice: '員工勞健保修改成功' }
       else
@@ -75,6 +73,9 @@ class EmployeeInsuranceSettingsController < ApplicationController
 
     def set_subsidy_type
       @subsidy_type = current_ou.subsidies.all
+      @lvlist_A = current_ou.lvlists.where(:lvtype_uid => "A")
+      @lvlist_B = current_ou.lvlists.where(:lvtype_uid => "B")
+      @lvlist_C = current_ou.lvlists.where(:lvtype_uid => "C")
     end
 
     def employee_insurance_params
