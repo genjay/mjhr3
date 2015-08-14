@@ -2,7 +2,8 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true %>
+    <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value)', :id => "employee_uid"},autofocus: true %><span id="name"></span>
+     <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
     <%= f.association :offtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" },all_blank: false %>
     <%= f.input :begin_date, label: '請假起(日期)' %>
     <%= f.input :begin_time, label: '請假起(時間)' %>

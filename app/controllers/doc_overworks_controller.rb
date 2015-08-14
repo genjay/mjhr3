@@ -99,6 +99,6 @@ class DocOverworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def overwork_params
-      params.require(:doc_overwork).permit(:employee_id, :overtype_id, :duty_date, :overwork_begin_at, :overwork_end_at, :hr, :hr_h, :is_closed, :notes)
+      params.require(:doc_overwork).permit(:employee_id, :employee_uid, :overtype_id, :duty_date, :overwork_begin_at, :overwork_end_at, :begin_date, :begin_time, :end_date, :end_time, :hr, :hr_h, :is_closed, :notes)
     end
 end
