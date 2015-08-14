@@ -2,12 +2,13 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <!--<%= f.association :employee, :label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true %>-->
-    <input type="text" id="input" onchange="emp_get_name(this.value)" />&nbsp;&nbsp;<span id="name"></span>
-    <%= f.input :employee_id %>
-    <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
-    <%= f.input :on_duty_at,as: :time,placeholder:'開始時間',label:'出勤起' %>
-    <%= f.input :off_duty_at,as: :time,placeholder:'結束時間',label:'出勤迄' %>
+    <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value);'} %><span id="name"></span>
+    <%= f.input :employee_id,as: :hidden %>
+    <%= f.input :duty_date,as: :string,label:'出勤日期' %>
+    <%= f.input :begin_date,label:'忘刷起(日期)' %>
+    <%= f.input :begin_time,label:'忘刷起(時間)' %>
+    <%= f.input :end_date,label:'忘刷起(日期)' %>
+    <%= f.input :end_time,label:'忘刷迄(時間)' %>
     <%= f.input :is_closed,label:'是否關帳' %>
     <%= f.input :notes,placeholder:'備註',label:'備註' %> 
   </div>
