@@ -1,5 +1,5 @@
 class DocOffwork < ActiveRecord::Base
-	validates :employee_id, uniqueness: {scope: [:employee_id, :offduty_begin_at]}
+	validates :employee_id, :employee_uid ,presence: true, uniqueness: {scope: [:employee_id, :offduty_begin_at]}
 
 	belongs_to :employee
 	belongs_to :offtype

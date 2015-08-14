@@ -10,6 +10,13 @@ class DocForget < ActiveRecord::Base
 	def assign_date
 		self.begin_date =  self.std_on
 		self.end_date = self.std_off
+
+	def begin_date
+  	  self.on_duty_at.strftime('%Y%m%d') if on_duty_at
+	end
+
+	def begin_date=(d)
+	  self.on_duty_at = "#{d} #{begin_time}"
 	end
 
 	def begin_time
@@ -22,6 +29,14 @@ class DocForget < ActiveRecord::Base
 		self.on_duty_at = "#{begin_date} #{time}"
 	end
 
+	def end_date
+  	  self.off_duty_at.strftime('%Y%m%d') if off_duty_at 
+	end
+
+	def end_date=(d)
+	  self.off_duty_at = "#{d} #{end_time}"
+	end
+
 	def end_time
 		self.off_duty_at.strftime('%H:%M') if off_duty_at 
 	end
@@ -32,21 +47,6 @@ class DocForget < ActiveRecord::Base
 		self.off_duty_at = "#{end_date} #{time}"
 	end
 
-  def begin_date
-  	self.on_duty_at.strftime('%Y%m%d') if on_duty_at 
-  end
-
-  def begin_date=(d)
-  	self.on_duty_at = "#{d} #{begin_time}"
-  end
-
-  def end_date
-  	self.off_duty_at.strftime('%Y%m%d') if off_duty_at 
-  end
-
-  def end_date=(d)
-  	self.off_duty_at = "#{d} #{end_time}"
-  end
 	def check_is_closed
 	  if self.is_closed == true
 	  	errors[:messages] << %Q(It's closed can't Delete)
