@@ -71,14 +71,6 @@ class CombineAll < ActiveRecord::Migration
         t.datetime "range_off"
   	  end
 
-  	  create_table "daily_duty_offtypes", force: :cascade do |t|
-  	    t.integer  "daily_duty_id", limit: 4
-  	    t.integer  "offtype_id",    limit: 4
-  	    t.integer  "minutes",       limit: 4
-  	    t.datetime "created_at",              null: false
-  	    t.datetime "updated_at",              null: false
-  	  end
-
   	  create_table "departments", force: :cascade do |t|
   	    t.string   "uid",             limit: 255
   	    t.string   "name",            limit: 255
@@ -411,7 +403,7 @@ class CombineAll < ActiveRecord::Migration
   	end
     
     create_table "daily_offworks", id: false, force: :cascade do |t|
-      t.integer "off_offwork_id", limit: 4, default: 0, null: false
+      t.integer "doc_offwork_id", limit: 4, default: 0, null: false
       t.date    "duty_date"
       t.integer "mins_of_duty",   limit: 4
     end

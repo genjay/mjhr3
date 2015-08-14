@@ -99,6 +99,6 @@ class DocForgetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def forget_params
-      params.require(:doc_forget).permit(:employee_id, :duty_date, :on_duty_at, :off_duty_at, :is_closed, :notes)
+      params.require(:doc_forget).permit(:employee_id, :duty_date, :on_duty_at, :off_duty_at,:begin_date, :begin_time, :end_date, :end_time, :is_closed, :notes)
     end
 end

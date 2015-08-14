@@ -25,8 +25,8 @@
           <td><%= i+1 %></td>
           <td><%= link_to forget.employee.try(:name), edit_doc_forget_path(forget) %></td>
           <td><%= forget.duty_date %></td>
-          <td><%= forget.on_duty_at.strftime('%H:%M') if forget.on_duty_at? %></td>
-          <td><%= forget.off_duty_at.strftime('%H:%M') if forget.off_duty_at? %></td>
+          <td><%= forget.on_duty_at.strftime('%Y-%m-%d %H:%M') if forget.on_duty_at? %></td>
+          <td><%= forget.off_duty_at.strftime('%Y-%m-%d %H:%M') if forget.off_duty_at? %></td>
           <td><%= '已關帳' if forget.is_closed %></td>  
         </tr>
       <% end %>

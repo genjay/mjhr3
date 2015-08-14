@@ -1,7 +1,6 @@
 class Cardtime < ActiveRecord::Base
 	require 'CSV'
 
-
 	def self.import(file,ou_id)
 		# v = Set.new
 		v = []
@@ -31,5 +30,27 @@ class Cardtime < ActiveRecord::Base
 	  return cnt
 	end # end self.import(file)
 
+		def self.f1_create(attributes = nil,bat_size=200)
+			columns = attributes[0].keys 
+	    conn = ActiveRecord::Base.connection
+			values,rows = '',''
+			attributes.each_with_index do |h,i|
+				h.each do |k,v| 
+					v = v.to_s(:db) if v.class == ActiveSupport::TimeWithZone
+			  	values << "'#{v}',"
+			  end
+			  rows << "(#{values.chop}),"
+			  values =''
+			  if rows.size % bat_size == 0
+					sql = "INSERT INTO #{table_name} (#{columns.join(',')}) VALUES #{rows.chop}"
+			  	conn.execute sql
+			  	rows =''
+			  end
+			end
+	    if rows.size > 0
+			  sql = "INSERT INTO #{table_name} (#{columns.join(',')}) VALUES #{rows.chop}"
+				conn.execute(sql)
+			end
+		end
 
 end

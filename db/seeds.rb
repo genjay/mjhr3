@@ -151,15 +151,15 @@ if true # 100-2 workrest 需要 worktypes 完成後
 	Workrest.where(worktype_id: w.ids).delete_all
 	w.each do |i| 
 		if true # 平日
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '00:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '03:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '07:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '10:20:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '00:00:00',mins_of_rest: 10,is_deduct_for_duty: 1,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '03:00:00',mins_of_rest: 10,is_deduct_for_duty: 1,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '07:00:00',mins_of_rest: 10,is_deduct_for_duty: 1,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '10:20:00',mins_of_rest: 10,is_deduct_for_duty: 1,is_holiday: 0)
 			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '12:30:00',mins_of_rest: 40,is_deduct_for_duty: 1,is_holiday: 0)
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '15:10:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '15:10:00',mins_of_rest: 10,is_deduct_for_duty: 1,is_holiday: 0)
 			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '17:20:00',mins_of_rest: 20,is_deduct_for_duty: 1,is_holiday: 0)
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '19:50:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 0)
-			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '21:50:00',mins_of_rest: 15,is_deduct_for_duty: 0,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '19:50:00',mins_of_rest: 10,is_deduct_for_duty: 1,is_holiday: 0)
+			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '21:50:00',mins_of_rest: 15,is_deduct_for_duty: 1,is_holiday: 0)
 		end
 		if true #假日
 			i.workrests.create(ou_id:i.ou_id,rest_begin_at: '00:00:00',mins_of_rest: 10,is_deduct_for_duty: 0,is_holiday: 1)
@@ -1018,7 +1018,7 @@ if true # 141 人員基本資料
 	Employee.create(ou_id:@ou.id, uid:"B00110",name:"name_B00110", department:Department.find_by(uid:"104-F"), arrive_date:"20150518", leave_date:"", cardno:"B00110") 
 	Employee.create(ou_id:@ou.id, uid:"B00111",name:"name_B00111", department:Department.find_by(uid:"101-F"), arrive_date:"20150521", leave_date:"", cardno:"B00111") 
 	Employee.create(ou_id:@ou.id, uid:"B00112",name:"name_B00112", department:Department.find_by(uid:"101-F"), arrive_date:"20150601", leave_date:"", cardno:"B00112") 
-
+  Employee.update_all(overtype_id: Overtype.first)
 end
 
 if true # 150 行事曆

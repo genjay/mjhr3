@@ -3,10 +3,12 @@
 
   <div class="form-inputs">
     <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true  %>
-    <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } %>
-    <%= f.input :duty_date,placeholder:'出勤日期',label:'出勤日' %>
-    <%= f.input :overwork_begin_at,placeholder:'開始時間',label:'加班起' %>
-    <%= f.input :overwork_end_at,placeholder:'結束時間',label:'加班迄' %>
+    <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" },include_blank: false  %>
+    <%= f.input :duty_date,as: :string,placeholder:'出勤日期',label:'出勤日' %>
+    <%= f.input :begin_date %>
+    <%= f.input :begin_time %>
+    <%= f.input :end_date %>
+    <%= f.input :end_time %>
     <%= f.input :hr,as: :integer,placeholder:'時數',label:'超時時數' %>
     <%= f.input :hr_h,as: :integer,placeholder:'時數',label:'假日時數' %>
     <%= f.input :is_closed,label:'是否關帳' %>

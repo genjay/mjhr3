@@ -16,7 +16,6 @@ class DailyDuty < ActiveRecord::Base
     	conn.execute "create table #{tmp01} select * from view_sch_emps WHERE ou_id='#{ou_id}' and duty_date='#{duty_date}'"
 			conn.execute("alter table #{tmp01} add index i01 (employee_id)")
     	tmp_base = tmp01
-
     end
 
     if true # 02 計算出上下班時間，結果=> tmp02
@@ -84,7 +83,7 @@ class DailyDuty < ActiveRecord::Base
 					select a.employee_id,a.worktype_id,a.type
 					,type_start,type_end 
 					,time_to_sec(timediff(type_end,type_start)) work_sec
-					,(is_deduct_for_duty*sum(time_to_sec(-timediff(case when type_start between rest_st and rest_end then type_start else rest_st end 
+					,(sum(is_deduct_for_duty*time_to_sec(-timediff(case when type_start between rest_st and rest_end then type_start else rest_st end 
 					,case when type_end between rest_st and rest_end then type_end else rest_end end )))) rest_sec
 					from #{tmp03a} a
 					left join #{tmp03b} b on a.worktype_id=b.worktype_id and a.is_holiday=b.is_holiday and a.type_start < b.rest_end and a.type_end > b.rest_st
@@ -114,16 +113,21 @@ class DailyDuty < ActiveRecord::Base
       	conn.execute "drop table if exists #{tmp03}"
       	sql = %Q(create table #{tmp03} 
       		Select a.*,b.workA,b.workB,b.workC,b.restA,b.restB,b.restC
+      		,case 
+					 when time_to_sec(timediff(real_on,std_on))/60 > 0 && time_to_sec(timediff(real_on,std_on))/60 < buffer_after_duty  then time_to_sec(timediff(real_on,std_on))/60
+					 else 0 end delay_used
       		,'#{now}' created_at,'#{now}' updated_at
 					from #{tmp02} a
 					left join #{tmp03d} b on a.employee_id=b.employee_id)
         conn.execute sql
         tmp_base = tmp03
+        if true 
         conn.execute "drop table if exists #{tmp02}"
         conn.execute "drop table if exists #{tmp03a}"
         conn.execute "drop table if exists #{tmp03b}"
         conn.execute "drop table if exists #{tmp03c}"
         conn.execute "drop table if exists #{tmp03d}"
+      	end
       end
     end
 
@@ -151,7 +155,7 @@ class DailyDuty < ActiveRecord::Base
     	return DailyDuty.where("ou_id=#{ou_id} and duty_date=#{duty_date}").count
     end
 
-    if nil # 清除所有 tmp開頭的 tables
+    if true # 清除所有 tmp開頭的 tables
     	conn.tables.each do |i|
     		if i[0,3] == 'tmp' && i.match(sid[0])
     			conn.execute "Drop table if exists #{i}"

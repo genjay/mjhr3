@@ -2,8 +2,8 @@ class Department < ActiveRecord::Base
   belongs_to :worktype
   belongs_to :upper, class_name: "Department" 
   belongs_to :ou
-
-  has_many :employees, :dependent => :restrict_with_error
+# condition , -> { where active: true }
+  has_many :employees, -> { where ou_id: 1 }, :dependent => :restrict_with_error
   has_many :departments, class_name: "Department", foreign_key: "id", :dependent => :restrict_with_error
 
   validates :ou_id, presence: true

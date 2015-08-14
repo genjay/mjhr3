@@ -6,6 +6,51 @@ class DocOverwork < ActiveRecord::Base
 	belongs_to :overtype
 	before_destroy :check_is_closed
 
+	def self.create_by_duty(ou_id,duty_date) # 自動輸入加班
+		x = ViewForOver.where(ou_id:ou_id,duty_date:duty_date)
+	  need_columns = self.column_names  
+	  need_columns<<'hr'
+		h = x.map do |i| 
+			i.attributes.slice(*need_columns) 
+		end
+		self.create(h)
+	end
+
+	def begin_time
+		self.overwork_begin_at.strftime('%H:%M') if overwork_begin_at 
+	end
+	def begin_time=(t)
+		t.delete(':')
+		time = "#{t[0,2]}:#{t[2,2]}"
+		self.overwork_begin_at = "#{begin_date} #{time}"
+	end
+
+	def end_time
+		self.overwork_end_at.strftime('%H:%M') if overwork_end_at 
+	end
+
+	def end_time=(t)
+		t.delete(':')
+		time = "#{t[0,2]}:#{t[2,2]}"
+		self.overwork_end_at = "#{end_date} #{time}"
+	end
+
+  def begin_date
+  	self.overwork_begin_at.strftime('%Y%m%d') if overwork_begin_at 
+  end
+
+  def begin_date=(d)
+  	self.overwork_begin_at = "#{d} #{begin_time}"
+  end
+
+  def end_date
+  	self.overwork_end_at.strftime('%Y%m%d') if overwork_end_at 
+  end
+
+  def end_date=(d)
+  	self.overwork_end_at = "#{d} #{end_time}"
+  end
+
 	def check_is_closed
 	  if self.is_closed == true
 	  	errors[:messages] << %Q(It's closed can't Delete)

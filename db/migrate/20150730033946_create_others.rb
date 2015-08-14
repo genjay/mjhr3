@@ -10,11 +10,15 @@ class CreateOthers < ActiveRecord::Migration
     sql = IO.read("./sql/view_workrests.sql")
     self.connection.execute (sql)
 
+    sql = IO.read("./sql/view_for_overs.sql")
+    self.connection.execute (sql)
+    
   end
 
   def down 
   	self.connection.execute %Q(Drop view view_sch_deps)
   	self.connection.execute %Q(Drop view view_sch_emps)
     self.connection.execute %Q(Drop view view_workrests)
+    self.connection.execute %Q(Drop view view_for_overs)
   end
 end

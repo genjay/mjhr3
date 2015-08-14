@@ -30,6 +30,7 @@ Select ifnull(c.id,0) id
 ,str_to_date(concat(b.duty_date,w.off_duty_at),'%Y-%m-%d%H:%i:%s')
  + interval w.off_duty_offset day std_off 
 ,a.cardno
+,w.buffer_before_duty,w.buffer_after_duty
 from employees a
 left join calendars b on a.ou_id=b.ou_id 
   and b.duty_date >= a.arrive_date

@@ -3,11 +3,17 @@ class DocOffwork < ActiveRecord::Base
 
 	belongs_to :employee
 	belongs_to :offtype
+	has_many :details, class_name: "DailyOffwork", foreign_key: "doc_offwork_id"
 	before_destroy :check_is_closed
 	after_save :insert_daily_offworks
 
+	def sum_offhours
+		self.details.sum(:mins_of_duty)/60
+	end
+
 	def off_hours
-		(self.mins_offduty == nil)? 0 : self.mins_offduty / 60
+		# (self.mins_offduty == nil)? 0 : (self.mins_offduty / 60)
+		self.details.sum(:mins_of_duty)/60
 	end
 
 	def off_hours=(hr)
@@ -59,10 +65,10 @@ class DocOffwork < ActiveRecord::Base
 
 	def insert_daily_offworks
 		conn = ActiveRecord::Base.connection
-		conn.execute "delete from daily_offworks where off_offwork_id=#{id}"
+		conn.execute "delete from daily_offworks where doc_offwork_id=#{id}"
 		sql = "Insert into daily_offworks 
-		(off_offwork_id,duty_date,mins_of_duty)
-		Select a.id off_offwork_id,duty_date,mins_of_duty*(case when is_holiday then include_holiday else 1 end )
+		(doc_offwork_id,duty_date,mins_of_duty)
+		Select a.id doc_offwork_id,duty_date,mins_of_duty*(case when is_holiday then include_holiday else 1 end )
 		from doc_offworks a
 		left join view_sch_emps b on a.employee_id=b.employee_id
 		 and b.std_on < offduty_end_at and  b.std_off > offduty_begin_at
