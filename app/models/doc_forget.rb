@@ -8,8 +8,8 @@ class DocForget < ActiveRecord::Base
 	before_validation :assign_date
 
 	def employee_uid
-		self.employee.try(:uid)
-	end
+		self.employee.try(:uid) 
+ 	end
 
 	def assign_date
 		self.begin_date =  self.std_on
