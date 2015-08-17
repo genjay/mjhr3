@@ -27,7 +27,6 @@ class DocOffworksController < ApplicationController
   # POST /worktypes.json
   def create
     @offwork = current_ou.doc_offworks.new(offwork_params)
-
     respond_to do |format|
       if @offwork.save
         format.html { redirect_to doc_offworks_path, notice: 'Offwork was successfully created.' }
@@ -93,12 +92,10 @@ class DocOffworksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_doc_offwork
       @offwork = current_ou.doc_offworks.find(params[:id])
-      # @forget.on_duty_at=@forget.on_duty_at.strftime('%H:%M')
-      # @forget.off_duty_at=@forget.off_duty_at.strftime('%H:%M')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offwork_params
-      params.require(:doc_offwork).permit(:employee_id, :employee_uid, :offtype_id, :begin_date, :begin_time, :end_date, :end_time, :off_hours, :offduty_begin_at, :offduty_end_at, :mins_offduty, :is_closed, :notes)
+      params.require(:doc_offwork).permit(:employee_id, :offtype_id, :begin_date, :begin_time, :end_date, :end_time, :off_hours, :offduty_begin_at, :offduty_end_at, :mins_offduty, :is_closed, :notes)
     end
 end

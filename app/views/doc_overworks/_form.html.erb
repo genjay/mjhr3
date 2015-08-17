@@ -2,28 +2,31 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-<<<<<<< HEAD
-    <%= f.association :employee,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } ,autofocus: true  %>
-    <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" },include_blank: false  %>
-    <%= f.input :duty_date,as: :string,placeholder:'出勤日期',label:'出勤日' %>
-    <%= f.input :begin_date %>
-    <%= f.input :begin_time %>
-    <%= f.input :end_date %>
-    <%= f.input :end_time %>
-=======
-    <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value)', :id => "employee_uid"},autofocus: true %><span id="name"></span>
-     <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
-    <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } %>
-    <%= f.input :duty_date,as: :string,placeholder:'出勤日期',label:'出勤日' %>
-    <%= f.input :begin_date,label:'加班起(日期)' %>
-    <%= f.input :begin_time,label:'加班起(時間)' %>
-    <%= f.input :end_date,label:'加班迄(日期)' %>
-    <%= f.input :end_time,label:'加班起(時間)' %>
->>>>>>> 7df8f3796f6653b079033c68d2a537a25eb4e266
-    <%= f.input :hr,as: :integer,placeholder:'時數',label:'超時時數' %>
-    <%= f.input :hr_h,as: :integer,placeholder:'時數',label:'假日時數' %>
-    <%= f.input :is_closed,label:'是否關帳' %>
-    <%= f.input :notes,placeholder:'備註',label:'備註' %> 
+    <table width="100%">
+      <tr>
+        <td width="50%">
+          <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value)'},autofocus: true %>
+        </td>
+        <td class="td_text">
+          <span id="name"></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+           <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
+          <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } %>
+          <%= f.input :duty_date,as: :string,placeholder:'出勤日期',label:'出勤日' %>
+          <%= f.input :begin_date,label:'加班起(日期)' %>
+          <%= f.input :begin_time,label:'加班起(時間)' %>
+          <%= f.input :end_date,label:'加班迄(日期)' %>
+          <%= f.input :end_time,label:'加班起(時間)' %>
+          <%= f.input :hr,as: :integer,placeholder:'時數',label:'超時時數' %>
+          <%= f.input :hr_h,as: :integer,placeholder:'時數',label:'假日時數' %>
+          <%= f.input :is_closed,label:'是否關帳' %>
+          <%= f.input :notes,placeholder:'備註',label:'備註' %>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div class="form-actions"> 

@@ -1,11 +1,15 @@
 class DocOffwork < ActiveRecord::Base
-	validates :employee_id, :employee_uid ,presence: true, uniqueness: {scope: [:employee_id, :offduty_begin_at]}
+	validates :employee_id, presence: true, uniqueness: {scope: [:employee_id, :offduty_begin_at]}
 
 	belongs_to :employee
 	belongs_to :offtype
 	has_many :details, class_name: "DailyOffwork", foreign_key: "doc_offwork_id"
 	before_destroy :check_is_closed
 	after_save :insert_daily_offworks
+
+	def employee_uid
+		self.employee.try(:uid)
+	end
 
 	def sum_offhours
 		self.details.sum(:mins_of_duty)/60

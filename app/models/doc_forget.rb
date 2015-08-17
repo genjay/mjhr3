@@ -7,9 +7,14 @@ class DocForget < ActiveRecord::Base
 	before_destroy :check_is_closed
 	before_validation :assign_date
 
+	def employee_uid
+		self.employee.try(:uid)
+	end
+
 	def assign_date
 		self.begin_date =  self.std_on
 		self.end_date = self.std_off
+	end
 
 	def begin_date
   	  self.on_duty_at.strftime('%Y%m%d') if on_duty_at

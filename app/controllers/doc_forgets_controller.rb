@@ -27,7 +27,6 @@ class DocForgetsController < ApplicationController
   # POST /worktypes.json
   def create
     @forget = current_ou.doc_forgets.new(forget_params)
-
     respond_to do |format|
       if @forget.save
         format.html { redirect_to doc_forgets_path, notice: 'Forget was successfully created.' }
@@ -93,16 +92,10 @@ class DocForgetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_doc_forget
       @forget = current_ou.doc_forgets.find(params[:id])
-      # @forget.on_duty_at=@forget.on_duty_at.strftime('%H:%M')
-      # @forget.off_duty_at=@forget.off_duty_at.strftime('%H:%M')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def forget_params
-<<<<<<< HEAD
       params.require(:doc_forget).permit(:employee_id, :duty_date, :on_duty_at, :off_duty_at,:begin_date, :begin_time, :end_date, :end_time, :is_closed, :notes)
-=======
-      params.require(:doc_forget).permit(:employee_id, :employee_uid, :duty_date, :begin_date, :begin_time, :end_date, :end_time, :on_duty_at, :off_duty_at, :is_closed, :notes)
->>>>>>> 7df8f3796f6653b079033c68d2a537a25eb4e266
     end
 end

@@ -1,10 +1,14 @@
 class DocOverwork < ActiveRecord::Base
-	validates :employee_id, :duty_date, :employee_uid ,presence: true, uniqueness: {scope: [:employee_id, :duty_date]}
+	validates :employee_id, :duty_date, presence: true, uniqueness: {scope: [:employee_id, :duty_date]}
 	validates :hr, :hr_h, inclusion: { :in => 0..24,message:"只能輸入0~24" }
 
 	belongs_to :employee
 	belongs_to :overtype
 	before_destroy :check_is_closed
+
+	def employee_uid
+		self.employee.try(:uid)
+	end
 
 	def self.create_by_duty(ou_id,duty_date) # 自動輸入加班
 		x = ViewForOver.where(ou_id:ou_id,duty_date:duty_date)
