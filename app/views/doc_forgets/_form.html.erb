@@ -5,7 +5,7 @@
     <table width="100%">
       <tr>
         <td width="50%">
-          <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value)'},autofocus: true %>
+          <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid',:onChange => 'emp_get_name(this.value)'},autofocus: true %>
         </td>
         <td class="td_text">
           <span id="name"></span>
@@ -14,11 +14,11 @@
       <tr>
         <td colspan="2">
           <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
-          <%= f.input :duty_date,as: :string,label:'出勤日期' %>
-          <%= f.input :begin_date,label:'忘刷起(日期)' %>
-          <%= f.input :begin_time,label:'忘刷起(時間)' %>
-          <%= f.input :end_date,label:'忘刷起(日期)' %>
-          <%= f.input :end_time,label:'忘刷迄(時間)' %>
+          <%= f.input :duty_date,as: :string,label:'出勤日期',:input_html => {:id => "duty_date", :onBlur => 'emp_get_ViewSchEmp()'} %>
+          <%= f.input :begin_date,label:'忘刷起(日期)',:input_html => {:id => "begin_date"} %>
+          <%= f.input :begin_time,label:'忘刷起(時間)',:input_html => {:id => "begin_time"} %>
+          <%= f.input :end_date,label:'忘刷起(日期)',:input_html => {:id => "end_date"} %>
+          <%= f.input :end_time,label:'忘刷迄(時間)',:input_html => {:id => "end_time"} %>
           <%= f.input :is_closed,label:'是否關帳' %>
           <%= f.input :notes,placeholder:'備註',label:'備註' %>
         </td>

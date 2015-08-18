@@ -3,6 +3,11 @@ class DocForgetsController < ApplicationController
 
   # GET /worktypes
   # GET /worktypes.json
+  def get_ViewSchEmp
+    duty_date = DocForget.duty_info(current_ou.id, params[:empid], params[:dutydate])
+    render :text => "#{duty_date.std_on.strftime('%Y%m%d')},#{duty_date.std_on.strftime('%H%M')},#{duty_date.std_off.strftime('%Y%m%d')},#{duty_date.std_off.strftime('%H%M')}"
+  end
+
   def index
     @forgets = current_ou.doc_forgets.includes(:employee).order(employee_id: :asc)
   end

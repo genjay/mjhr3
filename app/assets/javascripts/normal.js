@@ -17,3 +17,32 @@ function emp_get_name(val){
     });
   }
 }
+
+function emp_get_ViewSchEmp(){
+  var empid = $("#employee_id").val();
+  var dutydate = $("#duty_date").val();
+  if(empid == "" || dutydate == ""){
+    alert("請輸入工號和出勤日期");
+  }else{
+    var empuid = $("#employee_uid").val();
+    $.ajax({
+      type: "GET",
+      url: '/doc_forgets/get_ViewSchEmp/?empid=' + empuid + '&dutydate=' + dutydate,
+      dataType: "html",
+      success: function(data) {
+        if(data.length >0){
+            var duty = data.split(",")
+           $("#begin_date").val(duty[0]);
+           $("#begin_time").val(duty[1]);
+           $("#end_date").val(duty[2]);
+           $("#end_time").val(duty[3]);
+       }else{
+           $("#begin_date").val();
+           $("#begin_time").val();
+           $("#end_date").val();
+           $("#end_time").val();
+       }
+      }
+    });
+  }
+}

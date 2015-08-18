@@ -5,16 +5,16 @@ class DocForget < ActiveRecord::Base
 
 	belongs_to :employee 
 	before_destroy :check_is_closed
-	before_validation :assign_date
+	# before_validation :assign_date
 
 	def employee_uid
 		self.employee.try(:uid) 
  	end
 
-	def assign_date
-		self.begin_date =  self.std_on
-		self.end_date = self.std_off
-	end
+	# def assign_date
+	# 	self.begin_date =  self.std_on
+	# 	self.end_date = self.std_off
+	# end
 
 	def begin_date
   	  self.on_duty_at.strftime('%Y%m%d') if on_duty_at
@@ -59,17 +59,17 @@ class DocForget < ActiveRecord::Base
 	  end
 	end
 
-	def std_on
-		a = ViewSchEmp.find_by(ou_id: ou_id,employee_id: employee_id,duty_date: duty_date)  
-    a.std_on
-	end
+	# def std_on
+	# 	a = ViewSchEmp.find_by(ou_id: ou_id,employee_id: employee_id,duty_date: duty_date)  
+ #    		a.std_on
+	# end
 
-	def std_off
-		a = ViewSchEmp.find_by(ou_id: ou_id,employee_id: employee_id,duty_date: duty_date)  
-    a.std_off
-	end
+	# def std_off
+	# 	a = ViewSchEmp.find_by(ou_id: ou_id,employee_id: employee_id,duty_date: duty_date)  
+ #    		a.std_off
+	# end
 
-	def duty_info
-		ViewSchEmp.find_by(ou_id: ou_id,employee_id: employee_id,duty_date: duty_date)
+	def self.duty_info(ouid, empid, dutydate)
+		ViewSchEmp.find_by(ou_id: ouid,uid: empid,duty_date: dutydate)
 	end
 end

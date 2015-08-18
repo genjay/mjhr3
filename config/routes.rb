@@ -31,7 +31,14 @@ Rails.application.routes.draw do
   get  'get_empid' => 'application#get_empid'
   root 'pages#home'
 
-  resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_forgets, :doc_offworks, :doc_overworks, except: [:show, :destroy] do
+  resources  :doc_forgets, except: [:show, :destroy] do
+    collection do
+      get 'get_ViewSchEmp', action: 'get_ViewSchEmp'
+      delete 'multi_destroy'
+    end
+  end
+
+  resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_offworks, :doc_overworks, except: [:show, :destroy] do
     collection do
       delete 'multi_destroy'
     end
