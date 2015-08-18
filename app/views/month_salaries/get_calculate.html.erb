@@ -1,0 +1,9 @@
+<h1>計算薪水</h1>
+
+<%= form_tag(calculate_month_salaries_path, method: "post") do %>
+  <%= label_tag(:yyyymm, '年月:') %>
+  <%= text_field_tag(:yyyymm ,@yyyymm)%>
+  </br>
+  
+  <%= submit_tag "結轉", data: { disable_with: "執行中" } %>
+<% end %>

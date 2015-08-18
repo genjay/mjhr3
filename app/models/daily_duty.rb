@@ -9,7 +9,7 @@ class DailyDuty < ActiveRecord::Base
 
 	def self.d04(ou_id,duty_date,*sid) # 日結
     conn = ActiveRecord::Base.connection  
-
+    sid[0] ||= ''
     if true # 01 用 view_sch_emps，產生 => tmp01
     	tmp01 = "tmp01" << sid[0]
     	conn.execute "drop table if exists #{tmp01}"

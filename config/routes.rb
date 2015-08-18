@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     collection { post 'import'}
   end
   
-  resources :daily_duties, :month_duties do
+  resources :daily_duties, :month_duties, :month_salaries do
     collection do 
       post 'calculate', action: 'post_calculate'
       get  'calculate', action: 'get_calculate'

@@ -1,0 +1,2 @@
+module MonthSalariesHelper
+end
