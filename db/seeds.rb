@@ -307,7 +307,8 @@ end
 
 if true # 140B 薪資項目 
 	PayType.where(ou_id:@ou.id).delete_all
-	PayType.create(ou_id:@ou.id, uid:'A', name:'底薪(月)',cycle_unit:'month',rule_for_break:'rate')
+	PayType.create(ou_id:@ou.id, uid:'A', name:'底薪(月)',cycle_unit:'A',rule_for_break:'A')
+	PayType.create(ou_id:@ou.id, uid:'B', name:'伙食津貼(月)',cycle_unit:'A',rule_for_break:'A')
 end
 
 if true # 140C 保險身分
@@ -1027,4 +1028,11 @@ if true # 150 行事曆
 	366.times.each do |f|
 		Calendar.create(ou_id:@ou.id,duty_date:x+=1,is_holiday:(x.cwday==6 || x.cwday==7)? 1:0)
 	end
+end
+
+if true # 160 人員薪水，測試資料
+	Employee.all.each do |i|
+	i.employee_salary_settings.create(ou_id: i.ou_id,pay_type: PayType.find_by(uid:'A'),amt: 28800)
+	i.employee_salary_settings.create(ou_id: i.ou_id,pay_type: PayType.find_by(uid:'B'),amt: 1200)
+end 
 end

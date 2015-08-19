@@ -6,8 +6,14 @@ class DailyDuty < ActiveRecord::Base
  #    sql = %Q(call p_d04(#{ou_id},'#{duty_date}')) 
  #    conn.execute(sql)
 	# end
+	def self.d04(ou_id,duty_date,*sid) # 日結，duty_date 可以接受 range
+		duty_date.each do |i|
+			self.d04_by_duty(ou_id,i,*sid)
+		end
+	end
 
-	def self.d04(ou_id,duty_date,*sid) # 日結
+	def self.d04_by_duty(ou_id,duty_date,*sid) # 日結
+		duty_date = duty_date.to_s
     conn = ActiveRecord::Base.connection  
     sid[0] ||= ''
     if true # 01 用 view_sch_emps，產生 => tmp01
