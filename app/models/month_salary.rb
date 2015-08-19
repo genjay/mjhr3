@@ -72,6 +72,8 @@ class MonthSalary < ActiveRecord::Base
       # MonthSalary.where("ou_id='#{ou_id}' and yyyymm='#{yyyymm}'").delete_all
       arr_c = (tmp_base.column_names & MonthSalary.column_names)
       arr_c.delete 'id'
+      arr_c.delete 'created_at'
+      arr_c.delete 'updated_at'
       columns = arr_c.join ','
       now = Time.now.utc.to_s :db
       sql = "INSERT INTO month_salaries (#{columns},created_at,updated_at) SELECT #{columns},'#{now}','#{now}' FROM #{tmp_base}"
