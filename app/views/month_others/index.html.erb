@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>薪資調整</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ou</th>
+      <th>Employee</th>
+      <th>Yyyymm</th>
+      <th>Pay type</th>
+      <th>Amt</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @month_others.each do |month_other| %>
+      <tr>
+        <td><%= month_other.ou_id %></td>
+        <td><%= month_other.employee_id %></td>
+        <td><%= month_other.yyyymm %></td>
+        <td><%= month_other.pay_type_id %></td>
+        <td><%= month_other.amt %></td>
+        <td><%= link_to 'Show', month_other %></td>
+        <td><%= link_to 'Edit', edit_month_other_path(month_other) %></td>
+        <td><%= link_to 'Destroy', month_other, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Month other', new_month_other_path %>

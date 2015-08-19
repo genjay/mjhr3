@@ -4,8 +4,8 @@
   <div class="form-inputs">
     <%= f.input :uid,placeholder:'薪資項目代號',autofocus:true %>
     <%= f.input :name,placeholder:'薪資項目名稱' %>
-    <%= f.input :cycle_unit,collection:@cycle_unit_lists %> 
-    <%= f.input :rule_for_break,collection:@rule_for_break_lists %>
+    <%= f.input :cycle_unit,include_blank: false ,collection:@cycle_unit_lists %> 
+    <%= f.input :rule_for_break,include_blank: false ,collection:@rule_for_break_lists %>
     <%= f.input :is_stoped %>
     <%= f.input :ou_id %>
     <%= f.input :memo %>

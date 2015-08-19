@@ -5,6 +5,7 @@ class MonthDuty < ActiveRecord::Base
 
     if true # 出勤及加班月結
     	tmp01 = 'tmp01' 
+      range_days = (duty_to.to_s.to_date - duty_fr.to_s.to_date) + 1
     	conn.execute "drop table if exists #{tmp01}"
     	sql =  "create table #{tmp01} as
                 Select #{yyyymm} yyyymm,#{duty_fr} duty_fr,#{duty_to} duty_to
@@ -13,6 +14,7 @@ class MonthDuty < ActiveRecord::Base
                 ,sum(over_b) over_b
                 ,sum(over_c) over_c
                 ,sum(over_h) over_h
+                ,#{range_days} range_days
                 from daily_duties a
                 left join doc_overworks b on a.ou_id=b.ou_id and a.duty_date=b.duty_date and a.employee_id=b.employee_id
                 where a.ou_id = #{ou_id}
