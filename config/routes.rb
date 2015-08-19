@@ -38,7 +38,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, :doc_offworks, :doc_overworks, except: [:show, :destroy] do
+  resources  :doc_overworks, except: [:show, :destroy] do
+    collection do
+      get 'get_ViewSchEmp', action: 'get_ViewSchEmp'
+      delete 'multi_destroy'
+    end
+  end
+
+  resources  :doc_offworks, :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, except: [:show, :destroy] do
     collection do
       delete 'multi_destroy'
     end

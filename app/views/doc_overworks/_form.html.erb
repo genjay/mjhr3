@@ -14,7 +14,7 @@
       <tr>
         <td colspan="2">
            <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
-          <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" } %>
+          <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" }, :include_blank => false %>
           <%= f.input :duty_date,as: :string,placeholder:'出勤日期',label:'出勤日' %>
           <%= f.input :begin_date,label:'加班起(日期)' %>
           <%= f.input :begin_time,label:'加班起(時間)' %>
