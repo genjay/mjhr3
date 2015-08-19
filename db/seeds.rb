@@ -335,7 +335,7 @@ end
 
 if true # 141 人員基本資料
 	Employee.where(ou_id:@ou.id).delete_all
-	Employee.create(ou_id:@ou.id, uid:"A00004",name:"name_A00004", department:Department.find_by(uid:"600-L"), arrive_date:"19960725", leave_date:"", cardno:"A00004") 
+	Employee.create(ou_id:@ou.id, uid:"A00004",name:"name_A00004", department:Department.find_by(uid:"600-L"), arrive_date:"19960725", leave_date:"20150720", cardno:"A00004") 
 	Employee.create(ou_id:@ou.id, uid:"A00005",name:"name_A00005", department:Department.find_by(uid:"001-A"), arrive_date:"19961021", leave_date:"", cardno:"A00005") 
 	Employee.create(ou_id:@ou.id, uid:"A00010",name:"name_A00010", department:Department.find_by(uid:"620-L"), arrive_date:"19970211", leave_date:"", cardno:"A00010") 
 	Employee.create(ou_id:@ou.id, uid:"A00018",name:"name_A00018", department:Department.find_by(uid:"600-L"), arrive_date:"19970519", leave_date:"", cardno:"A00018") 

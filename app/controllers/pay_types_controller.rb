@@ -109,8 +109,8 @@ class PayTypesController < ApplicationController
     end
 
     def set_lists # 下單選單用 
-      @cycle_unit_lists = [["A 月薪", "A"], ["B 時薪", "B"], ["C 日薪", "C"]]
-      @rule_for_break_lists = [["A 依出勤比率", "A"], ["B 全給付", "B"], ["C 手動輸入", "C"] ]
+      @cycle_unit_lists = [["A 月薪", "pay_by_month"], ["B 時薪", "pay_by_hour"], ["C 日薪", "pay_by_day"]]
+      @rule_for_break_lists = [["A 依出勤比率", "rate_by_duty"], ["B 全給付", "pay_all"], ["C 手動輸入", "pay_by_user_keyin"] ]
       
     end
 end
