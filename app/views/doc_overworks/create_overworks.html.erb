@@ -1,0 +1,10 @@
+<h2>自動輸入加班單</h2>
+
+<%= form_tag create_overworks_doc_overworks_path, :method => 'get' do %>
+  <p>
+  	<%= text_field_tag :yyyymmdd, yyyymmdd, placeholder:'年月日', autofocus: true %>  	
+  	<%= submit_tag "送出", :name => nil %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', doc_overworks_path,class: 'btn btn-primary', method: :get %>

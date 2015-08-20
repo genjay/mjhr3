@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources  :doc_overworks, except: [:show, :destroy] do
     collection do
       get 'get_ViewSchEmp', action: 'get_ViewSchEmp'
+      get 'create_overworks', action: 'create_overworks'
       delete 'multi_destroy'
     end
   end

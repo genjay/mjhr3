@@ -9,6 +9,7 @@ function emp_get_name(val){
             var emp = data.split(",")
            $("#name").text(emp[0]);
            $("#employee_id").val(emp[1]);
+           $("#doc_overwork_overtype_id").val(emp[2])
        }else{
            $("#name").text("無此工號");
            $("#employee_id").val("");

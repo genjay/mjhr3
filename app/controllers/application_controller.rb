@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     if @employee == nil
       render :text => ""
     else
-      render :text => "#{@employee.name},#{@employee.id}"
+      render :text => "#{@employee.name},#{@employee.id},#{@employee.overtype_id}"
     end
   end
 

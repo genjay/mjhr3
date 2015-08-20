@@ -18,6 +18,7 @@ class DocOverwork < ActiveRecord::Base
 			i.attributes.slice(*need_columns) 
 		end
 		self.create(h)
+		return h.size
 	end
 
 	def begin_time

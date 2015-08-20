@@ -5,6 +5,8 @@
 
   <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
 
+  <%= link_to '自動輸入', create_overworks_doc_overworks_path, method: :get, class: 'btn btn-primary' %>
+
   <table id='table_id' class='table table-hover'>
     <thead>
       <tr>
@@ -38,6 +40,8 @@
   </table> 
    <%= link_to 'New ', new_doc_overwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
 
-    <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+    <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+
+    <%= link_to '自動輸入', create_overworks_doc_overworks_path, method: :get, class: 'btn btn-primary' %>
 <% end %>
  

@@ -1,6 +1,13 @@
 class DocOverworksController < ApplicationController
   before_action :set_doc_overwork, only: [:show, :edit, :update, :destroy]
 
+  def create_overworks
+    if params[:yyyymmdd] != nil
+      create = current_ou.doc_overworks.create_by_duty(current_ou.id, params[:yyyymmdd])
+      redirect_to create_overworks_doc_overworks_path, :flash => { :notice => "已建立#{create}筆加班單" }
+    end
+  end
+
   # GET /worktypes
   # GET /worktypes.json
   def index
