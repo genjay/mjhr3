@@ -32,7 +32,7 @@
           <td><%= overwork.duty_date %></td>
           <td><%= overwork.overwork_begin_at.strftime('%H:%M') if overwork.overwork_begin_at? %></td>
           <td><%= overwork.overwork_end_at.strftime('%H:%M') if overwork.overwork_end_at? %></td>
-          <td><%= overwork.hr + overwork.hr_h %></td>
+          <td><%= overwork.hr %></td>
           <td><%= '已關帳' if overwork.is_closed %></td>  
         </tr>
       <% end %>

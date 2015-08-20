@@ -5,7 +5,11 @@
     <table width="100%">
       <tr>
         <td width="50%">
-          <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid',:onChange => 'emp_get_name(this.value)'},autofocus: true %>
+          <% if params[:action] == 'new' %>
+            <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid',:onChange => 'emp_get_name(this.value)'},autofocus: true %>
+          <% else %>
+            <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid',:onChange => 'emp_get_name(this.value)'},autofocus: true, :disabled => true %>
+          <% end %>
         </td>
         <td class="td_text">
           <span id="name"></span>
@@ -14,7 +18,11 @@
       <tr>
         <td colspan="2">
           <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
-          <%= f.input :duty_date,as: :string,label:'出勤日期',:input_html => {:id => "duty_date", :onBlur => 'emp_get_ViewSchEmp()'} %>
+          <% if params[:action] == 'new' %>
+            <%= f.input :duty_date,as: :string,label:'出勤日期',:input_html => {:id => "duty_date", :onBlur => 'emp_get_ViewSchEmp()'} %>
+          <% else %>
+             <%= f.input :duty_date,as: :string,label:'出勤日期',:input_html => {:id => "duty_date", :onBlur => 'emp_get_ViewSchEmp()'}, :disabled => true %>
+          <% end %>
           <%= f.input :begin_date,label:'忘刷起(日期)',:input_html => {:id => "begin_date"} %>
           <%= f.input :begin_time,label:'忘刷起(時間)',:input_html => {:id => "begin_time"} %>
           <%= f.input :end_date,label:'忘刷起(日期)',:input_html => {:id => "end_date"} %>

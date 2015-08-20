@@ -1,6 +1,6 @@
 class DocOverwork < ActiveRecord::Base
 	validates :employee_id, :duty_date, presence: true, uniqueness: {scope: [:employee_id, :duty_date]}
-	validates :hr, :hr_h, inclusion: { :in => 0..24,message:"只能輸入0~24" }
+	validates :hr, inclusion: { :in => 0..24,message:"只能輸入0~24" }
 
 	belongs_to :employee
 	belongs_to :overtype
@@ -65,26 +65,66 @@ class DocOverwork < ActiveRecord::Base
 	end
 
 	def hr # 加班時數，指1750後的加班 
-		(self.mins_A + self.mins_B + self.mins_C)/60
+		(self.mins_A + self.mins_B + self.mins_C + self.mins_H)/60
 	end
 
 	def hr=(hrs)
-
 		mins = hrs.to_i * 60
-		self.mins_A = (mins>120)? 120:mins
-		mins = mins - mins_A
-		self.mins_B = (mins>120)? 120:mins
-		mins = mins - mins_B
-		self.mins_C = mins
+		if is_holiday == 0
+			self.mins_A = (mins>120)? 120:mins
+			mins = mins - mins_A
+			self.mins_B = (mins>120)? 120:mins
+			mins = mins - mins_B
+			self.mins_C = mins
+		else
+			self.mins_H = mins
+		end
 	end
 
-	def hr_h # 假日時數，指 0820~1720 部份
-		self.mins_H/60
+	def hr_a
+		self.mins_A = self.mins_A/60
+	end
+
+	def hr_a=(hrs)
+		self.mins_A = hrs.to_i * 60
+	end
+
+	def hr_b
+		self.mins_B = self.mins_B/60
+	end
+
+	def hr_b=(hrs)
+		self.mins_B = hrs.to_i * 60
+	end
+
+	def hr_c
+		self.mins_C = self.mins_C/60
+	end
+
+	def hr_c=(hrs)
+		self.mins_C = hrs.to_i * 60
+	end
+
+	def hr_h
+		self.mins_H = self.mins_H/60
 	end
 
 	def hr_h=(hrs)
-		mins = hrs.to_i * 60
-		self.mins_H = mins
+		self.mins_H = hrs.to_i * 60
 	end
+
+	def is_holiday
+		holiday = ViewSchEmp.find_by(employee_id:self.employee_id, duty_date:self.duty_date)
+		holiday.is_holiday
+	end
+
+	# def hr_h # 假日時數，指 0820~1720 部份
+	# 	self.mins_H/60
+	# end
+
+	# def hr_h=(hrs)
+	# 	mins = hrs.to_i * 60
+	# 	self.mins_H = mins
+	# end
 
 end

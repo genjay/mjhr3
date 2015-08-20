@@ -3,7 +3,7 @@
 <%= form_tag create_overworks_doc_overworks_path, :method => 'get' do %>
   <p>
   	<%= text_field_tag :yyyymmdd, yyyymmdd, placeholder:'年月日', autofocus: true %>  	
-  	<%= submit_tag "送出", :name => nil %>
+  	<%= submit_tag "送出", :name => nil, data: { disable_with: "執行中" } %>
   </p>
 <% end %>
 

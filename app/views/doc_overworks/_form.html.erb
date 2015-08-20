@@ -19,9 +19,15 @@
           <%= f.input :begin_date,label:'加班起(日期)' %>
           <%= f.input :begin_time,label:'加班起(時間)' %>
           <%= f.input :end_date,label:'加班迄(日期)' %>
-          <%= f.input :end_time,label:'加班起(時間)' %>
-          <%= f.input :hr,as: :integer,placeholder:'時數',label:'超時時數' %>
-          <%= f.input :hr_h,as: :integer,placeholder:'時數',label:'假日時數' %>
+          <%= f.input :end_time,label:'加班迄(時間)' %>
+          <% if params[:action] == 'new' %>
+            <%= f.input :hr,as: :integer,placeholder:'時數',label:'加班時數' %>
+          <% else %>
+            <%= f.input :hr_a,as: :integer,placeholder:'時數',label:'1.33倍時數' %>
+            <%= f.input :hr_b,as: :integer,placeholder:'時數',label:'1.66倍時數' %>
+            <%= f.input :hr_c,as: :integer,placeholder:'時數',label:'2倍時數' %>
+            <%= f.input :hr_h,as: :integer,placeholder:'假日時數',label:'假日時數' %>
+          <% end %>
           <%= f.input :is_closed,label:'是否關帳' %>
           <%= f.input :notes,placeholder:'備註',label:'備註' %>
         </td>
