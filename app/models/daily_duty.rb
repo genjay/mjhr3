@@ -7,8 +7,12 @@ class DailyDuty < ActiveRecord::Base
  #    conn.execute(sql)
 	# end
 	def self.d04(ou_id,duty_date,*sid) # 日結，duty_date 可以接受 range
-		duty_date.each do |i|
-			self.d04_by_duty(ou_id,i,*sid)
+		if duty_date.class == Range
+			duty_date.each do |i|
+				self.d04_by_duty(ou_id,i,*sid)
+			end
+		else
+			self.d04_by_duty(ou_id,duty_date,*sid)
 		end
 	end
 
