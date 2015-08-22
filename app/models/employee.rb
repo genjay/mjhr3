@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  validates :uid,:name,presence:true 
+  validates :ou_id,:uid,:name, :arrive_date,presence:true 
  	validates :uid,:cardno, uniqueness: {scope: [:ou_id], message: "已經被使用" }, :allow_blank => true
   belongs_to :department,counter_cache: true  
   belongs_to :ou

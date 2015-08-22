@@ -1,9 +1,13 @@
-one:
-  id: 1
-  uid: 'a01'
-  name: 'Ricky'
+# one:
+#   id: 1
+#   ou_id: 11
+#   uid: 'a01'
+#   name: 'Ricky'
+#   arrive_date: 20150101
 
-two:
-  id: 2
-  uid: 'a02'
-  name: 'Mary'
+# two:
+#   id: 2
+#   ou_id: 11
+#   uid: 'a02'
+#   name: 'Mary'
+#   arrive_date: 20150101

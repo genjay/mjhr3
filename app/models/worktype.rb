@@ -1,6 +1,7 @@
 class Worktype < ActiveRecord::Base
   validates :uid,:name,presence:true 
   validates :uid, uniqueness: {scope: :ou_id, message: "已經被使用"} 
+  validates :buffer_before_duty,:buffer_after_duty,:minimum_before_overwork,:minimum_after_overwork,:minimum_holiday_overwork,:range_on,:range_off,:mins_of_duty,:numericality => { :greater_than_or_equal_to => 0 }
 
   has_many :workrests, :dependent => :destroy
   has_many :departments, :dependent => :restrict_with_error 
@@ -11,6 +12,11 @@ class Worktype < ActiveRecord::Base
   accepts_nested_attributes_for :workrests, :allow_destroy => true
 
   after_initialize :assign_default_values
+  before_validation :some_values_upcase
+
+  def some_values_upcase
+    self.uid.replace uid.upcase
+  end
 
   def assign_default_values
     self.on_duty_at               ||= '08:20'
