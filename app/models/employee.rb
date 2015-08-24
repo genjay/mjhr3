@@ -11,6 +11,7 @@ class Employee < ActiveRecord::Base
   has_many :doc_overworks
   has_many :doc_offworks
   has_many :daily_duties  
+  has_many :month_duties
   # has_many :calendars, foreign_key: :ou_id, primary_key: :ou_id
   # ,-> {"where calendars.duty_date >= employees.arrive_date and calendars.duty_date <= ifnull(employees.leave_date,'99991231')"}
 

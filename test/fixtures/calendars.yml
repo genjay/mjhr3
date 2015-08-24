@@ -10,3 +10,13 @@
 #   ou_id: 1
 #   duty_date: 2015-07-16
 #   is_holiday: 0
+
+<% d_fr = Date.new 2015,1,1 %>
+<% d_to = Date.new 2015,12,31 %>
+<% r = d_fr..d_to %>
+<% r.each do |i| %>
+<%= "x_#{i}:" %>
+<%= "  ou_id: 100 " %>
+<%= "  duty_date: #{i}" %>
+<%= "  is_holiday: #{(i.cwday==6 || i.cwday==7)? 1:0}" %>
+<% end %>

@@ -1,0 +1,9 @@
+One:
+  id: 100 
+  uid: '100'
+  name: 'created by test/yml'
+  overwork_hours_for_freetax: 46
+  days_per_month: 30
+  hours_per_day: 8
+  LP_rate: 6
+  welfare_rate: 0.5 

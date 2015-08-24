@@ -12,7 +12,7 @@ class CombineAll < ActiveRecord::Migration
 
   	  create_table "calendars", force: :cascade do |t|
   	    t.date     "duty_date"
-  	    t.boolean  "is_holiday", limit: 1
+  	    t.boolean  "is_holiday", limit: 1, default: 0
   	    t.integer  "ou_id",      limit: 4
   	    t.datetime "created_at",           null: false
   	    t.datetime "updated_at",           null: false

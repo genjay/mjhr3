@@ -2,6 +2,8 @@ class MonthDuty < ActiveRecord::Base
 
   def self.d04(ou_id ,yyyymm ,duty_fr ,duty_to,*sid)
   	conn = ActiveRecord::Base.connection
+    duty_fr = duty_fr.to_s.delete '-'
+    duty_to = duty_to.to_s.delete '-'
 
     if true # 出勤及加班月結
     	tmp01 = 'tmp01' 
