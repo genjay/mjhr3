@@ -71,22 +71,23 @@ class EmployeeInoutlogsController < ApplicationController
 
   private
     def opt_action(empid, act)
-      if act == "A1"
-        action_permit(empid, act)
-      elsif act == "A2"
-        accept = [ "A1", "A3", "A4", "A5"]
-        action_permit(empid, accept)
-      elsif act == "A3"
-        accept = [ "A1", "A5"]
-        action_permit(empid, accept)
-      elsif act == "A4"
-        accept = [ "A1", "A3", "A5"]
-        action_permit(empid, accept)
-      elsif act == "A5"
-        accept = [ "A4"]
-        action_permit(empid, accept)
-      else
-        nil
+      case act
+        when "A1"
+          action_permit(empid, act)
+        when "A2"
+          accept = [ "A1", "A3", "A4", "A5"]
+          action_permit(empid, accept)
+        when "A3"
+          accept = [ "A1", "A5"]
+          action_permit(empid, accept)
+        when "A4"
+          accept = [ "A1", "A3", "A5"]
+          action_permit(empid, accept)
+        when "A5"
+          accept = [ "A4"]
+          action_permit(empid, accept)
+        else
+          nil
       end
     end
 
@@ -110,7 +111,7 @@ class EmployeeInoutlogsController < ApplicationController
     end
 
     def set_options
-        @options = {"A1"=>"報到", "A2"=>"離職", "A3"=>"調職", "A4"=>"留停", "A5"=>"復職"}
+        @options = current_ou.employee_inoutlogs.set_options
     end
 
     def set_inoutlog
