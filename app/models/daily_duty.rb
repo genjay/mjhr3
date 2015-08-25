@@ -1,11 +1,7 @@
 class DailyDuty < ActiveRecord::Base
 	belongs_to :employee
+	scope :open_duty, -> (ou_id,date) {where("is_closed= 0 and ou_id=? and duty_date=?",ou_id, date)}
 
-	# def self.d04(ou_id,duty_date)
-	# 	conn = ActiveRecord::Base.connection 
- #    sql = %Q(call p_d04(#{ou_id},'#{duty_date}')) 
- #    conn.execute(sql)
-	# end
 	def self.d04(ou_id,duty_date,*sid) # 日結，duty_date 可以接受 range
 		if duty_date.class == Range
 			duty_date.each do |i|
@@ -132,11 +128,11 @@ class DailyDuty < ActiveRecord::Base
         conn.execute sql
         tmp_base = tmp03
         if true 
-        conn.execute "drop table if exists #{tmp02}"
-        conn.execute "drop table if exists #{tmp03a}"
-        conn.execute "drop table if exists #{tmp03b}"
-        conn.execute "drop table if exists #{tmp03c}"
-        conn.execute "drop table if exists #{tmp03d}"
+	        conn.execute "drop table if exists #{tmp02}"
+	        conn.execute "drop table if exists #{tmp03a}"
+	        conn.execute "drop table if exists #{tmp03b}"
+	        conn.execute "drop table if exists #{tmp03c}"
+	        conn.execute "drop table if exists #{tmp03d}"
       	end
       end
     end
@@ -156,13 +152,13 @@ class DailyDuty < ActiveRecord::Base
     end
 
     if true # 將最後結果新增到 daily_duties
-    	DailyDuty.where("ou_id=#{ou_id} and duty_date=#{duty_date}").delete_all
+    	DailyDuty.open_duty(ou_id,duty_date).delete_all
     	arr_c = (tmp_base.column_names & DailyDuty.column_names)
     	arr_c.delete('id')
     	columns = arr_c.join(',')
     	sql = "INSERT INTO daily_duties (#{columns}) SELECT #{columns} FROM #{tmp_base}"
     	conn.execute sql
-    	return DailyDuty.where("ou_id=#{ou_id} and duty_date=#{duty_date}").count
+    	return DailyDuty.open_duty(ou_id,duty_date).count
     end
 
     if true # 清除所有 tmp開頭的 tables
