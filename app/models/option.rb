@@ -6,13 +6,11 @@ class Option
 		end
 
 		def marriage
-      x = %w(single married)
+     			 x = %w(single married)
 		end
 
 		def education
-      x = %w(小學 國中 高中 五專 大學 碩士 博士)
+      			x = %w(小學 國中 高中 五專 大學 碩士 博士)
 		end
-
-
 	end
 end

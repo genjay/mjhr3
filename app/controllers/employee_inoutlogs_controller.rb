@@ -1,6 +1,7 @@
 class EmployeeInoutlogsController < ApplicationController
   before_action :set_inoutlog, only: [:show, :edit, :update, :destroy]
   before_action :set_employee_name, only: [:index, :edit, :new]
+  before_action :set_options, only: [:new, :edit]
 
   def index
     @employee_id = params[:employee_id]
@@ -16,11 +17,19 @@ class EmployeeInoutlogsController < ApplicationController
   def create
     @inoutlog = current_ou.employee_inoutlogs.new(inoutlog_params)
     @inoutlog.employee_id = params[:employee_id]
-    respond_to do |format|
-      if @inoutlog.save
-        format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定新增成功' }
-      else
-        format.html { render :new }
+    act = opt_action(@inoutlog.employee_id, params[:employee_inoutlog][:action])
+
+    if act == false
+      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動" }
+    elsif act == nil
+      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "異動類別錯誤" }
+    else
+       respond_to do |format|
+        if @inoutlog.save
+          format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定新增成功' }
+        else
+          format.html { render :new }
+        end
       end
     end
   end
@@ -61,6 +70,49 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   private
+    def opt_action(empid, act)
+      if act == "A1"
+        action_permit(empid, act)
+      elsif act == "A2"
+        accept = [ "A1", "A3", "A4", "A5"]
+        action_permit(empid, accept)
+      elsif act == "A3"
+        accept = [ "A1", "A5"]
+        action_permit(empid, accept)
+      elsif act == "A4"
+        accept = [ "A1", "A3", "A5"]
+        action_permit(empid, accept)
+      elsif act == "A5"
+        accept = [ "A4"]
+        action_permit(empid, accept)
+      else
+        nil
+      end
+    end
+
+    def action_permit(empid, acc)
+      data = current_ou.employee_inoutlogs.check_permit(empid)
+      if acc == "A1"
+        if data == nil
+          true
+        elsif data != nil and data.action == "A2"
+          true
+        else
+          false
+        end          
+      else
+        if data != nil and acc.include? data.action
+          true
+        else
+          false
+        end
+      end
+    end
+
+    def set_options
+        @options = {"A1"=>"報到", "A2"=>"離職", "A3"=>"調職", "A4"=>"留停", "A5"=>"復職"}
+    end
+
     def set_inoutlog
       @inoutlog = current_ou.employee_inoutlogs.find(params[:id])
     end
