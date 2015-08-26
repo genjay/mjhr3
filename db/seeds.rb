@@ -1,6 +1,7 @@
 if true # 增加 user
 	User.where(email:'genjay@gmail.com').delete_all
 	User.create(email:'genjay@gmail.com',password:'1234',password_confirmation:'1234')
+	User.create(email:'jungsheng_li@microjet.com.tw',password:'1234',password_confirmation:'1234')
 end
 
 if true # ou
@@ -1035,4 +1036,14 @@ if true # 160 人員薪水，測試資料
 	i.employee_salary_settings.create(ou_id: i.ou_id,pay_type: PayType.find_by(uid:'A'),amt: 28800)
 	i.employee_salary_settings.create(ou_id: i.ou_id,pay_type: PayType.find_by(uid:'B'),amt: 1200)
 end 
+
+if true # options 
+	Option.delete_all
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A1',value:'報到')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A2',value:'復職')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'C1',value:'調職')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q1',value:'離職')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q2',value:'留停')
+end
+
 end
