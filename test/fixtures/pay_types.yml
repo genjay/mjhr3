@@ -1,0 +1,27 @@
+A01:
+  ou_id: 100
+  uid: 'A01'
+  name: '底薪'
+  cycle_unit: 'pay_by_month'
+  rule_for_break: 'rate_by_duty'
+
+A02:
+  ou_id: 100
+  uid: 'A02'
+  name: '伙食津貼'
+  cycle_unit: 'pay_by_month'
+  rule_for_break: 'rate_by_duty'
+
+A03:
+  ou_id: 100
+  uid: 'A03'
+  name: '全給付津貼'
+  cycle_unit: 'pay_by_month'
+  rule_for_break: 'pay_all'
+
+A04:
+  ou_id: 100
+  uid: 'A04'
+  name: '使用者自行輸入津貼'
+  cycle_unit: 'pay_by_month'
+  rule_for_break: 'pay_by_user_keyin'

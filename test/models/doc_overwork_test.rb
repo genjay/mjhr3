@@ -11,6 +11,7 @@ class DocOverworkTest < ActiveSupport::TestCase
 
 	test "同一日不能輸入二筆加班單" do
 		self.init_data
+		DocOverwork.where(ou_id:1,employee_id: 123,duty_date:20150711).delete_all
 		o = DocOverwork.create(ou_id:1,employee_id: 123,duty_date:20150711,hr:5)
 		assert_equal 0,o.errors.size
 		o = DocOverwork.create(ou_id:1,employee_id: 123,duty_date:20150711,hr:5)

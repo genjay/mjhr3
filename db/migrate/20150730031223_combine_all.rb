@@ -35,7 +35,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.string   "col_name",   limit: 255
   	    t.string   "uid",        limit: 255
   	    t.string   "name",       limit: 255
-  	    t.boolean  "is_stoped",  limit: 1
+  	    t.boolean  "is_stoped",  limit: 1, default: 0
   	    t.integer  "ou_id",      limit: 4
   	    t.text     "memo",       limit: 65535
   	    t.datetime "created_at",               null: false
@@ -76,7 +76,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.string   "name",            limit: 255
   	    t.integer  "worktype_id",     limit: 4
   	    t.integer  "upper_id",        limit: 4
-  	    t.boolean  "is_stoped",       limit: 1
+  	    t.boolean  "is_stoped",       limit: 1, default: 0
   	    t.text     "memo",            limit: 65535
   	    t.integer  "ou_id",           limit: 4
   	    t.datetime "created_at",                                null: false
@@ -92,7 +92,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.date     "duty_date"
   	    t.datetime "on_duty_at"
   	    t.datetime "off_duty_at"
-  	    t.boolean  "is_closed",   limit: 1
+  	    t.boolean  "is_closed",   limit: 1, default: 0
   	    t.integer  "ou_id",       limit: 4
   	    t.text     "notes",       limit: 65535
   	    t.datetime "created_at",                null: false
@@ -107,7 +107,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.datetime "offduty_begin_at"
   	    t.datetime "offduty_end_at"
   	    t.integer  "mins_offduty",     limit: 4
-  	    t.boolean  "is_closed",        limit: 1
+  	    t.boolean  "is_closed",        limit: 1, default: 0
   	    t.integer  "ou_id",            limit: 4
   	    t.text     "notes",            limit: 65535
   	    t.datetime "created_at",                     null: false
@@ -124,7 +124,7 @@ class CombineAll < ActiveRecord::Migration
         t.integer  "mins_B",  limit: 4, default: 0
         t.integer  "mins_C",  limit: 4, default: 0
         t.integer  "mins_H",  limit: 4, default: 0
-  	    t.boolean  "is_closed",         limit: 1
+  	    t.boolean  "is_closed",         limit: 1, default: 0
   	    t.integer  "ou_id",             limit: 4
   	    t.text     "notes",             limit: 65535
   	    t.datetime "created_at",                      null: false
@@ -195,7 +195,7 @@ class CombineAll < ActiveRecord::Migration
   	  create_table "insurance_settings", force: :cascade do |t|
   	    t.string   "uid",        limit: 255
   	    t.string   "name",       limit: 255
-  	    t.boolean  "is_stoped",  limit: 1
+  	    t.boolean  "is_stoped",  limit: 1, default: 0
   	    t.text     "memo",       limit: 65535
   	    t.integer  "ou_id",      limit: 4
   	    t.decimal  "a_rate",                   precision: 7,  scale: 4
@@ -246,7 +246,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.boolean  "include_holiday", limit: 1
   	    t.boolean  "can_duplicate",   limit: 1
   	    t.boolean  "is_quota_ctrl",   limit: 1
-  	    t.boolean  "is_stoped",       limit: 1
+  	    t.boolean  "is_stoped",       limit: 1, default: 0
   	    t.text     "memo",            limit: 65535
   	    t.integer  "ou_id",           limit: 4
   	    t.datetime "created_at",                                            null: false
@@ -283,7 +283,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.decimal  "amt_of_H",                    precision: 10
   	    t.integer  "mins_per_unit", limit: 4
   	    t.string   "valid_unit",    limit: 255
-  	    t.boolean  "is_stoped",     limit: 1
+  	    t.boolean  "is_stoped",     limit: 1, default: 0
   	    t.string   "pay_type",      limit: 255
   	    t.text     "memo",          limit: 65535
   	    t.integer  "ou_id",         limit: 4
@@ -298,7 +298,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.string   "name",           limit: 255
   	    t.string   "cycle_unit",     limit: 255
   	    t.string   "rule_for_break", limit: 255
-  	    t.boolean  "is_stoped",      limit: 1
+  	    t.boolean  "is_stoped",      limit: 1, default: 0
   	    t.integer  "ou_id",          limit: 4
   	    t.text     "memo",           limit: 65535
   	    t.datetime "created_at",                   null: false
@@ -336,7 +336,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.string   "name",       limit: 255
   	    t.decimal  "rate",                     precision: 7, scale: 4
   	    t.text     "memo",       limit: 65535
-  	    t.boolean  "is_stoped",  limit: 1
+  	    t.boolean  "is_stoped",  limit: 1, default: 0
   	    t.integer  "ou_id",      limit: 4
   	    t.datetime "created_at",                                       null: false
   	    t.datetime "updated_at",                                       null: false
@@ -388,7 +388,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.integer  "minimum_holiday_overwork", limit: 4
   	    t.integer  "range_on",                 limit: 4
   	    t.integer  "range_off",                limit: 4
-  	    t.boolean  "is_stoped",                limit: 1
+  	    t.boolean  "is_stoped",                limit: 1, default: 0
   	    t.integer  "mins_of_duty",             limit: 4
   	    t.text     "memo",                     limit: 65535
   	    t.integer  "ou_id",                    limit: 4

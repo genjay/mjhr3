@@ -47,7 +47,6 @@ class MonthSalary < ActiveRecord::Base
 
 	  if true # 將tmp02結果新增至 month_salaries
       tmp_base = tmp02
-      # MonthSalary.where("ou_id='#{ou_id}' and yyyymm='#{yyyymm}'").delete_all
       arr_c = (tmp_base.column_names & MonthSalary.column_names)
       arr_c.delete 'id'
       columns = arr_c.join ','
@@ -69,7 +68,6 @@ class MonthSalary < ActiveRecord::Base
 
     if true # 將tmp03 結果新增至 month_salaries
       tmp_base = tmp03
-      # MonthSalary.where("ou_id='#{ou_id}' and yyyymm='#{yyyymm}'").delete_all
       arr_c = (tmp_base.column_names & MonthSalary.column_names)
       arr_c.delete 'id'
       arr_c.delete 'created_at'
