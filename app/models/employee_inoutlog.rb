@@ -4,7 +4,7 @@ class EmployeeInoutlog < ActiveRecord::Base
   delegate :department, to: :employee
 
   def self.check_permit(empid) 
-    self.select("action").where("employee_id = #{empid}").order("created_at DESC").first
+    self.select("action, begin_at").where("employee_id = #{empid}").order("created_at DESC").first
   end
 
   def self.set_options
