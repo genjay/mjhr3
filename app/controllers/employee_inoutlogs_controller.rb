@@ -6,6 +6,10 @@ class EmployeeInoutlogsController < ApplicationController
   def index
     @employee_id = params[:employee_id]
     @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).where(:employee_id => @employee_id)
+
+    @inoutlogs.each do |i|
+      i.action = set_docode(i.action)
+    end
   end
 
   def new
@@ -17,10 +21,13 @@ class EmployeeInoutlogsController < ApplicationController
   def create
     @inoutlog = current_ou.employee_inoutlogs.new(inoutlog_params)
     @inoutlog.employee_id = params[:employee_id]
-    act = opt_action(@inoutlog.employee_id, params[:employee_inoutlog][:action])
+
+    form_action = params[:employee_inoutlog][:action]
+    form_date = Date.parse params[:employee_inoutlog][:begin_at]
+    act = opt_action(@inoutlog.employee_id, form_action, form_date)
 
     if act == false
-      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動" }
+      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動或生效日期有誤" }
     elsif act == nil
       redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "異動類別錯誤" }
     else
@@ -70,38 +77,39 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   private
-    def opt_action(empid, act)
-      if act == "A1"
-        action_permit(empid, act)
-      elsif act == "A2"
-        accept = [ "A1", "A3", "A4", "A5"]
-        action_permit(empid, accept)
-      elsif act == "A3"
-        accept = [ "A1", "A5"]
-        action_permit(empid, accept)
-      elsif act == "A4"
-        accept = [ "A1", "A3", "A5"]
-        action_permit(empid, accept)
-      elsif act == "A5"
-        accept = [ "A4"]
-        action_permit(empid, accept)
-      else
-        nil
+    def opt_action(empid, act, date)
+      case act
+        when "A1"
+          action_permit(empid, act, date)
+        when "A2"
+          accept = [ "A1", "A3", "A4", "A5"]
+          action_permit(empid, accept, date)
+        when "A3"
+          accept = [ "A1", "A5"]
+          action_permit(empid, accept, date)
+        when "A4"
+          accept = [ "A1", "A3", "A5"]
+          action_permit(empid, accept, date)
+        when "A5"
+          accept = [ "A4"]
+          action_permit(empid, accept, date)
+        else
+          nil
       end
     end
 
-    def action_permit(empid, acc)
+    def action_permit(empid, acc, ac_date)
       data = current_ou.employee_inoutlogs.check_permit(empid)
       if acc == "A1"
         if data == nil
           true
-        elsif data != nil and data.action == "A2"
+        elsif data != nil and data.action == "A2" and ac_date >= data.begin_at
           true
         else
           false
         end          
       else
-        if data != nil and acc.include? data.action
+        if data != nil and acc.include? data.action and ac_date >= data.begin_at
           true
         else
           false
@@ -110,7 +118,24 @@ class EmployeeInoutlogsController < ApplicationController
     end
 
     def set_options
-        @options = {"A1"=>"報到", "A2"=>"離職", "A3"=>"調職", "A4"=>"留停", "A5"=>"復職"}
+        @options = current_ou.employee_inoutlogs.set_options
+    end
+
+    def set_docode(acc)
+      case acc
+        when "A1"
+         "報到"
+        when "A2"
+          "離職"
+        when "A3"
+          "調職"
+        when "A4"
+          "留停"
+        when "A5"
+          "復職"
+        else
+          ""
+        end
     end
 
     def set_inoutlog

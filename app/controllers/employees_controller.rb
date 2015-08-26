@@ -17,9 +17,9 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = current_ou.employees.new(employee_params)
-
     respond_to do |format|
       if @employee.save
+        set_emp_inout
         format.html { redirect_to employees_path, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
@@ -34,6 +34,7 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
+        set_emp_inout
         format.html { redirect_to employees_path, notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
@@ -83,6 +84,18 @@ class EmployeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
       @employee = current_ou.employees.find(params[:id])
+    end
+
+    def set_emp_inout
+      log_exist = current_ou.employee_inoutlogs.find_by(employee_id:@employee.id)
+      if log_exist == nil and @employee.arrive_date != nil
+          log = current_ou.employee_inoutlogs.new
+          log.employee_id = @employee.id
+          log.department_id = @employee.department_id
+          log.action = "A1"
+          log.begin_at = @employee.arrive_date
+          log.save
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
