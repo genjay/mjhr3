@@ -11,7 +11,7 @@
     <%= f.input :id_number, label: '身份證號' %>
     <%= f.date_field :arrive_date, label: '到職日' %>
     <%= f.date_field :leave_date, label: '離職日' %>
-    <%= f.input :birthday, label: '生日' %>
+    <%= f.input :birthday, label: '生日', as: :string %>
     <%= f.input :sex, label: '性別', :collection => Option.sex %>
     <%= f.input :marriage, label: '婚姻', :collection => Option.marriage  %>
     <%= f.input :education, label: '學歷', :collection => Option.education %>
