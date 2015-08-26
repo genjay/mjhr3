@@ -5,7 +5,7 @@ class CreateOptions < ActiveRecord::Migration
       t.string :column_title
       t.string :key
       t.string :value
-      t.string :status
+      t.string :status_rule
       t.text :memo
 
       t.timestamps null: true

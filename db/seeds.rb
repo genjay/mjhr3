@@ -1039,11 +1039,11 @@ end
 
 if true # options 
 	Option.delete_all
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A1',value:'報到')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A2',value:'復職')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'C1',value:'調職')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q1',value:'離職')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q2',value:'留停')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A1',value:'報到',status_rule:'C1,Q1,Q2')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A2',value:'復職',status_rule:'Q2')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'C1',value:'調職',status_rule:'A1,A2,C1')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q1',value:'離職',status_rule:'A1,A2,C1,Q2')
+	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q2',value:'留停',status_rule:'A1,A2,C1')
 end
 
 end
