@@ -78,4 +78,26 @@ class MonthSalary < ActiveRecord::Base
       conn.execute sql
     end
 	end
+
+	def self.over(ou_id,yyyymm,*sid)
+		conn = ActiveRecord::Base.connection
+
+		if true # 計算 rule_for_break='A' 依出勤日比率給付的所有薪資類別
+			tmp01 = 'tmp01'
+			conn.execute "drop table if exists #{tmp01}"
+			sql = "create table #{tmp01} as
+			SELECT a.ou_id,a.employee_id,a.yyyymm,b.pay_type_id,'加班費' type
+			,round(case 
+			 when dutydays=range_days or dutydays>=30 then amt
+			 else dutydays/30 * amt
+			 end) amt 
+			FROM month_duties a
+			left join employee_salary_settings b on a.employee_id=b.employee_id 
+			left join pay_types c on b.pay_type_id=c.id 
+			where rule_for_break = 'A'
+			and a.ou_id=#{ou_id}
+			;"
+			conn.execute sql
+	  end
+	end
 end

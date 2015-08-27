@@ -23,8 +23,8 @@
       <tr>
         <td><%= check_box_tag "ids[]", inoutlog.id %></td>
         <td><%= i+1 %></td>
-        <td><%= link_to inoutlog.employee.try(:name), edit_employee_employee_inoutlog_path(inoutlog.employee_id, inoutlog) %></td>
-        <td><%= inoutlog.action %></td>
+        <td><%= link_to inoutlog.emp_name, edit_employee_employee_inoutlog_path(inoutlog.employee_id, inoutlog) %></td>
+        <td><%= inoutlog.to_s %></td> 
         <td><%= inoutlog.begin_at %></td>
         <td><%= inoutlog.days_of_jobage %></td> 
       </tr>
