@@ -1,15 +1,11 @@
 class EmployeeInoutlogsController < ApplicationController
   before_action :set_inoutlog, only: [:show, :edit, :update, :destroy]
   before_action :set_employee_name, only: [:index, :edit, :new]
-  before_action :set_options, only: [:new, :edit]
 
   def index
     @employee_id = params[:employee_id]
-    @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).where(:employee_id => @employee_id)
-
-    @inoutlogs.each do |i|
-      i.action = set_docode(i.action)
-    end
+    # @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).where(:employee_id => @employee_id)
+    @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).select("employee_inoutlogs.*, options.*").joins("left join options on employee_inoutlogs.action = options.key").where(:employee_inoutlogs => {:employee_id => @employee_id})
   end
 
   def new
@@ -24,14 +20,15 @@ class EmployeeInoutlogsController < ApplicationController
 
     form_action = params[:employee_inoutlog][:action]
     form_date = Date.parse params[:employee_inoutlog][:begin_at]
-    act = opt_action(@inoutlog.employee_id, form_action, form_date)
+    act = action_permit(@inoutlog.employee_id, form_action, form_date)
 
-    if act == false
-      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動或生效日期有誤" }
-    elsif act == nil
-      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "異動類別錯誤" }
+    case act
+    when false
+        redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動或生效日期有誤" }
+    when nil
+        redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "異動類別錯誤" }
     else
-       respond_to do |format|
+      respond_to do |format|
         if @inoutlog.save
           format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定新增成功' }
         else
@@ -77,65 +74,30 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   private
-    def opt_action(empid, act, date)
-      case act
-        when "A1"
-          action_permit(empid, act, date)
-        when "A2"
-          accept = [ "A1", "A3", "A4", "A5"]
-          action_permit(empid, accept, date)
-        when "A3"
-          accept = [ "A1", "A5"]
-          action_permit(empid, accept, date)
-        when "A4"
-          accept = [ "A1", "A3", "A5"]
-          action_permit(empid, accept, date)
-        when "A5"
-          accept = [ "A4"]
-          action_permit(empid, accept, date)
-        else
-          nil
-      end
-    end
+    def action_permit(empid, act, date)
+      opt_data = Option.find_by(key:act)
 
-    def action_permit(empid, acc, ac_date)
-      data = current_ou.employee_inoutlogs.check_permit(empid)
-      if acc == "A1"
-        if data == nil
-          true
-        elsif data != nil and data.action == "A2" and ac_date >= data.begin_at
-          true
+      if opt_data != nil    
+        data = current_ou.employee_inoutlogs.check_permit(empid)
+        case act
+        when "A1"
+          if data == nil
+            true
+          elsif data != nil and data.action == "Q2" and date >= data.begin_at
+            true
+          else
+            false
+          end
         else
-          false
-        end          
+          if data != nil and opt_data.status_rule.include? data.action and date >= data.begin_at
+            true
+          else
+            false
+          end
+        end
       else
-        if data != nil and acc.include? data.action and ac_date >= data.begin_at
-          true
-        else
-          false
-        end
+        nil
       end
-    end
-
-    def set_options
-        @options = current_ou.employee_inoutlogs.set_options
-    end
-
-    def set_docode(acc)
-      case acc
-        when "A1"
-         "報到"
-        when "A2"
-          "離職"
-        when "A3"
-          "調職"
-        when "A4"
-          "留停"
-        when "A5"
-          "復職"
-        else
-          ""
-        end
     end
 
     def set_inoutlog
