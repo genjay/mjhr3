@@ -4,8 +4,8 @@ class EmployeeInoutlogsController < ApplicationController
 
   def index
     @employee_id = params[:employee_id]
-    # @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).where(:employee_id => @employee_id)
-    @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).select("employee_inoutlogs.*, options.*").joins("left join options on employee_inoutlogs.action = options.key").where(:employee_inoutlogs => {:employee_id => @employee_id})
+    @inoutlogs = current_ou.employee_inoutlogs.includes(:employee).where(:employee_id => @employee_id)
+    # @inoutlogs = EmployeeInoutlog.includes(:employee).select("employee_inoutlogs.*, options.*").joins("left join options on employee_inoutlogs.action = options.key").where(ou_id: current_ou,:employee_inoutlogs => {:employee_id => @employee_id})
   end
 
   def new

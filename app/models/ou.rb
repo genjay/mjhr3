@@ -25,11 +25,13 @@ class Ou < ActiveRecord::Base
 	has_many :employee_inoutlogs, :dependent => :restrict_with_error
 	has_many :month_others, :dependent => :restrict_with_error
 
+
   # prefix with view_ is a db view can't update delete new
 	has_many :view_sch_emps # can not use :dependent
 	has_many :sch_emps
 	has_many :sch_deps
 	has_many :view_sch_deps
+	has_many :view_employee_inoutlogs
 	alias_method :viewschemps, :view_sch_emps
 
 	def assign_default_values
