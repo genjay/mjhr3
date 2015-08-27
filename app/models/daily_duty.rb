@@ -137,7 +137,8 @@ class DailyDuty < ActiveRecord::Base
       end
     end
 
-    if true # 04 將 doc_overworks 併入 
+    if nil # 04 將 doc_overworks 併入 
+    	# 20150827 改成加班單不需結轉
     	tmp04 = 'tmp04' << sid[0]
     	conn.execute "drop table if exists #{tmp04}"
     	sql = "create table #{tmp04} as

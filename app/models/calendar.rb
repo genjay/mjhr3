@@ -15,14 +15,6 @@ class Calendar < ActiveRecord::Base
 		self.where("duty_date between #{a}01 and #{a}31")\
 		.order(:duty_date) 
 	end
-
-	def destroy
-		if self.id == 0 
-			errors[:message] << "This isn't a real data,it a db view"
-			false
-		else
-			Calendar.destroy(self.id)
-		end
-	end
+	
 
 end

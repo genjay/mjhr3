@@ -12,10 +12,10 @@ class MonthDuty < ActiveRecord::Base
     	sql =  "create table #{tmp01} as
                 Select #{yyyymm} yyyymm,#{duty_fr} duty_fr,#{duty_to} duty_to
                 ,a.ou_id,a.employee_id,sum(1) dutydays
-                ,sum(over_a) over_a
-                ,sum(over_b) over_b
-                ,sum(over_c) over_c
-                ,sum(over_h) over_h
+                ,sum(mins_a) over_a
+                ,sum(mins_b) over_b
+                ,sum(mins_c) over_c
+                ,sum(mins_h) over_h
                 ,#{range_days} range_days
                 from daily_duties a
                 left join doc_overworks b on a.ou_id=b.ou_id and a.duty_date=b.duty_date and a.employee_id=b.employee_id
