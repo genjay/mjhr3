@@ -1039,11 +1039,32 @@ end
 
 if true # options 
 	Option.delete_all
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A1',value:'報到',status_rule:'C1,Q1,Q2')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'A2',value:'復職',status_rule:'Q2')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'C1',value:'調職',status_rule:'A1,A2,C1')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q1',value:'離職',status_rule:'A1,A2,C1,Q2')
-	Option.create(model_title:'employee_inoutlog',column_title:'action',key:'Q2',value:'留停',status_rule:'A1,A2,C1')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'A1',value:'報到',status_rule:'C1,Q1,Q2')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'A2',value:'復職',status_rule:'Q2')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'C1',value:'調職',status_rule:'A1,A2,C1')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'Q1',value:'離職',status_rule:'A1,A2,C1,Q2')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'Q2',value:'留停',status_rule:'A1,A2,C1')
+
+	Option.create(model_title:'Employee',column_title:'sex',key:'F',value:'女')
+	Option.create(model_title:'Employee',column_title:'sex',key:'M',value:'男')
+	Option.create(model_title:'Employee',column_title:'marriage',key:'A',value:'未婚')
+	Option.create(model_title:'Employee',column_title:'marriage',key:'B',value:'已婚')
+	Option.create(model_title:'Employee',column_title:'education',key:'A',value:'博士')
+	Option.create(model_title:'Employee',column_title:'education',key:'B',value:'碩士')
+	Option.create(model_title:'Employee',column_title:'education',key:'C',value:'大學')
+	Option.create(model_title:'Employee',column_title:'education',key:'D',value:'二專五專')
+	Option.create(model_title:'Employee',column_title:'education',key:'E',value:'高中高職')
+	Option.create(model_title:'Employee',column_title:'education',key:'F',value:'國中')
+	Option.create(model_title:'Employee',column_title:'education',key:'G',value:'國小') 
+	Option.create(model_title:'Employee',column_title:'education',key:'Z',value:'其他')
+
+	Option.create(model_title:'PayType',column_title:'cycle_unit',key:'A',value:'月薪')
+	Option.create(model_title:'PayType',column_title:'cycle_unit',key:'B',value:'日薪')
+	Option.create(model_title:'PayType',column_title:'cycle_unit',key:'C',value:'時薪')
+ 	Option.create(model_title:'PayType',column_title:'rule_for_break',key:'A',value:'依出勤比率')
+	Option.create(model_title:'PayType',column_title:'rule_for_break',key:'B',value:'全給付')
+	Option.create(model_title:'PayType',column_title:'rule_for_break',key:'C',value:'手動輸入')
+  
 end
 
 end
