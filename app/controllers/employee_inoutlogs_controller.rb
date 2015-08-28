@@ -38,7 +38,7 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   def edit
-    @inoutlog.department_id = @inoutlog.department.id
+    # @inoutlog.department_id = @inoutlog.department.id
   end
 
   def update

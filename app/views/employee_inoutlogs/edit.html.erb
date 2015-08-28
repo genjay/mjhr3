@@ -7,8 +7,8 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :department_id, as: :hidden %>
     <%= f.input :action, label: '類別', :collection => Option.of(:EmployeeInoutlog, :action), :disabled => true %>
+    <%= f.association :department, label: '部門', :label_method => lambda { |f| "#{f.uid}  #{f.name}" }, :include_blank => false, :disabled => true  %>
     <%= f.input :begin_at, label: '生效日', as: :string, :disabled => true %>
     <%= f.input :days_of_jobage, label: '期初年資', :disabled => true %>
   </div>

@@ -12,6 +12,7 @@
       <th></th>
       <th>項次</th>
       <th>姓名</th>
+      <th>部門</th>
       <th>類別</th> 
       <th>生效日</th>
       <th>期初年資</th>
@@ -24,6 +25,7 @@
         <td><%= check_box_tag "ids[]", inoutlog.id %></td>
         <td><%= i+1 %></td>
         <td><%= link_to inoutlog.emp_name, edit_employee_employee_inoutlog_path(inoutlog.employee_id, inoutlog) %></td>
+        <td><%= inoutlog.to_dept_s %></td>
         <td><%= inoutlog.to_s %></td> 
         <td><%= inoutlog.begin_at %></td>
         <td><%= inoutlog.days_of_jobage %></td> 
