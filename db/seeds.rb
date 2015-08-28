@@ -170,8 +170,8 @@ if true # 130 加班設定
   Overtype.where(ou_id:@ou.id).delete_all
   id = 0 
   Overtype.create(id: id+=1, ou_id:@ou.id, uid:'A', name:'一般加班', pay_type: 'A')
-  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'B', name:'固定金額加班', pay_type: 'B')
-  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'C', name:'補休加班', pay_type: 'C')
+  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'B', name:'固定金額加班', pay_type: 'B',rate_of_A: 0, amt_of_A: 150, rate_of_B: 0, amt_of_B: 150, rate_of_C: 0, amt_of_C: 150, rate_of_H:0, amt_of_H: 150)
+  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'C', name:'補休加班', pay_type: 'C', valid_unit: '12m')
 end
 
 if true # 140A 特休對應表 

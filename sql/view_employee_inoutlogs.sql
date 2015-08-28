@@ -5,4 +5,4 @@ Select a.*,b.value
 from employee_inoutlogs a
 left join options b on a.action=b.key and b.model_title='EmployeeInoutlog' and b.column_title='action'
 left join employees c on c.id=a.employee_id
-left join departments d on d.id=c.department_id; 
+left join departments d on d.id=a.department_id;  
