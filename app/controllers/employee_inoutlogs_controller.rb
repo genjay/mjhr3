@@ -19,6 +19,7 @@ class EmployeeInoutlogsController < ApplicationController
 
     form_action = params[:employee_inoutlog][:action]
     form_date = Date.parse params[:employee_inoutlog][:begin_at]
+    form_depid = params[:employee_inoutlog][:department_id]
     act = action_permit(@inoutlog.employee_id, form_action, form_date)
 
     case act
@@ -29,6 +30,7 @@ class EmployeeInoutlogsController < ApplicationController
     else
       respond_to do |format|
         if @inoutlog.save
+          update_employee(form_action, form_date, @inoutlog.employee_id, form_depid)
           format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定新增成功' }
         else
           format.html { render :new }
@@ -41,15 +43,15 @@ class EmployeeInoutlogsController < ApplicationController
     # @inoutlog.department_id = @inoutlog.department.id
   end
 
-  def update
-    respond_to do |format|
-      if @inoutlog.update(inoutlog_params)
-        format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定修改成功' }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @inoutlog.update(inoutlog_params)
+  #       format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定修改成功' }
+  #     else
+  #       format.html { render :edit }
+  #     end
+  #   end
+  # end
 
   def multi_destroy 
     err_msg,ok_msg,all_msg = '','',''
@@ -96,6 +98,18 @@ class EmployeeInoutlogsController < ApplicationController
         end
       else
         nil
+      end
+    end
+
+    def update_employee(action, date, emp_id, dep_id)
+      case action
+      when "A1"
+        current_ou.employees.where(id:emp_id).update_all(arrive_date:date)
+      when "Q1"
+        current_ou.employees.where(id:emp_id).update_all(leave_date:date)
+      when "C1"
+        current_ou.employees.where(id:emp_id).update_all(department_id:dep_id)
+      else
       end
     end
 

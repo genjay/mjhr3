@@ -94,6 +94,7 @@ class EmployeesController < ApplicationController
           log.department_id = @employee.department_id
           log.action = "A1"
           log.begin_at = @employee.arrive_date
+          log.days_of_jobage = 0
           log.save
       end
     end
