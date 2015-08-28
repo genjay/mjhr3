@@ -12,7 +12,7 @@
     <%= f.association :department, label: '部門', :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
     <%= f.input :id_number, label: '身份證號' %>
     <%= f.date_field :arrive_date, label: '到職日' %>
-    <%= f.date_field :leave_date, label: '離職日' %>
+    <%= f.date_field :leave_date, label: '離職日',:readonly => true %>
     <%= f.input :birthday, label: '生日', as: :string %>
     <%= f.input :sex, label: '性別', :collection => Option.of(:Employee,:sex) %>
     <%= f.input :marriage, label: '婚姻', :collection => Option.of(:Employee,:marriage)  %>

@@ -169,8 +169,9 @@ end
 if true # 130 加班設定
   Overtype.where(ou_id:@ou.id).delete_all
   id = 0 
-  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'A', name:'一般加班')
-  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'B', name:'補休加班')
+  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'A', name:'一般加班', pay_type: 'A')
+  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'B', name:'固定金額加班', pay_type: 'B')
+  Overtype.create(id: id+=1, ou_id:@ou.id, uid:'C', name:'補休加班', pay_type: 'C')
 end
 
 if true # 140A 特休對應表 
@@ -930,8 +931,8 @@ end
 if true # 160 人員薪水，測試資料
 	paytype_a = PayType.find_by(uid:'A',ou_id:@ou.id)
 	paytype_b = PayType.find_by(uid:'B',ou_id:@ou.id)
-  # EmployeeSalarySetting.delete_all
-	@ou.employee_salary_settings.delete_all
+  EmployeeSalarySetting.delete_all
+	# @ou.employee_salary_settings.delete_all
 	Employee.where(ou_id:@ou.id).each do |i|
 		i.employee_salary_settings.create(ou_id: i.ou_id,pay_type: paytype_a,amt: 28800)
 		i.employee_salary_settings.create(ou_id: i.ou_id,pay_type: paytype_b,amt: 1200)
@@ -965,5 +966,14 @@ if true # options
  	Option.create(model_title:'PayType',column_title:'rule_for_break',key:'A',value:'依出勤比率')
 	Option.create(model_title:'PayType',column_title:'rule_for_break',key:'B',value:'全給付')
 	Option.create(model_title:'PayType',column_title:'rule_for_break',key:'C',value:'手動輸入')
+
+  Option.create(model_title:'Overtype',column_title:'pay_type',key:'A',value:'依比率')
+  Option.create(model_title:'Overtype',column_title:'pay_type',key:'B',value:'依金額')
+  Option.create(model_title:'Overtype',column_title:'pay_type',key:'C',value:'換補休')
+
+  Option.create(model_title:'Overtype',column_title:'valid_unit',key:'1m',value:'1 個月')
+  Option.create(model_title:'Overtype',column_title:'valid_unit',key:'2m',value:'2 個月')
+  Option.create(model_title:'Overtype',column_title:'valid_unit',key:'12m',value:'12個月')
+
 end 
 

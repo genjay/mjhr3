@@ -15,9 +15,9 @@
     <%= f.input :rate_of_H,placeholder:'假日加班費比率：2.000' %>
     <%= f.input :amt_of_H,placeholder:'假日加班費金額：0' %>
     <%= f.input :mins_per_unit,placeholder:'加班費累進單位(分鐘) 預設：60' %>
-    <%= f.input :valid_unit , :collection => ['1m', '2m']%> 
+    <%= f.input :valid_unit, collection:Option.of('Overtype',:valid_unit)  %> 
     <%= f.input :is_stoped %>
-    <%= f.input :pay_type %>
+    <%= f.input :pay_type, include_blank: false, collection: Option.of('Overtype',:pay_type) %>
     <%= f.input :memo %> 
   </div>
 
