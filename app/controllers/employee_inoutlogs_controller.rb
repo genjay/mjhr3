@@ -93,7 +93,7 @@ class EmployeeInoutlogsController < ApplicationController
         when "A1"
           if data == nil
             true
-          elsif data != nil and data.action == "Q2" and date >= data.begin_at
+          elsif data != nil and data.action == "Q1" and date >= data.begin_at
             true
           else
             false
