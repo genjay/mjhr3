@@ -1,0 +1,14 @@
+<%= simple_form_for @daily_offwork, url: doc_offwork_daily_offwork_path do |f| %>
+  <% f.error_notification %>
+
+  <div class="form-inputs"> 
+    <%= f.input :duty_date,as: :string,readonly: true %> 
+    <%= f.input :mins_of_duty %>
+
+  </div>
+
+  <div class="form-actions"> 
+      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to 'Back', doc_offwork_daily_offworks_path,class: 'btn btn-primary', method: :get %>
+  </div>
+<% end %>

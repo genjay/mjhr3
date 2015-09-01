@@ -1,14 +1,14 @@
 class DocOffwork < ActiveRecord::Base
 	validates :employee_id, presence: true, uniqueness: {scope: [:employee_id, :offduty_begin_at]}
-
 	belongs_to :employee
 	belongs_to :offtype
 	has_many :details, class_name: "DailyOffwork", foreign_key: "doc_offwork_id"
 	before_destroy :check_is_closed
 	after_save :insert_daily_offworks
+	validate :check_overlap, :check_is_closed, :begin_greater_than_end
 
 	def employee_uid
-		self.employee.try(:uid)
+		self.employee.try(:uid) 
 	end
 
 	def sum_offhours
@@ -16,8 +16,8 @@ class DocOffwork < ActiveRecord::Base
 	end
 
 	def off_hours
-		# (self.mins_offduty == nil)? 0 : (self.mins_offduty / 60)
-		self.details.sum(:mins_of_duty)/60
+		x = self.details.sum(:mins_of_duty)/60
+    # "#{x.to_f/8} 天" if x>8
 	end
 
 	def off_hours=(hr)
@@ -62,10 +62,12 @@ class DocOffwork < ActiveRecord::Base
 
 	def check_is_closed
 	  if self.is_closed == true
-	  	errors[:messages] << %Q(It's closed can't Delete)
-	  	false
+	  	# errors[:messages] << %Q(It's closed can't Delete)
+	  	errors.add(:begin_date,"關帳")
 	  end
 	end
+
+# private
 
 	def insert_daily_offworks
 		conn = ActiveRecord::Base.connection
@@ -80,4 +82,20 @@ class DocOffwork < ActiveRecord::Base
 		where a.id = #{id};"
 		conn.execute sql
 	end
+
+  def check_overlap
+  	#檢查是否有另一張重疊的假單
+  	cnt = self.class.where("employee_id= ? and offduty_begin_at < ? and offduty_end_at > ? and id != ?",employee_id,offduty_end_at,offduty_begin_at,id).count
+  	if cnt > 0
+		  errors.add(:begin_date,"與另一張請假單發現重疊")
+		end 
+  end
+
+  def begin_greater_than_end
+  	if offduty_begin_at >= offduty_end_at 
+  		errors.add(:begin_date,"請假起迄有錯")
+  	end
+  end
+
 end
+

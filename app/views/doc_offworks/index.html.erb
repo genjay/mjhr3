@@ -28,7 +28,7 @@
           <td><%= offwork.offtype.try(:name) %></td>
           <td><%= offwork.offduty_begin_at.strftime('%Y-%m-%d %H:%M') if offwork.offduty_begin_at? %></td>
           <td><%= offwork.offduty_end_at.strftime('%Y-%m-%d %H:%M') if offwork.offduty_end_at? %></td>
-          <td><%= offwork.off_hours %></td>
+          <td><%= link_to offwork.off_hours,doc_offwork_daily_offworks_path(offwork) %></td>
           <td><%= '已關帳' if offwork.is_closed %></td>  
         </tr>
       <% end %>

@@ -402,10 +402,10 @@ class CombineAll < ActiveRecord::Migration
 
   	end
     
-    create_table "daily_offworks", id: false, force: :cascade do |t|
+    create_table "daily_offworks", force: :cascade do |t|
       t.integer "doc_offwork_id", limit: 4, default: 0, null: false
       t.date    "duty_date"
-      t.integer "mins_of_duty",   limit: 4
+      t.integer "mins_of_duty",   limit: 4, default: 0, null: false
     end
 
 end

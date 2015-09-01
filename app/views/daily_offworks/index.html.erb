@@ -1,0 +1,29 @@
+<h2>請假單明細</h2> 
+
+  <%= link_to 'Back', doc_offworks_path, class: 'btn btn-primary', method: :get %>
+
+  <table id='table_id' class='table table-hover'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>項次</th> 
+        <th>日期</th>
+        <th>請假時間</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @doc_details.each_with_index do |f,i| %>
+        <tr>
+          <td><%= check_box_tag "ids[]", f.id %></td>
+          <td><%= i+1 %></td>
+          <td><%= f.duty_date %></td> 
+          <td><%= link_to f.mins_of_duty,edit_doc_offwork_daily_offwork_path(f.doc_offwork_id,f.id) %></td> 
+
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 
+
+ 

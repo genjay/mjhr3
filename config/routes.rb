@@ -47,7 +47,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources  :doc_offworks, :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, except: [:show, :destroy] do
+  resources  :doc_offworks do 
+    resources :daily_offworks, only: [:index, :edit, :update]
+    collection do
+      delete 'multi_destroy'
+    end
+  end
+
+  resources  :subsidies, :overtypes, :departments, :offtypes, :ous, :annual_leave_lists, :pay_types, :catcodes, :insurance_settings, except: [:show, :destroy] do
     collection do
       delete 'multi_destroy'
     end
