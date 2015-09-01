@@ -6,4 +6,8 @@ class EmployeeInoutlog < ActiveRecord::Base
   def self.check_permit(empid) 
     self.select("action, begin_at").where("employee_id = #{empid}").order("created_at DESC").first
   end
+
+  def can_delete?
+    delete = self.class.where(:employee_id => employee_id).order("begin_at DESC").first
+  end
 end

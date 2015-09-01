@@ -4,7 +4,7 @@ class EmployeeInoutlogsController < ApplicationController
 
   def index
     @employee_id = params[:employee_id]
-    @inoutlogs = current_ou.view_employee_inoutlogs.where(employee_id: @employee_id)
+    @inoutlogs = current_ou.view_employee_inoutlogs.where(employee_id: @employee_id).order("begin_at ASC")
   end
 
   def new
@@ -53,25 +53,34 @@ class EmployeeInoutlogsController < ApplicationController
   #   end
   # end
 
-  def multi_destroy 
-    err_msg,ok_msg,all_msg = '','',''
-    params[:ids].each do |f|
-      x = current_ou.employee_inoutlogs.find(f)
-      if x.destroy
-        ok_msg = ok_msg << "[#{x.employee.name} #{x.action}]"
+  def multi_destroy
+    items = params[:ids]
+    case items
+    when nil
+      redirect_to employee_employee_inoutlogs_path, :flash => { :alert => "沒有項目被選取" }      
+    else
+      if items.size == 1
+        err_msg,ok_msg,all_msg = '','',''
+        params[:ids].each do |f|
+          x = current_ou.employee_inoutlogs.find(f)
+          if x.destroy
+            ok_msg = ok_msg << "[#{x.employee.name} #{x.action}]"
+          else
+            err_msg = err_msg << "[#{x.employee.name} #{x.action}] 刪除失敗 " << x.errors[:base].join << '\n'
+          end
+        end
+        all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
+        respond_to do |format|
+          if err_msg.size>0
+            format.html { redirect_to employee_employee_inoutlogs_path, alert: all_msg }
+          else
+            format.html { redirect_to employee_employee_inoutlogs_path, notice: all_msg }
+          end
+        end
       else
-        err_msg = err_msg << "[#{x.employee.name} #{x.action}] 刪除失敗 " << x.errors[:base].join << '\n'
+        redirect_to employee_employee_inoutlogs_path, :flash => { :alert => "同一時間只能刪除一個項目" }
       end
     end
-
-      all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
-      respond_to do |format|
-        if err_msg.size>0
-          format.html { redirect_to employee_employee_inoutlogs_path, alert: all_msg }
-        else
-          format.html { redirect_to employee_employee_inoutlogs_path, notice: all_msg }
-        end
-      end
   end
 
   private
@@ -104,11 +113,15 @@ class EmployeeInoutlogsController < ApplicationController
     def update_employee(action, date, emp_id, dep_id)
       case action
       when "A1"
-        current_ou.employees.where(id:emp_id).update_all(arrive_date:date)
+        current_ou.employees.where(id:emp_id).update_all(arrive_date:date, leave_date:nil)
       when "Q1"
         current_ou.employees.where(id:emp_id).update_all(leave_date:date)
       when "C1"
         current_ou.employees.where(id:emp_id).update_all(department_id:dep_id)
+      when "Q2"
+        current_ou.employees.where(id:emp_id).update_all(leave_date:date)        
+      when "A2"
+        current_ou.employees.where(id:emp_id).update_all(leave_date:nil)        
       else
       end
     end
@@ -118,7 +131,8 @@ class EmployeeInoutlogsController < ApplicationController
     end
 
     def set_employee_name
-      @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
+      data = current_ou.employees.includes(:department).find_by(id: params[:employee_id])
+      @employee_name = "#{data.name} #{data.department.name}"
     end
 
     def inoutlog_params
