@@ -1,6 +1,6 @@
 <%= simple_form_for(@forget) do |f| %>
   <% f.error_notification %>
-  <%= params[:action] %>
+
   <div class="form-inputs">
     <table width="100%">
       <tr>
@@ -27,7 +27,7 @@
           <%= f.input :begin_time,label:'忘刷起(時間)',:input_html => {:id => "begin_time"} %>
           <%= f.input :end_date,label:'忘刷起(日期)',:input_html => {:id => "end_date"} %>
           <%= f.input :end_time,label:'忘刷迄(時間)',:input_html => {:id => "end_time"} %>
-          <%= f.input :is_closed,label:'是否關帳' %>
+          <!-- <%= f.input :is_closed,label:'是否關帳' %> -->
           <%= f.input :notes,placeholder:'備註',label:'備註' %>
         </td>
       </tr>
@@ -36,6 +36,6 @@
 
   <div class="form-actions"> 
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', doc_forgets_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', doc_forgets_path,class: 'btn btn-primary', method: :get %>
   </div>
 <% end %>

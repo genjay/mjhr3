@@ -115,7 +115,9 @@ class DocOverwork < ActiveRecord::Base
 
 	def is_holiday
 		holiday = ViewSchEmp.find_by(employee_id:self.employee_id, duty_date:self.duty_date)
-		holiday.is_holiday
+		if holiday != nil
+		  return holiday.is_holiday
+		end
 	end
 
 	# def hr_h # 假日時數，指 0820~1720 部份

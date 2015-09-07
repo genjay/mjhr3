@@ -14,7 +14,7 @@
       <tr>
         <td colspan="2">
            <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
-          <%= f.association :overtype,:label_method => lambda { |f| "#{f.uid}  #{f.name}" }, :include_blank => false %>
+          <%= f.association :overtype,label: '加班類別',:label_method => lambda { |f| "#{f.uid}  #{f.name}" }, :include_blank => false %>
           <%= f.input :duty_date,as: :string,placeholder:'出勤日期',label:'出勤日' %>
           <%= f.input :begin_date,label:'加班起(日期)' %>
           <%= f.input :begin_time,label:'加班起(時間)' %>
@@ -28,7 +28,7 @@
             <%= f.input :hr_c,as: :integer,placeholder:'時數',label:'2倍時數' %>
             <%= f.input :hr_h,as: :integer,placeholder:'假日時數',label:'假日時數' %>
           <% end %>
-          <%= f.input :is_closed,label:'是否關帳' %>
+          <!-- <%= f.input :is_closed,label:'是否關帳' %> -->
           <%= f.input :notes,placeholder:'備註',label:'備註' %>
         </td>
       </tr>
@@ -37,6 +37,6 @@
 
   <div class="form-actions"> 
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', doc_overworks_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', doc_overworks_path,class: 'btn btn-primary', method: :get %>
   </div>
 <% end %>

@@ -109,9 +109,11 @@ class DocOffwork < ActiveRecord::Base
   end
 
   def begin_greater_than_end
+    if offduty_begin_at != nil
   	if offduty_begin_at >= offduty_end_at 
   		errors.add(:begin_date,"請假起迄有錯")
   	end
+    end
   end
 
 end

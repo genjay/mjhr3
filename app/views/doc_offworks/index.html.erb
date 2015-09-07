@@ -1,9 +1,10 @@
 <h2>請假清單</h2> 
 
-<%= form_tag multi_destroy_doc_offworks_path, method: :delete do %>  
-  <%= link_to 'New ', new_doc_offwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
+<%= form_tag multi_destroy_doc_offworks_path, method: :delete do %> 
 
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to '新增 ', new_doc_offwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
   <table id='table_id' class='table table-hover'>
     <thead>
@@ -34,8 +35,11 @@
       <% end %>
     </tbody>
   </table> 
-   <%= link_to 'New ', new_doc_offwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>  
 
-    <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+   <%= link_to '新增 ', new_doc_offwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
+
+
 <% end %>
  
