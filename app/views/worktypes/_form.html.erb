@@ -2,20 +2,20 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :uid,placeholder:'班別代號',autofocus:true %>
-    <%= f.input :name,placeholder:'班別名稱' %>
-    <%= f.input :on_duty_at,as: 'string' %>
-    <%= f.input :off_duty_at,as: 'string' %>
-    <%= f.input :buffer_before_duty,placeholder:'提早上班，提早下班(分鐘)' %>
-    <%= f.input :buffer_after_duty,placeholder:'延後上班，延後下班(分鐘)' %>
-    <%= f.input :minimum_before_overwork,placeholder:'上班前加班最小申報單位(分鐘)' %>
-    <%= f.input :minimum_after_overwork,placeholder:'下班後加班最小申報單位(分鐘)' %>
-    <%= f.input :minimum_holiday_overwork,placeholder:'假日加班最小申報單位(分鐘)' %>
+    <%= f.input :uid,label:'代號',placeholder:'班別代號',autofocus:true %>
+    <%= f.input :name,label:'名稱',placeholder:'班別名稱' %>
+    <%= f.input :on_duty_at,label:'出勤起',placeholder:'出勤起(分鐘)',as: 'string' %>
+    <%= f.input :off_duty_at,label:'出勤迄',placeholder:'出勤迄(分鐘)',as: 'string' %>
+    <%= f.input :buffer_before_duty,label:'提早上班',placeholder:'提早上班，提早下班(分鐘)' %>
+    <%= f.input :buffer_after_duty,label:'延後上班',placeholder:'延後上班，延後下班(分鐘)' %>
+    <%= f.input :minimum_before_overwork,label:'上班前加班分鐘',placeholder:'上班前加班最小申報單位(分鐘)' %>
+    <%= f.input :minimum_after_overwork,label:'下班後加班分鐘',placeholder:'下班後加班最小申報單位(分鐘)' %>
+    <%= f.input :minimum_holiday_overwork,label:'假日加班分鐘',placeholder:'假日加班最小申報單位(分鐘)' %>
     <%= f.input :range_on,placeholder:'判斷刷卡時間用，預設:360' %>
     <%= f.input :range_off,placeholder:'判斷刷卡時間用，預設：480' %>
-    <%= f.input :is_stoped %>
+    <%= f.input :is_stoped,label:'停用' %>
     <%= f.input :mins_of_duty,placeholder:'該班別工時(分鐘)' %>
-    <%= f.input :memo %> 
+    <%= f.input :memo,label:'備註' %> 
   </div>
 
     <%# f.simple_fields_for :workrests, @worktype.workrests do |q| %>
@@ -27,7 +27,7 @@
 
   <div class="form-actions">
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', worktypes_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', worktypes_path,class: 'btn btn-warning', method: :get %>
   </div>
 
 <% end %>

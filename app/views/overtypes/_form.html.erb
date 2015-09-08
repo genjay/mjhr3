@@ -2,8 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :uid,placeholder:'加班類別代號',autofocus:true %>
-    <%= f.input :name,placeholder:'加班類別名稱' %>
+    <%= f.input :uid,label:'代號',placeholder:'加班類別代號',autofocus:true %>
+    <%= f.input :name,label:'名稱',placeholder:'加班類別名稱' %>
     <%= f.input :mins_of_A,placeholder:'加班A時間預設：120' %>
     <%= f.input :mins_of_B,placeholder:'加班b時段預設：120' %>
     <%= f.input :rate_of_A,placeholder:'A時段加班費比率：1.333' %>
@@ -12,17 +12,17 @@
     <%= f.input :amt_of_B,placeholder:'B時段加班費金額：0' %>
     <%= f.input :rate_of_C,placeholder:'C時段加班費比率：2.000' %>
     <%= f.input :amt_of_C,placeholder:'C時段加班費金額：0' %>
-    <%= f.input :rate_of_H,placeholder:'假日加班費比率：2.000' %>
-    <%= f.input :amt_of_H,placeholder:'假日加班費金額：0' %>
-    <%= f.input :mins_per_unit,placeholder:'加班費累進單位(分鐘) 預設：60' %>
+    <%= f.input :rate_of_H,label:'假日加班費比率',placeholder:'假日加班費比率：2.000' %>
+    <%= f.input :amt_of_H,label:'假日加班費金額',placeholder:'假日加班費金額：0' %>
+    <%= f.input :mins_per_unit,label:'加班費累進單位',placeholder:'加班費累進單位(分鐘) 預設：60' %>
     <%= f.input :valid_unit, collection:Option.of('Overtype',:valid_unit)  %> 
-    <%= f.input :is_stoped %>
+    <%= f.input :is_stoped,label:'停用' %>
     <%= f.input :pay_type, include_blank: false, collection: Option.of('Overtype',:pay_type) %>
-    <%= f.input :memo %> 
+    <%= f.input :memo,label:'備註' %> 
   </div>
 
   <div class="form-actions">
     <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-    <%= link_to 'Back', overtypes_path,class: 'btn btn-primary', method: :get %></td>
+    <%= link_to '回上一頁', overtypes_path,class: 'btn btn-warning', method: :get %></td>
   </div>
 <% end %>

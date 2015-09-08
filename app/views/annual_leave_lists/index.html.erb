@@ -1,18 +1,18 @@
-<h2>Listing Annual Leave Lists</h2>
+<h2>特休年資對應表</h2>
 
 <%= form_tag multi_destroy_annual_leave_lists_path, method: :delete do %>
 
-  <%= link_to 'New ', new_annual_leave_list_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to '新增 ', new_annual_leave_list_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Months of job</th>
-      <th>Days</th>
-      <th>Memo</th> 
+      <th>年資(月份)</th>
+      <th>特休天數</th>
+      <th>備註</th> 
     </tr>
   </thead>
 
@@ -29,7 +29,7 @@
   </tbody>
 </table>
 
-  <%= link_to 'New ', new_annual_leave_list_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_annual_leave_list_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
   
 <% end %>

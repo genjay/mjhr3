@@ -1,29 +1,29 @@
-<h2>Listing Worktypes</h2>
+<h2>班別清單</h2>
 
 <%= form_tag multi_destroy_worktypes_path, method: :delete do %>
 
-  <%= link_to 'New', new_worktype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增', new_worktype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Uid</th>
-      <th>Name</th>
+      <th>代號</th>
+      <th>名稱</th>
       <th>休息時刻</th>
-      <th>On duty at</th>
-      <th>Off duty at</th>
-      <th>Buffer before duty</th>
-      <th>Buffer after duty</th>
-      <th>Minimum before overwork</th>
-      <th>Minimum after overwork</th>
-      <th>Minimum holiday overwork</th>
-      <th>Range on</th>
-      <th>Range off</th>
-      <th>Is stoped</th>
-      <th>Mins of duty</th> 
+      <th>出勤起</th>
+      <th>出勤迄</th>
+      <th>提早上班</th>
+      <th>延後上班</th>
+      <th>上班前加班分鐘</th>
+      <th>下班後加班分鐘</th>
+      <th>假日加班分鐘</th>
+      <!-- <th>Range on</th>
+      <th>Range off</th> -->
+      <th>停用</th>
+      <th>班別工時</th> 
     </tr>
   </thead>
 
@@ -42,8 +42,8 @@
         <td><%= worktype.minimum_before_overwork %></td>
         <td><%= worktype.minimum_after_overwork %></td>
         <td><%= worktype.minimum_holiday_overwork %></td>
-        <td><%= worktype.range_on %></td>
-        <td><%= worktype.range_off %></td>
+        <!-- <td><%= worktype.range_on %></td>
+        <td><%= worktype.range_off %></td> -->
         <td><%= worktype.is_stoped %></td>
         <td><%= worktype.mins_of_duty %></td>
       </tr>
@@ -51,7 +51,7 @@
   </tbody>
 </table>
 
-<%= link_to 'New ', new_worktype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+<%= link_to '新增 ', new_worktype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <% end %>

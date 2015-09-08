@@ -58,45 +58,51 @@ class DepartmentsController < ApplicationController
 
   # DELETE /departments/1
   # DELETE /departments/1.json
-  def destroy
-    respond_to do |format|
-      if @department.destroy
-          format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
-          format.json { head :no_content }
-      else
-        # render :text => @department.errors[:base].to_s 
-        # return
-         format.html { render :edit, notice: 'error',alert: @department.errors[:base] }
-      end
-    end
-  end
+  # def destroy
+  #   respond_to do |format|
+  #     if @department.destroy
+  #         format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
+  #         format.json { head :no_content }
+  #     else
+  #       # render :text => @department.errors[:base].to_s 
+  #       # return
+  #        format.html { render :edit, notice: 'error',alert: @department.errors[:base] }
+  #     end
+  #   end
+  # end
 
-  def multi_destroy 
-    errors ||=''
-    ok_msg ||=''
-    all_msg ||=''
-    params[:ids].each do |f|
-      x = Department.find(f)
-      x.destroy
-      if x.errors.empty?
-        ok_msg = ok_msg + " [#{x.uid} #{x.name}]"  
-      else
-        errors = errors + "[#{x.uid} #{x.name}] 失敗" + x.errors[:base].join + '\n'
+  def multi_destroy
+    items = params[:ids]
+    case items
+    when nil
+      redirect_to departments_path, :flash => { :alert => "沒有項目被選取" }
+    else
+      errors ||=''
+      ok_msg ||=''
+      all_msg ||=''
+      params[:ids].each do |f|
+        x = Department.find(f)
+        x.destroy
+        if x.errors.empty?
+          ok_msg = ok_msg + " [#{x.uid} #{x.name}]"  
+        else
+          errors = errors + "[#{x.uid} #{x.name}] 失敗" + x.errors[:base].join + '\n'
+        end
+               
+        if ok_msg.size>0 
+          all_msg = "#{ok_msg} 刪除完成\\n #{errors}" 
+        else
+         all_msg = "#{errors}" 
+        end
       end
-         
-      if ok_msg.size>0 
-        all_msg = "#{ok_msg} 刪除完成\\n #{errors}" 
-      else
-        all_msg = "#{errors}" 
-      end
-    end
 
-    respond_to do |format|
-      if errors.size>0 
-       format.html { redirect_to departments_path, alert: all_msg } 
-      else
-       format.html { redirect_to departments_path, notice: all_msg }
-      end 
+      respond_to do |format|
+        if errors.size>0 
+          format.html { redirect_to departments_path, alert: all_msg } 
+        else
+          format.html { redirect_to departments_path, notice: all_msg }
+        end 
+      end
     end
   end
 

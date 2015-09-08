@@ -1,22 +1,22 @@
-<h2>Listing Ous</h2>
+<h2>公司清單</h2>
 
 <%= form_tag multi_destroy_ous_path, method: :delete do %>
 
-  <%= link_to 'New ', new_ou_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_ou_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <!-- <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> -->
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th>項次</th>
-      <th>Uid</th>
-      <th>Name</th>
-      <th>Overwork hours for freetax</th>
+      <th>代號</th>
+      <th>名稱</th>
+      <th>加班免稅時數</th>
       <th>Days per month</th>
       <th>Hours per day</th>
       <th>Lp rate</th>
       <th>Welfare rate</th>
-      <th>Memo</th>
+      <th>備註</th>
     </tr>
   </thead>
 
@@ -37,7 +37,7 @@
   </tbody>
 </table>
 
-<%= link_to 'New ', new_ou_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+<%= link_to '新增 ', new_ou_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <!-- <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> -->
 
 <% end %>

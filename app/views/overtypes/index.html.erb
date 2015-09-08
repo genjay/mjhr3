@@ -1,10 +1,10 @@
-<h2>加班類別</h2>
+<h2>加班類別清單</h2>
 
 <%= form_tag multi_destroy_overtypes_path, method: :delete do %>
 
-  <%= link_to 'New', new_overtype_path ,class: 'btn btn-primary'%>
+  <%= link_to '新增', new_overtype_path ,class: 'btn btn-primary'%>
 
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料'} %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料'} %>
 
 <table id='table_id' class='table table-hover'>
   <thead>
@@ -21,11 +21,11 @@
       <th>B 金額</th>
       <th>C 比率</th>
       <th>C 金額</th>
-      <th>Rate of h</th>
-      <th>Amt of h</th>
-      <th>Mins per unit</th>
+      <th>假日加班費比率</th>
+      <th>假日加班費金額</th>
+      <th>加班費累進單位</th>
       <th>Valid unit</th>
-      <th>Is stoped</th>
+      <th>停用</th>
       <th>Pay type</th>   
     </tr>
   </thead>
@@ -56,8 +56,8 @@
   </tbody>
 </table>
 
-<%= link_to 'New', new_overtype_path ,class: 'btn btn-primary'%>
+<%= link_to '新增', new_overtype_path ,class: 'btn btn-primary'%>
 
-<%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料'} %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料'} %>
 
 <% end %>

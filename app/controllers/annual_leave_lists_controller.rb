@@ -61,20 +61,21 @@ class AnnualLeaveListsController < ApplicationController
   #   end
   # end
 
-  def multi_destroy 
-    # render :text => params
-    err_msg,ok_msg,all_msg = '','',''
-    # ok_msg = 'yyy'
-    # render :text => ok_msg
-    # return
-    params[:ids].each do |f|
-      x = current_ou.annual_leave_lists.find(f)
-      if x.destroy
-        ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
-      else
-        err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+  def multi_destroy
+    items = params[:ids]
+    case items
+    when nil
+      redirect_to annual_leave_lists_path, :flash => { :alert => "沒有項目被選取" }
+    else
+      err_msg,ok_msg,all_msg = '','',''
+      params[:ids].each do |f|
+        x = current_ou.annual_leave_lists.find(f)
+        if x.destroy
+          ok_msg = ok_msg << "[#{x.uid} #{x.name}]"
+        else
+          err_msg = err_msg << "[#{x.uid} #{x.name}] 刪除失敗 " << x.errors[:base].join << '\n'
+        end
       end
-    end
 
       all_msg = (ok_msg.size==0? '' :(ok_msg << "刪除完成\\n")) << err_msg
       # render :text => all_msg
@@ -85,6 +86,7 @@ class AnnualLeaveListsController < ApplicationController
           format.html { redirect_to annual_leave_lists_path, notice: all_msg }
         end
       end
+    end
   end
 
   private

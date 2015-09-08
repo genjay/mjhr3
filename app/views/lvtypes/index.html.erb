@@ -2,15 +2,15 @@
 
 <%= form_tag multi_destroy_lvtypes_path, method: :delete do %>
 
-  <%= link_to 'New ', new_lvtype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to '新增 ', new_lvtype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> 
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Uid</th>
+      <th>代號</th>
       <th>名稱</th>
       <th></th>
     </tr>
@@ -23,13 +23,13 @@
         <td><%= i+1 %></td>
         <td><%= lvtype.uid %></td>
         <td><%= link_to lvtype.name, edit_lvtype_path(lvtype) %></td>
-        <td><%= link_to '清單維護', lvtype_lvlists_path(lvtype.id), method: :get %></td>
+        <td><%= link_to '級距表維護', lvtype_lvlists_path(lvtype.id), method: :get %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-  <%= link_to 'New ', new_lvtype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_lvtype_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> 
   
 <% end %>

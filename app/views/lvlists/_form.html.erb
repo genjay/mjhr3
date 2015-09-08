@@ -2,13 +2,13 @@
   <% f.error_notification %>
 
   <div class="form-inputs"> 
-    <%= f.input :uid %>
-    <%= f.input :amt %>
+    <%= f.input :uid,label:'代號' %>
+    <%= f.input :amt,label:'金額' %>
   </div>
 
   <div class="form-actions">
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', lvtype_lvlists_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', lvtype_lvlists_path,class: 'btn btn-warning', method: :get %>
   </div>
 
 <% end %>

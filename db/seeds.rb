@@ -977,3 +977,12 @@ if true # options
 
 end 
 
+if true   #lvtype
+    Lvtype.delete_all
+    id = 0
+    year = (Time.now.strftime('%Y')).to_i-1911
+    Lvtype.create(id: id+=1, uid: 'A', name: "#{year} 健保級距", memo: "#{year} 健保級距")
+    Lvtype.create(id: id+=1, uid: 'B', name: "#{year} 勞保級距", memo: "#{year} 勞保級距")
+    Lvtype.create(id: id+=1, uid: 'C', name: "#{year} 勞退級距", memo: "#{year} 勞退級距")
+end
+
