@@ -13,17 +13,16 @@ class Employee < ActiveRecord::Base
   has_many :daily_duties  
   has_many :month_duties
   has_many :month_duty
+  after_create :create_inoutlog
   # has_many :calendars, foreign_key: :ou_id, primary_key: :ou_id
   # ,-> {"where calendars.duty_date >= employees.arrive_date and calendars.duty_date <= ifnull(employees.leave_date,'99991231')"}
 
-  # def self.create
-  # 	super
-  #   self.employee_inoutlog.create(action:'hired')
-  # end
-  # def create
-  # 	super
-  # 	employee_inoutlog.create(employee_id:self,action:'hired')
-  # end
+  def create_inoutlog
+    # 新增employee時，順便新增報到log(employee_inoutlogs)
+    # 刪除暫時不寫，因為正常作業，不應該出現刪除人員的動作
+    self.employee_inoutlogs.create(department_id:department_id,begin_at:arrive_date,ou_id:ou_id,action:'A1')
+  end
+
   def to_s
     "#{self.uid} #{self.name}"
   end 

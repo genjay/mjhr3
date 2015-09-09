@@ -139,7 +139,7 @@ class CombineAll < ActiveRecord::Migration
   	    t.string   "action",         limit: 255
   	    t.date     "begin_at"
   	    t.integer  "department_id",  limit: 4
-  	    t.integer  "days_of_jobage", limit: 4
+  	    t.integer  "days_of_jobage", limit: 4, default: 0
   	    t.datetime "created_at",                 null: false
   	    t.datetime "updated_at",                 null: false
   	  end
