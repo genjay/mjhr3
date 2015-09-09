@@ -14,26 +14,31 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   def create
-    @inoutlog = current_ou.employee_inoutlogs.new(inoutlog_params)
-    @inoutlog.employee_id = params[:employee_id]
-
-    form_action = params[:employee_inoutlog][:action]
-    form_date = Date.parse params[:employee_inoutlog][:begin_at]
-    form_depid = params[:employee_inoutlog][:department_id]
-    act = action_permit(@inoutlog.employee_id, form_action, form_date)
-
-    case act
-    when false
-        redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動或生效日期有誤" }
+    form_date = Date.parse params[:employee_inoutlog][:begin_at] rescue nil
+    case form_date
     when nil
-        redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "異動類別錯誤" }
+      redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動或生效日期有誤" }
     else
-      respond_to do |format|
-        if @inoutlog.save
-          update_employee(form_action, form_date, @inoutlog.employee_id, form_depid)
-          format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定新增成功' }
-        else
-          format.html { render :new }
+      @inoutlog = current_ou.employee_inoutlogs.new(inoutlog_params)
+      @inoutlog.employee_id = params[:employee_id]
+
+      form_action = params[:employee_inoutlog][:action]
+      form_depid = params[:employee_inoutlog][:department_id]
+      act = action_permit(@inoutlog.employee_id, form_action, form_date)
+
+      case act
+      when false
+          redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "操作錯誤，請檢查此員工狀態是否可異動或生效日期有誤" }
+      when nil
+          redirect_to new_employee_employee_inoutlog_path, :flash => { :alert => "異動類別錯誤" }
+      else
+        respond_to do |format|
+          if @inoutlog.save
+            update_employee(form_action, form_date, @inoutlog.employee_id, form_depid)
+            format.html { redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定新增成功' }
+          else
+            format.html { render :new }
+          end
         end
       end
     end

@@ -1,20 +1,20 @@
-<h2>Listing Catcodes</h2>
+<h2>系統代碼清單</h2>
 
 <%= form_tag multi_destroy_catcodes_path, method: :delete do %>
 
-  <%= link_to 'New ', new_catcode_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to '新增 ', new_catcode_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> 
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
+      <th>代號</th>
       <th>M name</th>
       <th>Col name</th>
-      <th>Uid</th>
-      <th>Name</th>
-      <th>Is stoped</th> 
+      <th>名稱</th>
+      <th>停用</th> 
     </tr>
   </thead>
 
@@ -23,9 +23,9 @@
       <tr>
         <td><%= check_box_tag "ids[]", catcode.id %></td>
         <td><%= i+1 %></td>
+        <td><%= catcode.uid %></td>
         <td><%= link_to catcode.m_name,edit_catcode_path(catcode) %></td>
         <td><%= link_to catcode.col_name,edit_catcode_path(catcode) %></td>
-        <td><%= catcode.uid %></td>
         <td><%= catcode.name %></td>
         <td><%= catcode.is_stoped %></td> 
       </tr>
@@ -33,7 +33,7 @@
   </tbody>
 </table>
 
-  <%= link_to 'New ', new_catcode_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_catcode_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> 
   
 <% end %>

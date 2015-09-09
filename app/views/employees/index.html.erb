@@ -1,28 +1,25 @@
-<h2>Listing Employees</h2>
+<h2>員工清單</h2>
 
 <%= form_tag multi_destroy_employees_path, method: :delete do %>
 
-  <%= link_to 'New ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to '新增 ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Uid</th>
-      <th>Name</th>
-      <th>Department</th>
-      <th>Id number</th>
-      <th>Arrive date</th>
-      <th>Levae date</th>
-      <th>Birthday</th>
-      <th>Sex</th>
-      <th>Marriage</th>
-      <th>Education</th>
-      <th>School</th> 
-      <th>Email</th>
-      <th>Cardno of duty</th>
+      <th>代號</th>
+      <th>姓名</th>
+      <th>部門</th>
+      <th>身份證號</th>
+      <th>到職日</th>
+      <th>離職日</th>
+      <th>生日</th>
+      <th>性別</th>
+      <th>學歷</th>
+      <th>出勤卡號</th>
     </tr>
   </thead>
 
@@ -39,17 +36,14 @@
         <td><%= employee.leave_date %></td>
         <td><%= employee.birthday %></td>
         <td><%= employee.sex %></td>
-        <td><%= employee.marriage %></td>
         <td><%= employee.education %></td>
-        <td><%= employee.school %></td>
-        <td><%= employee.email %></td>
         <td><%= employee.cardno %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-  <%= link_to 'New ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
   
 <% end %>

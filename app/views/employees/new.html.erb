@@ -1,4 +1,4 @@
-<h2>New Employee</h2>
+<h2>員工新增</h2>
 
 <div id='rcorners2'>
   <%= simple_form_for(@employee) do |f| %>
@@ -26,7 +26,7 @@
 
   <div class="form-actions">
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', employees_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', employees_path,class: 'btn btn-warning', method: :get %>
   </div>
 
 <% end %>

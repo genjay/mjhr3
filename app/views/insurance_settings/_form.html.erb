@@ -2,10 +2,10 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :uid,placeholder:'保險身分代號',autofocus:true %>
-    <%= f.input :name,placeholder:'保險身分說明' %>
-    <%= f.input :is_stoped %>
-    <%= f.input :memo %> 
+    <%= f.input :uid,label:'代號',placeholder:'保險身分代號',autofocus:true %>
+    <%= f.input :name,label:'名稱',placeholder:'保險身分說明' %>
+    <%= f.input :is_stoped,label:'停用' %>
+    <%= f.input :memo,label:'備註' %> 
     <%= f.input :a_rate,placeholder:'普通事故保險費率',label:'普通事故保險費率' %>
     <%= f.input :a_employee,placeholder:'員工自付％',label:'普通事故' %>
     <%= f.input :a_company,placeholder:'公司付擔％' %>
@@ -25,7 +25,7 @@
 
   <div class="form-actions">
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', insurance_settings_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', insurance_settings_path,class: 'btn btn-warning', method: :get %>
   </div>
 
 <% end %> 

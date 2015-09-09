@@ -981,8 +981,30 @@ if true   #lvtype
     Lvtype.delete_all
     id = 0
     year = (Time.now.strftime('%Y')).to_i-1911
-    Lvtype.create(id: id+=1, uid: 'A', name: "#{year} 健保級距", memo: "#{year} 健保級距")
-    Lvtype.create(id: id+=1, uid: 'B', name: "#{year} 勞保級距", memo: "#{year} 勞保級距")
-    Lvtype.create(id: id+=1, uid: 'C', name: "#{year} 勞退級距", memo: "#{year} 勞退級距")
+    Lvtype.create(id: id+=1, ou_id:@ou.id, uid: 'A', name: "#{year} 健保級距", memo: "#{year} 健保級距")
+    Lvtype.create(id: id+=1, ou_id:@ou.id, uid: 'B', name: "#{year} 勞保級距", memo: "#{year} 勞保級距")
+    Lvtype.create(id: id+=1, ou_id:@ou.id, uid: 'C', name: "#{year} 勞退級距", memo: "#{year} 勞退級距")
+end
+
+if true   #lvlist
+    Lvlist.delete_all
+    id = 0
+    Lvlist.create(id: id+=1, uid: 'A1', amt: 10000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
+    Lvlist.create(id: id+=1, uid: 'A2', amt: 20000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
+    Lvlist.create(id: id+=1, uid: 'A3', amt: 30000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
+    Lvlist.create(id: id+=1, uid: 'A4', amt: 40000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
+    Lvlist.create(id: id+=1, uid: 'A5', amt: 50000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
+
+    Lvlist.create(id: id+=1, uid: 'B1', amt: 15000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
+    Lvlist.create(id: id+=1, uid: 'B2', amt: 25000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
+    Lvlist.create(id: id+=1, uid: 'B3', amt: 35000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
+    Lvlist.create(id: id+=1, uid: 'B4', amt: 45000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
+    Lvlist.create(id: id+=1, uid: 'B5', amt: 55000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
+
+    Lvlist.create(id: id+=1, uid: 'C1', amt: 12000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
+    Lvlist.create(id: id+=1, uid: 'C2', amt: 22000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
+    Lvlist.create(id: id+=1, uid: 'C3', amt: 32000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
+    Lvlist.create(id: id+=1, uid: 'C4', amt: 42000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
+    Lvlist.create(id: id+=1, uid: 'C5', amt: 52000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
 end
 

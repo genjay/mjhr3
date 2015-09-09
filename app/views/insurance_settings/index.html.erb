@@ -1,18 +1,18 @@
-<h2>Listing Insurance Settings</h2>
+<h2>保險身分清單</h2>
 
 <%= form_tag multi_destroy_insurance_settings_path, method: :delete do %>
 
-  <%= link_to 'New ', new_insurance_setting_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %> 
+  <%= link_to '新增 ', new_insurance_setting_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %> 
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Uid</th>
-      <th>Name</th>
-      <th>Is stoped</th> 
+      <th>代號</th>
+      <th>名稱</th>
+      <th>停用</th> 
       <th>A rate</th>
       <th>A employee</th>
       <th>A company</th>
@@ -59,8 +59,8 @@
   </tbody>
 </table>
 
-  <%= link_to 'New ', new_insurance_setting_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_insurance_setting_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
   
 <% end %>
 

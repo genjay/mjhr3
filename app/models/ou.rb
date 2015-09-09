@@ -24,6 +24,7 @@ class Ou < ActiveRecord::Base
 	has_many :employee_salary_settings, :dependent => :restrict_with_error
 	has_many :employee_inoutlogs, :dependent => :restrict_with_error
 	has_many :month_others, :dependent => :restrict_with_error
+	has_many :catcodes, :dependent => :restrict_with_error
 
 
   # prefix with view_ is a db view can't update delete new

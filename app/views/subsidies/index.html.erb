@@ -1,21 +1,19 @@
-<h2>Listing Subsidies</h2>
+<h2>補助比率清單</h2>
 
 <%= form_tag multi_destroy_subsidies_path, method: :delete do %>
 
-  <%= link_to 'New ', new_subsidy_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '新增 ', new_subsidy_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>Uid</th>
-      <th>Name</th>
-      <th>Rate</th>
-      <th>Memo</th>
-      <th>Is stoped</th>
-      <th>Ou</th>
+      <th>代號</th>
+      <th>名稱</th>
+      <th>比率</th>
+      <th>停用</th>
     </tr>
   </thead>
 
@@ -27,15 +25,13 @@
         <td><%= link_to subsidy.uid, edit_subsidy_path(subsidy) %></td>
         <td><%= link_to subsidy.name, edit_subsidy_path(subsidy) %></td>
         <td><%= subsidy.rate %></td>
-        <td><%= subsidy.memo %></td>
         <td><%= subsidy.is_stoped %></td>
-        <td><%= subsidy.ou_id %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New ', new_subsidy_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "Delete Selected",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+<%= link_to '新增 ', new_subsidy_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
+  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <% end %>

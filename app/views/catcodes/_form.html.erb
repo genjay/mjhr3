@@ -2,17 +2,17 @@
   <% f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :m_name,placeholder:'Model_Name',autofocus:true %>
-    <%= f.input :col_name,placeholder:'Column_name' %>
-    <%= f.input :uid,placeholder:'代號' %>
-    <%= f.input :name,placeholder:'名稱' %>
-    <%= f.input :is_stoped %> 
-    <%= f.input :memo %>
+    <%= f.input :m_name,label:'Model_Name',placeholder:'Model_Name',autofocus:true %>
+    <%= f.input :col_name,label:'Column_name',placeholder:'Column_name' %>
+    <%= f.input :uid,label:'代號',placeholder:'代號' %>
+    <%= f.input :name,label:'名稱',placeholder:'名稱' %>
+    <%= f.input :is_stoped,label:'停用' %> 
+    <%= f.input :memo,label:'備註' %>
   </div>
 
   <div class="form-actions">
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to 'Back', catcodes_path,class: 'btn btn-primary', method: :get %>
+      <%= link_to '回上一頁', catcodes_path,class: 'btn btn-warning', method: :get %>
   </div>
 
 <% end %> 
