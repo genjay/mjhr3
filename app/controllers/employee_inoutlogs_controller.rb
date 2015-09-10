@@ -1,6 +1,6 @@
 class EmployeeInoutlogsController < ApplicationController
   before_action :set_inoutlog, only: [:show, :edit, :update, :destroy]
-  before_action :set_employee_name, only: [:index, :edit, :new]
+  before_action :set_employee, only: [:index, :edit, :new]
 
   def index
     @employee_id = params[:employee_id]
@@ -135,9 +135,9 @@ class EmployeeInoutlogsController < ApplicationController
       @inoutlog = current_ou.employee_inoutlogs.find(params[:id])
     end
 
-    def set_employee_name
+    def set_employee
       data = current_ou.employees.includes(:department).find_by(id: params[:employee_id])
-      @employee_name = "#{data.name} #{data.department.name}"
+      @employee = "#{data.name} #{data.department.name}"
     end
 
     def inoutlog_params

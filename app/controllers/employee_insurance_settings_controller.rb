@@ -1,6 +1,6 @@
 class EmployeeInsuranceSettingsController < ApplicationController
   before_action :set_employee_insurance, only: [:show, :edit, :update, :destroy]
-  before_action :set_employee_name, only: [:index, :edit, :new]
+  before_action :set_employee, only: [:index, :edit, :new]
   before_action :set_subsidy_type, only: [:new, :edit]
 
   def index
@@ -73,8 +73,8 @@ class EmployeeInsuranceSettingsController < ApplicationController
       @employee_insurance = current_ou.employee_insurance_settings.find(params[:id])
     end
 
-    def set_employee_name
-      @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
+    def set_employee
+      @employee = current_ou.employees.find_by(id: params[:employee_id])
     end
 
     def set_subsidy_type

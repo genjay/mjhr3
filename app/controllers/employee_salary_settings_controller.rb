@@ -1,6 +1,6 @@
 class EmployeeSalarySettingsController < ApplicationController
   before_action :set_employee_salary, only: [:show, :edit, :update, :destroy]
-  before_action :set_employee_name, only: [:index, :edit, :new]
+  before_action :set_employee, only: [:index, :edit, :new]
 
   def index
     @employee_id = params[:employee_id]
@@ -68,8 +68,8 @@ class EmployeeSalarySettingsController < ApplicationController
       @employee_salary = current_ou.employee_salary_settings.find(params[:id])
     end
 
-    def set_employee_name
-      @employee_name = current_ou.employees.find_by(id: params[:employee_id]).name
+    def set_employee
+      @employee = current_ou.employees.find_by(id: params[:employee_id])
     end
 
     def employee_salary_params

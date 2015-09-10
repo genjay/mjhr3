@@ -11,7 +11,7 @@ class EmployeeInoutlog < ActiveRecord::Base
 
   def can_delete?
     delete = self.class.where(:employee_id => employee_id).order("begin_at DESC").first
-    if delete != nil and delete.id == Integer(id)
+    if delete != nil and delete.id == id.to_i
       true
     else
       false

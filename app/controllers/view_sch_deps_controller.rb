@@ -3,10 +3,9 @@ class ViewSchDepsController < ApplicationController
 
   def index 
     yyyymm = params[:yyyymm]
-  	dep_id = params[:dep_id] 
+    dep_id = params[:dep_id] 
  
-   	@viewschdeps = current_ou.view_sch_deps.search(yyyymm, dep_id)
-
+   @viewschdeps = current_ou.view_sch_deps.search(yyyymm, dep_id)
   end
 
   def edit  
