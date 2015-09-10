@@ -1,19 +1,32 @@
 class Calendar < ActiveRecord::Base
-	# validates :is_holiday, :worktype_id ,presence: true
 	validates :duty_date, uniqueness: {scope: [:ou_id]} 
- #  belongs_to :worktype
-  # self.primary_key = 'id' # 這行一定要加，因為這是db view，沒有primary index,給rails 抓預設值
-  self.primary_key = 'duty_date'
-  has_many :dutys,-> {where leave_date:nil},class_name: Employee,foreign_key: :ou_id,primary_key: :ou_id
 	after_initialize :assign_default_values
+
+	def self.create_by_yyyymm(ou_id,yyyymm)
+		if yyyymm.to_s.match(Regexp_yyyymm)
+			date_start = "#{yyyymm}01".to_date
+			date_end = date_start.end_of_month
+			if self.where("ou_id=? and duty_date between ? and ?",ou_id,date_start,date_end).size < 31
+				(date_start..date_end).each do |i|
+					self.create(ou_id:ou_id,duty_date:i)
+				end
+			end
+		else
+			puts "yyyymm 錯誤"
+			return false
+	  end
+	end
   
   def assign_default_values
-  	self.is_holiday ||= 0  
+  	self.is_holiday ||= (duty_date.to_s.to_date.cwday==[6,7]) ? 1:0
   end
 
-	def self.search(a)
-		self.where("duty_date between #{a}01 and #{a}31")\
-		.order(:duty_date) 
+	def self.search(ou_id,yyyymm)
+		if yyyymm.to_s.match(Regexp_yyyymm)
+			date_start = "#{yyyymm}01".to_date
+			date_end = date_start.end_of_month
+		  self.where("ou_id= ? and duty_date between ? and ?",ou_id,date_start,date_end)
+		end  
 	end
 	
 
