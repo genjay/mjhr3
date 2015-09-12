@@ -4,7 +4,7 @@
 
   <%= link_to '新增 ', new_employee_employee_inoutlog_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
   <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
-  <%= link_to '回上一頁', edit_employee_path(@employee_id), class: 'btn btn-warning', method: :get %>
+  <%= link_to '回上一頁', edit_employee_path(@employee), class: 'btn btn-warning', method: :get %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
@@ -13,6 +13,7 @@
       <th>項次</th>
       <th>類別</th> 
       <th>生效日</th>
+      <th>部門</th>
       <th>期初年資</th>
     </tr>
   </thead>
@@ -24,6 +25,7 @@
         <td><%= i+1 %></td>
         <td><%= link_to inoutlog.to_s, edit_employee_employee_inoutlog_path(inoutlog.employee_id, inoutlog) %></td> 
         <td><%= inoutlog.begin_at %></td>
+        <td><%= inoutlog.to_dept_s %></td>
         <td><%= inoutlog.days_of_jobage %></td> 
       </tr>
     <% end %>
@@ -32,6 +34,6 @@
 
   <%= link_to '新增 ', new_employee_employee_inoutlog_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
   <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
-  <%= link_to '回上一頁', edit_employee_path(@employee_id), class: 'btn btn-warning', method: :get %>
+  <%= link_to '回上一頁', edit_employee_path(@employee), class: 'btn btn-warning', method: :get %>
   
 <% end %>

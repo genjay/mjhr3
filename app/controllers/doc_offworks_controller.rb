@@ -4,7 +4,7 @@ class DocOffworksController < ApplicationController
   # GET /worktypes
   # GET /worktypes.json
   def index
-    @offworks = current_ou.doc_offworks.includes([:employee, :offtype]).order(employee_id: :asc)
+    @offworks = current_ou.doc_offworks.includes([:employee, :offtype]).order(id: :desc)
   end
 
   # GET /worktypes/1

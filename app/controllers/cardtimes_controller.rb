@@ -1,6 +1,6 @@
 class CardtimesController < ApplicationController
   def index
-  	@cardtimes = Cardtime.limit 25
+  	@cardtimes = Cardtime.where(ou_id:current_ou.id).limit 25
   end
 
   def import

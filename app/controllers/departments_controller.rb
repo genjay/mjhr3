@@ -1,31 +1,20 @@
 class DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
-  # GET /departments
-  # GET /departments.json
   def index 
-    # session[:xid] = '11123'
-    # render :text => session[:xid] 
-    # return
     @departments = current_ou.departments.includes(:worktype).order(:uid) 
   end
 
-  # GET /departments/1
-  # GET /departments/1.json
   def show
   end
 
-  # GET /departments/new
   def new
     @department = current_ou.departments.new
   end
 
-  # GET /departments/1/edit
   def edit
   end
 
-  # POST /departments
-  # POST /departments.json
   def create
     @department = current_ou.departments.new(department_params) 
 
@@ -40,11 +29,7 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /departments/1
-  # PATCH/PUT /departments/1.json
   def update
-    # render :text => department_params
-    # return
     respond_to do |format|
       if @department.update(department_params)
         format.html { redirect_to departments_path, notice: 'Department was successfully updated.' }
@@ -55,21 +40,6 @@ class DepartmentsController < ApplicationController
       end
     end
   end
-
-  # DELETE /departments/1
-  # DELETE /departments/1.json
-  # def destroy
-  #   respond_to do |format|
-  #     if @department.destroy
-  #         format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
-  #         format.json { head :no_content }
-  #     else
-  #       # render :text => @department.errors[:base].to_s 
-  #       # return
-  #        format.html { render :edit, notice: 'error',alert: @department.errors[:base] }
-  #     end
-  #   end
-  # end
 
   def multi_destroy
     items = params[:ids]

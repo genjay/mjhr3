@@ -7,7 +7,7 @@
     <%= f.input :action, label: '類別', :collection => Option.of(:EmployeeInoutlog, :action), :input_html => {:onChange => 'emp_inout_change()'}, :include_blank => false %>
     <div id="active_div"><%= f.association :department, label: '部門', :label_method => lambda { |f| "#{f.uid}  #{f.name}" }, :include_blank => false %></div>
     <%= f.input :begin_at, label: '生效日', as: :string %>
-    <%= f.input :days_of_jobage, label: '期初年資', input_html: {value: f.object.days_of_jobage || '0'} %>
+    <%= f.input :days_of_jobage, label: '期初年資' %>
   </div>
 
   <div class="form-actions">

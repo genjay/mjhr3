@@ -9,7 +9,7 @@ class DocForgetsController < ApplicationController
   end
 
   def index
-    @forgets = current_ou.doc_forgets.includes(:employee).order(employee_id: :asc)
+    @forgets = current_ou.doc_forgets.includes(:employee).order(id: :desc)
   end
 
   # GET /worktypes/1

@@ -8,6 +8,6 @@ class ViewEmployeeInoutlog < ActiveRecord::Base
   end
   
   def readonly?
- 	true
+ 	  true
   end
 end

@@ -49,6 +49,7 @@ group :development, :test do
   gem 'better_errors'
   gem "brakeman", require: false
   gem "rails_best_practices", require: false
+  gem 'awesome_print'
 end
 
 group :test do

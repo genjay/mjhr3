@@ -22,7 +22,7 @@ class Ou < ActiveRecord::Base
 	has_many :calendars, :dependent => :restrict_with_error
 	has_many :employee_insurance_settings, :dependent => :restrict_with_error
 	has_many :employee_salary_settings, :dependent => :restrict_with_error
-	has_many :employee_inoutlogs, :dependent => :restrict_with_error
+	has_many :employee_inoutlogs,through: :employees, :dependent => :restrict_with_error
 	has_many :month_others, :dependent => :restrict_with_error
 	has_many :catcodes, :dependent => :restrict_with_error
 
@@ -32,7 +32,6 @@ class Ou < ActiveRecord::Base
 	has_many :sch_emps
 	has_many :sch_deps
 	has_many :view_sch_deps
-	has_many :view_employee_inoutlogs
 	alias_method :viewschemps, :view_sch_emps
 
 	def assign_default_values
