@@ -231,6 +231,7 @@ if true # 140F 勞保級距表, wait todo
 end
 
 if true # 141 人員基本資料
+  EmployeeInoutlog.where(ou_id:@ou.id).delete_all
 	Employee.where(ou_id:@ou.id).delete_all
 	id = 0
 	Employee.create(id: id+=1, ou_id:@ou.id, uid:"A00004",name:"name_A00004", department:Department.find_by(uid:"600-L"), arrive_date:"19960725", leave_date:"20150720", cardno:"A00004") 
@@ -942,10 +943,10 @@ end
 if true # options 
 	Option.delete_all
 	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'A1',value:'報到',status_rule:'C1,Q1,Q2')
-	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'A2',value:'復職',status_rule:'Q2')
-	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'C1',value:'調職',status_rule:'A1,A2,C1')
-	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'Q1',value:'離職',status_rule:'A1,A2,C1,Q2')
-	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'Q2',value:'留停',status_rule:'A1,A2,C1')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'A2',value:'復職',status_rule:'C1,Q1,Q2')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'C1',value:'調職',status_rule:'C1,Q1,Q2')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'Q1',value:'離職',status_rule:'A1')
+	Option.create(model_title:'EmployeeInoutlog',column_title:'action',key:'Q2',value:'留停',status_rule:'A1,A2,C1,Q1')
 
 	Option.create(model_title:'Employee',column_title:'sex',key:'F',value:'女')
 	Option.create(model_title:'Employee',column_title:'sex',key:'M',value:'男')

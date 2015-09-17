@@ -12,6 +12,8 @@ class EmployeeInoutlogsController < ApplicationController
   end
 
   def create
+    render :text => params
+    return
     emp = current_ou.employees.find(params[:employee_id])
     @inoutlog = emp.employee_inoutlogs.new(inoutlog_params)
     if @inoutlog.save
