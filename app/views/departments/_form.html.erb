@@ -4,13 +4,18 @@
   <div class="form-inputs"> 
     <%= f.input(:uid,label: '代號',placeholder:'部門代號', autofocus: true) %>  
     <%= f.input :name,placeholder:'部門名稱',label: '部門' %>  
-    <%= f.association :worktype, value_method: :id, :label_method => lambda { |f| "#{f.uid}  #{f.name} " },label: '班別' %> 
+    <%= f.association :worktype\
+                      ,collection: @worktype\
+                      ,:label_method => lambda { |f| "#{f.to_s}" }\
+                      ,:prompt => '選擇班別(可空白)'\
+                      ,label: '班別'\
+                      ,include_blank: true %> 
     <%= f.association :upper\
+                      ,collection:  @upper\
                       ,label: '上層主管'\
-                      ,collection: Department.where(ou_id: current_ou)\
-                      ,:label_method => lambda { |f| "#{f.uid} #{f.name}"}\
-                      ,:prompt => '請選擇上層主管'\
-                      %>
+                      ,:label_method => lambda { |f| "#{f.to_s}"}\
+                      ,:prompt => '選擇上層主管(可空白)'\
+                      , include_blank: true %> 
     <%= f.input :is_stoped,label:'停用' %>
     <%= f.input :memo,label:'備註',placeholder:'備註' %> 
   </div>

@@ -1,5 +1,11 @@
 class DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :get_list
+
+  def get_list
+    @upper = current_ou.departments.select(:uid,:name,:id) 
+    @worktype = current_ou.worktypes 
+  end
 
   def index 
     @departments = current_ou.departments.includes(:worktype).order(:uid) 
@@ -84,6 +90,6 @@ class DepartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def department_params
-      params.require(:department).permit(:uid, :name, :worktype_id, :upper_id, :is_stoped, :memo, :ou_id)
+      params.require(:department).permit(:uid, :name, :worktype_id, :upper_id, :is_stoped, :memo)
     end
 end
