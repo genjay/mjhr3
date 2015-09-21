@@ -22,6 +22,8 @@ class DepartmentsController < ApplicationController
   end
 
   def create
+    render :text => params.to_s
+    return
     @department = current_ou.departments.new(department_params) 
 
     respond_to do |format|

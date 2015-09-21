@@ -6,7 +6,6 @@ class EmployeeInoutlog < ActiveRecord::Base
   validate :check_action, :check_dates
   after_save :update_employee
   after_initialize :assign_default_values
-  validates :department, :inclusion=> { :in => Department.where(ou_id: @ou_id),message: '別亂改' }
 
   before_destroy :can_delete?
 

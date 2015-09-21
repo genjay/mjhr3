@@ -12,7 +12,7 @@ class MonthOther < ActiveRecord::Base
 	end
 
 	def get_next 
-		self.doc_no = MonthOther.next_docno ou_id
+		self.doc_no = MonthOther.next_docno(ou_id)
 	end
 	
 end

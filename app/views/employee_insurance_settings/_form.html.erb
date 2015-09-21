@@ -1,23 +1,48 @@
-<h4><strong><%= @employee.name %></strong></h4>
+<h4><strong><%= @employee.to_s %></strong></h4>
 
 <%= simple_form_for @employee_insurance, url: employee_employee_insurance_settings_path do |f| %>
   <% f.error_notification %>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <h3>
+        健保
+      </h3>
+      <p>
+        <%= f.input :NHI_LV, :collection => @lvlist_A, :label_method => :amt, :value_method => :amt, :label => "健保級距", :include_blank => false %>
+        <%= f.input :NHI_begin_at, as: :string, label: '健保(起)' %>
+        <%= f.input :NHI_end_at, as: :string, label: '健保(迄)' %>
+        <%= f.input :NHI_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "健保補助等級", :include_blank => false %>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h3>
+        勞保
+      </h3>
+      <p>
+        <%= f.input :labor_lv, :collection => @lvlist_B, :label_method => :amt, :value_method => :amt, :label => "勞保級距", :include_blank => false %>
+        <%= f.input :labor_begin_at, as: :string, label: '勞保(起)' %>
+        <%= f.input :labor_end_at, as: :string, label: '勞保(迄)' %>
+        <%= f.input :labor_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "勞保補助等級", :include_blank => false %>
+      </p> 
+    </div>
+    <div class="col-md-4">
+      <h3>
+        勞退
+      </h3>
+      <p>
+        <%= f.input :LP_Lv, :collection => @lvlist_C, :label_method => :amt, :value_method => :amt, :label => "勞退級距", :include_blank => false %>
+        <%= f.input :LP_begin_at, as: :string, label: '勞退(起)' %>
+        <%= f.input :LP_end_at, as: :string, label: '勞退(迄)' %>
+        <%= f.input :LP_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "勞退補助等級", :include_blank => false %>
+      </p> 
+    </div>
+  </div>
+</div>
 
   <div class="form-inputs">
-    <%= f.input :NHI_LV, :collection => @lvlist_A, :label_method => :amt, :value_method => :amt, :label => "健保級距", :include_blank => false %>
-    <%= f.input :NHI_begin_at, as: :string, label: '健保(起)' %>
-    <%= f.input :NHI_end_at, as: :string, label: '健保(迄)' %>
-    <%= f.input :NHI_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "健保補助等級", :include_blank => false %>
-    <%= f.input :labor_lv, :collection => @lvlist_B, :label_method => :amt, :value_method => :amt, :label => "勞保級距", :include_blank => false %>
-    <%= f.input :labor_begin_at, as: :string, label: '勞保(起)' %>
-    <%= f.input :labor_end_at, as: :string, label: '勞保(迄)' %>
-    <%= f.input :labor_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "勞保補助等級", :include_blank => false %>
-    <%= f.input :LP_Lv, :collection => @lvlist_C, :label_method => :amt, :value_method => :amt, :label => "勞退級距", :include_blank => false %>
-    <%= f.input :LP_begin_at, as: :string, label: '勞退(起)' %>
-    <%= f.input :LP_end_at, as: :string, label: '勞退(迄)' %>
-    <%= f.input :LP_subsidy_id, :collection => @subsidy_type, :label_method => :name, :value_method => :id, :label => "勞退補助等級", :include_blank => false %>
-    <%= f.input :is_free_for_2nd, label: '二低免繳原因' %>
-    <%= f.input :reson_for_free2nd, label: '二低免繳原因' %>
+    <%= f.input :is_free_for_2nd, label: '二代健保免繳原因' %>
+    <%= f.input :reson_for_free2nd, label: '二代健保免繳原因' %>
     <%= f.input :memo, label: '備註' %>
   </div>
 

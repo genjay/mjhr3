@@ -1,33 +1,5 @@
-<h2>員工新增</h2>
+<h2>員工維護</h2>
 
 <div id='rcorners2'>
-  <%= simple_form_for(@employee) do |f| %>
-  <% f.error_notification %>
-
-  <div class="form-inputs" style="padding-top: 30px">
-    <%= f.input :uid,autofocus:true, label: '工號' %>
-    <%= f.input :name, label: '姓名' %>
-    <%= f.association :department, label: '部門', :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
-    <%= f.input :id_number, label: '身份證號' %>
-    <%= f.date_field :arrive_date, label: '到職日' %>
-    <%= f.date_field :leave_date, label: '離職日',:readonly => true %>
-    <%= f.input :birthday, label: '生日', as: :string %>
-    <%= f.input :sex, label: '性別', :collection => Option.of(:Employee,:sex) %>
-    <%= f.input :marriage, label: '婚姻', :collection => Option.of(:Employee,:marriage)  %>
-    <%= f.input :education, label: '學歷', :collection => Option.of(:Employee,:education) %>
-    <%= f.input :school, label: '學校科系' %>
-    <%= f.input :tel1, label: '電話一' %>
-    <%= f.input :tel2, label: '電話二' %>
-    <%= f.input :address1, label: '戶籍地址' %>
-    <%= f.input :address2, label: '通訊地址' %>
-    <%= f.input :email, label: '電子信箱' %>
-    <%= f.input :cardno, label: '出勤卡號' %>
-  </div>
-
-  <div class="form-actions">
-      <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to '回上一頁', employees_path,class: 'btn btn-warning', method: :get %>
-  </div>
-
-<% end %>
+  <%= render 'form' %>
 </div>

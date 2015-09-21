@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   def index
-    @employees = current_ou.employees.includes(:department).order(uid: :asc)#page(params[:page])
+    @employees = current_ou.employees.includes(:department).order(updated_at: :desc,uid: :asc) 
   end
  
   def show

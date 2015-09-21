@@ -1,18 +1,12 @@
-<%= link_to '勞健保設定', employee_employee_insurance_settings_path(@employee), class: 'btn btn-info', method: :get %>
-<%= link_to '薪資設定', employee_employee_salary_settings_path(@employee), class: 'btn btn-info', method: :get %>
-<%= link_to '人員異動', employee_employee_inoutlogs_path(@employee), class: 'btn btn-info', method: :get %>
-<%= link_to '回上一頁', employees_path,class: 'btn btn-warning', method: :get %>
-
 <%= simple_form_for(@employee) do |f| %>
-  <% f.error_notification %>
 
   <div class="form-inputs" style="padding-top: 30px">
     <%= f.input :uid,autofocus:true, label: '工號' %>
     <%= f.input :name, label: '姓名' %>
-    <%= f.association :department, label: '部門', :label_method => lambda { |f| "#{f.uid}  #{f.name}" }  %>
+    <%= f.association :department, label: '部門', :label_method => lambda { |f| "#{f.to_s}" }  %>
     <%= f.input :id_number, label: '身份證號' %>
-    <%= f.date_field :arrive_date, label: '到職日' %>
-    <%= f.date_field :leave_date, label: '離職日',:readonly => true %>
+    <%= f.input :arrive_date, label: '到職日', as: :string %>
+    <%= f.input :leave_date, label: '離職日', as: :string ,:readonly => true %>
     <%= f.input :birthday, label: '生日', as: :string %>
     <%= f.input :sex, label: '性別', :collection => Option.of(:Employee,:sex) %>
     <%= f.input :marriage, label: '婚姻', :collection => Option.of(:Employee,:marriage)  %>
