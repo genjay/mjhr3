@@ -39,7 +39,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  # ActiveRecord::Base.default_timezone = :utc
-  config.time_zone= 'Taipei'
+  # config.time_zone= 'Taipei' #會讓時間錯亂不要開
   
 end
