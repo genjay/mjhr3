@@ -12,8 +12,8 @@ class Ou < ActiveRecord::Base
 	has_many :subsidies, :dependent => :restrict_with_error
 	has_many :annual_leave_lists, :dependent => :restrict_with_error
 	has_many :insurance_settings, :dependent => :restrict_with_error
-	has_many :lvlists, :dependent => :restrict_with_error
 	has_many :lvtypes, :dependent => :restrict_with_error
+	has_many :lvlists, :dependent => :restrict_with_error, through: :lvtypes
 	has_many :offtypes, :dependent => :restrict_with_error
 	has_many :pay_types, :dependent => :restrict_with_error
 	has_many :doc_forgets, :dependent => :restrict_with_error

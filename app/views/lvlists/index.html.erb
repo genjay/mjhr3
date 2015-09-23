@@ -1,4 +1,4 @@
-<h2>級距表</h2>
+<h2><%= @lvtype.name %></h2>
 
 <%= form_tag multi_destroy_lvtype_lvlists_path, method: :delete do %>
 
@@ -10,8 +10,7 @@
   <thead>
     <tr>
       <th></th>
-      <th>項次</th>
-      <th>代號</th>
+      <th>項次</th> 
       <th>金額</th>
     </tr>
   </thead>
@@ -20,9 +19,8 @@
     <% @lvlists.each_with_index do |lvlist,i| %>
       <tr>
         <td><%= check_box_tag "ids[]", lvlist.id %></td>
-        <td><%= i+1 %></td>
-        <td><%= link_to lvlist.uid, edit_lvtype_lvlist_path(lvlist.lvtype_id, lvlist) %></td>
-        <td><%= lvlist.amt %></td>
+        <td><%= i+1 %></td> 
+        <td><%= link_to lvlist.amt, edit_lvtype_lvlist_path(lvlist.lvtype_id, lvlist)  %></td>
       </tr>
     <% end %>
   </tbody>

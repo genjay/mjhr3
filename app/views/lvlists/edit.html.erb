@@ -1,12 +1,11 @@
-<h2>級距表維護</h2>
+<h2><%= @lvtype.name %></h2>
 
 <div id='rcorners2'>
   <%= simple_form_for @lvlist, url: lvtype_lvlist_path do |f| %>
   <% f.error_notification %>
 
   <div class="form-inputs"> 
-    <%= f.input :uid,label:'代號' %>
-    <%= f.input :amt,label:'金額' %>
+    <%= f.input :amt,label:'金額',autofocus: true %>
   </div>
 
   <div class="form-actions">

@@ -1,28 +1,21 @@
 class LvlistsController < ApplicationController
+  before_action :set_lvtype, only: [:index, :show, :new, :edit]
   before_action :set_lvlist, only: [:show, :edit, :update, :destroy]
 
-  # GET /lvlists
-  # GET /lvlists.json
   def index
-    @lvlists = current_ou.lvlists.where(:lvtype_id => params[:lvtype_id])
+    @lvlists = @lvtype.lvlists.order(:amt)
   end
 
-  # GET /lvlists/1
-  # GET /lvlists/1.json
   def show
   end
 
-  # GET /lvlists/new
   def new
     @lvlist = current_ou.lvlists.new(lvtype_id: params[:lvtype_id])
   end
 
-  # GET /lvlists/1/edit
   def edit
   end
 
-  # POST /lvlists
-  # POST /lvlists.json
   def create
     @lvlist = current_ou.lvlists.new(lvlist_params)
     @lvlist.lvtype_id = params[:lvtype_id]
@@ -36,8 +29,6 @@ class LvlistsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lvlists/1
-  # PATCH/PUT /lvlists/1.json
   def update
     respond_to do |format|
       if @lvlist.update(lvlist_params)
@@ -47,16 +38,6 @@ class LvlistsController < ApplicationController
       end
     end
   end
-
-  # DELETE /lvlists/1
-  # DELETE /lvlists/1.json
-  # def destroy
-  #   @lvlist.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to lvlists_url, notice: 'Lvlist was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
   def multi_destroy
     items = params[:ids]
@@ -87,6 +68,9 @@ class LvlistsController < ApplicationController
   end
 
   private
+    def set_lvtype
+      @lvtype = current_ou.lvtypes.find(params[:lvtype_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_lvlist
       @lvlist = current_ou.lvlists.find(params[:id])
@@ -94,6 +78,6 @@ class LvlistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lvlist_params
-      params.require(:lvlist).permit(:uid, :amt, :lvtype_id, :type)
+      params.require(:lvlist).permit(:amt, :lvtype_id, :id)
     end
 end

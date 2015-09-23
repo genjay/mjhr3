@@ -990,22 +990,23 @@ end
 if true   #lvlist
     Lvlist.delete_all
     id = 0
-    Lvlist.create(id: id+=1, uid: 'A1', amt: 10000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
-    Lvlist.create(id: id+=1, uid: 'A2', amt: 20000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
-    Lvlist.create(id: id+=1, uid: 'A3', amt: 30000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
-    Lvlist.create(id: id+=1, uid: 'A4', amt: 40000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
-    Lvlist.create(id: id+=1, uid: 'A5', amt: 50000, ou_id: @ou.id, lvtype_id: 1, lvtype_uid: 'A')
+    labor = [0,19273,20100,21000,21900,22800,24000,25200,26400,27600,28800,30300,33300,34800,36300,38200,40100,42000,43900]
+    t = Lvtype.find_by(uid:'B')
+    labor.each do |i|
+      Lvlist.create(lvtype: t,amt: i)
+    end
 
-    Lvlist.create(id: id+=1, uid: 'B1', amt: 15000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
-    Lvlist.create(id: id+=1, uid: 'B2', amt: 25000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
-    Lvlist.create(id: id+=1, uid: 'B3', amt: 35000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
-    Lvlist.create(id: id+=1, uid: 'B4', amt: 45000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
-    Lvlist.create(id: id+=1, uid: 'B5', amt: 55000, ou_id: @ou.id, lvtype_id: 2, lvtype_uid: 'B')
+    health = [0,19273,20100,21000,21900,22800,24000,25200,26400,27600,28800,30300,31800,33300,34800,36300,40100,42000,43900,45800,48200,50600,53000,55400,57800,60800,63800,69800,72800,76500,80200,83900,87600,92100,96600,101100,105600,110100,115500,120900,126300,131700,137100,142500,147900,150000,156400,162800,169200,175600,182000]
+    t = Lvtype.find_by(uid:'A')
+    health.each do |i|
+      Lvlist.create(lvtype: t,amt: i)
+    end
 
-    Lvlist.create(id: id+=1, uid: 'C1', amt: 12000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
-    Lvlist.create(id: id+=1, uid: 'C2', amt: 22000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
-    Lvlist.create(id: id+=1, uid: 'C3', amt: 32000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
-    Lvlist.create(id: id+=1, uid: 'C4', amt: 42000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
-    Lvlist.create(id: id+=1, uid: 'C5', amt: 52000, ou_id: @ou.id, lvtype_id: 3, lvtype_uid: 'C')
+    lab = [0,1500,3000,4500,6000,7500,8700,9900,11100,12540,13500,15840,16500,17280,17880,19047,19273,20100,21000,21900,22800,24000,25200,26400,27600,28800,30300,31800,33300,34800,36300,38200,40100,42000,43900,45800,48200,50600,53000,55400,57800,60800,63800,66800,69800,72800,76500,80200,83900,87600,92100,96600,101100,105600,110100,115500,120900,126300,131700,137100,142500,147900,150000]
+    t = Lvtype.find_by(uid:'C')
+    lab.each do |i|
+      Lvlist.create(lvtype: t,amt: i)
+    end
 end
+
 
