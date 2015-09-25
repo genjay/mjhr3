@@ -1,11 +1,8 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:edit, :update, :destroy]
 
   def index
     @employees = current_ou.employees.includes(:department).order(updated_at: :desc,uid: :asc) 
-  end
- 
-  def show
   end
 
   def new
@@ -28,8 +25,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /employees/1
-  # PATCH/PUT /employees/1.json
   def update
     respond_to do |format|
       if @employee.update(employee_params)
@@ -41,16 +36,6 @@ class EmployeesController < ApplicationController
       end
     end
   end
-
-  # DELETE /employees/1
-  # DELETE /employees/1.json
-  # def destroy
-  #   @employee.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
   def multi_destroy
     items = params[:ids]
@@ -81,12 +66,10 @@ class EmployeesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_employee
       @employee = current_ou.employees.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
       params.require(:employee).permit(:uid, :name, :department_id, :id_number, :arrive_date, :leave_date, :birthday, :sex, :marriage, :education, :school, :tel1, :tel2, :address1, :address2, :email, :cardno)
     end

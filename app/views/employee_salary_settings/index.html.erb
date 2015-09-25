@@ -3,8 +3,8 @@
 <%= form_tag multi_destroy_employee_employee_salary_settings_path, method: :delete do %>
 
   <%= link_to '新增 ', new_employee_employee_salary_setting_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
-  <%= link_to '回上一頁', edit_employee_path(@employee_id), class: 'btn btn-warning', method: :get %>
+  <%= submit_tag "刪除",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '回上一頁', edit_employee_path(@employee), class: 'btn btn-warning', method: :get %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
@@ -31,7 +31,7 @@
 </table>
 
   <%= link_to '新增 ', new_employee_employee_salary_setting_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
-  <%= link_to '回上一頁', edit_employee_path(@employee_id), class: 'btn btn-warning', method: :get %>
+  <%= submit_tag "刪除",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= link_to '回上一頁', edit_employee_path(@employee), class: 'btn btn-warning', method: :get %>
   
 <% end %>

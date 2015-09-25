@@ -1,19 +1,17 @@
 class EmployeeSalarySettingsController < ApplicationController
-  before_action :set_employee_salary, only: [:show, :edit, :update, :destroy]
-  before_action :set_employee, only: [:index, :edit, :new]
+  before_action :set_employee  
+  before_action :set_employee_salary, only: [:edit, :update]
 
   def index
-    @employee_id = params[:employee_id]
-    @employee_salaries = current_ou.employee_salary_settings.includes([:employee, :pay_type]).where(:employee_id => @employee_id)
+    @employee_salaries = @employee.employee_salary_settings.includes([:pay_type]) 
   end
 
   def new
-    @employee_salary = current_ou.employee_salary_settings.new
+    @employee_salary = @employee.employee_salary_settings.new
   end
 
   def create
-    @employee_salary = current_ou.employee_salary_settings.new(employee_salary_params)
-    @employee_salary.employee_id = params[:employee_id]
+    @employee_salary = @employee.employee_salary_settings.new(employee_salary_params)
     respond_to do |format|
       if @employee_salary.save
         format.html { redirect_to employee_employee_salary_settings_path, notice: '員工薪資設定新增成功' }
@@ -64,12 +62,12 @@ class EmployeeSalarySettingsController < ApplicationController
   end
 
   private
-    def set_employee_salary
-      @employee_salary = current_ou.employee_salary_settings.find(params[:id])
+    def set_employee
+      @employee = current_ou.employees.find(params[:employee_id])
     end
 
-    def set_employee
-      @employee = current_ou.employees.find_by(id: params[:employee_id])
+    def set_employee_salary
+      @employee_salary = @employee.employee_salary_settings.find(params[:id])
     end
 
     def employee_salary_params

@@ -83,11 +83,8 @@ Rails.application.routes.draw do
   end
 
   resources  :employees, except: [:show, :destroy] do
-    resources :employee_insurance_settings, except: [:show, :destroy] do
-      collection do
-        delete 'multi_destroy'
-      end
-    end
+    resource :employee_insurance_settings, only: [:edit, :update]
+
     resources :employee_salary_settings, except: [:show, :destroy] do
       collection do
         delete 'multi_destroy'

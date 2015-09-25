@@ -1,6 +1,5 @@
 class EmployeeInoutlogsController < ApplicationController
-  before_action :set_inoutlog, only: [:show, :edit, :update, :destroy]
-  before_action :set_employee, only: [:index, :edit, :new]
+  before_action :set_employee, only: [:index, :new, :create, :edit]
 
   def index
     @inoutlogs = @employee.view_employee_inoutlogs.order(begin_at: :asc,id: :asc)
@@ -11,11 +10,8 @@ class EmployeeInoutlogsController < ApplicationController
     @inoutlog.department_id = @employee.department_id
   end
 
-  def create
-    render :text => params
-    return
-    emp = current_ou.employees.find(params[:employee_id])
-    @inoutlog = emp.employee_inoutlogs.new(inoutlog_params)
+  def create 
+    @inoutlog = @employee.employee_inoutlogs.new(inoutlog_params)
     if @inoutlog.save
       redirect_to employee_employee_inoutlogs_path, notice: '人員異動設定修改成功' 
     else
@@ -24,6 +20,7 @@ class EmployeeInoutlogsController < ApplicationController
   end #create
 
   def edit
+    @inoutlog = @employee.employee_inoutlogs.find(params[:id])
   end
 
   def multi_destroy
@@ -56,10 +53,7 @@ class EmployeeInoutlogsController < ApplicationController
     end
   end
 
-  private
-    def set_inoutlog
-      @inoutlog = current_ou.employee_inoutlogs.find(params[:id])
-    end
+  private 
 
     def set_employee
       @employee = current_ou.employees.find params[:employee_id]
