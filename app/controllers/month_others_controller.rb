@@ -15,6 +15,7 @@ class MonthOthersController < ApplicationController
   # GET /month_others/new
   def new
     @month_other = current_ou.month_others.new
+    @month_other.month_other_details.build
   end
 
   # GET /month_others/1/edit
@@ -24,7 +25,9 @@ class MonthOthersController < ApplicationController
   # POST /month_others
   # POST /month_others.json
   def create
+    doc_no = current_ou.month_others.next_docno(current_ou.id)
     @month_other = current_ou.month_others.new(month_other_params)
+    @month_other.doc_no = doc_no
 
     respond_to do |format|
       if @month_other.save
@@ -69,6 +72,9 @@ class MonthOthersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def month_other_params
-      params.require(:month_other).permit(:ou_id, :employee_id, :yyyymm, :pay_type_id, :amt)
+      params.require(:month_other).permit(
+        :name, :yyyymm, :pay_type_id, :month_other_id, :employee_id, :amt,
+        month_other_details_attributes:[:month_other_id, :employee_id, :amt, :_destroy]
+      )
     end
 end

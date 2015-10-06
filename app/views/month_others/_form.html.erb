@@ -2,10 +2,26 @@
   <%= f.error_notification %>
 
   <div class="form-inputs"> 
-    <%= f.association :employee %>
+  <%= f.input :name %>
     <%= f.association :pay_type,include_blank: false  %>
     <%= f.input :yyyymm %>
-    <%= f.input :amt %>
+  </div><hr/>
+
+  <div style="width: 90%">
+    <table class='table table-hover' id="display">
+      <thead>
+        <tr>
+          <th>工號</th>
+          <th>金額</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td width="50%"><input type="text"  name="employee[]" onChange="emp_get_name_multi(this)"><input type="hidden" name="employee_id[]"/><label></label></td>
+          <td width="50%"><input type="text" name="amt[]" onfocus="get_next_line(this)"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="form-actions">

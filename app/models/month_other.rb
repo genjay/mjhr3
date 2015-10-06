@@ -1,6 +1,8 @@
 class MonthOther < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :pay_type
+	has_many :month_other_details
+	accepts_nested_attributes_for :month_other_details, allow_destroy: true
 
 	def self.next_docno(ou_id)
 		x = self.where(ou_id: ou_id).maximum('doc_no')

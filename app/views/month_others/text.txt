@@ -1,0 +1,7 @@
+<%= f.simple_fields_for(:month_other_details) do |detail| %>
+    <%= render 'detail_fields', f: detail %>
+  <% end %>
+
+  <div class="links">
+    <%= link_to_add_association '新增員工', f, :month_other_details, class:'btn btn-primary btn-xs' %>
+  </div><hr/>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ou_id: 1
+  month_other_id: MyString
+  employee_id: 1
+  amt: 1
+
+two:
+  ou_id: 1
+  month_other_id: MyString
+  employee_id: 1
+  amt: 1
