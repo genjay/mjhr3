@@ -31,11 +31,11 @@ class MonthOthersController < ApplicationController
 
     respond_to do |format|
       if @month_other.save
-        format.html { redirect_to @month_other, notice: 'Month other was successfully created.' }
-        format.json { render :show, status: :created, location: @month_other }
+        format.html { redirect_to month_others_path, notice: 'Month other was successfully created.' }
+        # format.json { render :show, status: :created, location: month_others_path }
       else
         format.html { render :new }
-        format.json { render json: @month_other.errors, status: :unprocessable_entity }
+        # format.json { render json: @month_other.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,11 +45,11 @@ class MonthOthersController < ApplicationController
   def update
     respond_to do |format|
       if @month_other.update(month_other_params)
-        format.html { redirect_to @month_other, notice: 'Month other was successfully updated.' }
-        format.json { render :show, status: :ok, location: @month_other }
+        format.html { redirect_to month_others_path, notice: 'Month other was successfully updated.' }
+        # format.json { render :show, status: :ok, location: month_others_path }
       else
         format.html { render :edit }
-        format.json { render json: @month_other.errors, status: :unprocessable_entity }
+        # format.json { render json: @month_other.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,7 +60,7 @@ class MonthOthersController < ApplicationController
     @month_other.destroy
     respond_to do |format|
       format.html { redirect_to month_others_url, notice: 'Month other was successfully destroyed.' }
-      format.json { head :no_content }
+      # format.json { head :no_content }
     end
   end
 
@@ -73,7 +73,7 @@ class MonthOthersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def month_other_params
       params.require(:month_other).permit(
-        :name, :yyyymm, :pay_type_id, :month_other_id, :employee_id, :amt,
+        :name, :yyyymm, :pay_type_id,
         month_other_details_attributes:[:month_other_id, :employee_id, :amt, :_destroy]
       )
     end

@@ -7,24 +7,18 @@
     <%= f.input :yyyymm %>
   </div><hr/>
 
-  <div style="width: 90%">
-    <table class='table table-hover' id="display">
-      <thead>
-        <tr>
-          <th>工號</th>
-          <th>金額</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td width="50%"><input type="text"  name="employee[]" onChange="emp_get_name_multi(this)"><input type="hidden" name="employee_id[]"/><label></label></td>
-          <td width="50%"><input type="text" name="amt[]" onfocus="get_next_line(this)"></td>
-        </tr>
-      </tbody>
-    </table>
+  <div id="display">
+    <%= f.simple_fields_for(:month_other_details) do |month| %>
+        <%= render 'month_other_detail_fields', f: month %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association '新增員工', f, :month_other_details, :id => 'add', :style => 'display:none;', class:'btn btn-primary btn-xs' %>
+    </div>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
+      <%= link_to '回上一頁', month_others_path, class: 'btn btn-warning', method: :get %>
   </div>
 <% end %>
