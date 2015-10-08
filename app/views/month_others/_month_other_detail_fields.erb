@@ -1,8 +1,7 @@
-  <table width="50%">
-    <tr>
-      <td width="30%" class="td1">
-        <%= f.input :employee_uid, label: false, placeholder:'員工代號', :input_html => {:name => 'employee_uid',:onChange => 'emp_get_name_multi(this)'} %></td>
-      <td width="40" class="td2"><label></label><%= f.input :employee_id, as: :hidden, :input_html => {:name => 'employee_id'} %></td>
-      <td width="30%" class="td3"><%= f.input :amt, label: false, placeholder:'金額', :input_html => {:name => 'amt', :onfocus => 'get_next_line(this)'} %></td>
-    </tr>
-  </table>
+<table width="60%">
+  <tr>
+    <td width="50%"><%= f.association :employee, label_method: :uid, value_method: :id, label: false, include_blank: false %></td>
+    <td width="30%"><%= f.input :amt, label: false, placeholder: '金額' %></td>
+    <td width="20%" align="center"><%= link_to_remove_association '刪除', f, class:'btn btn-xs btn-danger' %></td>
+  </tr>
+</table>

@@ -1,36 +1,30 @@
-<p id="notice"><%= notice %></p>
-
 <h2>津貼/扣款單</h2>
-<h3> todo </br>
-  1．新增，單頭選擇 paytype, 及 yyyymm </br>
-  2 單身為 員工、金額</br>
-  3 存檔前，取得新的 docno 後，存檔</br>
-</h3>
 
-<table>
+<%= link_to '新增 ', new_month_other_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
+
+<table id='table_id' class='table table-hover'>
   <thead>
     <tr>
-      <th>Ou</th>
-      <th>Yyyymm</th>
-      <th>Pay type</th>
-      <th colspan="3"></th>
+      <th>項次</th>
+      <th>名稱</th>
+      <th>年月</th>
+      <th>薪資項目</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @month_others.each do |month_other| %>
+    <% @month_others.each_with_index do |month_other,i| %>
       <tr>
-        <td><%= month_other.ou_id %></td>
+        <td><%= check_box_tag "ids[]", month_other.id %></td>
+        <td><%= month_other.name %></td>
         <td><%= month_other.yyyymm %></td>
-        <td><%= month_other.pay_type_id %></td>
-        <td><%= link_to 'Show', month_other %></td>
-        <td><%= link_to 'Edit', edit_month_other_path(month_other) %></td>
-        <td><%= link_to 'Destroy', month_other, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= month_other.pay_type.try(:name) %></td>
+        <td><%= link_to '修改', edit_month_other_path(month_other) %></td>
+        <td><%= link_to '刪除', month_other, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Month other', new_month_other_path %>
+<%= link_to '新增 ', new_month_other_path, autofocus: true, method: :get, class: 'btn btn-primary' %>
