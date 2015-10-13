@@ -16,7 +16,7 @@
   <tbody>
     <% @month_others.each_with_index do |month_other,i| %>
       <tr>
-        <td><%= check_box_tag "ids[]", month_other.id %></td>
+        <td><%= i+1 %></td>
         <td><%= month_other.name %></td>
         <td><%= month_other.yyyymm %></td>
         <td><%= month_other.pay_type.try(:name) %></td>

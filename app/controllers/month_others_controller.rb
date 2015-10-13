@@ -57,10 +57,13 @@ class MonthOthersController < ApplicationController
   # DELETE /month_others/1
   # DELETE /month_others/1.json
   def destroy
-    @month_other.destroy
     respond_to do |format|
-      format.html { redirect_to month_others_url, notice: 'Month other was successfully destroyed.' }
-      # format.json { head :no_content }
+      if @month_other.destroy
+          format.html { redirect_to month_others_url, notice: 'Month other was successfully destroyed.' }
+          # format.json { head :no_content }
+      else
+        format.html { redirect_to month_others_url, alert: '明細有資料，無法刪除表頭' }
+      end
     end
   end
 

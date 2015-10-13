@@ -4,6 +4,14 @@ class MonthOther < ActiveRecord::Base
 	has_many :month_other_details
 	accepts_nested_attributes_for :month_other_details, allow_destroy: true
 
+	before_destroy :check_has_details
+
+	def check_has_details
+	  if self.month_other_details.any?
+	  	false
+	  end
+	end
+
 	def self.next_docno(ou_id)
 		x = self.where(ou_id: ou_id).maximum('doc_no')
 		if x == nil
