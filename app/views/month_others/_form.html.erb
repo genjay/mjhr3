@@ -1,4 +1,4 @@
-<%= simple_form_for(@month_other) do |f| %>
+<%= simple_form_for(@month_other, :html=>{:onsubmit=>"return checkform();"}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs"> 
@@ -7,13 +7,46 @@
     <%= f.input :yyyymm %>
   </div><hr/>
 
-    <%= f.simple_fields_for(:month_other_details) do |month| %>
+    <!--<%= f.simple_fields_for(:month_other_details) do |month| %>
         <%= render 'month_other_detail_fields', f: month %>
     <% end %>
 
     <div class="links">
       <%= link_to_add_association '新增員工', f, :month_other_details, class:'btn btn-primary btn-xs' %>
-    </div><hr/>
+    </div><hr/>-->
+
+  <div id="details_div" style="padding-bottom: 30px;">
+    <table id="details_table" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>項次</th>
+          <th>工號</th>
+          <th>姓名</th>
+          <th>部門</th>
+          <th>金額</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @month_other.month_other_details.each_with_index do |details,i| %>
+          <tr>
+            <td><label><%= i+1 %></label></td>
+            <td><input type="text" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" name="employee_id" value="<%= details.employee.id %>" /></td>
+            <td><input type="text" name="employee_name" value="<%= details.employee.name %>" disabled="true" /></td>
+            <td><input type="text" name="employee_dep" value="<%= details.employee.department.name %>" disabled="true" /></td>
+            <td><input type="text" name="amt" value="<%= details.amt %>" onfocus="get_next_line(this)" /></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td><label></label></td>
+          <td><input type="text" name="employee_uid" onchange="emp_get_name_multi(this)" /><input type="hidden" name="employee_id" /></td>
+          <td><input type="text" name="employee_name" disabled="true" /></td>
+          <td><input type="text" name="employee_dep" disabled="true" /></td>
+          <td><input type="text" name="amt" onfocus="get_next_line(this)" /><input type="hidden" name="details" id="details" value="" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="form-actions">
     <%= f.button :submit,'存檔',class: 'btn btn-primary' %>

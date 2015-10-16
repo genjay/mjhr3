@@ -8,7 +8,9 @@ class MonthOther < ActiveRecord::Base
 
 	def check_has_details
 	  if self.month_other_details.any?
-	  	false
+	      false
+	  else
+	  	true
 	  end
 	end
 

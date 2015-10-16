@@ -47,3 +47,118 @@ function emp_get_ViewSchEmp(){
     });
   }
 }
+
+function emp_get_name_multi(e){
+  var val = e.value;
+  if(val.length > 0){
+    $.ajax({
+      type: "GET",
+      url: '/get_empid/?uid=' + val,
+      dataType: "html",
+      success: function(data) {
+        if(data.length >0){
+           set_employee_name(e, data);
+        }else{
+           set_employee_name(e, "");
+        }
+      }
+    });
+  }else{
+    set_employee_name(e, "");
+  }
+}
+
+function set_employee_name(e, data){
+  var id, name, dep, emp_data;
+  if(data.indexOf(",") == -1){
+      id = "";
+      name = "無此工號";
+      dep = "";
+  }else{
+    emp_data = data.split(",");
+    name = emp_data[0];
+    id = emp_data[1];
+    dep = emp_data[3];
+  }
+
+  var emp_uid = document.getElementsByName("employee_uid");
+  var emp_id = document.getElementsByName("employee_id");
+  var emp_name =  document.getElementsByName("employee_name");
+  var emp_dep =  document.getElementsByName("employee_dep");
+  
+  for(var i=0; i<emp_uid.length; i++){
+    if(e == emp_uid[i]){
+      emp_id[i].value = id;
+      emp_name[i].value = name;
+      emp_dep[i].value = dep;
+      break;
+    }
+  }
+}
+
+function get_amt_index(e){
+  var element = document.getElementsByName("amt");
+  for(var i=0; i<element.length; i++){
+    if(e == element[i]){
+      return [element.length, i];
+    }
+  }
+}
+
+function get_next_line(e){
+  var obj = get_amt_index(e);
+  if(obj[1]+1 == obj[0]){
+    add_amt_row();
+  }
+}
+
+function add_amt_row(){
+  $("#details_table > tbody").append("<tr><td><label></label></td><td><input type='text' name='employee_uid' onchange='emp_get_name_multi(this)' /><input type='hidden' name='employee_id' /></td><td><input type='text' name='employee_name' disabled='true' /></td><td><input type='text' name='employee_dep' disabled='true' /></td><td><input type='text' name='amt' onfocus='get_next_line(this)'' /></td></tr>");
+  reset_num();
+}
+
+function reset_num(){
+  $("#details_table label").each(function(index){
+    $(this).text(index + 1);
+  });
+}
+
+function checkform(){
+  var emp_id = document.getElementsByName("employee_id");
+  var emp_amt = document.getElementsByName("amt");
+  var details = "";
+  var status = true;
+  var line = 0;
+
+  for(var i=0; i<emp_id.length; i++){
+    var id = emp_id[i].value;
+    var amt = emp_amt[i].value;
+
+    if(id == "" && amt.length == 0){
+      continue;
+    }else{
+      if(id != "" && isNumber(amt)){
+        details = details + "[" + id + "," + amt + "],";
+      }else{
+        line = i + 1;
+        status = false;
+        break;
+      }
+    }
+  }
+
+  if(status){
+      var str = details.substr(0, (details.length)-1);
+      document.getElementById("details").value = "[" + str + "]";
+      return true;
+    }else{
+      details.value = "";
+      alert("明細第" + line + "行資料有誤");
+      return false;
+    }  
+}
+
+function isNumber(str){
+  var pattern = /^\d+$/;
+  return pattern.test(str);
+}

@@ -1,7 +1,9 @@
-<table width="60%">
-  <tr>
-    <td width="50%"><%= f.association :employee, label_method: :uid, value_method: :id, label: false, include_blank: false %></td>
-    <td width="30%"><%= f.input :amt, label: false, placeholder: '金額' %></td>
-    <td width="20%" align="center"><%= link_to_remove_association '刪除', f, class:'btn btn-xs btn-danger' %></td>
-  </tr>
-</table>
+<div class="well nested-fields">
+	<table width="60%">
+	  <tr>
+	    <td width="50%"><%= f.association :employee, label_method: :uid, value_method: :id, label: false, include_blank: false %></td>
+	    <td width="30%"><%= f.input :amt, label: false, placeholder: '金額' %></td>
+	    <td width="20%" align="center"><%= link_to_remove_association '刪除', f, class:'btn btn-xs btn-danger' %></td>
+	  </tr>
+	</table>
+</div>
