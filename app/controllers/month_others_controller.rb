@@ -43,8 +43,8 @@ class MonthOthersController < ApplicationController
   # PATCH/PUT /month_others/1
   # PATCH/PUT /month_others/1.json
   def update
-        render :text => params
-    return false
+    # render :text => params
+    # return false
     respond_to do |format|
       if @month_other.update(month_other_params)
         format.html { redirect_to month_others_path, notice: 'Month other was successfully updated.' }
@@ -78,8 +78,8 @@ class MonthOthersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def month_other_params
       params.require(:month_other).permit(
-        :name, :yyyymm, :pay_type_id
-        # month_other_details_attributes:[:id, :month_other_id, :employee_id, :amt, :_destroy]
+        :name, :yyyymm, :pay_type_id,
+        month_other_details_attributes:[:id, :month_other_id, :employee_id, :amt, :_destroy]
       )
     end
 end

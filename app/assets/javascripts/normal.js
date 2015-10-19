@@ -82,7 +82,7 @@ function set_employee_name(e, data){
   }
 
   var emp_uid = document.getElementsByName("employee_uid");
-  var emp_id = document.getElementsByName("employee_id");
+  var emp_id = document.getElementsByClassName("employee_id");
   var emp_name =  document.getElementsByName("employee_name");
   var emp_dep =  document.getElementsByName("employee_dep");
   
@@ -97,7 +97,7 @@ function set_employee_name(e, data){
 }
 
 function get_amt_index(e){
-  var element = document.getElementsByName("amt");
+  var element = document.getElementsByClassName("amt");
   for(var i=0; i<element.length; i++){
     if(e == element[i]){
       return [element.length, i];
@@ -113,8 +113,18 @@ function get_next_line(e){
 }
 
 function add_amt_row(){
-  $("#details_table > tbody").append("<tr><td><label></label></td><td><input type='text' name='employee_uid' onchange='emp_get_name_multi(this)' /><input type='hidden' name='employee_id' /></td><td><input type='text' name='employee_name' disabled='true' /></td><td><input type='text' name='employee_dep' disabled='true' /></td><td><input type='text' name='amt' onfocus='get_next_line(this)'' /></td></tr>");
+  var name = new Date().getTime();
+  $("#details_table > tbody").append("<tr><td><label></label></td><td><input type=\"text\" name=\"employee_uid\" onchange=\"emp_get_name_multi(this)\" /><input type=\"hidden\" class=\"employee_id\" name=\"month_other[month_other_details_attributes][" + name + "][employee_id]\" /></td><td><input type=\"text\" name=\"employee_name\" disabled=\"true\" /></td><td><input type=\"text\" name=\"employee_dep\" disabled=\"true\" /></td><td><input type=\"text\" class=\"amt\" name=\"month_other[month_other_details_attributes][" + name + "][amt]\" onfocus=\"get_next_line(this)\" /></td></tr>");
   reset_num();
+}
+
+function add_first_row(){
+  var data = document.getElementsByClassName("employee_id");
+  if(data.length <= 0){
+    $("#details_table > tbody").append("<tr><td><label>1</label></td><td><input type=\"text\" name=\"employee_uid\" onchange=\"emp_get_name_multi(this)\" /><input type=\"hidden\" class=\"employee_id\" name=\"month_other[month_other_details_attributes][0][employee_id]\" /></td><td><input type=\"text\" name=\"employee_name\" disabled=\"true\" /></td><td><input type=\"text\" name=\"employee_dep\" disabled=\"true\" /></td><td><input type=\"text\" class=\"amt\" name=\"month_other[month_other_details_attributes][0][amt]\" onfocus=\"get_next_line(this)\" /></td></tr>");
+  }else{
+    add_amt_row();
+  }
 }
 
 function reset_num(){
@@ -124,21 +134,22 @@ function reset_num(){
 }
 
 function checkform(){
-  var emp_id = document.getElementsByName("employee_id");
-  var emp_amt = document.getElementsByName("amt");
-  var details = "";
+  var emp_uid = document.getElementsByName("employee_uid");
+  var emp_id = document.getElementsByClassName("employee_id");
+  var emp_amt = document.getElementsByClassName("amt");
   var status = true;
   var line = 0;
 
   for(var i=0; i<emp_id.length; i++){
+    var uid = emp_uid[i].value;
     var id = emp_id[i].value;
     var amt = emp_amt[i].value;
 
-    if(id == "" && amt.length == 0){
+    if(id == "" && amt.length == 0 && uid.length ==0){
       continue;
     }else{
       if(id != "" && isNumber(amt)){
-        details = details + "[" + id + "," + amt + "],";
+
       }else{
         line = i + 1;
         status = false;
@@ -148,11 +159,8 @@ function checkform(){
   }
 
   if(status){
-      var str = details.substr(0, (details.length)-1);
-      document.getElementById("details").value = "[" + str + "]";
       return true;
     }else{
-      details.value = "";
       alert("明細第" + line + "行資料有誤");
       return false;
     }  
@@ -160,5 +168,9 @@ function checkform(){
 
 function isNumber(str){
   var pattern = /^\d+$/;
-  return pattern.test(str);
+  if(str == "" || str.length == 0){
+    return false
+  }else{
+    return pattern.test(str);
+  }
 }

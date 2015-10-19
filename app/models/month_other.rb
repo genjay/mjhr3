@@ -2,7 +2,7 @@ class MonthOther < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :pay_type
 	has_many :month_other_details
-	accepts_nested_attributes_for :month_other_details, allow_destroy: true
+	accepts_nested_attributes_for :month_other_details, :reject_if => proc { |attributes| attributes['employee_id'].blank? }, allow_destroy: true
 
 	before_destroy :check_has_details
 

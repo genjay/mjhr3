@@ -31,19 +31,12 @@
         <% @month_other.month_other_details.each_with_index do |details,i| %>
           <tr>
             <td><label><%= i+1 %></label></td>
-            <td><input type="text" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" name="employee_id" value="<%= details.employee.id %>" /></td>
+            <td><input type="hidden" name="month_other[month_other_details_attributes][<%= i %>][id]" value="<%= details.id %>" /><input type="text" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" class="employee_id" name="month_other[month_other_details_attributes][<%= i %>][employee_id]" value="<%= details.employee.id %>" /></td>
             <td><input type="text" name="employee_name" value="<%= details.employee.name %>" disabled="true" /></td>
             <td><input type="text" name="employee_dep" value="<%= details.employee.department.name %>" disabled="true" /></td>
-            <td><input type="text" name="amt" value="<%= details.amt %>" onfocus="get_next_line(this)" /></td>
+            <td><input type="text" class="amt" name="month_other[month_other_details_attributes][<%= i %>][amt]" value="<%= details.amt %>" onfocus="get_next_line(this)" /></td>
         </tr>
-        <% end %>
-        <tr>
-          <td><label></label></td>
-          <td><input type="text" name="employee_uid" onchange="emp_get_name_multi(this)" /><input type="hidden" name="employee_id" /></td>
-          <td><input type="text" name="employee_name" disabled="true" /></td>
-          <td><input type="text" name="employee_dep" disabled="true" /></td>
-          <td><input type="text" name="amt" onfocus="get_next_line(this)" /><input type="hidden" name="details" id="details" value="" /></td>
-        </tr>
+        <% end %>        
       </tbody>
     </table>
   </div>
@@ -52,4 +45,8 @@
     <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
       <%= link_to '回上一頁', month_others_path, class: 'btn btn-warning', method: :get %>
   </div>
+<% end %>
+
+<%= javascript_tag do %>
+  add_first_row();
 <% end %>
