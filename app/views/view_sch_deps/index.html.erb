@@ -1,11 +1,13 @@
 <h2>部門出勤曆</h2>
-<%= form_tag view_sch_deps_path, :method => 'get' do %>
-  <p>
-  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true %>
-  	<%= select_tag 'dep_id', options_for_select(Department.all.collect{ |u| [u.name, u.uid] }) %>
-  	<%= submit_tag "尋找", :name => nil %>
-  </p>
-<% end %>
+<%= form_tag view_sch_deps_path, :method => 'get' do %><p>
+  	<table width="70%">
+  		<tr>
+  			<td><%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true, class: 'string optional form-control' %></td>
+  			<td><%= select_tag 'dep_id', options_for_select(Department.all.collect{ |u| [u.name, u.uid] }), class: 'select optional form-control' %></td>
+  			<td  align="center"><%= submit_tag "尋找", :name => nil, class: 'btn btn-primary' %></td>
+  		</tr>
+  	</table>
+<% end %><p/>
 
 <table id='table_id' class='table table-hover'>
 	<thead>

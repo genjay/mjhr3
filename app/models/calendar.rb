@@ -2,6 +2,19 @@ class Calendar < ActiveRecord::Base
 	validates :duty_date, uniqueness: {scope: [:ou_id]} 
 	after_initialize :assign_default_values
 
+	def wday
+		case self.duty_date.wday
+		when 1 then '一'
+		when 2 then '二'
+		when 3 then '三'
+		when 4 then '四'
+		when 5 then '五'
+		when 6 then '六'
+		when 0 then '日'
+		else '無'
+		end
+	end
+
 	def self.create_by_yyyymm(ou_id,yyyymm)
 		if yyyymm.to_s.match(Regexp_yyyymm)
 			date_start = "#{yyyymm}01".to_date

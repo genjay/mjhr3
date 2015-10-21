@@ -2,24 +2,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs"> 
-  <%= f.input :name %>
     <%= f.association :pay_type, include_blank: false  %>
     <%= f.input :yyyymm %>
+    <%= f.input :name, label: '備註' %>
   </div><hr/>
 
-    <!--<%= f.simple_fields_for(:month_other_details) do |month| %>
-        <%= render 'month_other_detail_fields', f: month %>
-    <% end %>
-
-    <div class="links">
-      <%= link_to_add_association '新增員工', f, :month_other_details, class:'btn btn-primary btn-xs' %>
-    </div><hr/>-->
-
   <div id="details_div" style="padding-bottom: 30px;">
-    <table id="details_table" class="table table-bordered">
+    <table id="details_table" class="list_tb" width="100%" border="1">
       <thead>
-        <tr>
-          <th>項次</th>
+        <tr style="background-color: #CEFFCE;">
+          <th>操作</th>
+          <th>項次 <input type="button" value="刪除" onclick="del_details();"></th>
           <th>工號</th>
           <th>姓名</th>
           <th>部門</th>
@@ -30,11 +23,12 @@
 
         <% @month_other.month_other_details.each_with_index do |details,i| %>
           <tr>
-            <td><label><%= i+1 %></label></td>
-            <td><input type="hidden" name="month_other[month_other_details_attributes][<%= i %>][id]" value="<%= details.id %>" /><input type="text" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" class="employee_id" name="month_other[month_other_details_attributes][<%= i %>][employee_id]" value="<%= details.employee.id %>" /></td>
-            <td><input type="text" name="employee_name" value="<%= details.employee.name %>" disabled="true" /></td>
-            <td><input type="text" name="employee_dep" value="<%= details.employee.department.name %>" disabled="true" /></td>
-            <td><input type="text" class="amt" name="month_other[month_other_details_attributes][<%= i %>][amt]" value="<%= details.amt %>" onfocus="get_next_line(this)" /></td>
+            <td><span class="del_span"></span></td>
+            <td><label><%= i+1 %></label> <input type="checkbox" name="delete" /></td>
+            <td><input type="hidden" name="month_other[month_other_details_attributes][<%= i %>][id]" value="<%= details.id %>" /><input type="text" class="employee_uid" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" class="employee_id" name="month_other[month_other_details_attributes][<%= i %>][employee_id]" value="<%= details.employee.id %>" /></td>
+            <td><input type="text" class="employee_name" name="employee_name" value="<%= details.employee.name %>" disabled="true" /></td>
+            <td><input type="text" class="employee_dep" name="employee_dep" value="<%= details.employee.department.name %>" disabled="true" /></td>
+            <td><input type="text" class="amt" name="month_other[month_other_details_attributes][<%= i %>][amt]" value="<%= details.amt %>" onfocus="get_next_line(this)" /><input type="hidden" class="destroy" name="month_other[month_other_details_attributes][<%= i %>][_destroy]" value="false" /></td>
         </tr>
         <% end %>        
       </tbody>

@@ -114,14 +114,14 @@ function get_next_line(e){
 
 function add_amt_row(){
   var name = new Date().getTime();
-  $("#details_table > tbody").append("<tr><td><label></label></td><td><input type=\"text\" name=\"employee_uid\" onchange=\"emp_get_name_multi(this)\" /><input type=\"hidden\" class=\"employee_id\" name=\"month_other[month_other_details_attributes][" + name + "][employee_id]\" /></td><td><input type=\"text\" name=\"employee_name\" disabled=\"true\" /></td><td><input type=\"text\" name=\"employee_dep\" disabled=\"true\" /></td><td><input type=\"text\" class=\"amt\" name=\"month_other[month_other_details_attributes][" + name + "][amt]\" onfocus=\"get_next_line(this)\" /></td></tr>");
+  $("#details_table > tbody").append("<tr><td><span class=\"del_span\" /></td><td><label></label> <input type=\"checkbox\" name=\"delete\" /></td><td><input type=\"text\" class=\"employee_uid\" name=\"employee_uid\" onchange=\"emp_get_name_multi(this)\" /><input type=\"hidden\" class=\"employee_id\" name=\"month_other[month_other_details_attributes][" + name + "][employee_id]\" /></td><td><input type=\"text\" class=\"employee_name\" name=\"employee_name\" disabled=\"true\" /></td><td><input type=\"text\" name=\"employee_dep\" class=\"employee_dep\" disabled=\"true\" /></td><td><input type=\"text\" class=\"amt\" name=\"month_other[month_other_details_attributes][" + name + "][amt]\" onfocus=\"get_next_line(this)\" /><input type=\"hidden\" name=\"month_other[month_other_details_attributes][" + name + "][_destroy]\" class=\"destroy\" value=\"false\" /></td></tr>");
   reset_num();
 }
 
 function add_first_row(){
   var data = document.getElementsByClassName("employee_id");
   if(data.length <= 0){
-    $("#details_table > tbody").append("<tr><td><label>1</label></td><td><input type=\"text\" name=\"employee_uid\" onchange=\"emp_get_name_multi(this)\" /><input type=\"hidden\" class=\"employee_id\" name=\"month_other[month_other_details_attributes][0][employee_id]\" /></td><td><input type=\"text\" name=\"employee_name\" disabled=\"true\" /></td><td><input type=\"text\" name=\"employee_dep\" disabled=\"true\" /></td><td><input type=\"text\" class=\"amt\" name=\"month_other[month_other_details_attributes][0][amt]\" onfocus=\"get_next_line(this)\" /></td></tr>");
+    $("#details_table > tbody").append("<tr><td><span class=\"del_span\" /></td><td><label>1</label> <input type=\"checkbox\" name=\"delete\" /></td><td><input type=\"text\" class=\"employee_uid\" name=\"employee_uid\" onchange=\"emp_get_name_multi(this)\" /><input type=\"hidden\" class=\"employee_id\" name=\"month_other[month_other_details_attributes][0][employee_id]\" /></td><td><input type=\"text\" class=\"employee_name\" name=\"employee_name\" disabled=\"true\" /></td><td><input type=\"text\" name=\"employee_dep\" class=\"employee_dep\" disabled=\"true\" /></td><td><input type=\"text\" class=\"amt\" name=\"month_other[month_other_details_attributes][0][amt]\" onfocus=\"get_next_line(this)\" /><input type=\"hidden\" name=\"month_other[month_other_details_attributes][0][_destroy]\" class=\"destroy\" value=\"false\" /></td></tr>");
   }else{
     add_amt_row();
   }
@@ -172,5 +172,21 @@ function isNumber(str){
     return false
   }else{
     return pattern.test(str);
+  }
+}
+
+function del_details(){
+  var destroy = document.getElementsByClassName("destroy");
+  var span = document.getElementsByClassName("del_span");
+  var details = document.getElementsByName("delete");
+  var len = details.length;
+  for(var i=0; i<=len; i++){
+    if(details[i].checked == true){
+       destroy[i].value = "true";
+       span[i].innerHTML = "X";
+    }else{
+       destroy[i].value = "false";
+       span[i].innerHTML = "";
+    }
   }
 }

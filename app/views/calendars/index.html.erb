@@ -1,16 +1,19 @@
-<h1>行事曆維護</h1>
+<h2>行事曆維護</h2>
 
-<%= form_tag calendars_path, :method => 'get' do %>
-  <p>
-  	<%= text_field_tag :yyyymm, yyyymm, placeholder:'年月', autofocus: true %>
-  	<%= submit_tag "尋找", :name => nil %>
-  </p>
-<% end %>
+<%= form_tag calendars_path, :method => 'get' do %><p>
+	<table width="40%">
+		<tr>
+			<td><%= text_field_tag :yyyymm, yyyymm, placeholder:'年月', autofocus: true, class: 'string optional form-control' %></td>
+			<td align="center"><%= submit_tag "尋找", :name => nil, class: 'btn btn-primary' %></td>
+		</tr>
+	</table> 	
+<% end %></p>
 
 <table id='table_id' class='table table-hover'>
 	<thead>
 		<tr>
 			<th>日期</th>
+			<th>周</th>
 			<th>是否為假日</th>
 	  	</tr>
 	</thead>
@@ -18,7 +21,8 @@
 		<% @calendars.each_with_index do |f,i| %>
 		  <tr>
 		  	<td><%= link_to f.duty_date,edit_calendar_path(f) %></td>
-			<td><%= (f.is_holiday)? '是' : '否' %></td>
+		  	<td><%= f.wday %></td>
+			<td><%= (f.is_holiday)? '是' : '' %></td>
 		</tr>
 		<% end %>
   	</tbody>

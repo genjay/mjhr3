@@ -1,14 +1,14 @@
 <h2>人員出勤曆</h2>
 
-<%= form_tag view_sch_emps_path, :method => 'get' do %>
-  <p>
-  	<%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true %>
-  	<%= text_field_tag :emp_id, 'a00514',placeholder:'工號' %>
-  	<%= submit_tag "尋找", :name => nil %>
-  </p>
-
-
-<% end %>
+<%= form_tag view_sch_emps_path, :method => 'get' do %><p>
+	<table width="70%">
+  		<tr>
+  			<td><%= text_field_tag :yyyymm, yyyymm,placeholder:'年月', autofocus: true, class: 'string optional form-control' %></td>
+  			<td><%= text_field_tag :emp_id, 'a00514',placeholder:'工號', class: 'string optional form-control' %></td>
+  			<td align="center"><%= submit_tag "尋找", :name => nil, class: 'btn btn-primary' %></td>
+  		</tr>
+  	</table>
+<% end %></p>
 
 <table id='table_id' class='table table-hover'>
 	<thead>
