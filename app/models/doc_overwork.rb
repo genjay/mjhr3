@@ -5,6 +5,11 @@ class DocOverwork < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :overtype
 	before_destroy :check_is_closed
+	has_one :department, through: :employee
+
+  delegate :name,:uid,:leave_date, :arrive_date,
+     to: :employee, prefix: :emp, allow_nil: true
+  delegate :name,:uid, to: :department, prefix: :dep, allow_nil: true
 
 	def employee_uid
 		self.employee.try(:uid)

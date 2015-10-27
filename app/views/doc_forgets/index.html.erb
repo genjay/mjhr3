@@ -11,6 +11,7 @@
         <th></th>
         <th>項次</th>
         <th>姓名</th>
+        <th>部門</th>
         <th>出勤日期</th>
         <th>出勤起</th>
         <th>出勤迄</th>
@@ -23,7 +24,8 @@
         <tr>
           <td><%= check_box_tag "ids[]", forget.id %></td>
           <td><%= i+1 %></td>
-          <td><%= link_to forget.employee.try(:name), edit_doc_forget_path(forget) %></td>
+          <td><%= link_to forget.emp_name, edit_doc_forget_path(forget) %></td>
+          <td><%= forget.dep_name %></td>
           <td><%= forget.duty_date %></td>
           <td><%= forget.on_duty_at.strftime('%Y-%m-%d %H:%M') if forget.on_duty_at? %></td>
           <td><%= forget.off_duty_at.strftime('%Y-%m-%d %H:%M') if forget.off_duty_at? %></td>

@@ -1,14 +1,14 @@
 <%= simple_form_for(@overwork) do |f| %>
   <% f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="form-inputs ">
     <table width="100%">
       <tr>
         <td width="50%">
           <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value)'},autofocus: true %>
         </td>
         <td class="td_text">
-          <span id="name"></span>
+          <span id="name"><%= @overwork.emp_name %></span>
         </td>
       </tr>
       <tr>

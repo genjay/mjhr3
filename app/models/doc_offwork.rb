@@ -6,6 +6,11 @@ class DocOffwork < ActiveRecord::Base
 	before_destroy :check_is_closed
 	after_save :create_details
 	validate :check_overlap, :check_is_closed, :begin_greater_than_end
+  has_one :department, through: :employee
+
+  delegate :name,:uid,:leave_date, :arrive_date,
+     to: :employee, prefix: :emp, allow_nil: true
+  delegate :name,:uid, to: :department, prefix: :dep, allow_nil: true
 
   def self.off_mins(ou_id,emp_uid,dt_st,dt_end)
   	# 回傳請假的總時數

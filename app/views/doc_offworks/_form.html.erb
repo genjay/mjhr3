@@ -8,7 +8,7 @@
           <%= f.input :employee_uid,label:'員工編號',:input_html => {:onChange => 'emp_get_name(this.value)'},autofocus: true %>
         </td>
         <td class="td_text">
-          <span id="name"></span>
+          <span id="name"><%= @offwork.emp_name %></span>
         </td>
       </tr>
       <tr>
@@ -19,7 +19,7 @@
           <%= f.input :begin_time, label: '請假起(時間)' %>
           <%= f.input :end_date,label: '請假迄(日期)' %>
           <%= f.input :end_time,label: '請假迄(時間)' %>
-          <!-- <%= f.input :off_hours,placeholder:'時數',label:'請假時數' %> -->
+          <%= f.input :off_hours,placeholder:'時數',label:'請假時數' %>  
           <!-- <%= f.input :is_closed,label:'是否關帳' %> -->
           <%= f.input :notes,placeholder:'備註',label:'備註' %>
         </td>

@@ -2,10 +2,26 @@ class DocForget < ActiveRecord::Base
 	validates :duty_date, format: { with: Regexp_yyyymmdd,message: "日期格式錯誤"}
 	validates :begin_time, :end_time, format: { with: Regexp_HHMM,message: "時間格式錯誤" }
 	validates :employee_id, :duty_date,presence: true, uniqueness: {scope: [:employee_id, :duty_date]}
+	validate :check_leave?
 
 	belongs_to :employee 
+	has_one :department, through: :employee
 	before_destroy :check_is_closed
 	# before_validation :assign_date
+	delegate :name,:uid,:leave_date, :arrive_date,
+		 to: :employee, prefix: :emp, allow_nil: true
+	delegate :name,:uid, to: :department, prefix: :dep, allow_nil: true
+  
+  def check_leave?
+  	case
+  	when self.emp_arrive_date > duty_date 
+  		then errors[:duty_date] << %Q(此人#{emp_arrive_date} 才到職)
+  		  false
+  	when self.emp_leave_date != nil && duty_date > self.emp_leave_date
+  		then errors[:duty_date] << %Q(此人#{emp_leave_date} 已離職)
+  	 	  false
+  	end
+  end
 
 	def employee_uid
 		self.employee.try(:uid) 
