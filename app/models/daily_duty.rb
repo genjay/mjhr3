@@ -1,6 +1,15 @@
 class DailyDuty < ActiveRecord::Base
 	belongs_to :employee
+	has_one :department, through: :employee
 	scope :open_duty, -> (ou_id,date) {where("is_closed= 0 and ou_id=? and duty_date=?",ou_id, date)}
+
+  def work_hr
+  	((workA+workB+workC).to_f/60).round(2)
+  end
+  
+	def emp_name
+		self.employee.name if self.employee
+	end
 
 	def self.d04(ou_id,duty_date,*sid) # 日結，duty_date 可以接受 range
 		if duty_date.class == Range

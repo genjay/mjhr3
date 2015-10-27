@@ -1,2 +1,46 @@
-<h1>DailyDuty#index</h1>
-<p>Find me in app/views/daily_duty/index.html.erb</p>
+<h2>日報</h2>
+
+<%= form_tag daily_duties_path, :method => 'get' do %><p>
+	<table width="40%">
+		<tr>
+			<td><%= text_field_tag :duty_date,
+			    (params[:duty_date]? params[:duty_date]:(Time.now - 1.days).strftime('%Y%m%d')  ),
+			     placeholder:'出勤日',autofocus: true,
+			     class: 'string optional form-control' %></td>
+			<td align="center"><%= submit_tag "尋找", :name => nil, class: 'btn btn-primary' %></td>
+		</tr>
+	</table> 	
+<% end %></p>
+<div class="table-responsive">
+	<table id='table_id' class='table table-hover'>
+		<thead>
+			<tr>
+				<th>項次</th>
+				<th>日期</th>
+				<th>周  </th>
+				<th>工號</th>
+				<th>部門</th>
+				<th>姓名</th>
+				<th>上班</th>
+				<th>下班</th>
+				<th>工時</th> 
+		  </tr>
+	  </thead>
+	  <tbody>
+			<% @duty.each_with_index  do |f,i| %>
+			  <tr>
+			  	<td><%= i+1 %></td>
+			  	<td><%= f.duty_date %></td>
+			  	<td><%= f.duty_date.tw_wday %></td>
+			  	<td><%= f.employee.uid %></td>
+			  	<td><%= f.department.to_s if f.department %></td>
+			  	<td><%= f.emp_name %></td>
+			  	<td><%= f.real_on.strftime('%H:%m') if f.real_on %></td>
+			  	<td><%= f.real_off.strftime('%H:%m') if f.real_off %></td>
+			  	<td><%= f.work_hr %></td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+

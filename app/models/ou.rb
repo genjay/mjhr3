@@ -4,6 +4,7 @@ class Ou < ActiveRecord::Base
 
 	after_initialize :assign_default_values
 	after_create :create_environment
+	has_many :daily_duty, :dependent => :restrict_with_error
 	has_many :worktypes, :dependent => :restrict_with_error
 	has_many :workrests, :dependent => :restrict_with_error
 	has_many :employees, :dependent => :restrict_with_error 

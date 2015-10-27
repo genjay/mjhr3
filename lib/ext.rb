@@ -1,3 +1,18 @@
+class Date
+	def tw_wday
+		case self.wday
+		when 1 then '一'
+		when 2 then '二'
+		when 3 then '三'
+		when 4 then '四'
+		when 5 then '五'
+		when 6 then '六'
+		when 0 then '日'
+		else '無'
+		end
+	end
+end
+
 class String
 	def column_names # 用來取的table的column_names
 		begin

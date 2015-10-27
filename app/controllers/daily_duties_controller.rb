@@ -1,5 +1,9 @@
 class DailyDutiesController < ApplicationController
   def index
+    search_duty ||= params[:duty_date]
+    # render :text => search_duty
+    # return
+    @duty = current_ou.daily_duty.includes(:employee,:department).where(duty_date: search_duty)
   end
 
   def get_calculate
