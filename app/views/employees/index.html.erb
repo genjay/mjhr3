@@ -3,23 +3,20 @@
 <%= form_tag multi_destroy_employees_path, method: :delete do %>
 
   <%= link_to '新增 ', new_employee_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
-  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= submit_tag "刪除",class: 'btn btn-danger ', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 <table id='table_id'class='table table-hover'>
   <thead>
     <tr>
       <th></th>
       <th>項次</th>
-      <th>代號</th>
+      <th>工號</th>
       <th>姓名</th>
+      <th>部門代號</th>
       <th>部門</th>
       <th>身份證號</th>
       <th>到職日</th>
       <th>離職日</th>
-      <th>生日</th>
-      <th>性別</th>
-      <th>學歷</th>
-      <th>出勤卡號</th>
     </tr>
   </thead>
 
@@ -30,14 +27,11 @@
         <td><%= i+1 %></td>
         <td><%= link_to employee.uid,edit_employee_path(employee) %></td>
         <td><%= link_to employee.name,edit_employee_path(employee) %></td>
-        <td><%= employee.department.try(:name) %></td>
+        <td><%= employee.dep_uid %></td>
+        <td><%= employee.dep_name %></td>
         <td><%= employee.id_number %></td>
         <td><%= employee.arrive_date %></td>
         <td><%= employee.leave_date %></td>
-        <td><%= employee.birthday %></td>
-        <td><%= employee.sex %></td>
-        <td><%= employee.education %></td>
-        <td><%= employee.cardno %></td>
       </tr>
     <% end %>
   </tbody>

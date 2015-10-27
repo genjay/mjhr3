@@ -1,39 +1,59 @@
 <%= simple_form_for(@forget) do |f| %>
 
   <div class="form-inputs">
-    <table width="100%">
-      <tr>
-        <td width="50%">
-          <% if params[:action] == 'new' || params[:action] == 'create' %>
-            <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid',:onChange => 'emp_get_name(this.value)'},autofocus: true %>
-          <% else %>
-            <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid'}, :disabled => true %>
-          <% end %>
-        </td>
-        <td class="td_text">
-          <span id="name"><%= @forget.emp_name %></span>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
-          <% if params[:action] == 'new' || params[:action] == 'create' %>
-            <%= f.input :duty_date,as: :string,label:'出勤日期',:input_html => {:id => "duty_date", :onBlur => 'emp_get_ViewSchEmp()'} %>
-          <% else %>
-             <%= f.input :duty_date,as: :string,label:'出勤日期',:input_html => {:id => "duty_date"}, :disabled => true %>
-          <% end %>
-          <%= f.input :begin_date,label:'忘刷起(日期)',:input_html => {:id => "begin_date"} %>
-          <%= f.input :begin_time,label:'忘刷起(時間)',:input_html => {:id => "begin_time"} %>
-          <%= f.input :end_date,label:'忘刷起(日期)',:input_html => {:id => "end_date"} %>
-          <%= f.input :end_time,label:'忘刷迄(時間)',:input_html => {:id => "end_time"} %>
-          <!-- <%= f.input :is_closed,label:'是否關帳' %> -->
-          <%= f.input :notes,placeholder:'備註',label:'備註' %>
-        </td>
-      </tr>
-    </table>
+    <div class='row'>
+      <div class='col-lg-2 text-right'>員工編號</div>
+      <div class='col-lg-4 text-right'>
+        <% if params[:action] == 'new' || params[:action] == 'create' %>
+          <%= f.input :employee_uid,label:false,:input_html => {:id => 'employee_uid',:onChange => 'emp_get_name(this.value)'},autofocus: true %>
+        <% else %>
+          <%= f.input :employee_uid,label:'員工編號',:input_html => {:id => 'employee_uid'}, :disabled => true %>
+        <% end %></div>
+      <div class='col-lg-4'>
+        姓名：
+        <span id="name"><%= @forget.emp_name %></span></div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-lg-2 text-right'> 出勤日期</div>
+      <div class='col-lg-4'>
+        <%= f.input :employee_id,as: :hidden,:input_html => {:id => "employee_id"} %>
+        <% if params[:action] == 'new' || params[:action] == 'create' %>
+          <%= f.input :duty_date,as: :string,label:false,:input_html => {:id => "duty_date", :onBlur => 'emp_get_ViewSchEmp()'} %>
+        <% else %>
+           <%= f.input :duty_date,as: :string,label:false,:input_html => {:id => "duty_date"}, :disabled => true %>
+        <% end %> </div>
+      <div class='col-lg-4'>
+        班別：<span id='duty-inof'></span>
+      </div>
+    </div>
+    
+    <div class='row'>
+      <div class='col-lg-2  text-right'>
+        <%= f.label '忘刷起' %></div>
+      <div class='col-lg-4'>
+        <%= f.input :begin_date,label:false,:input_html => {:id => "begin_date"} %></div>
+      <div class='col-lg-4'>
+        <%= f.input :begin_time,label: false,:input_html => {:id => "begin_time"} %></div>
+    </div> 
+
+    <div class='row'>
+      <div class='col-lg-2 text-right'>
+        <%= f.label '忘刷迄' %></div>
+      <div class='col-lg-4'>
+        <%= f.input :end_date,label:false,:input_html => {:id => "end_date"} %></div>
+      <div class='col-lg-4'>
+        <%= f.input :end_time,label:false,:input_html => {:id => "end_time"} %></div>
+    </div>  
+    <div class='row'>
+      <div class='col-lg-2 text-right'>備註</div>
+      <div class='col-lg-8'> 
+        <%= f.input :notes,placeholder:false,label:'備註' %>
+      </div>
+    </div>
   </div>
 
-  <div class="form-actions"> 
+  <div class="col-lg-6 col-lg-offset-1 form-actions"> 
       <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
       <%= link_to '回上一頁', doc_forgets_path,class: 'btn btn-warning', method: :get %>
   </div>

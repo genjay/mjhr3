@@ -5,20 +5,21 @@
 
   <%= link_to '自動輸入', create_overworks_doc_overworks_path, method: :get, class: 'btn btn-primary' %>
 
-  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= submit_tag "刪除",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
   <table id='table_id' class='table table-hover'>
     <thead>
       <tr>
         <th></th>
         <th>項次</th>
+        <th>工號</th>
         <th>姓名</th>
+        <th>部門</th>
         <th>加班別</th>
         <th>出勤日</th>
         <th>加班起</th>
         <th>加班迄</th>
         <th>時數</th>
-        <th>是否關帳</th>
         <th>修改日期</th>
       </tr>
     </thead>
@@ -28,13 +29,14 @@
         <tr>
           <td><%= check_box_tag "ids[]", overwork.id %></td>
           <td><%= i+1 %></td>
-          <td><%= link_to overwork.employee.try(:name), edit_doc_overwork_path(overwork) %></td>
+          <td><%= overwork.emp_uid %></td>
+          <td><%= link_to overwork.emp_name, edit_doc_overwork_path(overwork) %></td>
+          <td><%= overwork.dep_uid %></td>
           <td><%= overwork.overtype.try(:name) %></td>
           <td><%= overwork.duty_date %></td>
           <td><%= overwork.overwork_begin_at.strftime('%H:%M') if overwork.overwork_begin_at? %></td>
           <td><%= overwork.overwork_end_at.strftime('%H:%M') if overwork.overwork_end_at? %></td>
           <td><%= overwork.hr %></td>
-          <td><%= '已關帳' if overwork.is_closed %></td>
           <td><%= overwork.updated_at.strftime('%Y/%m/%d') %></td>
         </tr>
       <% end %>

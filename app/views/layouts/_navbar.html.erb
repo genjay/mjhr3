@@ -16,23 +16,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">日常 <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">A 人員資料設定<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><%= link_to '忘刷單',doc_forgets_path, method: :get %></li>
-            <li><%= link_to '請假單',doc_offworks_path, method: :get %></li>
-            <li><%= link_to '加班單',doc_overworks_path, method: :get %></li>
-            <li><%= link_to '日報',daily_duties_path, method: :get %></li>
-            <li class="divider"></li>
-            <li><%= link_to '卡鐘上傳',cardtimes_path, method: :get %></li>
-            <li><%= link_to '日結',calculate_daily_duties_path, method: :get %></li> 
-            <li><%= link_to '月結',calculate_month_duties_path, method: :get %></li>
-            <li><%= link_to '算薪',calculate_month_salaries_path, method: :get %></li>
-            <li><%= link_to '津貼/扣款單',month_others_path, method: :get %></li>
+            <li><%= link_to '人員資料',employees_path, method: :get %></li> 
+            <li><%= link_to '人員出勤曆',view_sch_emps_path, method: :get %></li>
+            <li><%= link_to '部門出勤曆',view_sch_deps_path, method: :get %></li>
+            <li><%= link_to '行事曆維護',calendars_path, method: :get %></li> 
           </ul>
         </li>
+
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">設定<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">B 基本資料設定<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><%= link_to '部門設定',departments_path, method: :get %></li>
             <li><%= link_to '假別設定',offtypes_path, method: :get %></li>
@@ -48,14 +44,39 @@
             <li><%= link_to '勞健保級距設定',lvtypes_path, method: :get %></li>
           </ul>
         </li>
-
-                <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">設定<span class="caret"></span></a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">C 出勤資料處理 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><%= link_to '人員資料',employees_path, method: :get %></li> 
-            <li><%= link_to '人員出勤曆',view_sch_emps_path, method: :get %></li>
-            <li><%= link_to '部門出勤曆',view_sch_deps_path, method: :get %></li>
-            <li><%= link_to '行事曆維護',calendars_path, method: :get %></li> 
+            <li><%= link_to '卡鐘上傳',cardtimes_path, method: :get %></li>
+            <li><%= link_to '忘刷單',doc_forgets_path, method: :get %></li>
+            <li><%= link_to '請假單',doc_offworks_path, method: :get %></li>
+            <li><%= link_to '加班單',doc_overworks_path, method: :get %></li>
+            <li><%= link_to '日報',daily_duties_path, method: :get %></li>
+            <li class="divider"></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">D 出勤資料結轉 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to '日結',calculate_daily_duties_path, method: :get %></li> 
+            <li><%= link_to '月結',calculate_month_duties_path, method: :get %></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">E 薪資處理 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to '津貼/扣款單',month_others_path, method: :get %></li>
+            <li><%= link_to '計算薪水',calculate_month_salaries_path, method: :get %></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">F 報表 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>#</li>
+            <li>#</li>
           </ul>
         </li>
         

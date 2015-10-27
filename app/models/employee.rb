@@ -15,6 +15,8 @@ class Employee < ActiveRecord::Base
   has_many :month_duty
   has_many :view_employee_inoutlogs
   after_create :create_inoutlog
+
+  delegate :name, :uid, to: :department, prefix: :dep, allow_nil: true
   # has_many :calendars, foreign_key: :ou_id, primary_key: :ou_id
   # ,-> {"where calendars.duty_date >= employees.arrive_date and calendars.duty_date <= ifnull(employees.leave_date,'99991231')"}
 

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def current_ou
     #TODO
-    #這應該做成活動的，使用者登入後，選擇他要的ou環境
+    #這應該做成活動的，使用者登入後，選擇他要的ou環境 
     Ou.find_by(uid: "16130535")
   end
 

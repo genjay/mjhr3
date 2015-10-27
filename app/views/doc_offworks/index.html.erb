@@ -4,19 +4,20 @@
 
   <%= link_to '新增 ', new_doc_offwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
 
-  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= submit_tag "刪除",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
   <table id='table_id' class='table table-hover'>
     <thead>
       <tr>
         <th></th>
         <th>項次</th>
+        <th>工號</th>
         <th>姓名</th>
+        <th>部門</th>
         <th>假別</th>
         <th>請假起</th>
         <th>請假迄</th>
         <th>請假時數</th>
-        <th>是否關帳</th>  
       </tr>
     </thead>
 
@@ -25,12 +26,13 @@
         <tr>
           <td><%= check_box_tag "ids[]", offwork.id %></td>
           <td><%= i+1 %></td>
-          <td><%= link_to offwork.employee.name, edit_doc_offwork_path(offwork) %></td>
+          <td><%= offwork.emp_uid %></td>
+          <td><%= link_to offwork.emp_name, edit_doc_offwork_path(offwork) %></td>
+          <td><%= offwork.dep_uid %></td>
           <td><%= offwork.offtype.try(:name) %></td>
           <td><%= offwork.offduty_begin_at.strftime('%Y-%m-%d %H:%M') if offwork.offduty_begin_at? %></td>
           <td><%= offwork.offduty_end_at.strftime('%Y-%m-%d %H:%M') if offwork.offduty_end_at? %></td>
           <td><%= link_to offwork.off_hours,doc_offwork_daily_offworks_path(offwork) %></td>
-          <td><%= '已關帳' if offwork.is_closed %></td>  
         </tr>
       <% end %>
     </tbody>
@@ -38,7 +40,7 @@
 
    <%= link_to '新增 ', new_doc_offwork_path,autofocus: true, method: :get, class: 'btn btn-primary' %>
 
-  <%= submit_tag "刪除",class: 'btn btn-danger btn-sm', data: { confirm: '刪除所選資料，Are you sure?' } %>
+  <%= submit_tag "刪除",class: 'btn btn-danger', data: { confirm: '刪除所選資料，Are you sure?' } %>
 
 
 <% end %>

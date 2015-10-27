@@ -2,7 +2,7 @@ class DailyOffworksController < ApplicationController
   before_action :set_dailyoffwork, only: [:show, :edit, :update, :destroy]
 
   def index
-    doc_offwork = DocOffwork.find params[:doc_offwork_id]
+    doc_offwork = DocOffwork.includes(:employee,:department).find params[:doc_offwork_id]
     @doc_details = doc_offwork.details
   end
 
