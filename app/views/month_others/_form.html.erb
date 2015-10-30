@@ -5,7 +5,7 @@
     <%= f.association :pay_type, include_blank: false  %>
     <%= f.input :yyyymm %>
     <%= f.input :name, label: '備註' %>
-  </div><hr/>
+  </div>
 
   <div id="details_div" style="padding-bottom: 30px;">
     <table id="details_table" class="list_tb" width="100%" border="1">
@@ -24,22 +24,34 @@
         <% @month_other.month_other_details.each_with_index do |details,i| %>
           <tr>
             <td><span class="del_span"></span></td>
-            <td><label><%= i+1 %></label> <input type="checkbox" name="delete" /></td>
-            <td><input type="hidden" name="month_other[month_other_details_attributes][<%= i %>][id]" value="<%= details.id %>" /><input type="text" class="employee_uid" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" class="employee_id" name="month_other[month_other_details_attributes][<%= i %>][employee_id]" value="<%= details.employee.id %>" /></td>
+            <td><label><%= i+1 %></label> <input type="checkbox" name="delete" /><input type="hidden" name="month_other[month_other_details_attributes][<%= i %>][id]" value="<%= details.id %>" /></td>
+            <td><input type="text" class="employee_uid" name="employee_uid" value="<%= details.employee.uid %>" onchange="emp_get_name_multi(this)" /><input type="hidden" class="employee_id" name="month_other[month_other_details_attributes][<%= i %>][employee_id]" value="<%= details.employee.id %>" /></td>
             <td><input type="text" class="employee_name" name="employee_name" value="<%= details.employee.name %>" disabled="true" /></td>
             <td><input type="text" class="employee_dep" name="employee_dep" value="<%= details.employee.department.name %>" disabled="true" /></td>
             <td><input type="text" class="amt" name="month_other[month_other_details_attributes][<%= i %>][amt]" value="<%= details.amt %>" onfocus="get_next_line(this)" /><input type="hidden" class="destroy" name="month_other[month_other_details_attributes][<%= i %>][_destroy]" value="false" /></td>
         </tr>
-        <% end %>        
+        <% end %>
       </tbody>
     </table>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit,'存檔',class: 'btn btn-primary' %>
-      <%= link_to '回上一頁', month_others_path, class: 'btn btn-warning', method: :get %>
+   <table width="100%">
+    <tr>
+      <td><%= f.button :submit,'存檔',class: 'btn btn-primary' %> <%= link_to '回上一頁', month_others_path, class: 'btn btn-warning', method: :get %></td>
+      <td align="right"></td>
+    </tr>
+   </table>
   </div>
 <% end %>
+
+<p>
+  <%= form_tag import_month_others_path, multipart: true do %>
+    <%= hidden_field_tag 'month_other_id', @month_other.id  %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</p>
 
 <%= javascript_tag do %>
   add_first_row();

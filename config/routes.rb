@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :month_others
+  resources :month_others do
+    collection do
+      post :import
+    end
+  end
   # get 'month_duties/index'
 
   # get 'month_duties/calculate'

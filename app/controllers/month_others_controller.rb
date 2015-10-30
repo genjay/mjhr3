@@ -1,6 +1,17 @@
 class MonthOthersController < ApplicationController
   before_action :set_month_other, only: [:show, :edit, :update, :destroy]
 
+  def import
+    if params[:file] != nil
+      file = current_ou.month_other_details.import(params[:file], params[:month_other_id])
+      if file == true
+          redirect_to edit_month_other_path(params[:month_other_id]), notice: "資料上傳成功"
+      else
+          redirect_to edit_month_other_path(params[:month_other_id]), alert: "資料上傳失敗"
+      end
+    end
+  end
+
   # GET /month_others
   # GET /month_others.json
   def index

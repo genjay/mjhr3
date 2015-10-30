@@ -20,7 +20,7 @@
         <td><%= month_other.name %></td>
         <td><%= month_other.yyyymm %></td>
         <td><%= month_other.pay_type.try(:name) %></td>
-        <td><%= link_to '修改', edit_month_other_path(month_other) %></td>
+        <td><%= link_to '修改', edit_month_other_path(month_other), method: :get %></td>
         <td><%= link_to '刪除', month_other, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
