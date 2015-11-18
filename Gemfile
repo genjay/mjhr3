@@ -28,6 +28,7 @@ gem 'cancancan'
 
 # file upload
 gem 'carrierwave'
+gem 'spreadsheet'
 
 # image processor
 gem 'mini_magick'

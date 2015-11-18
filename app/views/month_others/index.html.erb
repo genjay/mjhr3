@@ -6,9 +6,9 @@
   <thead>
     <tr>
       <th>項次</th>
-      <th>名稱</th>
       <th>年月</th>
       <th>薪資項目</th>
+      <th>備註</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -17,9 +17,9 @@
     <% @month_others.each_with_index do |month_other,i| %>
       <tr>
         <td><%= i+1 %></td>
-        <td><%= month_other.name %></td>
         <td><%= month_other.yyyymm %></td>
         <td><%= month_other.pay_type.try(:name) %></td>
+        <td><%= month_other.name %></td>
         <td><%= link_to '修改', edit_month_other_path(month_other), method: :get %></td>
         <td><%= link_to '刪除', month_other, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

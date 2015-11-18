@@ -19,7 +19,7 @@ class MonthOther < ActiveRecord::Base
 		if x == nil
 			"#{Time.now.strftime('%Y%m%d')}001"
 		else
-      x.next
+      			x.next
 		end
 	end
 

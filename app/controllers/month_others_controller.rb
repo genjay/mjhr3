@@ -9,7 +9,27 @@ class MonthOthersController < ApplicationController
       else
           redirect_to edit_month_other_path(params[:month_other_id]), alert: "資料上傳失敗"
       end
+    else
+      redirect_to edit_month_other_path(params[:month_other_id]), alert: "資料上傳失敗"
     end
+  end
+
+  def export
+    month_other_details = current_ou.month_other_details.find_details(params[:id])
+    download(month_other_details)
+  end
+
+  def download(obj)
+   book = Spreadsheet::Workbook.new    
+   sheet1 = book.create_worksheet :name => "Sheet1"
+
+   obj.each_with_index do |detail, i| 
+     sheet1.row(i).replace [detail.employee.uid, detail.amt, detail.employee.name, detail.employee.department.name]
+   end
+
+   export_file_path = [Rails.root, "tmp", "export.xls"].join("/")
+   book.write export_file_path
+   send_file export_file_path, :content_type => "application/vnd.ms-excel", :disposition => 'inline'
   end
 
   # GET /month_others

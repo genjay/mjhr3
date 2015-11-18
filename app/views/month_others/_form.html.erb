@@ -39,12 +39,14 @@
    <table width="100%">
     <tr>
       <td><%= f.button :submit,'存檔',class: 'btn btn-primary' %> <%= link_to '回上一頁', month_others_path, class: 'btn btn-warning', method: :get %></td>
-      <td align="right"></td>
+      <td align="right"><% if params[:action] != 'new' %><%= link_to 'Export to Excel', export_month_others_path("id" => @month_other.id), class: 'btn btn-primary', method: :get %><% end %>
+      </td>
     </tr>
    </table>
   </div>
 <% end %>
 
+<% if params[:action] != 'new' %>
 <p>
   <%= form_tag import_month_others_path, multipart: true do %>
     <%= hidden_field_tag 'month_other_id', @month_other.id  %>
@@ -52,6 +54,7 @@
     <%= submit_tag "Import" %>
   <% end %>
 </p>
+<% end %>
 
 <%= javascript_tag do %>
   add_first_row();

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :month_others do
     collection do
       post :import
+      get :export
     end
   end
   # get 'month_duties/index'
