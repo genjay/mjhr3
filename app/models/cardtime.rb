@@ -1,5 +1,5 @@
 class Cardtime < ActiveRecord::Base
-	require 'CSV'
+	require 'csv'
 
 	def self.import(file,ou_id)
 		# v = Set.new
