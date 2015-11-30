@@ -25,7 +25,7 @@ class Ou < ActiveRecord::Base
 	has_many :employee_salary_settings, :dependent => :restrict_with_error
 	has_many :employee_inoutlogs,through: :employees, :dependent => :restrict_with_error
 	has_many :month_others, :dependent => :restrict_with_error
-	has_many :month_other_details, :dependent => :restrict_with_error
+	has_many :month_other_details, :dependent => :restrict_with_error, through: :month_others
 	has_many :catcodes, :dependent => :restrict_with_error
 
 
